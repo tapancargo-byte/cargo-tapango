@@ -30,6 +30,11 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+test-output.txt
+test-error.txt
+
+# Configuration files with secrets
+warp-*-mcp-config.json
 
 # Database files
 *.db
