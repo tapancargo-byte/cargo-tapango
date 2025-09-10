@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged to check and fix code before commit
+npx lint-staged
+
+# Run type checking
+echo "🔍 Running TypeScript type check..."
+cd tapango && npm run typecheck
+cd ../admin && npm run typecheck
+
+# Run tests
+echo "🧪 Running tests..."
+cd ../tapango && npm run test -- --passWithNoTests --watchAll=false
+cd ../admin && npm run test -- --passWithNoTests --watchAll=false
+
+echo "✅ Pre-commit checks passed!"

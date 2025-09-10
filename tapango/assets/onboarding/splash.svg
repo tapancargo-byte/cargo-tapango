@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Light theme gradient -->
+    <linearGradient id="bg_light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1B2A"/>
+      <stop offset="100%" stop-color="#1E3A5F"/>
+    </linearGradient>
+    
+    <!-- Dark theme gradient -->
+    <linearGradient id="bg_dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020917"/>
+      <stop offset="100%" stop-color="#0F1B2A"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Layer -->
+  <g id="bg">
+    <rect width="1080" height="1920" fill="url(#bg_light)"/>
+  </g>
+  
+  <!-- Airplane Layer (flipped, 60% width, 15% from top) -->
+  <g id="plane" transform="translate(540, 336) scale(-0.6, 0.6)">
+    <!-- Simplified airplane path based on splash.json structure -->
+    <g fill="#3B82F6" stroke="#1E3A5F" stroke-width="2">
+      <!-- Fuselage -->
+      <ellipse cx="0" cy="0" rx="80" ry="200" fill="#3B82F6"/>
+      
+      <!-- Wings -->
+      <ellipse cx="-15" cy="-20" rx="120" ry="25" fill="#60A5FA"/>
+      <ellipse cx="-15" cy="20" rx="120" ry="25" fill="#60A5FA"/>
+      
+      <!-- Tail -->
+      <ellipse cx="0" cy="-180" rx="30" ry="40" fill="#3B82F6"/>
+      
+      <!-- Propeller -->
+      <circle cx="0" cy="180" r="15" fill="#1E3A5F"/>
+      <rect x="-2" y="165" width="4" height="30" fill="#1E3A5F"/>
+    </g>
+    
+    <!-- Animation hint - floating motion -->
+    <animateTransform
+      attributeName="transform"
+      attributeType="XML"
+      type="translate"
+      values="540,326; 540,346; 540,326"
+      dur="3s"
+      repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Brand Logo Layer -->
+  <g id="logo" transform="translate(540, 864)">
+    <text x="0" y="0" text-anchor="middle" fill="#E2E8F0" 
+          font-family="system-ui, -apple-system, sans-serif" 
+          font-size="54" font-weight="700" letter-spacing="1.5">
+      TapanGo
+    </text>
+  </g>
+  
+  <!-- Tagline Layer -->
+  <g id="tagline" transform="translate(540, 920)">
+    <text x="0" y="0" text-anchor="middle" fill="#E2E8F0" 
+          font-family="system-ui, -apple-system, sans-serif" 
+          font-size="24" font-weight="400" opacity="0.75">
+      Fast. Reliable. Everywhere.
+    </text>
+  </g>
+  
+  <!-- Loading Spinner Layer -->
+  <g id="spinner" transform="translate(540, 1680)">
+    <!-- Spinner track -->
+    <circle cx="0" cy="0" r="12" fill="none" stroke="#3B82F6" 
+            stroke-width="3" opacity="0.1"/>
+    
+    <!-- Spinner indicator -->
+    <circle cx="0" cy="0" r="12" fill="none" stroke="#3B82F6" 
+            stroke-width="3" stroke-linecap="round"
+            stroke-dasharray="18.85 18.85" stroke-dashoffset="37.7"
+            opacity="1">
+      <animateTransform
+        attributeName="transform"
+        attributeType="XML"
+        type="rotate"
+        values="0 0 0; 360 0 0"
+        dur="1.2s"
+        repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Loading Text Layer -->
+  <g id="loading_txt" transform="translate(540, 1720)">
+    <text x="0" y="0" text-anchor="middle" fill="#E2E8F0" 
+          font-family="system-ui, -apple-system, sans-serif" 
+          font-size="21" font-weight="400" opacity="0.6">
+      Loading your delivery experience...
+    </text>
+  </g>
+  
+  <!-- Version Layer -->
+  <g id="version" transform="translate(1040, 1880)">
+    <text x="0" y="0" text-anchor="end" fill="#E2E8F0" 
+          font-family="system-ui, -apple-system, sans-serif" 
+          font-size="15" font-weight="400" opacity="0.4">
+      V1.0.0
+    </text>
+  </g>
+</svg>

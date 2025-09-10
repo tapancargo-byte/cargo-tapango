@@ -1,0 +1,39 @@
+SPLASH_LIGHT.PNG - Light Theme Static Export
+===========================================
+
+Dimensions: 1080 × 1920px @ 144 DPI
+Background: Linear gradient from #0F1B2A (top-left) to #1E3A5F (bottom-right)
+Safe Areas: 48px top, 96px bottom
+
+ELEMENTS:
+---------
+✈️ Airplane (flipped 180° Y-axis):
+   - Position: 15% from top, centered horizontally
+   - Size: 648px × 648px (60% of canvas width)  
+   - Colors: Primary blue #3B82F6, accent #60A5FA
+   - Source: Simplified airplane from splash.json Lottie
+
+📝 Brand Text:
+   - "TapanGo" at 45% from top, 36sp bold, #E2E8F0
+   - "Fast. Reliable. Everywhere." below, 16sp regular, #E2E8F0 @ 75% opacity
+
+🔄 Loading Spinner:
+   - Position: 120px from bottom, centered  
+   - Size: 24dp diameter, 3dp stroke
+   - Colors: #3B82F6 indicator, #3B82F640 track (10% opacity)
+   - State: Mid-rotation (approx 45° rotated)
+
+📄 Loading Text:
+   - "Loading your delivery experience..." 
+   - Position: 80px from bottom, centered
+   - Style: 14sp regular, #E2E8F0 @ 60% opacity
+
+🏷️ Version:
+   - "V1.0.0" in bottom-right corner (16px from bottom, 20px from right)
+   - Style: 10sp regular, #E2E8F0 @ 40% opacity
+
+EXPORT COMMAND (using design tool):
+Export → PNG → 1080×1920 → 144 DPI → sRGB color profile
+
+WCAG 2.1 Compliance: All text meets AA contrast requirements (≥4.5:1)
+Material 3 Design System: Light theme color tokens applied

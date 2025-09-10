@@ -1,0 +1,53 @@
+[
+  {
+    "id": "customer_1",
+    "role": "customer",
+    "name": "John Doe",
+    "email": "john.doe@email.com",
+    "phone": "+1234567890",
+    "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    "address": "123 Main Street, Downtown City",
+    "joined_date": "2024-01-15T08:00:00Z",
+    "verified": true,
+    "stats": {
+      "total_orders": 15,
+      "completed_orders": 13,
+      "cancelled_orders": 2,
+      "total_spent": 2750.50
+    }
+  },
+  {
+    "id": "customer_2",
+    "role": "customer",
+    "name": "Sarah Johnson",
+    "email": "sarah.johnson@email.com",
+    "phone": "+1987654321",
+    "avatar": "https://images.unsplash.com/photo-1494790108755-2616b332e234?w=150&h=150&fit=crop&crop=face",
+    "address": "456 Oak Avenue, Riverside District",
+    "joined_date": "2024-02-20T10:30:00Z",
+    "verified": true,
+    "stats": {
+      "total_orders": 8,
+      "completed_orders": 7,
+      "cancelled_orders": 1,
+      "total_spent": 1420.00
+    }
+  },
+  {
+    "id": "customer_3",
+    "role": "customer",
+    "name": "Mike Wilson",
+    "email": "mike.wilson@email.com",
+    "phone": "+1555123456",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    "address": "789 Pine Street, Northside",
+    "joined_date": "2024-03-10T14:15:00Z",
+    "verified": false,
+    "stats": {
+      "total_orders": 3,
+      "completed_orders": 3,
+      "cancelled_orders": 0,
+      "total_spent": 580.00
+    }
+  }
+]

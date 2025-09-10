@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Material 3 primary colors -->
+    <style>
+      .spinner-light { stroke: #3B82F6; }
+      .spinner-dark { stroke: #60A5FA; }
+      .track-light { stroke: #3B82F6; opacity: 0.1; }
+      .track-dark { stroke: #60A5FA; opacity: 0.1; }
+    </style>
+  </defs>
+  
+  <!-- Light theme spinner -->
+  <g id="spinner-light" class="light-theme">
+    <!-- Track circle -->
+    <circle 
+      cx="12" 
+      cy="12" 
+      r="9" 
+      fill="none" 
+      stroke="#3B82F6" 
+      stroke-width="3" 
+      opacity="0.1"/>
+    
+    <!-- Progress indicator -->
+    <circle 
+      cx="12" 
+      cy="12" 
+      r="9" 
+      fill="none" 
+      stroke="#3B82F6" 
+      stroke-width="3" 
+      stroke-linecap="round"
+      stroke-dasharray="14.14 42.42"
+      stroke-dashoffset="56.56">
+      
+      <!-- Continuous rotation -->
+      <animateTransform
+        attributeName="transform"
+        attributeType="XML"
+        type="rotate"
+        values="0 12 12; 360 12 12"
+        dur="1.2s"
+        repeatCount="indefinite"
+        begin="0s"/>
+        
+      <!-- Smooth easing -->  
+      <animate
+        attributeName="stroke-dasharray"
+        values="0 56.56; 14.14 42.42; 28.28 28.28; 14.14 42.42; 0 56.56"
+        dur="1.2s"
+        repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Dark theme spinner (hidden by default) -->
+  <g id="spinner-dark" class="dark-theme" style="display: none;">
+    <!-- Track circle -->
+    <circle 
+      cx="12" 
+      cy="12" 
+      r="9" 
+      fill="none" 
+      stroke="#60A5FA" 
+      stroke-width="3" 
+      opacity="0.1"/>
+    
+    <!-- Progress indicator -->
+    <circle 
+      cx="12" 
+      cy="12" 
+      r="9" 
+      fill="none" 
+      stroke="#60A5FA" 
+      stroke-width="3" 
+      stroke-linecap="round"
+      stroke-dasharray="14.14 42.42"
+      stroke-dashoffset="56.56">
+      
+      <!-- Continuous rotation -->
+      <animateTransform
+        attributeName="transform"
+        attributeType="XML"
+        type="rotate"
+        values="0 12 12; 360 12 12"
+        dur="1.2s"
+        repeatCount="indefinite"
+        begin="0s"/>
+        
+      <!-- Smooth easing -->  
+      <animate
+        attributeName="stroke-dasharray"
+        values="0 56.56; 14.14 42.42; 28.28 28.28; 14.14 42.42; 0 56.56"
+        dur="1.2s"
+        repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tapango" },
+    { "path": "./admin" }
+  ],
+  "exclude": ["**/node_modules/**"]
+}

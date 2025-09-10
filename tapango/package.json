@@ -1,0 +1,164 @@
+{
+  "name": "tapango-mobile",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
+  "description": "TAPANGO Mobile App - Cargo Logistics Platform",
+  "scripts": {
+    "start": "expo start",
+    "start:dev": "expo start --dev-client",
+    "start:tunnel": "expo start --tunnel",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "build": "eas build",
+    "build:android": "eas build --platform android",
+    "build:ios": "eas build --platform ios",
+    "submit": "eas submit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:e2e": "detox test",
+    "test:e2e:build": "detox build",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "rm -rf node_modules && rm -rf .expo && npm install",
+    "prebuild": "expo prebuild",
+    "postinstall": "husky install"
+  },
+  "dependencies": {
+    "@clerk/clerk-expo": "^2.14.30",
+    "@expo/vector-icons": "^14.0.2",
+    "@lottiefiles/dotlottie-react": "^0.6.5",
+    "@react-native-async-storage/async-storage": "^2.1.2",
+    "@react-navigation/native": "^7.1.6",
+    "@react-navigation/native-stack": "^7.3.10",
+    "@supabase/supabase-js": "^2.45.4",
+    "@tanstack/react-query": "^5.56.2",
+    "expo": "~53.0.0",
+    "expo-auth-session": "~6.2.1",
+    "expo-camera": "~16.1.11",
+    "expo-constants": "~17.1.7",
+    "expo-crypto": "~14.1.5",
+    "expo-device": "~7.1.4",
+    "expo-font": "~13.3.2",
+    "expo-haptics": "^14.1.4",
+    "expo-image": "~2.4.0",
+    "expo-image-picker": "~16.1.4",
+    "expo-linear-gradient": "^14.1.5",
+    "expo-linking": "~7.1.7",
+    "expo-location": "~18.1.6",
+    "expo-notifications": "~0.31.4",
+    "expo-router": "~5.1.6",
+    "expo-secure-store": "~14.2.4",
+    "expo-splash-screen": "~0.30.10",
+    "expo-status-bar": "~2.2.3",
+    "expo-system-ui": "~5.0.11",
+    "expo-web-browser": "~14.2.0",
+    "lottie-react-native": "^7.2.2",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-native": "0.79.5",
+    "react-native-gesture-handler": "~2.24.0",
+    "react-native-maps": "1.20.1",
+    "react-native-reanimated": "~3.17.4",
+    "react-native-safe-area-context": "^4.12.0",
+    "react-native-screens": "~4.11.1",
+    "react-native-web": "^0.20.0",
+    "zod": "^3.23.8",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@react-native/eslint-config": "^0.76.0",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^12.9.0",
+    "@types/jest": "^29.5.13",
+    "@types/react": "~19.0.10",
+    "@types/react-test-renderer": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "detox": "^20.27.3",
+    "eslint": "^8.57.1",
+    "eslint-config-expo": "~9.2.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-native": "^4.1.0",
+    "husky": "^9.1.6",
+    "jest": "^29.7.0",
+    "jest-expo": "~53.0.10",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "react-test-renderer": "^19.0.0",
+    "typescript": "~5.8.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "detox": {
+    "testRunner": {
+      "args": {
+        "$0": "jest",
+        "config": "e2e/jest.config.js"
+      },
+      "jest": {
+        "setupFilesAfterEnv": [
+          "<rootDir>/e2e/init.js"
+        ]
+      }
+    },
+    "apps": {
+      "ios.debug": {
+        "type": "ios.app",
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/tapango.app"
+      },
+      "android.debug": {
+        "type": "android.apk",
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk"
+      }
+    },
+    "devices": {
+      "simulator": {
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 15 Pro"
+        }
+      },
+      "emulator": {
+        "type": "android.emulator",
+        "device": {
+          "avdName": "Pixel_7_API_34"
+        }
+      }
+    },
+    "configurations": {
+      "ios.sim.debug": {
+        "device": "simulator",
+        "app": "ios.debug"
+      },
+      "android.emu.debug": {
+        "device": "emulator",
+        "app": "android.debug"
+      }
+    }
+  },
+  "expo": {
+    "install": {
+      "exclude": [
+        "react-native-safe-area-context"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "private": true
+}

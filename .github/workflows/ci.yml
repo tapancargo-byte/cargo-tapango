@@ -1,0 +1,335 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: '18'
+  
+jobs:
+  lint-and-type-check:
+    name: Lint and Type Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: |
+            tapango/package-lock.json
+            admin/package-lock.json
+            
+      - name: Install mobile dependencies
+        run: |
+          cd tapango
+          npm ci
+          
+      - name: Install admin dependencies  
+        run: |
+          cd admin
+          npm ci
+          
+      - name: Lint mobile app
+        run: |
+          cd tapango
+          npm run lint
+          
+      - name: Lint admin dashboard
+        run: |
+          cd admin
+          npm run lint
+          
+      - name: Type check mobile app
+        run: |
+          cd tapango
+          npm run typecheck
+          
+      - name: Type check admin dashboard
+        run: |
+          cd admin
+          npm run typecheck
+          
+      - name: Check code formatting
+        run: |
+          npx prettier --check .
+          
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: lint-and-type-check
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: |
+            tapango/package-lock.json
+            admin/package-lock.json
+            
+      - name: Install mobile dependencies
+        run: |
+          cd tapango
+          npm ci
+          
+      - name: Install admin dependencies
+        run: |
+          cd admin
+          npm ci
+          
+      - name: Run mobile app tests
+        run: |
+          cd tapango
+          npm run test:coverage
+          
+      - name: Run admin dashboard tests
+        run: |
+          cd admin
+          npm run test:coverage
+          
+      - name: Upload mobile coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./tapango/coverage/lcov.info
+          flags: mobile
+          name: mobile-coverage
+          
+      - name: Upload admin coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./admin/coverage/lcov.info
+          flags: admin
+          name: admin-coverage
+          
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: lint-and-type-check
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+          
+      - name: Audit npm packages (mobile)
+        run: |
+          cd tapango
+          npm audit --audit-level moderate
+          
+      - name: Audit npm packages (admin)
+        run: |
+          cd admin
+          npm audit --audit-level moderate
+          
+  build-mobile:
+    name: Build Mobile App
+    runs-on: ubuntu-latest
+    needs: [lint-and-type-check, test]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: tapango/package-lock.json
+          
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+          
+      - name: Install dependencies
+        run: |
+          cd tapango
+          npm ci
+          
+      - name: Build for production
+        run: |
+          cd tapango
+          expo build:web
+          
+  build-admin:
+    name: Build Admin Dashboard
+    runs-on: ubuntu-latest
+    needs: [lint-and-type-check, test]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm' 
+          cache-dependency-path: admin/package-lock.json
+          
+      - name: Install dependencies
+        run: |
+          cd admin
+          npm ci
+          
+      - name: Build for production
+        run: |
+          cd admin
+          npm run build
+          
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: admin-build
+          path: admin/build/
+          
+  e2e-tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    needs: [build-mobile, build-admin]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          cd tapango
+          npm ci
+          
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        
+      - name: Create AVD and run E2E tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          script: |
+            cd tapango
+            npm run test:e2e:build
+            npm run test:e2e
+            
+  performance-tests:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    needs: [build-mobile, build-admin]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          cd admin
+          npm ci
+          
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.12.x
+          cd admin
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [e2e-tests, performance-tests]
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy mobile to Expo
+        run: |
+          cd tapango
+          npx expo publish --release-channel staging
+          
+      - name: Deploy admin to staging
+        run: |
+          echo "Deploy admin dashboard to staging environment"
+          # Add deployment commands here
+          
+  deploy-production:
+    name: Deploy to Production  
+    runs-on: ubuntu-latest
+    needs: [e2e-tests, performance-tests]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy mobile to production
+        run: |
+          cd tapango
+          npx expo publish --release-channel production
+          
+      - name: Deploy admin to production
+        run: |
+          echo "Deploy admin dashboard to production environment"
+          # Add deployment commands here
+          
+  notify:
+    name: Notify Team
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always()
+    
+    steps:
+      - name: Notify on success
+        if: ${{ success() }}
+        run: |
+          echo "🎉 Deployment successful!"
+          # Add Slack/Discord notification here
+          
+      - name: Notify on failure
+        if: ${{ failure() }}
+        run: |
+          echo "❌ Deployment failed!"
+          # Add failure notification here

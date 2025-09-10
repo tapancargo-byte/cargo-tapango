@@ -1,0 +1,110 @@
+[
+  {
+    "id": "driver_1",
+    "name": "Alex Rodriguez",
+    "email": "alex.rodriguez@tapango.com",
+    "phone": "+1777888999",
+    "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
+    "driver_license": "DL123456789",
+    "vehicle": {
+      "type": "van",
+      "make": "Ford",
+      "model": "Transit",
+      "year": 2022,
+      "license_plate": "ABC-1234",
+      "capacity": "1500kg",
+      "color": "White"
+    },
+    "status": "online",
+    "current_location": {
+      "latitude": 40.7282,
+      "longitude": -73.9942,
+      "timestamp": "2024-08-24T11:45:00Z"
+    },
+    "rating": 4.8,
+    "total_reviews": 127,
+    "joined_date": "2023-02-15T00:00:00Z",
+    "verified": true,
+    "stats": {
+      "total_deliveries": 234,
+      "completed_deliveries": 228,
+      "cancelled_deliveries": 6,
+      "total_earnings": 18750.50,
+      "this_month_earnings": 2340.00,
+      "hours_worked": 1240,
+      "on_time_percentage": 94
+    }
+  },
+  {
+    "id": "driver_2",
+    "name": "Maria Santos",
+    "email": "maria.santos@tapango.com",
+    "phone": "+1666555444",
+    "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
+    "driver_license": "DL987654321",
+    "vehicle": {
+      "type": "truck",
+      "make": "Isuzu",
+      "model": "NPR",
+      "year": 2021,
+      "license_plate": "XYZ-5678",
+      "capacity": "3000kg",
+      "color": "Blue"
+    },
+    "status": "busy",
+    "current_location": {
+      "latitude": 40.6832,
+      "longitude": -74.0889,
+      "timestamp": "2024-08-24T11:50:00Z"
+    },
+    "rating": 4.9,
+    "total_reviews": 89,
+    "joined_date": "2023-01-20T00:00:00Z",
+    "verified": true,
+    "stats": {
+      "total_deliveries": 178,
+      "completed_deliveries": 176,
+      "cancelled_deliveries": 2,
+      "total_earnings": 15420.75,
+      "this_month_earnings": 3120.50,
+      "hours_worked": 980,
+      "on_time_percentage": 97
+    }
+  },
+  {
+    "id": "driver_3",
+    "name": "David Chen",
+    "email": "david.chen@tapango.com",
+    "phone": "+1333222111",
+    "avatar": "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face",
+    "driver_license": "DL456789123",
+    "vehicle": {
+      "type": "pickup",
+      "make": "Toyota",
+      "model": "Hilux",
+      "year": 2023,
+      "license_plate": "DEF-9012",
+      "capacity": "1000kg",
+      "color": "Silver"
+    },
+    "status": "offline",
+    "current_location": {
+      "latitude": 40.7047,
+      "longitude": -74.0134,
+      "timestamp": "2024-08-24T11:30:00Z"
+    },
+    "rating": 4.6,
+    "total_reviews": 45,
+    "joined_date": "2023-08-10T00:00:00Z",
+    "verified": true,
+    "stats": {
+      "total_deliveries": 67,
+      "completed_deliveries": 65,
+      "cancelled_deliveries": 2,
+      "total_earnings": 5890.25,
+      "this_month_earnings": 1240.00,
+      "hours_worked": 420,
+      "on_time_percentage": 91
+    }
+  }
+]

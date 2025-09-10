@@ -1,0 +1,15 @@
+{
+  "MCP-Fetch-Me": {
+    "command": "cmd",
+    "args": [
+      "/c",
+      "npx",
+      "-y",
+      "@smithery/cli@latest",
+      "run",
+      "@JeremyNixon/mcp-fetch-me",
+      "--key",
+      "eaab6c22-4e10-4ae2-816f-205b210e8012"
+    ]
+  }
+}

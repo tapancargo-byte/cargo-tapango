@@ -1,0 +1,283 @@
+[
+  {
+    "id": "order_101",
+    "customer_id": "customer_1",
+    "driver_id": "driver_1",
+    "status": "delivered",
+    "pickup_address": {
+      "street": "123 Main Street",
+      "city": "Downtown City",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      }
+    },
+    "delivery_address": {
+      "street": "456 Commerce Ave",
+      "city": "Business District",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.7589,
+        "longitude": -73.9851
+      }
+    },
+    "cargo_description": "Office furniture - 2 desks and 4 chairs",
+    "cargo_weight": "150kg",
+    "cargo_type": "furniture",
+    "price": 275.00,
+    "currency": "USD",
+    "distance": "12.5km",
+    "estimated_duration": "45 minutes",
+    "created_at": "2024-08-20T09:15:00Z",
+    "updated_at": "2024-08-20T11:45:00Z",
+    "estimated_delivery": "2024-08-20T11:15:00Z",
+    "pickup_time": "2024-08-20T10:30:00Z",
+    "delivered_time": "2024-08-20T11:45:00Z",
+    "payment_method": "credit_card",
+    "payment_status": "completed",
+    "rating": {
+      "customer_rating": 5,
+      "driver_rating": 4,
+      "customer_comment": "Excellent service, very professional driver!",
+      "driver_comment": "Customer was ready on time, easy delivery."
+    },
+    "tracking": {
+      "current_location": {
+        "latitude": 40.7589,
+        "longitude": -73.9851
+      },
+      "route_progress": 100,
+      "estimated_arrival": null
+    }
+  },
+  {
+    "id": "order_102",
+    "customer_id": "customer_2",
+    "driver_id": "driver_2",
+    "status": "in_transit",
+    "pickup_address": {
+      "street": "456 Oak Avenue",
+      "city": "Riverside District",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.6892,
+        "longitude": -74.0445
+      }
+    },
+    "delivery_address": {
+      "street": "789 Industrial Blvd",
+      "city": "Manufacturing Zone",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.6782,
+        "longitude": -74.1234
+      }
+    },
+    "cargo_description": "Electronics equipment - Server rack and accessories",
+    "cargo_weight": "85kg",
+    "cargo_type": "electronics",
+    "price": 420.00,
+    "currency": "USD",
+    "distance": "18.2km",
+    "estimated_duration": "1 hour 15 minutes",
+    "created_at": "2024-08-24T08:00:00Z",
+    "updated_at": "2024-08-24T09:30:00Z",
+    "estimated_delivery": "2024-08-24T10:45:00Z",
+    "pickup_time": "2024-08-24T09:30:00Z",
+    "delivered_time": null,
+    "payment_method": "bank_transfer",
+    "payment_status": "pending",
+    "rating": null,
+    "tracking": {
+      "current_location": {
+        "latitude": 40.6832,
+        "longitude": -74.0889
+      },
+      "route_progress": 65,
+      "estimated_arrival": "2024-08-24T10:45:00Z"
+    }
+  },
+  {
+    "id": "order_103",
+    "customer_id": "customer_1",
+    "driver_id": "driver_1",
+    "status": "picked_up",
+    "pickup_address": {
+      "street": "123 Main Street",
+      "city": "Downtown City",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      }
+    },
+    "delivery_address": {
+      "street": "321 Residential Road",
+      "city": "Suburban Area",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.7830,
+        "longitude": -73.9712
+      }
+    },
+    "cargo_description": "Home appliances - Washing machine",
+    "cargo_weight": "75kg",
+    "cargo_type": "appliances",
+    "price": 180.00,
+    "currency": "USD",
+    "distance": "8.7km",
+    "estimated_duration": "35 minutes",
+    "created_at": "2024-08-24T10:30:00Z",
+    "updated_at": "2024-08-24T11:45:00Z",
+    "estimated_delivery": "2024-08-24T12:20:00Z",
+    "pickup_time": "2024-08-24T11:45:00Z",
+    "delivered_time": null,
+    "payment_method": "cash",
+    "payment_status": "pending",
+    "rating": null,
+    "tracking": {
+      "current_location": {
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      "route_progress": 15,
+      "estimated_arrival": "2024-08-24T12:20:00Z"
+    }
+  },
+  {
+    "id": "order_104",
+    "customer_id": "customer_3",
+    "driver_id": null,
+    "status": "pending",
+    "pickup_address": {
+      "street": "789 Pine Street",
+      "city": "Northside",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.7505,
+        "longitude": -73.9934
+      }
+    },
+    "delivery_address": {
+      "street": "147 Market Street",
+      "city": "Central Plaza",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.7282,
+        "longitude": -73.9942
+      }
+    },
+    "cargo_description": "Art supplies and canvases",
+    "cargo_weight": "25kg",
+    "cargo_type": "art_supplies",
+    "price": 95.00,
+    "currency": "USD",
+    "distance": "3.2km",
+    "estimated_duration": "20 minutes",
+    "created_at": "2024-08-24T11:00:00Z",
+    "updated_at": "2024-08-24T11:00:00Z",
+    "estimated_delivery": "2024-08-24T11:30:00Z",
+    "pickup_time": null,
+    "delivered_time": null,
+    "payment_method": "credit_card",
+    "payment_status": "pending",
+    "rating": null,
+    "tracking": {
+      "current_location": null,
+      "route_progress": 0,
+      "estimated_arrival": null
+    }
+  },
+  {
+    "id": "order_105",
+    "customer_id": "customer_2",
+    "driver_id": "driver_3",
+    "status": "assigned",
+    "pickup_address": {
+      "street": "456 Oak Avenue",
+      "city": "Riverside District",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.6892,
+        "longitude": -74.0445
+      }
+    },
+    "delivery_address": {
+      "street": "852 Harbor View",
+      "city": "Waterfront",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.7047,
+        "longitude": -74.0134
+      }
+    },
+    "cargo_description": "Documents and files - 3 boxes",
+    "cargo_weight": "15kg",
+    "cargo_type": "documents",
+    "price": 65.00,
+    "currency": "USD",
+    "distance": "5.8km",
+    "estimated_duration": "25 minutes",
+    "created_at": "2024-08-24T11:30:00Z",
+    "updated_at": "2024-08-24T11:30:00Z",
+    "estimated_delivery": "2024-08-24T13:00:00Z",
+    "pickup_time": null,
+    "delivered_time": null,
+    "payment_method": "digital_wallet",
+    "payment_status": "pending",
+    "rating": null,
+    "tracking": {
+      "current_location": null,
+      "route_progress": 0,
+      "estimated_arrival": "2024-08-24T13:00:00Z"
+    }
+  },
+  {
+    "id": "order_106",
+    "customer_id": "customer_1",
+    "driver_id": "driver_2",
+    "status": "cancelled",
+    "pickup_address": {
+      "street": "123 Main Street",
+      "city": "Downtown City",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      }
+    },
+    "delivery_address": {
+      "street": "963 Tech Park",
+      "city": "Innovation District",
+      "state": "NY",
+      "coordinates": {
+        "latitude": 40.7614,
+        "longitude": -73.9776
+      }
+    },
+    "cargo_description": "Computer equipment",
+    "cargo_weight": "40kg",
+    "cargo_type": "electronics",
+    "price": 150.00,
+    "currency": "USD",
+    "distance": "9.1km",
+    "estimated_duration": "40 minutes",
+    "created_at": "2024-08-23T15:20:00Z",
+    "updated_at": "2024-08-23T16:45:00Z",
+    "estimated_delivery": "2024-08-23T16:00:00Z",
+    "pickup_time": null,
+    "delivered_time": null,
+    "payment_method": "credit_card",
+    "payment_status": "refunded",
+    "cancellation_reason": "Customer unavailable at pickup time",
+    "cancelled_at": "2024-08-23T16:45:00Z",
+    "rating": null,
+    "tracking": {
+      "current_location": null,
+      "route_progress": 0,
+      "estimated_arrival": null
+    },
+    "special_instructions": "Call before delivery"
+  }
+]

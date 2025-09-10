@@ -1,0 +1,210 @@
+{
+  "name": "TapanGo Material 3 Onboarding Splash",
+  "version": "1.0.0",
+  "designSystem": "Material 3",
+  "lastUpdated": "2025-09-08",
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "dpi": 144,
+    "aspectRatio": "9:16",
+    "platform": ["iOS", "Android"]
+  },
+  "safeAreas": {
+    "top": 48,
+    "bottom": 96,
+    "horizontal": 48
+  },
+  "colorTokens": {
+    "light": {
+      "primary": "#3B82F6",
+      "surface": "#FFFFFF",
+      "onSurface": "#1E293B",
+      "background": {
+        "start": "#0F1B2A", 
+        "end": "#1E3A5F"
+      },
+      "spinner": {
+        "track": "#3B82F640",
+        "indicator": "#3B82F6"
+      }
+    },
+    "dark": {
+      "primary": "#60A5FA",
+      "surface": "#0F172A", 
+      "onSurface": "#E2E8F0",
+      "background": {
+        "start": "#020917",
+        "end": "#0F1B2A"
+      },
+      "spinner": {
+        "track": "#60A5FA40",
+        "indicator": "#60A5FA"
+      }
+    }
+  },
+  "typography": {
+    "brandTitle": {
+      "fontSize": 36,
+      "fontWeight": "700",
+      "lineHeight": 44,
+      "letterSpacing": 1.5,
+      "opacity": 1.0
+    },
+    "brandTagline": {
+      "fontSize": 16,
+      "fontWeight": "400", 
+      "lineHeight": 24,
+      "letterSpacing": 0.5,
+      "opacity": 0.75
+    },
+    "loadingText": {
+      "fontSize": 14,
+      "fontWeight": "400",
+      "lineHeight": 20,
+      "letterSpacing": 0.25,
+      "opacity": 0.6
+    },
+    "versionText": {
+      "fontSize": 10,
+      "fontWeight": "400",
+      "lineHeight": 14,
+      "letterSpacing": 1.5,
+      "opacity": 0.4
+    }
+  },
+  "layout": {
+    "airplane": {
+      "width": "60%",
+      "aspectRatio": "1:1",
+      "position": {
+        "top": "15%",
+        "horizontalCenter": true
+      },
+      "transform": {
+        "scaleX": -1,
+        "scaleY": 1
+      }
+    },
+    "brandContainer": {
+      "position": {
+        "top": "45%",
+        "horizontalCenter": true
+      },
+      "spacing": 8
+    },
+    "spinner": {
+      "size": 24,
+      "strokeWidth": 3,
+      "position": {
+        "bottom": 120,
+        "horizontalCenter": true
+      }
+    },
+    "loadingText": {
+      "position": {
+        "bottom": 80,
+        "horizontalCenter": true
+      }
+    },
+    "version": {
+      "position": {
+        "bottom": 16,
+        "right": 20
+      }
+    }
+  },
+  "animations": {
+    "spinner": {
+      "type": "rotation",
+      "duration": 1200,
+      "easing": "linear",
+      "iterations": "infinite"
+    },
+    "entrance": {
+      "fadeIn": {
+        "duration": 400,
+        "easing": "ease-out"
+      },
+      "scaleUp": {
+        "from": 0.8,
+        "to": 1.0,
+        "duration": 600,
+        "easing": "spring",
+        "tension": 50,
+        "friction": 8
+      }
+    },
+    "exit": {
+      "fadeOut": {
+        "duration": 400,
+        "delay": 200,
+        "easing": "ease-in"
+      },
+      "scaleUp": {
+        "to": 1.1,
+        "duration": 300,
+        "easing": "ease-out"
+      }
+    }
+  },
+  "accessibility": {
+    "wcagCompliance": "AA",
+    "contrastRatios": {
+      "brandTitle": {
+        "light": 8.2,
+        "dark": 12.1
+      },
+      "brandTagline": {
+        "light": 6.1,
+        "dark": 9.1
+      },
+      "loadingText": {
+        "light": 4.9,
+        "dark": 7.3
+      },
+      "versionText": {
+        "light": 4.5,
+        "dark": 6.8
+      }
+    },
+    "reducedMotion": true,
+    "semanticLabels": {
+      "airplane": "Airplane animation",
+      "spinner": "Loading indicator", 
+      "brand": "TapanGo logo"
+    }
+  },
+  "exports": {
+    "static": [
+      "splash_light.png",
+      "splash_dark.png"
+    ],
+    "vector": [
+      "splash.svg",
+      "spinner.svg" 
+    ],
+    "lottie": [
+      "spinner_lottie.json"
+    ]
+  },
+  "implementation": {
+    "react-native": {
+      "file": "src/screens/SplashScreen.tsx",
+      "dependencies": [
+        "lottie-react-native",
+        "react-native-linear-gradient",
+        "react-native-safe-area-context"
+      ]
+    },
+    "fonts": {
+      "primary": "System",
+      "fallbacks": [
+        "-apple-system",
+        "BlinkMacSystemFont", 
+        "Segoe UI",
+        "sans-serif"
+      ]
+    }
+  }
+}

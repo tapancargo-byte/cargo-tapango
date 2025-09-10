@@ -1,0 +1,107 @@
+[
+  {
+    "id": "payment_001",
+    "order_id": "order_101",
+    "customer_id": "customer_1",
+    "driver_id": "driver_1",
+    "amount": 275.00,
+    "currency": "USD",
+    "payment_method": "credit_card",
+    "status": "completed",
+    "transaction_date": "2024-08-20T11:45:00Z",
+    "fees": {
+      "platform_fee": 27.50,
+      "payment_processing_fee": 8.25,
+      "driver_commission": 55.00
+    },
+    "driver_payout": {
+      "amount": 220.00,
+      "status": "paid",
+      "payout_date": "2024-08-21T10:00:00Z"
+    }
+  },
+  {
+    "id": "payment_002",
+    "order_id": "order_102",
+    "customer_id": "customer_2",
+    "driver_id": "driver_2",
+    "amount": 420.00,
+    "currency": "USD",
+    "payment_method": "bank_transfer",
+    "status": "pending",
+    "transaction_date": "2024-08-24T09:30:00Z",
+    "fees": {
+      "platform_fee": 42.00,
+      "payment_processing_fee": 8.40,
+      "driver_commission": 84.00
+    },
+    "driver_payout": {
+      "amount": 336.00,
+      "status": "pending",
+      "payout_date": null
+    }
+  },
+  {
+    "id": "payment_003",
+    "order_id": "order_103",
+    "customer_id": "customer_1",
+    "driver_id": "driver_1",
+    "amount": 180.00,
+    "currency": "USD",
+    "payment_method": "cash",
+    "status": "pending",
+    "transaction_date": "2024-08-24T11:45:00Z",
+    "fees": {
+      "platform_fee": 18.00,
+      "payment_processing_fee": 0.00,
+      "driver_commission": 36.00
+    },
+    "driver_payout": {
+      "amount": 144.00,
+      "status": "pending",
+      "payout_date": null
+    }
+  },
+  {
+    "id": "payment_004",
+    "order_id": "order_105",
+    "customer_id": "customer_2",
+    "driver_id": "driver_3",
+    "amount": 65.00,
+    "currency": "USD",
+    "payment_method": "digital_wallet",
+    "status": "pending",
+    "transaction_date": "2024-08-24T11:30:00Z",
+    "fees": {
+      "platform_fee": 6.50,
+      "payment_processing_fee": 1.95,
+      "driver_commission": 13.00
+    },
+    "driver_payout": {
+      "amount": 52.00,
+      "status": "pending",
+      "payout_date": null
+    }
+  },
+  {
+    "id": "payment_005",
+    "order_id": "order_106",
+    "customer_id": "customer_1",
+    "driver_id": "driver_2",
+    "amount": 150.00,
+    "currency": "USD",
+    "payment_method": "credit_card",
+    "status": "refunded",
+    "transaction_date": "2024-08-23T15:20:00Z",
+    "fees": {
+      "platform_fee": 0.00,
+      "payment_processing_fee": 0.00,
+      "driver_commission": 0.00
+    },
+    "driver_payout": {
+      "amount": 0.00,
+      "status": "failed",
+      "payout_date": null
+    }
+  }
+]
