@@ -1,0 +1,6 @@
+# @ts-nocheck
+# Redirect to project favicon
+[[redirects]]
+from = "/favicon.ico"
+to = "/favicon.svg"
+status = 200

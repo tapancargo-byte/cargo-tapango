@@ -6,6 +6,17 @@ import tamaguiConfig from '../tamagui.config'
 import '../tamagui-web.css'
 import { ThemeProvider } from '../src/styles/ThemeProvider'
 
+// Ensure favicon is referenced for dev servers that don’t auto-detect it
+if (typeof document !== 'undefined') {
+  const hasFavicon = document.querySelector('link[rel="icon"]')
+  if (!hasFavicon) {
+    const link = document.createElement('link')
+    link.rel = 'icon'
+    link.href = '/favicon.svg'
+    document.head.appendChild(link)
+  }
+}
+
 // Simple global decorator to toggle design-system mode via globals
 const preview: Preview = {
   parameters: {
