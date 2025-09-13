@@ -6,7 +6,7 @@ export default {
     orientation: 'portrait',
     icon: './assets/icon.png',
     userInterfaceStyle: 'automatic',
-    newArchEnabled: true,
+    newArchEnabled: true, // SDK 54: New Architecture is now default
     splash: {
       image: './assets/splash.png',
       resizeMode: 'contain',
@@ -18,13 +18,20 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: 'com.tapango.mobile'
+      // SDK 54: Add Liquid Glass icon support when ready
+      // icon: './assets/app.icon' 
     },
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#ffffff'
       },
-      package: 'com.tapango.mobile'
+      package: 'com.tapango.mobile',
+      // SDK 54: Android 16 features
+      predictiveBackGestureEnabled: true, // Enable predictive back gesture
+      navigationBar: {
+        enforceContrast: true // Replaces react-native-edge-to-edge
+      }
     },
     web: {
       favicon: './assets/favicon.png'
@@ -55,6 +62,8 @@ export default {
     ],
     experiments: {
       typedRoutes: true
-    }
+    },
+    // SDK 54: Performance improvements
+    buildCacheProvider: "eas" // Enable build cache for faster builds
   }
 };

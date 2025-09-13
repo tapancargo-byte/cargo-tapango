@@ -16,7 +16,7 @@ export const AnimatedContainer: React.FC<AnimatedContainerProps> = ({
   style,
   ...props
 }) => {
-  const animatedValue = new Animated.Value(0);
+  const animatedValue = React.useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,7 +28,7 @@ export const AnimatedContainer: React.FC<AnimatedContainerProps> = ({
     }, delay);
 
     return () => clearTimeout(timer);
-  }, [delay, duration]);
+  }, [animatedValue, delay, duration]);
 
   const getAnimatedStyle = () => {
     switch (animationType) {

@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { useDrivers, useUpdateDriverStatus, useUpdateDriverOnlineStatus } from '../hooks/useDrivers';
 import { DriverWithProfile } from '../lib/supabase';
+import { toCSV } from '../lib/csv';
 import { DriverFilters } from '../lib/validations';
 
 const Drivers: React.FC = () => {
@@ -79,7 +80,7 @@ const Drivers: React.FC = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4 items-end">
             <div className="flex-1">
               <Input
                 placeholder="Search drivers..."
@@ -114,6 +115,14 @@ const Drivers: React.FC = () => {
                 <SelectItem value="false">Offline</SelectItem>
               </SelectContent>
             </Select>
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1">From</label>
+              <Input type="date" value={(filters as any).date_from || ''} onChange={(e) => setFilters({ ...filters, date_from: e.target.value } as any)} />
+            </div>
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1">To</label>
+              <Input type="date" value={(filters as any).date_to || ''} onChange={(e) => setFilters({ ...filters, date_to: e.target.value } as any)} />
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -121,8 +130,31 @@ const Drivers: React.FC = () => {
       {/* Drivers Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Drivers ({drivers?.length || 0})</CardTitle>
-          <CardDescription>A list of all registered drivers in the system</CardDescription>
+          <div className="flex items-center justify-between w-full">
+            <div>
+              <CardTitle>Drivers ({drivers?.length || 0})</CardTitle>
+              <CardDescription>A list of all registered drivers in the system</CardDescription>
+            </div>
+            <div>
+              <Button variant="outline" onClick={() => {
+                const cols = [
+                  { key: 'name', label: 'Name', map: (r: any) => r.user_profile?.name || '' },
+                  { key: 'email', label: 'Email', map: (r: any) => r.user_profile?.email || '' },
+                  { key: 'phone', label: 'Phone', map: (r: any) => r.user_profile?.phone || '' },
+                  { key: 'status', label: 'Status', map: (r: any) => r.status || '' },
+                  { key: 'is_online', label: 'Online', map: (r: any) => (r.is_online ? 'true' : 'false') },
+                  { key: 'rating', label: 'Rating', map: (r: any) => r.rating ?? '' },
+                  { key: 'total_trips', label: 'Total Trips', map: (r: any) => r.total_trips ?? '' },
+                  { key: 'created_at', label: 'Created', map: (r: any) => r.created_at || '' },
+                ];
+                const csv = toCSV(drivers || [], cols);
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url; a.download = 'drivers.csv'; a.click(); URL.revokeObjectURL(url);
+              }}>Export CSV</Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <Table>

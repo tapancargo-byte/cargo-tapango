@@ -188,11 +188,7 @@ supabase/
 | `tsconfig.json` | Root TypeScript configuration |
 | `mcp-config.json` | MCP configuration |
 | `mcp-config-pnpm.json` | PNPM-specific MCP config |
-| `complete-admin-fix.sql` | Admin system fixes |
-| `create-admin-user.sql` | Admin user creation |
-| `create-test-users.js` | Test user generation |
-| `fix-profile-creation.sql` | Profile creation fixes |
-| `supabase-migration.sql` | Main migration script |
+| `supabase-migration.sql` | Main migration script (core database schema) |
 
 ---
 
@@ -210,7 +206,6 @@ supabase/
 ### Development Scripts
 - **Mobile App:** `expo start`, `expo run:android`, `expo run:ios`
 - **Admin Dashboard:** `react-scripts start`, `react-scripts build`
-- **Testing:** Jest test runner in both projects
 
 ---
 

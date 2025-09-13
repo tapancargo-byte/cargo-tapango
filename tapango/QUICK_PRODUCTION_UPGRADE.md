@@ -1,5 +1,7 @@
 # Quick Production Upgrade Guide
 
+For Supabase database hardening and when to drop dev policies, see `docs/PROJECT_STATUS_AND_SUPABASE.md`.
+
 ## 🚀 **Ready to Eliminate the Warning? Upgrade to Production!**
 
 ### **Step 1: Create Production Instance**

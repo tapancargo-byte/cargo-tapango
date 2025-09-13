@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Animated,
   Dimensions,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -132,9 +133,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: spacing.sm,
     letterSpacing: -0.5,
-    textShadowColor: 'rgba(0, 0, 0, 0.1)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
+    ...(Platform.OS === 'web' ? {} : {
+      textShadowColor: 'rgba(0, 0, 0, 0.1)',
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 4,
+    }),
   },
   subtitle: {
     ...textStyles.bodyLarge,
@@ -143,9 +146,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
     paddingHorizontal: spacing.lg,
-    textShadowColor: 'rgba(0, 0, 0, 0.1)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
+    ...(Platform.OS === 'web' ? {} : {
+      textShadowColor: 'rgba(0, 0, 0, 0.1)',
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 2,
+    }),
   },
   decorativeContainer: {
     flexDirection: 'row',

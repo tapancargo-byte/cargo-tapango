@@ -8,6 +8,7 @@ import {
   Animated,
   TouchableOpacity,
   ScrollView,
+  Platform,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -17,6 +18,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import SplashAnimation from '../../assets/lottie/splash.json';
 // Import blue theme colors
 import { colors } from '../styles/colors';
+import { Headline as DsHeadline, Body as DsBody, Title as DsTitle } from '../design-system/components/Typography';
 
 interface OnboardingScreen {
   id: string;
@@ -83,6 +85,18 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
   const scrollViewRef = useRef<ScrollView>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLastScreen, setIsLastScreen] = useState(false);
+  
+  // Safely resolve current screen values (avoid optional colors with exactOptionalPropertyTypes)
+  const defaultScreen: OnboardingScreen = {
+    id: 'default',
+    title: '',
+    subtitle: '',
+    description: '',
+    primaryAnimation: SplashAnimation,
+    backgroundColor: colors.gradients.primary,
+    textColor: colors.neutral.white,
+  };
+  const current: OnboardingScreen = (onboardingData[currentIndex] ?? onboardingData[0]) ?? defaultScreen;
   
   // Animation values
   const fadeAnim = useRef(new Animated.Value(1)).current;
@@ -199,15 +213,15 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
 
           {/* Content */}
           <View style={styles.contentContainer}>
-            <Text style={[styles.subtitle, { color: screen.textColor }]}>
+            <DsBody color={screen.textColor} align="center">
               {screen.subtitle}
-            </Text>
-            <Text style={[styles.title, { color: screen.textColor }]}>
+            </DsBody>
+            <DsHeadline color={screen.textColor} align="center" weight="extrabold">
               {screen.title}
-            </Text>
-            <Text style={[styles.description, { color: screen.textColor }]}>
+            </DsHeadline>
+            <DsBody color={screen.textColor} align="center">
               {screen.description}
-            </Text>
+            </DsBody>
           </View>
         </LinearGradient>
       </View>
@@ -218,7 +232,7 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
     <View style={styles.container}>
       <StatusBar 
         barStyle={currentIndex === 1 ? "dark-content" : "light-content"}
-        backgroundColor={onboardingData[currentIndex]?.backgroundColor[0]}
+        backgroundColor={current.backgroundColor[0]}
         translucent={false}
       />
 
@@ -232,9 +246,9 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
               onPress={onSkip}
               activeOpacity={0.7}
             >
-              <Text style={[styles.skipText, { color: onboardingData[currentIndex]?.textColor }]}>
+              <DsBody color={current.textColor} align="center">
                 Skip
-              </Text>
+              </DsBody>
             </TouchableOpacity>
           )}
 
@@ -249,14 +263,14 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
                       inputRange: [0, 1],
                       outputRange: ['0%', '100%'],
                     }),
-                    backgroundColor: onboardingData[currentIndex]?.textColor,
+                    backgroundColor: current.textColor,
                   },
                 ]}
               />
             </View>
-            <Text style={[styles.progressText, { color: onboardingData[currentIndex]?.textColor }]}>
+            <DsBody color={current.textColor} align="center">
               {currentIndex + 1} / {onboardingData.length}
-            </Text>
+            </DsBody>
           </View>
         </View>
 
@@ -284,8 +298,8 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
                   styles.pageIndicator,
                   {
                     backgroundColor: index === currentIndex 
-                      ? onboardingData[currentIndex]?.textColor 
-                      : onboardingData[currentIndex]?.textColor + '40',
+                      ? current.textColor 
+                      : current.textColor + '40',
                     transform: [{ scale: index === currentIndex ? 1.2 : 1 }],
                   },
                 ]}
@@ -300,14 +314,14 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
                 style={[
                   styles.button,
                   styles.previousButton,
-                  { borderColor: onboardingData[currentIndex]?.textColor },
+                  { borderColor: current.textColor },
                 ]}
                 onPress={handlePrevious}
                 activeOpacity={0.8}
               >
-                <Text style={[styles.buttonText, { color: onboardingData[currentIndex]?.textColor }]}>
+                <DsBody color={current.textColor} align="center" weight="semibold">
                   Previous
-                </Text>
+                </DsBody>
               </TouchableOpacity>
             )}
 
@@ -316,18 +330,14 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
                 style={[
                   styles.button,
                   styles.nextButton,
-                  { backgroundColor: onboardingData[currentIndex]?.textColor },
+                  { backgroundColor: current.textColor },
                 ]}
                 onPress={handleNext}
                 activeOpacity={0.8}
               >
-                <Text style={[
-                  styles.buttonText,
-                  styles.nextButtonText,
-                  { color: onboardingData[currentIndex]?.backgroundColor[0] }
-                ]}>
+                <DsBody color={current.backgroundColor[0]} align="center" weight="bold">
                   {isLastScreen ? 'Get Started' : 'Next'}
-                </Text>
+                </DsBody>
               </TouchableOpacity>
             </Animated.View>
           </View>

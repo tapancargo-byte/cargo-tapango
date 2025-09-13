@@ -15,6 +15,9 @@ export interface OrderFilters {
   status?: Order['status'];
   customer_id?: string;
   driver_id?: string;
+  q?: string;
+  fromDate?: string; // ISO date string
+  toDate?: string;   // ISO date string
   limit?: number;
   offset?: number;
 }
@@ -43,6 +46,17 @@ export function useOrders(filters: OrderFilters = {}) {
       }
       if (filters.driver_id) {
         query = query.eq('driver_id', filters.driver_id);
+      }
+      if (filters.q && filters.q.trim()) {
+        query = query.ilike('route', `%${filters.q.trim()}%`);
+      }
+      const from = (filters as any).fromDate || (filters as any).date_from;
+      const to = (filters as any).toDate || (filters as any).date_to;
+      if (from) {
+        query = query.gte('created_at', from);
+      }
+      if (to) {
+        query = query.lte('created_at', to);
       }
       if (filters.limit) {
         query = query.limit(filters.limit);

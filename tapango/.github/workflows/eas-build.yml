@@ -1,0 +1,55 @@
+name: EAS Build and Submit
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: 'Channel to deploy to (production/beta)'
+        required: true
+        default: 'beta'
+        type: choice
+        options:
+          - beta
+          - production
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  build-and-submit:
+    name: Build and Submit
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Check out repository
+        uses: actions/checkout@v4
+
+      - name: 🏗 Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: npm
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📱 Build app
+        run: eas build --platform all --non-interactive --no-wait --profile ${{ github.event.inputs.channel || 'beta' }}
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_APP_ID: ${{ secrets.ASC_APP_ID }}
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 🚀 Submit to stores
+        run: eas submit --platform all --profile ${{ github.event.inputs.channel || 'beta' }}
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_APP_ID: ${{ secrets.ASC_APP_ID }}
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}

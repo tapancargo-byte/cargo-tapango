@@ -99,6 +99,8 @@ export const orderFiltersSchema = z.object({
 export const driverFiltersSchema = z.object({
   status: z.enum(['offline', 'online', 'busy', 'break']).optional(),
   is_online: z.boolean().optional(),
+  date_from: z.string().optional(),
+  date_to: z.string().optional(),
   limit: z.number().min(1).max(100).default(10),
   offset: z.number().min(0).default(0),
 });

@@ -1,36 +1,24 @@
-import * as Sentry from "@sentry/react";
+import * as Sentry from '@sentry/react';
 
-// Get version from package.json for release tracking
-const packageJson = require('../../package.json');
+// Read DSN and environment from Vite env (fallback to CRA env for compatibility)
+const dsn = (import.meta as any)?.env?.VITE_SENTRY_DSN || process.env.REACT_APP_SENTRY_DSN;
+const environment = (import.meta as any)?.env?.VITE_SENTRY_ENVIRONMENT || process.env.REACT_APP_SENTRY_ENVIRONMENT || (process.env.NODE_ENV || 'development');
+const release = (import.meta as any)?.env?.VITE_APP_VERSION || undefined;
 
-// Read DSN from environment variables
-const dsn = process.env.REACT_APP_SENTRY_DSN;
-const environment = process.env.REACT_APP_SENTRY_ENVIRONMENT || 'development';
-
-// Only initialize Sentry if DSN is provided
-if (dsn && dsn.trim() !== '') {
+if (dsn && String(dsn).trim() !== '') {
   Sentry.init({
-    dsn: dsn,
-    environment: environment,
-    // Enable performance monitoring
+    dsn: String(dsn),
+    environment: String(environment),
     tracesSampleRate: environment === 'development' ? 1.0 : 0.1,
-    // Enable Session Replay
     replaysSessionSampleRate: environment === 'development' ? 1.0 : 0.05,
     replaysOnErrorSampleRate: 1.0,
-    // Enable debug in development
     debug: environment === 'development',
-    // Release tracking for health monitoring
-    release: packageJson.version,
-    // Integrations
-    integrations: [
-      Sentry.browserTracingIntegration(),
-      Sentry.replayIntegration(),
-    ],
-    // Send default PII for better context
+    release,
+    integrations: [Sentry.browserTracingIntegration(), Sentry.replayIntegration()],
     sendDefaultPii: true,
   });
 } else {
-  console.log('Sentry disabled: REACT_APP_SENTRY_DSN not configured');
+  console.log('Sentry disabled: VITE_SENTRY_DSN (or REACT_APP_SENTRY_DSN) not configured');
 }
 
 export { Sentry };

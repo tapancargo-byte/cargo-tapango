@@ -13,6 +13,7 @@ import {
   UserCheck,
   ChevronUp,
   User2,
+  Activity,
 } from 'lucide-react'
 import {
   Sidebar,
@@ -79,6 +80,16 @@ const navMain = [
         title: "Invoices",
         url: "/invoices", 
         icon: FileText,
+      },
+      {
+        title: "Tracking Events",
+        url: "/tracking-events",
+        icon: Activity,
+      },
+      {
+        title: "KYC",
+        url: "/kyc",
+        icon: Shield,
       }
     ]
   },

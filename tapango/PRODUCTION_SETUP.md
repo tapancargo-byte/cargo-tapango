@@ -1,5 +1,7 @@
 # Production Deployment Guide for Clerk Authentication
 
+For Supabase database hardening steps and the plan to drop dev-only policies before release, see `docs/PROJECT_STATUS_AND_SUPABASE.md`.
+
 ## Current Status
 ✅ **Development Setup Complete** - Your app is using Clerk development keys, which is perfect for testing and development.
 

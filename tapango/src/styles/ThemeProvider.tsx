@@ -40,25 +40,25 @@ interface Theme {
 // WCAG 2.2 AA compliant color themes
 const lightTheme: Theme = {
   colors: {
-    background: '#FFFFFF',
-    surface: '#FFFFFF',
-    surfaceVariant: '#F8FAFC',
-    primary: colors.primary.blue,
-    primaryContainer: '#EFF6FF',
-    secondary: colors.secondary.indigo,
-    secondaryContainer: '#E0E7FF',
-    text: '#0F172A',           // 4.5:1 contrast on white
-    textSecondary: '#475569',  // 4.5:1 contrast on white
+    background: '#FAFBFF',        // Subtle blue-tinted background
+    surface: '#FFFFFF',           // Pure white cards
+    surfaceVariant: '#F1F5FF',    // Light blue variant
+    primary: '#0D47A1',           // Rich royal blue
+    primaryContainer: '#E3F2FD',  // Light primary container
+    secondary: '#5E35B1',         // Premium purple
+    secondaryContainer: '#EDE7F6',
+    text: '#1A1C1E',              // Rich dark text
+    textSecondary: '#5F6368',     // Medium gray text
     textOnPrimary: '#FFFFFF',
-    border: '#E2E8F0',
-    borderFocus: colors.primary.blue,
-    error: colors.status.error,
-    errorContainer: '#FEE2E2',
-    success: colors.status.success,
-    warning: colors.status.warning,
-    info: colors.status.info,
-    overlay: 'rgba(15, 23, 42, 0.5)',
-    shadow: 'rgba(15, 23, 42, 0.1)',
+    border: '#E8EAF6',            // Light border
+    borderFocus: '#0D47A1',       // Primary focus border
+    error: '#D32F2F',             // Material red
+    errorContainer: '#FFEBEE',
+    success: '#388E3C',           // Material green
+    warning: '#F57C00',           // Material orange
+    info: '#1976D2',              // Material blue
+    overlay: 'rgba(26, 28, 30, 0.6)',
+    shadow: 'rgba(26, 28, 30, 0.08)',
   },
   typography,
   textStyles,
@@ -70,25 +70,25 @@ const lightTheme: Theme = {
 
 const darkTheme: Theme = {
   colors: {
-    background: '#0F172A',     // Dark navy
-    surface: '#1E293B',       // Lighter navy
-    surfaceVariant: '#334155', // Even lighter
-    primary: '#60A5FA',       // Lighter blue for dark mode
-    primaryContainer: '#1E3A8A',
-    secondary: '#818CF8',     // Lighter indigo
-    secondaryContainer: '#3730A3',
-    text: '#F8FAFC',          // Near white, high contrast
-    textSecondary: '#CBD5E1',  // Light gray, 4.5:1 contrast
-    textOnPrimary: '#0F172A',
-    border: '#334155',
-    borderFocus: '#60A5FA',
-    error: '#F87171',         // Lighter red for dark mode
-    errorContainer: '#7F1D1D',
-    success: '#34D399',       // Lighter green
-    warning: '#FBBF24',       // Lighter amber
-    info: '#60A5FA',
-    overlay: 'rgba(0, 0, 0, 0.7)',
-    shadow: 'rgba(0, 0, 0, 0.3)',
+    background: '#0A0E1A',        // Deep space blue
+    surface: '#1A1F2E',          // Dark surface with blue tint
+    surfaceVariant: '#252D3F',    // Variant surface
+    primary: '#4FC3F7',           // Bright cyan for dark mode
+    primaryContainer: '#0D47A1',
+    secondary: '#B39DDB',         // Light purple
+    secondaryContainer: '#4527A0',
+    text: '#F8FAFF',              // Off-white with blue tint
+    textSecondary: '#B3C5EF',     // Light blue-gray
+    textOnPrimary: '#0A0E1A',     // Dark text on bright primary
+    border: '#37415A',            // Subtle blue-gray border
+    borderFocus: '#4FC3F7',       // Bright focus border
+    error: '#FF6B6B',             // Softer red for dark mode
+    errorContainer: '#5D1A1A',
+    success: '#4ECDC4',           // Turquoise success
+    warning: '#FFD93D',           // Bright warning yellow
+    info: '#4FC3F7',              // Primary info color
+    overlay: 'rgba(10, 14, 26, 0.8)',
+    shadow: 'rgba(0, 0, 0, 0.4)',
   },
   typography,
   textStyles,
@@ -115,7 +115,8 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const systemColorScheme = useColorScheme();
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('system');
+  // Default to light theme for premium feel
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
 
   // Load saved color scheme on mount
   useEffect(() => {
@@ -124,6 +125,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         const saved = await AsyncStorage.getItem(THEME_STORAGE_KEY);
         if (saved && ['light', 'dark', 'system'].includes(saved)) {
           setColorScheme(saved as ColorScheme);
+        } else {
+          // No saved preference: remain on default 'light'
+          setColorScheme('light');
         }
       } catch (error) {
         console.warn('Failed to load color scheme preference:', error);
@@ -172,7 +176,27 @@ export const useTheme = (): ThemeContextType => {
 // Convenience hooks
 export const useColors = () => {
   const { theme } = useTheme();
-  return theme.colors;
+  return theme.colors as any as {
+    background: string;
+    surface: string;
+    surfaceVariant: string;
+    primary: string;
+    primaryContainer: string;
+    secondary: string;
+    secondaryContainer: string;
+    text: string;
+    textSecondary: string;
+    textOnPrimary: string;
+    border: string;
+    borderFocus: string;
+    error: string;
+    errorContainer: string;
+    success: string;
+    warning: string;
+    info: string;
+    overlay: string;
+    shadow: string;
+  };
 };
 
 export const useIsDark = () => {

@@ -104,6 +104,18 @@ import { styles } from './Component.styles';
    npm run lint
    ```
 
+## UI Guidelines (Typography and Theming)
+
+- Use numeric tokens via src/ui/tokens for text sizes:
+  - headline, title, section, body, subtitle, caption
+- Do not use H1/H2/H4 components in new code; prefer Text with token sizes.
+- Secondary text should mostly use caption with reduced opacity in context.
+- Badges and pills adapt to theme; for new badges use InlineBadge for contrast in dark mode.
+- Cards and surfaces must use $background and token border colors; avoid hardcoded colors.
+
 ## 📚 Documentation
+
+- Project status and Supabase posture: see `docs/PROJECT_STATUS_AND_SUPABASE.md`
+- Supabase setup and migrations: see `docs/SUPABASE_SETUP_GUIDE.md`
 
 Each directory contains specific documentation about its contents and usage patterns. Refer to individual README files for detailed information.

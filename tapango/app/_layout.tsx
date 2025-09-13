@@ -2,11 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, useColorScheme } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
-import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo';
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { ReactQueryProvider } from '../src/utils/reactQuery';
+import { OfflineBanner } from '../src/components/OfflineBanner';
+import { drainPendingBookings } from '../src/utils/offlineQueue';
+import { ThemeProvider, useIsDark } from '../src/styles/ThemeProvider';
+import { TamaguiProvider, Theme } from 'tamagui';
+import tamaguiConfig from '../tamagui.config';
 import * as SecureStore from 'expo-secure-store';
+import { AppToastProvider } from '../src/ui/tg/ToastHost';
+import { GlobalErrorCatcher } from '../src/components/GlobalErrorCatcher';
 
 // Clerk token cache configuration
 const tokenCache = {
@@ -47,6 +55,8 @@ SplashScreen.preventAutoHideAsync()
 // Note: SplashScreen.setOptions is not available in Expo Go
 // Use development builds or remove for Expo Go compatibility
 
+import { initSentry } from '../src/utils/sentry';
+
 /**
  * Root layout for the TAPANGO mobile app following Expo Router best practices
  * 
@@ -56,12 +66,23 @@ SplashScreen.preventAutoHideAsync()
  * - Font loading and splash screen management
  * - Status bar configuration
  */
+
 export default function RootLayout() {
   const [appIsReady, setAppIsReady] = useState(false);
+  const systemColorScheme = (useColorScheme() ?? 'light') as 'light' | 'dark';
 
   useEffect(() => {
+    // Initialize Sentry (no-op if DSN/package not present)
+    initSentry();
+
     async function prepare() {
       try {
+        // Load locale preference
+        try {
+          const { loadLocaleFromStorage } = await import('../src/i18n')
+          await loadLocaleFromStorage()
+        } catch {}
+
         // Pre-load any fonts or resources here
         // await Font.loadAsync({
         //   'SpaceMono': require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -74,6 +95,8 @@ export default function RootLayout() {
       } finally {
         // Tell the application to render
         setAppIsReady(true);
+        // Best-effort drain queued bookings
+        drainPendingBookings().catch(() => {});
         // Note: splash screen hiding is controlled by the splash.tsx screen
         // Do not call SplashScreen.hideAsync() here
       }
@@ -104,20 +127,48 @@ export default function RootLayout() {
 
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
-      <SafeAreaProvider>
-        <StatusBar style="auto" />
-        <Stack
-          screenOptions={{
-            headerShown: false, // Hide headers by default for splash/onboarding
-          }}
+      <ReactQueryProvider>
+        <TamaguiProvider
+          config={tamaguiConfig}
+          defaultTheme={systemColorScheme === 'dark' ? 'tapango_dark' : 'tapango_light'}
         >
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="splash" options={{ headerShown: false }} />
-          <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        </Stack>
-      </SafeAreaProvider>
+          <ThemeProvider>
+            <ThemedApp />
+          </ThemeProvider>
+        </TamaguiProvider>
+      </ReactQueryProvider>
     </ClerkProvider>
+  );
+}
+
+function ThemedApp() {
+  const isDark = useIsDark();
+  return (
+    <Theme name={isDark ? 'tapango_dark' : 'tapango_light'}>
+      <AppToastProvider>
+        <SafeAreaProvider>
+          <StatusBar style={isDark ? 'light' : 'dark'} backgroundColor="transparent" />
+          <GlobalErrorCatcher />
+          <OfflineBanner />
+          <AppNavigator />
+        </SafeAreaProvider>
+      </AppToastProvider>
+    </Theme>
+  );
+}
+
+function AppNavigator() {
+  const { CountsProvider } = require('../src/contexts/CountsContext');
+  return (
+    <CountsProvider>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="splash" options={{ headerShown: false }} />
+        <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(modals)" options={{ presentation: 'modal', headerShown: false }} />
+      </Stack>
+    </CountsProvider>
   );
 }

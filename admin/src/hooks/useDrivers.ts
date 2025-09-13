@@ -14,6 +14,8 @@ export const driverKeys = {
 export interface DriverFilters {
   status?: Driver['status'];
   is_online?: boolean;
+  date_from?: string;
+  date_to?: string;
   limit?: number;
   offset?: number;
 }
@@ -38,6 +40,16 @@ export function useDrivers(filters: DriverFilters = {}) {
         const status = filters.is_online ? 'online' : 'offline';
         query = query.eq('status', status);
       }
+      // Date range filters on created_at
+      const from = (filters as any).fromDate || (filters as any).date_from;
+      const to = (filters as any).toDate || (filters as any).date_to;
+      if (from) {
+        query = query.gte('created_at', from);
+      }
+      if (to) {
+        query = query.lte('created_at', to);
+      }
+
       if (filters.limit) {
         query = query.limit(filters.limit);
       }

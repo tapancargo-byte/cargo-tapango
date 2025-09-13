@@ -6,16 +6,17 @@ import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { useOrders, useAssignDriver } from '../hooks/useOrders';
+import { useOrders, useAssignDriver, OrderFilters } from '../hooks/useOrders';
 import { useDrivers } from '../hooks/useDrivers';
 import { OrderWithRelations } from '../lib/supabase';
-import { OrderFilters } from '../lib/validations';
+import { toCSV } from '../lib/csv';
 
 const Orders: React.FC = () => {
   const [filters, setFilters] = useState<OrderFilters>({ 
     limit: 20, 
     offset: 0,
-    status: undefined
+    status: undefined,
+    q: ''
   });
   const [selectedOrder, setSelectedOrder] = useState<OrderWithRelations | null>(null);
 
@@ -60,18 +61,23 @@ const Orders: React.FC = () => {
       {/* Filters */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2" data-testid="orders-filters">
             <Filter className="h-4 w-4" />
             Filters
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <Input
-                placeholder="Search orders..."
-                className="max-w-sm"
-              />
+          <div className="flex flex-wrap gap-4 items-end">
+            <div className="flex-1 min-w-[200px]">
+              <Input placeholder="Search orders..." className="max-w-sm" value={filters.q || ''} onChange={(e) => setFilters({ ...filters, q: e.target.value })} />
+            </div>
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1">From</label>
+              <Input type="date" value={filters.fromDate || ''} onChange={(e) => setFilters({ ...filters, fromDate: e.target.value })} />
+            </div>
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1">To</label>
+              <Input type="date" value={filters.toDate || ''} onChange={(e) => setFilters({ ...filters, toDate: e.target.value })} />
             </div>
             <Select
               value={filters.status || 'all'}
@@ -95,13 +101,41 @@ const Orders: React.FC = () => {
         </CardContent>
       </Card>
 
+      {/* Pagination */}
+      <div className="flex justify-between items-center">
+        <div className="text-sm text-muted-foreground">Offset: {filters.offset} • Limit: {filters.limit}</div>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => setFilters(f => ({ ...f, offset: Math.max(0, (f.offset || 0) - (f.limit || 20)) }))}>Prev</Button>
+          <Button onClick={() => setFilters(f => ({ ...f, offset: (f.offset || 0) + (f.limit || 20) }))}>Next</Button>
+        </div>
+      </div>
+
       {/* Orders Table */}
       <Card>
         <CardHeader>
           <CardTitle>Orders ({orders?.length || 0})</CardTitle>
+          <div className="ml-auto">
+            <Button data-testid="orders-export" variant="outline" onClick={() => {
+              const cols = [
+                { key: 'id', label: 'ID', map: (r: any) => r.id },
+                { key: 'customer', label: 'Customer', map: (r: any) => r.customer?.name || '' },
+                { key: 'driver', label: 'Driver', map: (r: any) => r.driver?.user_profile?.name || '' },
+                { key: 'status', label: 'Status', map: (r: any) => r.status || '' },
+                { key: 'route', label: 'Route', map: (r: any) => `${r.pickup_address || ''} -> ${r.delivery_address || ''}` },
+                { key: 'total_price', label: 'Price', map: (r: any) => r.total_price || 0 },
+                { key: 'created_at', label: 'Created', map: (r: any) => r.created_at || '' },
+              ];
+              const csv = toCSV(orders || [], cols);
+              const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url; a.download = 'orders.csv'; a.click(); URL.revokeObjectURL(url);
+            }}>Export CSV</Button>
+          </div>
           <CardDescription>A list of all delivery orders in the system</CardDescription>
         </CardHeader>
         <CardContent>
+          {/* Table */}
           <Table>
             <TableHeader>
               <TableRow>

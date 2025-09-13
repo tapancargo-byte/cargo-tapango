@@ -1,0 +1,1 @@
+import{T as e}from"./ThemeProvider-BSGpWKhi.js";import{s}from"./styled-mACW7C1C.js";var t={};const r=s(e,{variants:{unstyled:{false:{color:"$color"}}},defaultVariants:{unstyled:t.TAMAGUI_HEADLESS==="1"}});export{r as T};

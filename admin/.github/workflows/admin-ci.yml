@@ -1,0 +1,45 @@
+name: Admin CI
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'vite.config.ts'
+      - 'package.json'
+      - 'tsconfig.json'
+      - '.github/workflows/admin-ci.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test -- --run
+      - name: Build
+        run: npm run build
+      - name: Generate Supabase types (optional)
+        if: ${{ secrets.SUPABASE_PROJECT_REF && secrets.SUPABASE_ACCESS_TOKEN }}
+        uses: supabase/setup-cli@v1
+      - name: Supabase types to file
+        if: ${{ secrets.SUPABASE_PROJECT_REF && secrets.SUPABASE_ACCESS_TOKEN }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          npx supabase gen types typescript --project-id ${{ secrets.SUPABASE_PROJECT_REF }} > src/types/database.types.ts
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: admin-dist
+          path: dist

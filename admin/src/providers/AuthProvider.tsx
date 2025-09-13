@@ -22,6 +22,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Dev emergency bypass using localStorage flag
+    const allowEmergency = ((import.meta as any)?.env?.VITE_DEV_EMERGENCY_ADMIN === '1');
+    if (allowEmergency && typeof window !== 'undefined') {
+      try {
+        const flag = window.localStorage.getItem('EMERGENCY_SIGNED_IN');
+        if (flag === '1') {
+          const fakeId = '0c5798d0-9eec-4b81-9203-31f4392c09a8';
+          console.log('🚀 EMERGENCY SIGN-IN ENABLED');
+          setSession(null);
+          setUser({ id: fakeId, email: 'admin@test.com' } as any);
+          createFallbackProfile(fakeId);
+          return; // Skip real auth init
+        } else {
+          console.log('🛡️ Emergency mode active, but not signed in. Showing login.');
+          setSession(null);
+          setUser(null);
+          setLoading(false);
+          return; // Skip real auth init to avoid network dependency in dev/CI
+        }
+      } catch (e) {
+        console.warn('Emergency flag check failed', e);
+      }
+    }
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       console.log('🔐 Initial session check:', { session: !!session, user: !!session?.user });
@@ -29,7 +53,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(session?.user ?? null);
       if (session?.user) {
         // Check if this is a known admin user - if so, create profile immediately
-        if (session.user.email === 'admin@test.com' || session.user.id === '0c5798d0-9eec-4b81-9203-31f4392c09a8') {
+        const allowEmergency2 = ((import.meta as any)?.env?.VITE_DEV_EMERGENCY_ADMIN === '1');
+        if (allowEmergency2 && (session.user.email === 'admin@test.com' || session.user.id === '0c5798d0-9eec-4b81-9203-31f4392c09a8')) {
           console.log('🔥 BYPASS: Known admin user detected, skipping profile fetch');
           createFallbackProfile(session.user.id);
         } else {
@@ -53,7 +78,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       if (session?.user) {
         // Same bypass logic for auth state changes
-        if (session.user.email === 'admin@test.com' || session.user.id === '0c5798d0-9eec-4b81-9203-31f4392c09a8') {
+        const allowEmergency = ((import.meta as any)?.env?.VITE_DEV_EMERGENCY_ADMIN === '1');
+        if (allowEmergency && (session.user.email === 'admin@test.com' || session.user.id === '0c5798d0-9eec-4b81-9203-31f4392c09a8')) {
           console.log('🔥 BYPASS: Known admin user detected in auth change, skipping profile fetch');
           createFallbackProfile(session.user.id);
         } else {

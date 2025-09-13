@@ -268,9 +268,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 12,
     letterSpacing: 3,
-    textShadowColor: 'rgba(15, 23, 42, 0.4)',
-    textShadowOffset: { width: 0, height: 3 },
-    textShadowRadius: 6,
+    // Avoid textShadow* props in Storybook web; use CSS shadow via style on web if needed
   },
   brandTagline: {
     fontSize: 18,
@@ -279,9 +277,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     opacity: 0.9,
     letterSpacing: 1,
-    textShadowColor: 'rgba(15, 23, 42, 0.3)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 3,
+    // Avoid textShadow* props in Storybook web
   },
 
   // Loading Section

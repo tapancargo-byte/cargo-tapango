@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Button } from '../src/components/ui/Button';
+import { Button } from '../src/ui';
 import { useRouter } from 'expo-router';
 import { colors } from '../src/styles/colors';
 
@@ -38,6 +38,7 @@ export default function WelcomeScreen() {
         <Text style={styles.description}>
           Connect with professional drivers for fast, reliable cargo delivery
         </Text>
+        {/* Update Button usages below if present, otherwise leave as is. */}
 
         <View style={styles.buttonContainer}>
           <Button

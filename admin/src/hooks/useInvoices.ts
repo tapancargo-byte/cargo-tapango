@@ -11,14 +11,17 @@ export const invoiceKeys = {
 };
 
 // Fetch invoices with filters
-export interface InvoiceFilters {
+export interface InvoicesQueryFilters {
   status?: Invoice['status'];
   customer_id?: string;
+  date_from?: string;
+  date_to?: string;
+  search?: string;
   limit?: number;
   offset?: number;
 }
 
-export function useInvoices(filters: InvoiceFilters = {}) {
+export function useInvoices(filters: InvoicesQueryFilters = {}) {
   return useQuery({
     queryKey: invoiceKeys.list(filters),
     queryFn: async (): Promise<InvoiceWithOrder[]> => {
@@ -37,6 +40,22 @@ export function useInvoices(filters: InvoiceFilters = {}) {
       if (filters.customer_id) {
         query = query.eq('customer_id', filters.customer_id);
       }
+      // Date range filters (issue_date preferred, fallback to created_at)
+      const from = (filters as any).fromDate || (filters as any).date_from;
+      const to = (filters as any).toDate || (filters as any).date_to;
+      if (from) {
+        // Filter against issue_date if available, otherwise created_at
+        query = query.gte('issue_date', from);
+      }
+      if (to) {
+        query = query.lte('issue_date', to);
+      }
+
+      // Basic search on invoice number
+      if ((filters as any).search && (filters as any).search.trim()) {
+        query = query.ilike('invoice_number', `%${(filters as any).search.trim()}%`);
+      }
+
       if (filters.limit) {
         query = query.limit(filters.limit);
       }

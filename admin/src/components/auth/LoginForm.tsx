@@ -56,7 +56,7 @@ export function LoginForm() {
               <CardTitle className="text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-300 bg-clip-text text-transparent">
                 TapanGo Admin
               </CardTitle>
-              <CardDescription className="text-slate-400 text-base">
+              <CardDescription data-testid="login-title" className="text-slate-400 text-base">
                 Sign in to your admin dashboard
               </CardDescription>
             </div>
@@ -76,6 +76,7 @@ export function LoginForm() {
                 </div>
                 <Input
                   id="email"
+                  data-testid="login-email"
                   type="email"
                   placeholder="admin@tapango.com"
                   value={email}
@@ -97,6 +98,7 @@ export function LoginForm() {
                 </div>
                 <Input
                   id="password"
+                  data-testid="login-password"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

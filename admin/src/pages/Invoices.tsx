@@ -19,16 +19,21 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { invoiceFormSchema } from '../lib/validations/invoice';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../components/ui/form';
 import { useToast } from '../components/ui/use-toast';
+import { toCSV } from '../lib/csv';
 
 const Invoices: React.FC = () => {
   const [filters, setFilters] = useState<{
     status: 'all' | 'draft' | 'issued' | 'paid' | 'overdue' | 'void';
     search: string;
     customer_id?: string;
+    date_from?: string;
+    date_to?: string;
   }>({
     status: 'all',
     search: '',
     customer_id: undefined,
+    date_from: undefined,
+    date_to: undefined,
   });
   const [selectedInvoice, setSelectedInvoice] = useState<InvoiceWithOrder | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -36,9 +41,13 @@ const Invoices: React.FC = () => {
   const [showDetailModal, setShowDetailModal] = useState(false);
 
   const { toast } = useToast();
-  const { data: invoices, isLoading } = useInvoices(
-    filters.status !== 'all' ? { status: filters.status as 'draft' | 'issued' | 'paid' | 'overdue' | 'void' } : {}
-  );
+  const { data: invoices, isLoading } = useInvoices({
+    ...(filters.status !== 'all' ? { status: filters.status as 'draft' | 'issued' | 'paid' | 'overdue' | 'void' } : {}),
+    customer_id: filters.customer_id,
+    date_from: filters.date_from,
+    date_to: filters.date_to,
+    search: filters.search,
+  });
   const { data: stats } = useInvoiceStats();
   const { data: customers } = useCustomers();
   const { data: orders } = useOrders();
@@ -474,7 +483,7 @@ const Invoices: React.FC = () => {
           <CardTitle>Filters</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4 items-end">
             <div className="flex-1">
               <div className="relative">
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -518,6 +527,14 @@ const Invoices: React.FC = () => {
                 ))}
               </SelectContent>
             </Select>
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1">From</label>
+              <Input type="date" value={filters.date_from || ''} onChange={(e) => setFilters(prev => ({ ...prev, date_from: e.target.value }))} />
+            </div>
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1">To</label>
+              <Input type="date" value={filters.date_to || ''} onChange={(e) => setFilters(prev => ({ ...prev, date_to: e.target.value }))} />
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -525,10 +542,32 @@ const Invoices: React.FC = () => {
       {/* Invoices Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Invoices</CardTitle>
-          <CardDescription>
-            {filteredInvoices?.length || 0} invoice(s) found
-          </CardDescription>
+          <div className="flex items-center justify-between w-full">
+            <div>
+              <CardTitle>Invoices</CardTitle>
+              <CardDescription>
+                {filteredInvoices?.length || 0} invoice(s) found
+              </CardDescription>
+            </div>
+            <div>
+              <Button variant="outline" onClick={() => {
+                const cols = [
+                  { key: 'invoice_number', label: 'Invoice #', map: (r: any) => r.invoice_number },
+                  { key: 'customer', label: 'Customer', map: (r: any) => r.customer_profile?.name || '' },
+                  { key: 'status', label: 'Status', map: (r: any) => r.status || '' },
+                  { key: 'total_amount', label: 'Total', map: (r: any) => r.total_amount || 0 },
+                  { key: 'tax_total', label: 'Tax', map: (r: any) => r.tax_total || 0 },
+                  { key: 'issued_date', label: 'Issued', map: (r: any) => r.issued_date || '' },
+                  { key: 'due_date', label: 'Due', map: (r: any) => r.due_date || '' },
+                ];
+                const csv = toCSV(filteredInvoices || [], cols);
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url; a.download = 'invoices.csv'; a.click(); URL.revokeObjectURL(url);
+              }}>Export CSV</Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <Table>

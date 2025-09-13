@@ -1,0 +1,238 @@
+1. Google Cloud – one-time prep
+Table
+
+Step	What & Why
+1.1	Create / select project → Google Cloud Console
+1.2	Enable APIs (all three):
+
+
+1.3	Credentials → Create API key → ** restrict **
+
+
+1.4	Billing → add card (₹ 0 free tier: 6 000 predictions + 40 000 geocode / month)
+Save key as GOOGLE_MAPS_API_KEY in Expo secrets (never commit to Git).
+2. Expo / package layer
+bash
+
+expo install expo-location@~18.0.0   # user bias
+expo install expo-secure-store@~14.0.0 # cache key
+yarn add react-native-google-places-autocomplete
+# OR lightweight hook (recommended):
+yarn add google-places-autocomplete-hooks
+yarn add zustand                       # local cache
+We’ll use the hook version—smaller, no extra UI, works with Tamagui or NativeWind.
+3. Architecture overview
+
+┌─ AddressInput (re-usable)
+│  ├─ TextInput (controlled)
+│  ├─ FlatList (predictions)
+│  ├─ debounce (400 ms)
+│  ├─ session-token (Google billing optimisation)
+│  └─ onPick → (lat, lng, formatted, components)
+│
+├─ PlacePredictionsStore (zustand)
+│   └─ cache by query (TTL 10 min)
+│
+└─ GooglePlaces HTTP (fetch)
+    ├─ autocomplete (session)
+    ├─ geocode place-id → lat/lng
+    └─ address-components → pin-code, city, state
+4. Minimal TypeScript hook
+TypeScript
+
+// hooks/usePlacesAutocomplete.ts
+import { useEffect, useMemo, useState } from 'react';
+import { debounce } from 'lodash';
+import * as Location from 'expo-location';
+import { create} from 'zustand';
+
+const GOOGLE_KEY = process.env.EXPO_PUBLIC_GOOGLE_MAPS_KEY; // EAS secret
+
+type Prediction = {
+  place_id: string;
+  description: string;
+  structured_formatting: { main_text: string; secondary_text: string };
+};
+
+type Cache = Record<string, { data: Prediction[]; ts: number }>;
+
+interface PlacesStore {
+  cache: Cache;
+  setCache: (q: string, p: Prediction[]) => void;
+  hit: (q: string) => Prediction[] | null;
+}
+const usePlacesStore = create<PlacesStore>((set, get) => ({
+  cache: {},
+  setCache: (q, data) =>
+    set((s) => ({ cache: { ...s.cache, [q]: { data, ts: Date.now() } } })),
+  hit: (q) => {
+    const hit = get().cache[q];
+    if (!hit) return null;
+    const stale = Date.now() - hit.ts > 10 * 60 * 1000;
+    return stale ? null : hit.data;
+  },
+}));
+
+export function usePlacesAutocomplete(
+  query: string,
+  country = 'IN'
+) {
+  const [predictions, setPredictions] = useState<Prediction[]>([]);
+  const [loading, setLoading] = useState(false);
+  const { cache, setCache, hit } = usePlacesStore();
+
+  const sessionToken = useMemo(() => crypto.randomUUID(), []); // per session
+
+  useEffect(() => {
+    if (!query) {
+      setPredictions([]);
+      return;
+    }
+    const cached = hit(query);
+    if (cached) {
+      setPredictions(cached);
+      return;
+    }
+    const run = debounce(async () => {
+      setLoading(true);
+      const url =
+        `https://maps.googleapis.com/maps/api/place/autocomplete/json` +
+        `?input=${encodeURIComponent(query)}` +
+        `&key=${GOOGLE_KEY}` +
+        `&sessiontoken=${sessionToken}` +
+        `&components=country:${country}` +
+        `&types=address` +
+        `&language=en-IN`;
+      const res = await fetch(url);
+      const json = await res.json();
+      if (json.predictions) {
+        setPredictions(json.predictions);
+        setCache(query, json.predictions);
+      }
+      setLoading(false);
+    }, 400);
+    run();
+  }, [query, sessionToken, country, hit, setCache]);
+
+  return { predictions, loading };
+}
+5. Geocode selected place → lat/lng + components
+TypeScript
+
+export async function geocodePlace(placeId: string) {
+  const url =
+    `https://maps.googleapis.com/maps/api/geocode/json` +
+    `?place_id=${placeId}` +
+    `&key=${GOOGLE_KEY}` +
+    `&language=en-IN`;
+  const res = await fetch(url);
+  const json = await res.json();
+  if (!json.results[0]) throw new Error('No geocode');
+  const { geometry, address_components } = json.results[0];
+  return {
+    lat: geometry.location.lat,
+    lng: geometry.location.lng,
+    formatted: json.results[0].formatted_address,
+    pin: address_components.find((c: any) =>
+      c.types.includes('postal_code')
+    )?.long_name,
+    city: address_components.find((c: any) =>
+      c.types.includes('locality')
+    )?.long_name,
+    state: address_components.find((c: any) =>
+      c.types.includes('administrative_area_level_1')
+    )?.long_name,
+  };
+}
+6. UI component (Tamagui example)
+tsx
+
+// components/AddressAutocomplete.tsx
+import { useState } from 'react';
+import { YStack, Input, Spinner, XStack, Text, Circle, ChevronRight } from '@my/ui';
+import { usePlacesAutocomplete, geocodePlace } from '../hooks/usePlacesAutocomplete';
+
+type Props = {
+  onSelect: (data: { lat: number; lng: number; formatted: string; pin?: string }) => void;
+  placeholder?: string;
+};
+
+export const AddressAutocomplete = ({ onSelect, placeholder }: Props) => {
+  const [value, setValue] = useState('');
+  const { predictions, loading } = usePlacesAutocomplete(value);
+
+  return (
+    <YStack gap="$2">
+      <Input
+        placeholder={placeholder ?? 'Start typing address…'}
+        value={value}
+        onChangeText={setValue}
+        returnKeyType="search"
+      />
+      {loading && <Spinner size="small" />}
+      {predictions.map((p) => (
+        <XStack
+          key={p.place_id}
+          ai="center"
+          jc="space-between"
+          p="$3"
+          bg="$backgroundHover"
+          borderRadius="$md"
+          onPress={async () => {
+            const geo = await geocodePlace(p.place_id);
+            onSelect(geo);
+            setValue(geo.formatted); // replace input
+          }}
+        >
+          <YStack f={1}>
+            <Text fontWeight="600">{p.structured_formatting.main_text}</Text>
+            <Text fontSize="$2" col="$gray11">{p.structured_formatting.secondary_text}</Text>
+          </YStack>
+          <Circle size="$2" bg="$primary" />
+        </XStack>
+      ))}
+    </YStack>
+  );
+};
+7. Wiring inside pickup / delivery form
+Replace the old static inputs:
+tsx
+
+// screens/BookScreen.tsx
+const [pickup, setPickup] = useState<LatLngAddr | null>(null);
+const [delivery, setDelivery] = useState<LatLngAddr | null>(null);
+
+<AddressAutocomplete
+  placeholder="Pickup address"
+  onSelect={(addr) => setPickup(addr)}
+/>
+<AddressAutocomplete
+  placeholder="Delivery address"
+  onSelect={(addr) => setDelivery(addr)}
+/>
+LatLngAddr now carries lat, lng, formatted, pin, city, state → ready for ₹ pricing API.
+8. Session-based billing optimisation
+Generate one sessionToken (UUID) when component mounts.
+Re-use for autocomplete → geocode → place-details calls.
+Google bills per session, not per keystroke → ~40% cheaper .
+9. India-specific tweaks
+Table
+
+Tweak	Code
+Restrict to India	&components=country:IN
+Pin-code first	sort address_components and surface postal_code prominently
+Regional languages	&language=hi or mr (user setting)
+Places types	`types=geocode	establishment(excluderoute` to reduce noise)
+10. Security & compliance
+Never ship GOOGLE_MAPS_KEY inside .apk/.ipa; use EAS secrets + expo-extra plugin.
+Restrict key to Android/iOS app signature + HTTP referrer.
+Add Address Validation API for India e-way bill compliance (optional).
+11. Quick checklist for AI agent
+[ ] Enable Places + Geocoding + Address Validation APIs
+[ ] Create restricted API key (Android/iOS/HTTP)
+[ ] Add expo-location for user bias
+[ ] Install & wrap usePlacesAutocomplete hook
+[ ] Replace all static address inputs with <AddressAutocomplete>
+[ ] Store lat/lng + pin in form state → send to ₹ quote endpoint
+[ ] Test offline → graceful fallback (cached predictions)
+[ ] Run Detox e2e: type “Hauz Khas” → select → sees ₹ quote

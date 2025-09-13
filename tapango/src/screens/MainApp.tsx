@@ -1,33 +1,27 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  StatusBar,
-} from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, textStyles, spacing } from '../styles';
+import { colors, spacing } from '../styles';
+import { Screen } from '../ui/Screen';
+import { Title as DsTitle, Subtitle as DsSubtitle, Body as DsBody } from '../design-system/components/Typography';
 
 const MainApp: React.FC = () => {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={styles.container}>
-      <StatusBar 
-        barStyle="dark-content" 
-        backgroundColor={colors.neutral.white}
-      />
-      
-      <View style={[styles.content, { paddingTop: insets.top }]}>
-        <Text style={styles.title}>Welcome to TapanGo!</Text>
-        <Text style={styles.subtitle}>Your delivery app is ready to use.</Text>
-        
-        <View style={styles.placeholder}>
-          <Text style={styles.placeholderText}>
-            Main app content will go here
-          </Text>
+      <StatusBar barStyle="dark-content" backgroundColor={colors.neutral.white} />
+
+      <Screen scroll={false} safeTop safeBottom>
+        <View style={[styles.content, { paddingTop: insets.top }]}>
+          <DsTitle>Welcome to Tapango!</DsTitle>
+          <DsSubtitle>Your delivery app is ready to use.</DsSubtitle>
+
+          <View style={styles.placeholder}>
+            <DsBody>Main app content will go here</DsBody>
+          </View>
         </View>
-      </View>
+      </Screen>
     </View>
   );
 };
@@ -42,29 +36,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: spacing.xl,
-  },
-  title: {
-    ...textStyles.title,
-    color: colors.primary.orange,
-    textAlign: 'center',
-    marginBottom: spacing.md,
-  },
-  subtitle: {
-    ...textStyles.bodyLarge,
-    color: colors.neutral.mediumGray,
-    textAlign: 'center',
-    marginBottom: spacing['4xl'],
+    gap: 8,
   },
   placeholder: {
     backgroundColor: colors.secondary.lightBlue,
     padding: spacing['3xl'],
     borderRadius: 16,
     alignItems: 'center',
-  },
-  placeholderText: {
-    ...textStyles.body,
-    color: colors.neutral.darkGray,
-    textAlign: 'center',
   },
 });
 

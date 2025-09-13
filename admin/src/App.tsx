@@ -14,10 +14,13 @@ import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
 import Invoices from './pages/Invoices';
 import Notifications from './pages/Notifications';
+import TrackingEvents from './pages/TrackingEvents';
 import RoleManagement from './pages/RoleManagement';
 import SuperAdmin from './pages/SuperAdmin';
 import SentryTest from './components/SentryTest';
 import { PermissionGuard, AdminGuard, SuperAdminGuard } from './components/PermissionGuard';
+
+const Kyc = React.lazy(() => import('./pages/Kyc'));
 
 function App() {
   return (
@@ -35,6 +38,17 @@ function App() {
                   <Route path="/drivers" element={<Drivers />} />
                   <Route path="/customers" element={<Customers />} />
                   <Route path="/invoices" element={<Invoices />} />
+                  <Route path="/tracking-events" element={<TrackingEvents />} />
+                  <Route 
+                    path="/kyc" 
+                    element={
+                      <AdminGuard>
+                        <React.Suspense fallback={null}>
+                          <Kyc />
+                        </React.Suspense>
+                      </AdminGuard>
+                    }
+                  />
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/analytics" element={<Analytics />} />
                   <Route 

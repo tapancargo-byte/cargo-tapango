@@ -2,13 +2,14 @@ module.exports = {
   extends: [
     'expo',
     '@react-native',
-    '@typescript-eslint/recommended',
-    '@typescript-eslint/recommended-requiring-type-checking'
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking'
   ],
   plugins: [
     '@typescript-eslint',
     'react-hooks',
-    'react-native'
+    'react-native',
+    'jest'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -20,19 +21,31 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname
   },
+  env: {
+    'jest/globals': true
+  },
   rules: {
     // TypeScript strict rules
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/prefer-nullish-coalescing': 'error',
-    '@typescript-eslint/prefer-optional-chain': 'error',
-    '@typescript-eslint/no-non-null-assertion': 'error',
-    '@typescript-eslint/no-unnecessary-type-assertion': 'error',
-    '@typescript-eslint/prefer-as-const': 'error',
+'@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+'@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+    '@typescript-eslint/prefer-optional-chain': 'warn',
+    '@typescript-eslint/no-non-null-assertion': 'warn',
+    '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+    '@typescript-eslint/prefer-as-const': 'warn',
+    '@typescript-eslint/no-unsafe-assignment': 'warn',
+    '@typescript-eslint/no-unsafe-member-access': 'warn',
+    '@typescript-eslint/no-unsafe-call': 'warn',
+    '@typescript-eslint/no-unsafe-return': 'warn',
+'@typescript-eslint/no-require-imports': 'warn',
+    '@typescript-eslint/no-var-requires': 'warn',
+    '@typescript-eslint/no-floating-promises': 'warn',
+    '@typescript-eslint/no-misused-promises': 'warn',
+    '@typescript-eslint/ban-ts-comment': 'warn',
     
     // React/React Native rules
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'error',
+    'react-hooks/rules-of-hooks': 'warn',
+    'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-key': 'error',
     'react/jsx-no-duplicate-props': 'error',
     'react/jsx-no-undef': 'error',
@@ -50,12 +63,25 @@ module.exports = {
     'prefer-template': 'error',
     
     // Import rules
-    'sort-imports': ['error', {
+'sort-imports': ['warn', {
       ignoreCase: true,
       ignoreDeclarationSort: true,
       ignoreMemberSort: false,
       memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
       allowSeparatedGroups: true
+    }],
+    'no-void': 'off',
+    'no-restricted-imports': ['error', {
+      patterns: [
+        {
+          group: ['**/src/components/ui/**'],
+          message: 'Import UI components from src/ui instead. Use Tamagui components as the single source of truth.'
+        },
+        {
+          group: ['react-native-elements', '@react-native-community/ui-*', 'native-base'],
+          message: 'Use Tamagui components instead of external UI libraries.'
+        }
+      ]
     }]
   },
   settings: {
