@@ -192,8 +192,11 @@ export default function OrdersScreen() {
 
   const handleRefresh = useCallback(async () => {
     setRefreshing(true);
-    await loadOrders();
-    setTimeout(() => setRefreshing(false), 500);
+    try {
+      await loadOrders();
+    } finally {
+      setTimeout(() => setRefreshing(false), 500);
+    }
   }, [loadOrders]);
 
   const PremiumOrderCard = ({ order }: { order: Order }) => {

@@ -6,7 +6,7 @@ import * as Haptics from 'expo-haptics';
 import { useTheme, useColors } from '../../src/styles/ThemeProvider';
 import { StorageService } from '../../src/utils/storage';
 import { KycProgress } from '../../src/components/KycProgress';
-import { YStack, Text, ListItem, Separator, XStack, Switch, Stack } from 'tamagui';
+import { YStack, Text, XStack, Switch, Stack } from 'tamagui';
 import { Circle } from '../../src/ui';
 import {
   Button,

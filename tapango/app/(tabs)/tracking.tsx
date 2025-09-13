@@ -28,7 +28,7 @@ try {
 import { useLocalSearchParams } from 'expo-router';
 import { Input } from '../../src/ui';
 import { StatusVariant } from '../../src/ui/StatusBadge';
-import { YStack, XStack, Text, ScrollView, Separator, Stack } from 'tamagui';
+import { YStack, XStack, Text, ScrollView, Stack } from 'tamagui';
 import { Circle } from '../../src/ui';
 import {
   Button,
@@ -263,11 +263,13 @@ export default function TrackingScreen() {
 
   const handleRefresh = async () => {
     if (!shipment) return;
-
     setRefreshing(true);
-    // TODO: Refresh shipment data
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setRefreshing(false);
+    try {
+      // TODO: Refresh shipment data
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } finally {
+      setRefreshing(false);
+    }
   };
 
   const formatDateTimeLocal = (timestamp: string): string => {
