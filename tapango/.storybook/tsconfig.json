@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["vite/client", "storybook__react"],
+    "skipLibCheck": true
+  },
+  "include": [
+    "../src/**/*",
+    "../storybook/**/*",
+    "./**/*"
+  ]
+}

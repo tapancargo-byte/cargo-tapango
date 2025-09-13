@@ -17,6 +17,25 @@ jobs:
       - run: npm ci
       - run: npm run test --silent
 
+  storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Storybook
+        run: npm run storybook:build
+      - name: Upload static Storybook as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static
+          path: storybook-static
+          if-no-files-found: ignore
+
   detox-android:
     runs-on: ubuntu-latest
     if: ${{ false }} # disable by default; enable when emulator resources are configured
