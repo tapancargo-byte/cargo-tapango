@@ -3,6 +3,7 @@ import { XStack, YStack, Text } from 'tamagui';
 import { AnimatePresence } from '@tamagui/animate-presence';
 import { Ionicons } from '@expo/vector-icons';
 import { GlassCard, Input, Button, LoadingSpinner, FadeIn } from '../../ui';
+import { font } from '../../ui/tokens';
 import { useColors } from '../../styles/ThemeProvider';
 import { Circle } from '../../ui';
 import { t } from '../../i18n';
@@ -138,10 +139,10 @@ export function SearchCard({
             <Ionicons name="search" size={20} color={palette.info} accessibilityRole="image" accessibilityLabel="Search icon" />
           </Circle>
           <YStack>
-            <Text fontSize="$section" fontWeight="700" color={palette.text} role="heading" aria-level={2}>
+<Text fontSize={font.section} fontWeight="700" color={palette.text} role="heading" aria-level={2}>
               Track Shipment
             </Text>
-            <Text fontSize="$caption" color={palette.textSecondary} role="text">
+<Text fontSize={font.caption} color={palette.textSecondary} role="text">
               Enter tracking number or scan QR code
             </Text>
           </YStack>
@@ -185,9 +186,9 @@ export function SearchCard({
                 space="$2"
               >
                 <Ionicons name="alert-circle" size={16} color={palette.error} />
-                <Text 
+<Text 
                   color={palette.error}
-                  fontSize="$caption"
+                  fontSize={font.caption}
                 >
                   {validationError ?? error}
                 </Text>

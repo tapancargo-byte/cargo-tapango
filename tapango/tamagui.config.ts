@@ -1,6 +1,22 @@
 import { createTamagui } from 'tamagui'
 import { defaultConfig } from '@tamagui/config/v4'
+import { createAnimations } from '@tamagui/animations-react-native'
 import { getUnifiedTheme, toTamaguiTheme } from './src/design-system/theme'
+
+// Define animations for Tamagui (must include every name used via `animation="..."` props)
+const animations = createAnimations({
+  // Fast subtle animation used for small UI changes
+  quick: { type: 'timing', duration: 150 },
+
+  // Card/grid entrance animations
+  fade: { type: 'timing', duration: 180 },
+  slide: { type: 'spring', stiffness: 300, damping: 25, mass: 1 },
+
+  // Additional presets you can reference if needed
+  bouncy: { type: 'spring', damping: 10, mass: 0.9, stiffness: 250 },
+  lazy: { type: 'spring', damping: 20, stiffness: 60 },
+  tooltip: { type: 'spring', damping: 10, mass: 0.9, stiffness: 100 },
+})
 
 // TAPANGO Premium Design System
 const brand = {
@@ -137,6 +153,7 @@ const tokens = {
 
 export const tamaguiConfig = createTamagui({
   ...defaultConfig,
+  animations,
   themes,
   tokens,
 })
@@ -148,4 +165,3 @@ export type Conf = typeof tamaguiConfig
 declare module 'tamagui' {
   interface TamaguiCustomConfig extends Conf {}
 }
-

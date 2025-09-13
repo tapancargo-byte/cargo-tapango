@@ -7,6 +7,7 @@ import { supabase } from '../../src/services/supabaseClient';
 import { YStack, XStack, Text, Tabs, Stack, ScrollView as TScrollView } from 'tamagui';
 import { Circle } from '../../src/ui';
 import { Button, Card, Skeleton, SkeletonText, ListRow, EmptyState, StatusPill, Screen, AppHeader, AppIcon, AnimatedBadge, FadeIn, Input, ElevatedCard, GlassCard, LoadingSpinner, Title, SectionTitle, Subtitle } from '../../src/ui';
+import { font } from '../../src/ui/tokens';
 import { StorageService } from '../../src/utils/storage';
 import { formatDateTime } from '../../src/utils/format';
 import { useColors as useAppColors } from '../../src/styles/ThemeProvider';
@@ -153,7 +154,7 @@ export default function OrdersScreen() {
                 </Circle>
                 <YStack flex={1}>
                   <XStack alignItems="center" space="$2">
-                    <Text fontSize="$body" fontWeight="700" color={palette.text}>
+<Text fontSize={font.body} fontWeight="700" color={palette.text}>
                       {order.id}
                     </Text>
                     <StatusPill status={isActive ? 'in-transit' : 'delivered'} />
@@ -164,7 +165,7 @@ export default function OrdersScreen() {
                       size={14} 
                       color={palette.textSecondary} 
                     />
-                    <Text fontSize="$subtitle" color={palette.textSecondary}>
+<Text fontSize={font.subtitle} color={palette.textSecondary}>
                       {order.route}
                     </Text>
                   </XStack>
@@ -172,10 +173,10 @@ export default function OrdersScreen() {
               </XStack>
               
               <YStack alignItems="flex-end">
-                <Text fontSize="$section" fontWeight="800" color={palette.primary}>
+<Text fontSize={font.section} fontWeight="800" color={palette.primary}>
                   {formatINR(order.price)}
                 </Text>
-                <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
                   {formatDateTime(order.updatedAt)}
                 </Text>
               </YStack>
@@ -251,10 +252,10 @@ export default function OrdersScreen() {
                         <Ionicons name="car" size={12} color={palette.primary} />
                       </Circle>
                       <YStack alignItems="center">
-                        <Text fontSize="$subtitle" fontWeight="600" color={segment === 'Active' ? palette.primary : palette.textSecondary}>
+<Text fontSize={font.subtitle} fontWeight="600" color={segment === 'Active' ? palette.primary : palette.textSecondary}>
                           Active
                         </Text>
-                        <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
                           {counts?.ordersActive ?? source.filter(o => o.status === 'Active').length}
                         </Text>
                       </YStack>
@@ -267,10 +268,10 @@ export default function OrdersScreen() {
                         <Ionicons name="checkmark-circle" size={12} color={palette.success} />
                       </Circle>
                       <YStack alignItems="center">
-                        <Text fontSize="$subtitle" fontWeight="600" color={segment === 'Past' ? palette.primary : palette.textSecondary}>
+<Text fontSize={font.subtitle} fontWeight="600" color={segment === 'Past' ? palette.primary : palette.textSecondary}>
                           Completed
                         </Text>
-                        <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
                           {counts?.ordersPast ?? source.filter(o => o.status === 'Past').length}
                         </Text>
                       </YStack>
@@ -291,7 +292,7 @@ export default function OrdersScreen() {
                           <Subtitle color={palette.text} weight="semibold">
                             Demo Mode
                           </Subtitle>
-                          <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
                             Showing sample TAPANGO orders
                           </Text>
                         </YStack>
@@ -415,7 +416,7 @@ export default function OrdersScreen() {
                         <SectionTitle color={palette.text}>
                           {filteredData.length} {segment} Orders
                         </SectionTitle>
-                        <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
                           Total: {formatINR(filteredData.reduce((sum, order) => sum + order.price, 0))}
                         </Text>
                       </XStack>

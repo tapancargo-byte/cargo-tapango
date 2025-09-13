@@ -7,18 +7,22 @@ import { RefreshControl } from 'react-native'
 export interface ScreenProps {
   children: React.ReactNode
   scroll?: boolean
-  padding?: any
+  padding?: number | string
   safeTop?: boolean
   safeBottom?: boolean
-  gap?: any
+  gap?: number | string
   header?: React.ReactNode
   headerSticky?: boolean
   headerShadow?: boolean
   refreshing?: boolean
   onRefresh?: () => void
+  // Edge-to-edge controls
+  edgeToEdge?: boolean
+  statusBarPadding?: boolean // when edgeToEdge, apply top inset
+  navigationBarPadding?: boolean // when edgeToEdge, apply bottom inset
 }
 
-export const Screen: React.FC<ScreenProps> = ({ children, scroll = false, padding = '$4', safeTop = true, safeBottom = true, gap, header, headerSticky = true, headerShadow = true, refreshing = false, onRefresh }) => {
+export const Screen: React.FC<ScreenProps> = ({ children, scroll = false, padding = '$4', safeTop = true, safeBottom = true, gap, header, headerSticky = true, headerShadow = true, refreshing = false, onRefresh, edgeToEdge = false, statusBarPadding = true, navigationBarPadding = true }) => {
   const insets = useSafeAreaInsets()
   const isDark = useIsDark()
   const headerElevation = headerShadow ? (isDark ? 1 : 3) : 0
@@ -27,8 +31,9 @@ export const Screen: React.FC<ScreenProps> = ({ children, scroll = false, paddin
       {children}
     </YStack>
   )
-  const padTop = safeTop ? insets.top : 0
-  const padBottom = safeBottom ? insets.bottom : 0
+  // Respect edge-to-edge overrides
+  const padTop = safeTop && (!edgeToEdge || statusBarPadding) ? insets.top : 0
+  const padBottom = safeBottom && (!edgeToEdge || navigationBarPadding) ? insets.bottom : 0
 
   if (scroll) {
     return (

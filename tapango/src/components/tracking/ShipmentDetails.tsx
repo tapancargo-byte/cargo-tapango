@@ -2,6 +2,7 @@ import React from 'react';
 import { XStack, YStack, Text, Separator } from 'tamagui';
 import { Ionicons } from '@expo/vector-icons';
 import { ElevatedCard, ProgressBar } from '../../ui';
+import { font } from '../../ui/tokens';
 import { useColors } from '../../styles/ThemeProvider';
 
 export enum ShipmentStatus {
@@ -32,18 +33,18 @@ interface StatPairProps {
 // Style objects for consistent text styles
 const styles = {
   label: {
-    fontSize: "$subtitle",
+    fontSize: font.subtitle as number,
     color: "$textSecondary"
   },
   value: {
-    fontSize: "$subtitle",
+    fontSize: font.subtitle as number,
     color: "$text",
     fontWeight: "600",
     numberOfLines: 1,
     ellipsizeMode: "tail"
   },
   caption: {
-    fontSize: "$caption",
+    fontSize: font.caption as number,
     color: "$textSecondary",
     textTransform: "uppercase"
   }
@@ -149,8 +150,8 @@ export function ShipmentDetails({
       testID="shipment-details-card"
     >
       <YStack space="$3">
-        <Text 
-          fontSize="$section" 
+<Text 
+          fontSize={font.section} 
           fontWeight="700" 
           color={palette.text}
           accessibilityRole="header"

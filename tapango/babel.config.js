@@ -1,4 +1,4 @@
-module.exports = function (api) {
+﻿module.exports = function (api) {
   api.cache(true)
   return {
     presets: ['babel-preset-expo'],
@@ -12,9 +12,7 @@ module.exports = function (api) {
           disableExtraction: process.env.NODE_ENV === 'development',
         },
       ],
-      'react-native-worklets/plugin',
-      'react-native-reanimated/plugin', // Must be last in the plugins array
+      'react-native-worklets/plugin', // Must be last in the plugins array
     ],
   }
 }
-

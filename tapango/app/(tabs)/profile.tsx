@@ -9,6 +9,7 @@ import { KycProgress } from '../../src/components/KycProgress';
 import { YStack, Text, ListItem, Separator, XStack, Switch, Stack } from 'tamagui';
 import { Circle } from '../../src/ui';
 import { Button, Card, AppIcon, Screen, FadeIn, ElevatedCard, GlassCard, Input, Title, SectionTitle, Subtitle } from '../../src/ui';
+import { font } from '../../src/ui/tokens';
 import { LoadingSpinner } from '../../src/ui/LoadingSpinner';
 import { SignOutButton } from '../components/SignOutButton';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
@@ -110,9 +111,9 @@ export default function ProfileScreen() {
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Text 
+<Text 
                     color={colors.textOnPrimary} 
-                    fontSize="$headline" 
+                    fontSize={font.headline} 
                     fontWeight="800"
                   >
                     {getUserInitial()}
@@ -138,7 +139,7 @@ export default function ProfileScreen() {
               </Title>
               <XStack alignItems="center" space="$2">
                 <Ionicons name="shield-checkmark" size={16} color={colors.success} />
-                <Text fontSize="$subtitle" color={colors.textSecondary}>
+<Text fontSize={font.subtitle} color={colors.textSecondary}>
                   {require('../../src/i18n').t('profileRoleCustomer')}
                 </Text>
               </XStack>
@@ -157,10 +158,10 @@ export default function ProfileScreen() {
                       />
                     </Circle>
                     <YStack>
-                      <Text fontSize="$body" fontWeight="600" color={colors.text}>
+<Text fontSize={font.body} fontWeight="600" color={colors.text}>
                         Theme
                       </Text>
-                      <Text fontSize="$caption" color={colors.textSecondary}>
+<Text fontSize={font.caption} color={colors.textSecondary}>
                         {colorScheme === 'dark' ? 'Dark Mode' : 'Light Mode'}
                       </Text>
                     </YStack>
@@ -193,7 +194,7 @@ export default function ProfileScreen() {
         <ElevatedCard variant="elevated" animation="fade">
           <XStack alignItems="center" justifyContent="space-between">
             <YStack flex={1}>
-              <Text fontSize="$section" fontWeight="700" color={colors.text}>
+<Text fontSize={font.section} fontWeight="700" color={colors.text}>
                 {require('../../src/i18n').t('kycProgress')}
               </Text>
               <Subtitle color={colors.textSecondary}>
@@ -314,7 +315,7 @@ export default function ProfileScreen() {
           <SectionTitle color={colors.text}>
             Business Details
           </SectionTitle>
-              <Text fontSize="$caption" color={colors.textSecondary}>
+<Text fontSize={font.caption} color={colors.textSecondary}>
                 Tax and compliance information
               </Text>
             </YStack>
@@ -376,7 +377,7 @@ export default function ProfileScreen() {
                 <Subtitle color={colors.text} weight="semibold">
                   Sign Out
                 </Subtitle>
-                <Text fontSize="$caption" color={colors.textSecondary}>
+<Text fontSize={font.caption} color={colors.textSecondary}>
                   You'll need to sign in again
                 </Text>
               </YStack>

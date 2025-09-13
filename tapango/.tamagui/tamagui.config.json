@@ -28429,26 +28429,47 @@
     "onlyAllowShorthands": false,
     "fontLanguages": [],
     "animations": {
+      "isReactNative": true,
       "animations": {
-        "75ms": "ease-in 75ms",
-        "100ms": "ease-in 100ms",
-        "200ms": "ease-in 200ms",
-        "bouncy": "ease-in 200ms",
-        "superBouncy": "ease-in 500ms",
-        "lazy": "ease-in 1000ms",
-        "medium": "ease-in 300ms",
-        "slow": "ease-in 500ms",
-        "quick": "cubic-bezier(0.215, 0.610, 0.355, 1.000) 400ms",
-        "quicker": "cubic-bezier(0.215, 0.610, 0.355, 1.000) 300ms",
-        "quickest": "cubic-bezier(0.215, 0.610, 0.355, 1.000) 200ms",
-        "tooltip": "ease-in 400ms"
+        "quick": {
+          "type": "timing",
+          "duration": 150
+        },
+        "fade": {
+          "type": "timing",
+          "duration": 180
+        },
+        "slide": {
+          "type": "spring",
+          "stiffness": 300,
+          "damping": 25,
+          "mass": 1
+        },
+        "bouncy": {
+          "type": "spring",
+          "damping": 10,
+          "mass": 0.9,
+          "stiffness": 250
+        },
+        "lazy": {
+          "type": "spring",
+          "damping": 20,
+          "stiffness": 60
+        },
+        "tooltip": {
+          "type": "spring",
+          "damping": 10,
+          "mass": 0.9,
+          "stiffness": 100
+        }
       },
-      "usePresence": "Function",
-      "ResetPresence": "Function",
-      "supportsCSS": true,
+      "View": "Component",
+      "Text": "Component",
       "useAnimatedNumber": "Function",
       "useAnimatedNumberReaction": "Function",
       "useAnimatedNumberStyle": "Function",
+      "usePresence": "Function",
+      "ResetPresence": "Function",
       "useAnimations": "Function"
     },
     "media": {
@@ -70957,11 +70978,11 @@
         "accent12": "hsla(0, 0%, 100%, 1)",
         "backgroundStrong": "#FFFFFF",
         "primary": "#0D47A1",
-        "primaryPress": "#01579B",
+        "primaryPress": "#0D47A1",
         "secondary": "#5E35B1",
-        "secondaryPress": "#7B1FA2",
+        "secondaryPress": "#5E35B1",
         "accent": "#FF8F00",
-        "accentPress": "#FF6D00",
+        "accentPress": "#FF8F00",
         "success": "#388E3C",
         "warning": "#F57C00",
         "danger": "#D32F2F",
@@ -71104,11 +71125,11 @@
         "accent12": "hsla(0, 0%, 9%, 1)",
         "backgroundStrong": "#1A1F2E",
         "primary": "#0D47A1",
-        "primaryPress": "#29B6F6",
+        "primaryPress": "#4FC3F7",
         "secondary": "#5E35B1",
-        "secondaryPress": "#9C27B0",
+        "secondaryPress": "#B39DDB",
         "accent": "#FFD93D",
-        "accentPress": "#FFC107",
+        "accentPress": "#FFD93D",
         "success": "#388E3C",
         "warning": "#F57C00",
         "danger": "#D32F2F",

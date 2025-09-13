@@ -28,7 +28,8 @@ import { Input } from '../../src/ui';
 import { StatusVariant } from '../../src/ui/StatusBadge';
 import { YStack, XStack, Text, ScrollView, Separator, Stack } from 'tamagui';
 import { Circle } from '../../src/ui';
-import { Button, Card, Skeleton, ProgressBar, SectionHeader, ListRow, Screen, AppHeader, StatusPill, AnimatedBadge, FadeIn, AppIcon, ElevatedCard, GlassCard, LoadingSpinner, Title, SectionTitle, Subtitle, Overline } from '../../src/ui';
+import { Button, Card, Skeleton, SkeletonText, StatChip, SectionHeader, ProgressBar, StatusPill, AppIcon, AppHeader, Screen, AnimatedBadge, FadeIn, GlassCard, ElevatedCard, LoadingSpinner, Title, SectionTitle, Subtitle, Overline } from '../../src/ui';
+import { font } from '../../src/ui/tokens';
 import { useColors } from '../../src/styles/ThemeProvider';
 import { t } from '../../src/i18n';
 import Animated, { FadeInDown, FadeInUp, useSharedValue, useAnimatedStyle, withRepeat, withTiming, interpolate } from 'react-native-reanimated';
@@ -331,14 +332,14 @@ export default function TrackingScreen() {
                   <XStack alignItems="center" justifyContent="space-between">
                     <YStack flex={1}>
                       <XStack alignItems="center" space="$2">
-                        <Text fontSize="$section" fontWeight="700" color={palette.text}>
+<Text fontSize={font.section} fontWeight="700" color={palette.text}>
                           {shipment.trackingNumber}
                         </Text>
                         <Circle size={8} backgroundColor={palette.success} />
                       </XStack>
                       <XStack alignItems="center" space="$2" marginTop="$1">
                         <StatusPill status={shipment.status as any} />
-                        <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
 Last updated: {formatDateTimeLocal((shipment.events[shipment.events.length - 1]?.timestamp) || '')}
                         </Text>
                       </XStack>
@@ -370,10 +371,10 @@ Last updated: {formatDateTimeLocal((shipment.events[shipment.events.length - 1]?
                           </Circle>
                         </Stack>
                         <YStack>
-                          <Text fontSize="$section" fontWeight="700" color={palette.text}>
+<Text fontSize={font.section} fontWeight="700" color={palette.text}>
                             Live Route Map
                           </Text>
-                          <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
                             Real-time location tracking
                           </Text>
                         </YStack>
@@ -499,9 +500,9 @@ Last updated: {formatDateTimeLocal((shipment.events[shipment.events.length - 1]?
                       <XStack alignItems="center" justifyContent="space-between">
                         <XStack alignItems="center" space="$2">
                           <Ionicons name="location" size={16} color={palette.primary} />
-                          <Text fontSize="$subtitle" color={palette.textSecondary}>From:</Text>
+<Text fontSize={font.subtitle} color={palette.textSecondary}>From:</Text>
                         </XStack>
-                        <Text fontSize="$subtitle" color={palette.text} fontWeight="600" flex={1} textAlign="right">
+<Text fontSize={font.subtitle} color={palette.text} fontWeight="600" flex={1} textAlign="right">
                           {shipment.origin}
                         </Text>
                       </XStack>
@@ -511,9 +512,9 @@ Last updated: {formatDateTimeLocal((shipment.events[shipment.events.length - 1]?
                       <XStack alignItems="center" justifyContent="space-between">
                         <XStack alignItems="center" space="$2">
                           <Ionicons name="flag" size={16} color={palette.success} />
-                          <Text fontSize="$subtitle" color={palette.textSecondary}>To:</Text>
+<Text fontSize={font.subtitle} color={palette.textSecondary}>To:</Text>
                         </XStack>
-                        <Text fontSize="$subtitle" color={palette.text} fontWeight="600" flex={1} textAlign="right">
+<Text fontSize={font.subtitle} color={palette.text} fontWeight="600" flex={1} textAlign="right">
                           {shipment.destination}
                         </Text>
                       </XStack>
@@ -522,25 +523,25 @@ Last updated: {formatDateTimeLocal((shipment.events[shipment.events.length - 1]?
                       
                       <XStack space="$4">
                         <YStack flex={1} space="$2">
-                          <Text fontSize="$caption" color={palette.textSecondary} textTransform="uppercase">Current Location</Text>
-                          <Text fontSize="$subtitle" color={palette.text} fontWeight="600">{shipment.currentLocation}</Text>
+<Text fontSize={font.caption} color={palette.textSecondary} textTransform="uppercase">Current Location</Text>
+<Text fontSize={font.subtitle} color={palette.text} fontWeight="600">{shipment.currentLocation}</Text>
                         </YStack>
                         
                         <YStack flex={1} space="$2">
-                          <Text fontSize="$caption" color={palette.textSecondary} textTransform="uppercase">Est. Delivery</Text>
-                          <Text fontSize="$subtitle" color={palette.text} fontWeight="600">{formatDateTimeLocal(shipment.estimatedDelivery)}</Text>
+<Text fontSize={font.caption} color={palette.textSecondary} textTransform="uppercase">Est. Delivery</Text>
+<Text fontSize={font.subtitle} color={palette.text} fontWeight="600">{formatDateTimeLocal(shipment.estimatedDelivery)}</Text>
                         </YStack>
                       </XStack>
                       
                       <XStack space="$4">
                         <YStack flex={1} space="$2">
-                          <Text fontSize="$caption" color={palette.textSecondary} textTransform="uppercase">Cargo Type</Text>
-                          <Text fontSize="$subtitle" color={palette.text} fontWeight="600">{shipment.cargoType}</Text>
+<Text fontSize={font.caption} color={palette.textSecondary} textTransform="uppercase">Cargo Type</Text>
+<Text fontSize={font.subtitle} color={palette.text} fontWeight="600">{shipment.cargoType}</Text>
                         </YStack>
                         
                         <YStack flex={1} space="$2">
-                          <Text fontSize="$caption" color={palette.textSecondary} textTransform="uppercase">Weight</Text>
-                          <Text fontSize="$subtitle" color={palette.text} fontWeight="600">{shipment.weight}</Text>
+<Text fontSize={font.caption} color={palette.textSecondary} textTransform="uppercase">Weight</Text>
+<Text fontSize={font.subtitle} color={palette.text} fontWeight="600">{shipment.weight}</Text>
                         </YStack>
                       </XStack>
                     </YStack>
@@ -558,7 +559,7 @@ Last updated: {formatDateTimeLocal((shipment.events[shipment.events.length - 1]?
                         <SectionTitle color={palette.text}>
                           Tracking Timeline
                         </SectionTitle>
-                        <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
                           {shipment.events.length} tracking events
                         </Text>
                       </YStack>
@@ -594,14 +595,14 @@ Last updated: {formatDateTimeLocal((shipment.events[shipment.events.length - 1]?
                             
                             <YStack flex={1} paddingBottom={index < shipment.events.length - 1 ? '$3' : 0}>
                               <XStack alignItems="center" justifyContent="space-between">
-                                <Text fontSize="$subtitle" fontWeight="600" color={palette.text}>
+<Text fontSize={font.subtitle} fontWeight="600" color={palette.text}>
                                   {event.location}
                                 </Text>
-                                <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
                                   {formatDateTimeLocal(event.timestamp)}
                                 </Text>
                               </XStack>
-                              <Text fontSize="$caption" color={palette.textSecondary} marginTop="$1">
+<Text fontSize={font.caption} color={palette.textSecondary} marginTop="$1">
                                 {event.description}
                               </Text>
                             </YStack>

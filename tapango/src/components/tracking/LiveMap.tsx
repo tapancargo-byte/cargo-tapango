@@ -5,6 +5,7 @@ import { Stack, Text, XStack, YStack } from 'tamagui';
 import { LiveTrackingPulse } from '@/components/tracking/LiveTrackingPulse';
 import { IconCircle } from '@/components/tracking/IconCircle';
 import { ElevatedCard, LoadingSpinner } from '../../ui';
+import { font } from '../../ui/tokens';
 import { useColors } from '../../styles/ThemeProvider';
 
 // Helper function to create alpha colors
@@ -122,7 +123,7 @@ export function LiveMap({ origin, destination, currentLocation }: LiveMapProps) 
       {!isMapReady && (
         <YStack {...MAP_STYLES.loadingContainer}>
           <LoadingSpinner size="lg" />
-          <Text fontSize="$caption" color={palette.textSecondary} marginTop="$2">
+<Text fontSize={font.caption} color={palette.textSecondary} marginTop="$2">
             Loading map...
           </Text>
         </YStack>
@@ -201,16 +202,16 @@ export function LiveMap({ origin, destination, currentLocation }: LiveMapProps) 
               />
             </Stack>
             <YStack>
-              <Text fontSize="$section" fontWeight="700" color={palette.text}>
+<Text fontSize={font.section} fontWeight="700" color={palette.text}>
                 Live Route Map
               </Text>
-              <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
                 Real-time location tracking
               </Text>
             </YStack>
           </XStack>
 
-          <Text fontSize="$caption" color={palette.success} fontWeight="600" textTransform="uppercase">
+<Text fontSize={font.caption} color={palette.success} fontWeight="600" textTransform="uppercase">
             LIVE
           </Text>
         </XStack>

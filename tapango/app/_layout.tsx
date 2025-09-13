@@ -1,8 +1,10 @@
+import 'react-native-gesture-handler'
+import 'react-native-reanimated'
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
-import { View, Text, ActivityIndicator, useColorScheme } from 'react-native';
+import { View, Text, ActivityIndicator, useColorScheme, Platform } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import { ClerkProvider } from '@clerk/clerk-expo';
@@ -14,6 +16,8 @@ import { TamaguiProvider, Theme } from 'tamagui';
 import tamaguiConfig from '../tamagui.config';
 import * as SecureStore from 'expo-secure-store';
 import { AppToastProvider } from '../src/ui/tg/ToastHost';
+import { enable as enableEdgeToEdge } from 'react-native-edge-to-edge';
+import * as NavigationBar from 'expo-navigation-bar';
 import { GlobalErrorCatcher } from '../src/components/GlobalErrorCatcher';
 
 // Clerk token cache configuration
@@ -77,6 +81,16 @@ export default function RootLayout() {
 
     async function prepare() {
       try {
+        if (Platform.OS === 'android') {
+          try {
+            // Enable true edge-to-edge on Android 14/15+
+            enableEdgeToEdge?.();
+            // Make navigation bar transparent and immersive
+            await NavigationBar.setBackgroundColorAsync('transparent').catch(() => {});
+            await NavigationBar.setVisibilityAsync('immersive').catch(() => {});
+            await NavigationBar.setBehaviorAsync('overlay-swipe').catch(() => {});
+          } catch {}
+        }
         // Load locale preference
         try {
           const { loadLocaleFromStorage } = await import('../src/i18n')
@@ -147,7 +161,7 @@ function ThemedApp() {
     <Theme name={isDark ? 'tapango_dark' : 'tapango_light'}>
       <AppToastProvider>
         <SafeAreaProvider>
-          <StatusBar style={isDark ? 'light' : 'dark'} backgroundColor="transparent" />
+          <StatusBar style={isDark ? 'light' : 'dark'} backgroundColor="transparent" translucent={true} />
           <GlobalErrorCatcher />
           <OfflineBanner />
           <AppNavigator />

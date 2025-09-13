@@ -1,6 +1,7 @@
 import React from 'react';
 import { Share, Alert } from 'react-native';
 import { XStack, YStack, Text, Theme } from 'tamagui';
+import { font } from '../../ui/tokens';
 import { Ionicons } from '@expo/vector-icons';
 import { ElevatedCard, Button, StatusPill, Circle } from '../../ui';
 import { useColors } from '../../styles/ThemeProvider';
@@ -52,8 +53,8 @@ function TrackingInfo({ trackingNumber, status, lastUpdate }: TrackingInfoProps)
   return (
     <YStack flexShrink={1}>
       <XStack alignItems="center" space="$2">
-        <Text 
-          fontSize="$section" 
+<Text 
+          fontSize={font.section} 
           fontWeight="700" 
           color={text}
           numberOfLines={1}
@@ -72,8 +73,8 @@ function TrackingInfo({ trackingNumber, status, lastUpdate }: TrackingInfoProps)
       </XStack>
       <XStack alignItems="center" space="$2" marginTop="$1">
         <StatusPill status={status as 'pending' | 'in-transit' | 'delivered' | 'delayed'} />
-        <Text 
-          fontSize="$caption" 
+<Text 
+          fontSize={font.caption} 
           color={textSecondary}
           numberOfLines={1}
           ellipsizeMode="tail"

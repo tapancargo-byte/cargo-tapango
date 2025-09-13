@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { Stack, Text, XStack, YStack } from 'tamagui';
 import Animated, { FadeInUp } from 'react-native-reanimated';
+import { font } from '../../ui/tokens';
 import { Ionicons } from '@expo/vector-icons';
 import { FlatList } from 'react-native';
 import { Circle, ElevatedCard } from '../../ui';
@@ -57,10 +58,10 @@ const TimelineHeader = memo(function TimelineHeader({ eventsCount }: TimelineHea
         <Ionicons name="time" size={20} color={palette.secondary} />
       </Circle>
       <YStack>
-        <Text fontSize="$section" fontWeight="700" color={palette.text}>
+<Text fontSize={font.section} fontWeight="700" color={palette.text}>
           Tracking Timeline
         </Text>
-        <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
           {eventsCount} tracking events
         </Text>
       </YStack>
@@ -87,14 +88,14 @@ const TimelineItem = memo(function TimelineItem({ event, formatDateTime, isLast,
         
         <YStack flex={1} paddingBottom={!isLast ? '$3' : 0}>
           <XStack alignItems="center" justifyContent="space-between">
-            <Text fontSize="$subtitle" fontWeight="600" color={palette.text}>
+<Text fontSize={font.subtitle} fontWeight="600" color={palette.text}>
               {event.location}
             </Text>
-            <Text fontSize="$caption" color={palette.textSecondary}>
+<Text fontSize={font.caption} color={palette.textSecondary}>
               {formatDateTime(event.timestamp)}
             </Text>
           </XStack>
-          <Text fontSize="$caption" color={palette.textSecondary} marginTop="$1">
+<Text fontSize={font.caption} color={palette.textSecondary} marginTop="$1">
             {event.description}
           </Text>
         </YStack>

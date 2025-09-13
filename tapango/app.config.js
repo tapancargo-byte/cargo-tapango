@@ -29,9 +29,16 @@ export default {
       package: 'com.tapango.mobile',
       // SDK 54: Android 16 features
       predictiveBackGestureEnabled: true, // Enable predictive back gesture
+      softwareKeyboardLayoutMode: 'resize',
       navigationBar: {
-        enforceContrast: true // Replaces react-native-edge-to-edge
+        enforceContrast: true, // Keep contrast for accessibility
+        backgroundColor: '#00000000' // Transparent nav bar for edge-to-edge
       }
+    },
+    androidStatusBar: {
+      translucent: true,
+      backgroundColor: '#00000000',
+      barStyle: 'light-content'
     },
     web: {
       favicon: './assets/favicon.png'
@@ -39,6 +46,25 @@ export default {
     scheme: 'tapango',
     plugins: [
       'expo-router',
+      [
+        'expo-navigation-bar',
+        {
+          backgroundColor: '#00000000',
+          barStyle: 'light',
+          visibility: 'immersive',
+          behavior: 'overlay-swipe',
+          position: 'absolute'
+        }
+      ],
+      [
+        'expo-build-properties',
+        {
+          android: {
+            compileSdkVersion: 35,
+            targetSdkVersion: 35
+          }
+        }
+      ],
       [
         'expo-splash-screen',
         {
