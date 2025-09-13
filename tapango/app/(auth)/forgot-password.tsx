@@ -347,8 +347,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary.blue,
     justifyContent: 'center',
     alignItems: 'center',
-    ...shadows.lg,
-    shadowColor: 'rgba(30, 64, 175, 0.3)',
+    ...(Platform.OS === 'web'
+      ? { boxShadow: '0px 8px 16px rgba(30, 64, 175, 0.30)' }
+      : { ...shadows.lg, shadowColor: 'rgba(30, 64, 175, 0.3)' } as any),
   },
   title: {
     ...textStyles.title,

@@ -272,8 +272,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary.blue,
     justifyContent: 'center',
     alignItems: 'center',
-    ...shadows.lg,
-    shadowColor: 'rgba(30, 64, 175, 0.3)',
+    ...(Platform.OS === 'web'
+      ? { boxShadow: '0px 8px 16px rgba(30, 64, 175, 0.30)' }
+      : { ...shadows.lg, shadowColor: 'rgba(30, 64, 175, 0.3)' } as any),
   },
   title: {
     ...textStyles.title,
@@ -301,7 +302,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.status.error,
-    ...shadows.sm,
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 1px 4px rgba(0,0,0,0.18)' } : { ...shadows.sm } as any),
   },
   errorText: {
     ...textStyles.body,

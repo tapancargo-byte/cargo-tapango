@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run lint-staged first (formatting + lint fixes)
+if command -v npx >/dev/null 2>&1; then
+  npx --no-install lint-staged || exit 1
+fi
+
+# Run Storybook runtime guard locally
+npm run ci:storybook:guard --silent || exit 1
