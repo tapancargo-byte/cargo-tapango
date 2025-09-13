@@ -1,10 +1,11 @@
 #!/usr/bin/env sh
-. "$(dirname "$0")/_/husky.sh"
+# Minimal pre-commit; run tools from the tapango project dir
+PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
 
 # Run lint-staged first (formatting + lint fixes)
 if command -v npx >/dev/null 2>&1; then
-  npx --no-install lint-staged || exit 1
+  (cd "$PROJECT_DIR" && npx --no-install lint-staged) || exit 1
 fi
 
 # Run Storybook runtime guard locally
-npm run ci:storybook:guard --silent || exit 1
+(cd "$PROJECT_DIR" && npm run ci:storybook:guard --silent) || exit 1

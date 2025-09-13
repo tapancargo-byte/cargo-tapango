@@ -36,7 +36,10 @@ function scanFile(file) {
   }
 
   // 2) Forbid JSX in .ts / .js under storybook (should be .tsx/.jsx)
-  if ((ext === '.ts' || ext === '.js') && /<\s*[A-Za-z][A-Za-z0-9]*/.test(text)) {
+  // Heuristic: match real JSX tags like <View> or <div>, not TS generics like Map<string>
+  // Use negative lookbehind to ensure '<' is not preceded by an identifier character
+  const jsxTag = /(?<![A-Za-z0-9_])<\s*[A-Za-z][A-Za-z0-9]*(\s|\/?>)/
+  if ((ext === '.ts' || ext === '.js') && jsxTag.test(text)) {
     errors.push(`[jsx-in-non-jsx] ${rel}: JSX detected in ${ext} file (rename to .tsx/.jsx)`) 
   }
 
