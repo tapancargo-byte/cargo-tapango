@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import LottieView from 'lottie-react-native';
@@ -248,14 +249,18 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     borderWidth: 2,
     borderColor: 'rgba(255, 255, 255, 0.2)',
-    shadowColor: colors.primary.navy,
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 20,
-    elevation: 10,
+    // Native shadows
+    ...(Platform.OS !== 'web'
+      ? {
+          shadowColor: colors.primary.navy,
+          shadowOffset: { width: 0, height: 12 },
+          shadowOpacity: 0.2,
+          shadowRadius: 20,
+          elevation: 10,
+        }
+      : {}),
+    // Web-only CSS shadow to avoid RNW shadow* warnings
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 12px 20px rgba(15, 23, 42, 0.2)' } : {}),
   },
   logoIcon: {
     width: 90,
@@ -299,27 +304,31 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     overflow: 'hidden',
     marginBottom: 12,
-    shadowColor: colors.primary.navy,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    ...(Platform.OS !== 'web'
+      ? {
+          shadowColor: colors.primary.navy,
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          elevation: 2,
+        }
+      : {}),
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 2px 4px rgba(15, 23, 42, 0.1)' } : {}),
   },
   progressBar: {
     height: '100%',
     backgroundColor: colors.neutral.white,
     borderRadius: 3,
-    shadowColor: colors.neutral.white,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.6,
-    shadowRadius: 6,
-    elevation: 4,
+    ...(Platform.OS !== 'web'
+      ? {
+          shadowColor: colors.neutral.white,
+          shadowOffset: { width: 0, height: 0 },
+          shadowOpacity: 0.6,
+          shadowRadius: 6,
+          elevation: 4,
+        }
+      : {}),
+    ...(Platform.OS === 'web' ? { boxShadow: '0 0 6px rgba(255,255,255,0.6)' } : {}),
   },
   progressText: {
     fontSize: 16,

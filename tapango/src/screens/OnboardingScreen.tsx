@@ -475,13 +475,15 @@ const styles = StyleSheet.create({
   },
   nextButton: {
     elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    ...(Platform.OS !== 'web'
+      ? {
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+        }
+      : {}),
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 2px 4px rgba(0,0,0,0.25)' } : {}),
   },
   buttonText: {
     fontSize: 16,

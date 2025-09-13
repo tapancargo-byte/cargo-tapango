@@ -217,11 +217,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.2)',
     // Modern shadow
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 5,
+    ...(Platform.OS !== 'web'
+      ? {
+          shadowColor: 'rgba(0, 0, 0, 0.1)',
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.1,
+          shadowRadius: 12,
+          elevation: 5,
+        }
+      : {}),
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 4px 12px rgba(0,0,0,0.1)' } : {}),
   },
   inputIcon: {
     marginRight: 12,
@@ -248,11 +253,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 24,
     // Modern shadow
-    shadowColor: 'rgba(0, 0, 0, 0.15)',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.15,
-    shadowRadius: 16,
-    elevation: 8,
+    ...(Platform.OS !== 'web'
+      ? {
+          shadowColor: 'rgba(0, 0, 0, 0.15)',
+          shadowOffset: { width: 0, height: 6 },
+          shadowOpacity: 0.15,
+          shadowRadius: 16,
+          elevation: 8,
+        }
+      : {}),
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 6px 16px rgba(0,0,0,0.15)' } : {}),
   },
   signInButtonDisabled: {
     opacity: 0.7,

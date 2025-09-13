@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { router } from 'expo-router';
 import { useUser } from '@clerk/clerk-expo';
-import { Linking, Alert } from 'react-native';
+import { Linking, Alert, Platform } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme, useColors } from '../../src/styles/ThemeProvider';
 import { StorageService } from '../../src/utils/storage';
@@ -98,11 +98,9 @@ export default function ProfileScreen() {
                 borderWidth={3}
                 borderColor={colors.primary}
                 backgroundColor={colors.primaryContainer}
-shadowColor={colors.shadow}
-                shadowOffset={{ width: 0, height: 8 }}
-                shadowOpacity={0.2}
-                shadowRadius={16}
-                elevation={8}
+                style={Platform.OS === 'web' 
+                  ? { boxShadow: '0px 8px 16px rgba(0,0,0,0.2)' } 
+                  : { shadowColor: colors.shadow, shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.2, shadowRadius: 16, elevation: 8 } as any}
               >
                 <Stack
                   width={94}
@@ -179,11 +177,9 @@ shadowColor={colors.shadow}
                     >
                       <Switch.Thumb
                         backgroundColor={colors.surface}
-shadowColor={colors.shadow}
-                        shadowOffset={{ width: 0, height: 2 }}
-                        shadowOpacity={0.2}
-                        shadowRadius={4}
-                        elevation={3}
+                        style={Platform.OS === 'web' 
+                          ? { boxShadow: '0px 2px 4px rgba(0,0,0,0.2)' } 
+                          : { shadowColor: colors.shadow, shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 3 } as any}
                       />
                     </Switch>
                   )}

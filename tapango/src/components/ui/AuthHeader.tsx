@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderColor: 'rgba(255, 255, 255, 0.2)',
+    ...(Platform.OS === 'web' ? { boxShadow: '0px 8px 16px rgba(0,0,0,0.15)' } : {}),
   },
   logoInner: {
     width: 84,
@@ -124,6 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backdropFilter: 'blur(10px)',
+    ...(Platform.OS === 'web' ? { boxShadow: 'inset 0 0 24px rgba(255,255,255,0.15)' } : {}),
   },
   title: {
     ...textStyles.title,
