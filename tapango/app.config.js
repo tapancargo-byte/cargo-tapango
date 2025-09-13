@@ -10,21 +10,19 @@ export default {
     splash: {
       image: './assets/splash.png',
       resizeMode: 'contain',
-      backgroundColor: '#FFFFFF'
+      backgroundColor: '#FFFFFF',
     },
-    assetBundlePatterns: [
-      '**/*'
-    ],
+    assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'com.tapango.mobile'
+      bundleIdentifier: 'com.tapango.mobile',
       // SDK 54: Add Liquid Glass icon support when ready
-      // icon: './assets/app.icon' 
+      // icon: './assets/app.icon'
     },
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
       },
       package: 'com.tapango.mobile',
       // SDK 54: Android 16 features
@@ -32,16 +30,16 @@ export default {
       softwareKeyboardLayoutMode: 'resize',
       navigationBar: {
         enforceContrast: true, // Keep contrast for accessibility
-        backgroundColor: '#00000000' // Transparent nav bar for edge-to-edge
-      }
+        backgroundColor: '#00000000', // Transparent nav bar for edge-to-edge
+      },
     },
     androidStatusBar: {
       translucent: true,
       backgroundColor: '#00000000',
-      barStyle: 'light-content'
+      barStyle: 'light-content',
     },
     web: {
-      favicon: './assets/favicon.png'
+      favicon: './assets/favicon.png',
     },
     scheme: 'tapango',
     plugins: [
@@ -53,17 +51,17 @@ export default {
           barStyle: 'light',
           visibility: 'immersive',
           behavior: 'overlay-swipe',
-          position: 'absolute'
-        }
+          position: 'absolute',
+        },
       ],
       [
         'expo-build-properties',
         {
           android: {
             compileSdkVersion: 35,
-            targetSdkVersion: 35
-          }
-        }
+            targetSdkVersion: 35,
+          },
+        },
       ],
       [
         'expo-splash-screen',
@@ -72,24 +70,23 @@ export default {
           image: './assets/splash-icon.png',
           dark: {
             image: './assets/splash-icon-dark.png',
-            backgroundColor: '#0B0B0B'
+            backgroundColor: '#0B0B0B',
           },
           imageWidth: 150,
-          resizeMode: 'contain'
-        }
+          resizeMode: 'contain',
+        },
       ],
       [
         'expo-notifications',
         {
-          icon: './assets/notification-icon.png',
-          color: '#ffffff'
-        }
-      ]
+          color: '#ffffff',
+        },
+      ],
     ],
     experiments: {
-      typedRoutes: true
+      typedRoutes: true,
     },
     // SDK 54: Performance improvements
-    buildCacheProvider: "eas" // Enable build cache for faster builds
-  }
+    buildCacheProvider: 'eas', // Enable build cache for faster builds
+  },
 };
