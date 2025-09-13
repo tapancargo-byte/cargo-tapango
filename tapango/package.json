@@ -4,6 +4,7 @@
   "main": "expo-router/entry",
   "description": "TAPANGO Mobile App - Cargo Logistics Platform",
   "scripts": {
+    "ci:storybook:guard": "node scripts/check-storybook-runtime.mjs",
     "fonts:scan": "node scripts/scan-fonts.js",
     "start": "expo start",
     "start:dev": "expo start --dev-client",
