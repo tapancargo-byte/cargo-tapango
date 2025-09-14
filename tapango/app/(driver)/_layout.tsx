@@ -1,8 +1,49 @@
 import React from 'react';
-import { Tabs } from 'expo-router';
+import { Stack, Tabs } from 'expo-router';
 import { AppIcon } from '../../src/ui';
+import { supabase } from '../../src/services/supabaseClient';
 
-export default function DriverTabs() {
+export default function DriverLayout() {
+  const [loading, setLoading] = React.useState(true);
+  const [isSignedIn, setIsSignedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    let unsubscribe: (() => void) | undefined;
+    (async () => {
+      try {
+        if (supabase) {
+          const { data } = await supabase.auth.getSession();
+          setIsSignedIn(!!data.session);
+          const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+            setIsSignedIn(!!session);
+          });
+          unsubscribe = () => sub.subscription.unsubscribe();
+        } else {
+          setIsSignedIn(false);
+        }
+      } finally {
+        setLoading(false);
+      }
+    })();
+    return () => {
+      try {
+        unsubscribe?.();
+      } catch {}
+    };
+  }, []);
+
+  if (loading) return null;
+
+  if (!isSignedIn) {
+    return (
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name='sign-in' />
+        <Stack.Screen name='sign-up' />
+        <Stack.Screen name='forgot-password' />
+      </Stack>
+    );
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -41,13 +82,11 @@ export default function DriverTabs() {
           tabBarIcon: ({ color, size }) => <AppIcon name='person' color={color} size={size} />,
         }}
       />
-      <Tabs.Screen
-        name='kyc'
-        options={{
-          title: 'KYC',
-          tabBarIcon: ({ color, size }) => <AppIcon name='id-card' color={color} size={size} />,
-        }}
-      />
+      {/* Auth routes hidden from tab bar */}
+      <Tabs.Screen name='sign-in' options={{ href: null }} />
+      <Tabs.Screen name='sign-up' options={{ href: null }} />
+      <Tabs.Screen name='forgot-password' options={{ href: null }} />
+      {/* KYC merged into Profile; tab removed */}
     </Tabs>
   );
 }
