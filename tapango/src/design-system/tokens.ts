@@ -128,23 +128,23 @@ const typographyBase: TypographyTokens = {
     ios: '400',
     android: '400',
     default: '400',
-  })!,
+  }),
   weightMedium: Platform.select({
     ios: '500',
     android: '500',
     default: '500',
-  })!,
+  }),
   weightSemibold: Platform.select({
     ios: '600',
     android: '600',
     default: '600',
-  })!,
-  weightBold: Platform.select({ ios: '700', android: '700', default: '700' })!,
+  }),
+  weightBold: Platform.select({ ios: '700', android: '700', default: '700' }),
   weightExtraBold: Platform.select({
     ios: '800',
     android: '800',
     default: '800',
-  })!,
+  }),
 };
 
 const spacingBase: SpacingTokens = {

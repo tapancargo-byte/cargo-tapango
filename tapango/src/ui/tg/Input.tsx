@@ -1,16 +1,17 @@
-import { Label, Input as TInput, type InputProps, YStack, Text, XStack, Stack } from 'tamagui';
+import { type InputProps, Label, Stack, Text, Input as TInput, XStack, YStack } from 'tamagui';
 import { useColors } from '../../styles/ThemeProvider';
 import { memo, useState } from 'react';
 import { Platform } from 'react-native';
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
-  withTiming,
+  useSharedValue,
   withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 
-const AnimatedYStack = Animated.createAnimatedComponent(YStack) as any;
-const AnimatedTInput = Animated.createAnimatedComponent(TInput) as any;
+type AnimComp = React.ComponentType<object>;
+const AnimatedYStack = Animated.createAnimatedComponent(YStack as unknown as AnimComp) as any;
+const AnimatedTInput = Animated.createAnimatedComponent(TInput as unknown as AnimComp) as any;
 
 export interface PremiumInputProps extends InputProps {
   label?: string;

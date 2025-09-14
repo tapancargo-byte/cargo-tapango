@@ -1,7 +1,5 @@
 import React from 'react';
-// Avoid hard dependency on bottom-tabs type in typecheck
-type BottomTabBarProps = any;
-import { Stack, XStack, YStack, Text } from 'tamagui';
+import { Stack, Text, XStack, YStack } from 'tamagui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useColors, useIsDark } from '../styles/ThemeProvider';
 import { Platform, Pressable } from 'react-native';
@@ -9,6 +7,8 @@ import { BlurView } from 'expo-blur';
 import * as Haptics from 'expo-haptics';
 import { Feather } from '@expo/vector-icons';
 import { useCounts } from '../contexts/CountsContext';
+// Avoid hard dependency on bottom-tabs type in typecheck
+type BottomTabBarProps = any;
 
 const ICON_SIZE = 22; // 22dp — matches Feather default weight well
 
@@ -90,7 +90,7 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, 
                       : route.name;
 
                 const isFocused = state.index === index;
-                const iconName = getFeatherName(route.name);
+                const iconName = getFeatherName(route.name as string);
 
                 const onPress = () => {
                   const event = navigation.emit({
@@ -115,10 +115,12 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, 
                 };
 
                 // Badge (dynamic): use Orders active count if available; fallback to static options
-                let badge = (options as any).tabBarBadge as number | string | undefined;
+                let badge = options.tabBarBadge as number | string | undefined;
                 if (badge === undefined && route.name === 'orders') {
                   const active = Number(counts?.ordersActive ?? 0);
-                  if (active > 0) badge = active;
+                  if (active > 0) {
+                    badge = active;
+                  }
                 }
 
                 return (

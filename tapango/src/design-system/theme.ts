@@ -1,9 +1,9 @@
 import {
-  getTokens,
-  tokensLight,
-  tokensDark,
-  type ThemeMode,
   type DesignTokens,
+  getTokens,
+  type ThemeMode,
+  tokensDark,
+  tokensLight,
 } from './tokens';
 
 // Bridge to Tamagui theme shape used across the app

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label, Select as TSelect, Adapt, Sheet, YStack, XStack, Text } from 'tamagui';
+import { Adapt, Label, Sheet, Text, Select as TSelect, XStack, YStack } from 'tamagui';
 import { useColors } from '../../styles/ThemeProvider';
 
 export type SelectOption = { label: string; value: string };

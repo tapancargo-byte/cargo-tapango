@@ -25,7 +25,9 @@ export const GlobalErrorCatcher: React.FC = () => {
     (global as any).ErrorUtils?.setGlobalHandler?.(handler);
     return () => {
       // @ts-ignore
-      if (prev) (global as any).ErrorUtils?.setGlobalHandler?.(prev);
+      if (prev) {
+        (global as any).ErrorUtils?.setGlobalHandler?.(prev);
+      }
     };
   }, [toast]);
 

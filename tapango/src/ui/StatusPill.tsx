@@ -40,10 +40,15 @@ export const StatusPill: React.FC<{
   }, [status, opacity, scale, delayMs]);
 
   let node: React.ReactNode;
-  if (status === 'in-transit') node = <InlineBadge text={t('inTransit')} tone='info' />;
-  else if (status === 'delivered') node = <InlineBadge text={t('delivered')} tone='success' />;
-  else if (status === 'delayed') node = <InlineBadge text={t('delayed')} tone='error' />;
-  else node = <InlineBadge text={t('onSchedule')} tone='warning' />;
+  if (status === 'in-transit') {
+    node = <InlineBadge text={t('inTransit')} tone='info' />;
+  } else if (status === 'delivered') {
+    node = <InlineBadge text={t('delivered')} tone='success' />;
+  } else if (status === 'delayed') {
+    node = <InlineBadge text={t('delayed')} tone='error' />;
+  } else {
+    node = <InlineBadge text={t('onSchedule')} tone='warning' />;
+  }
 
   return <Animated.View style={{ opacity, transform: [{ scale }] }}>{node}</Animated.View>;
 };

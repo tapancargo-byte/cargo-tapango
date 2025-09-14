@@ -1,6 +1,6 @@
 import React, {
-  PropsWithChildren,
   createContext,
+  PropsWithChildren,
   useCallback,
   useContext,
   useEffect,
@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import { Animated, Easing, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { YStack, XStack, Text } from 'tamagui';
+import { Text, XStack, YStack } from 'tamagui';
 import { AppIcon } from '../../ui';
 import { useColors } from '../../styles/ThemeProvider';
 
@@ -118,13 +118,19 @@ export const AppToastProvider = ({ children }: PropsWithChildren) => {
 
   // Auto-dismiss current
   useEffect(() => {
-    if (!current) return;
-    if (timerRef.current) clearTimeout(timerRef.current);
+    if (!current) {
+      return;
+    }
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
     timerRef.current = setTimeout(() => {
       playOut(() => setCurrent(null));
     }, 3000);
     return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
     };
   }, [current, playOut]);
 

@@ -71,23 +71,7 @@ export interface SpacingProps {
 /**
  * Color values that can be hex colors or semantic token names
  */
-export type ColorValue =
-  | string
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'info'
-  | 'background'
-  | 'surface'
-  | 'surfaceVariant'
-  | 'text'
-  | 'textSecondary'
-  | 'textMuted'
-  | 'border'
-  | 'borderSecondary'
-  | 'transparent';
+export type ColorValue = string;
 
 // ============= SIZE AND RADIUS TYPES =============
 
@@ -227,7 +211,9 @@ export interface ThemedProps {
  * @returns Number of pixels
  */
 export const toPixels = (value: SpaceValue): number => {
-  if (typeof value === 'number') return value;
+  if (typeof value === 'number') {
+    return value;
+  }
 
   // Convert Tamagui space tokens to pixel values
   const tokenMap: Record<string, number> = {
@@ -255,7 +241,9 @@ export const toPixels = (value: SpaceValue): number => {
  * @returns Number of pixels
  */
 export const toRadius = (value: RadiusValue): number => {
-  if (typeof value === 'number') return value;
+  if (typeof value === 'number') {
+    return value;
+  }
 
   const tokenMap: Record<string, number> = {
     $1: 2,
@@ -316,38 +304,90 @@ export const extractSpacingProps = <T extends SpacingProps>(
   const spacingProps: Partial<SpacingProps> = {};
 
   // Only add defined values
-  if (padding !== undefined) spacingProps.padding = padding;
-  if (p !== undefined) spacingProps.p = p;
-  if (paddingHorizontal !== undefined)
+  if (padding !== undefined) {
+    spacingProps.padding = padding;
+  }
+  if (p !== undefined) {
+    spacingProps.p = p;
+  }
+  if (paddingHorizontal !== undefined) {
     spacingProps.paddingHorizontal = paddingHorizontal;
-  if (px !== undefined) spacingProps.px = px;
-  if (paddingVertical !== undefined)
+  }
+  if (px !== undefined) {
+    spacingProps.px = px;
+  }
+  if (paddingVertical !== undefined) {
     spacingProps.paddingVertical = paddingVertical;
-  if (py !== undefined) spacingProps.py = py;
-  if (paddingTop !== undefined) spacingProps.paddingTop = paddingTop;
-  if (pt !== undefined) spacingProps.pt = pt;
-  if (paddingRight !== undefined) spacingProps.paddingRight = paddingRight;
-  if (pr !== undefined) spacingProps.pr = pr;
-  if (paddingBottom !== undefined) spacingProps.paddingBottom = paddingBottom;
-  if (pb !== undefined) spacingProps.pb = pb;
-  if (paddingLeft !== undefined) spacingProps.paddingLeft = paddingLeft;
-  if (pl !== undefined) spacingProps.pl = pl;
-  if (margin !== undefined) spacingProps.margin = margin;
-  if (m !== undefined) spacingProps.m = m;
-  if (marginHorizontal !== undefined)
+  }
+  if (py !== undefined) {
+    spacingProps.py = py;
+  }
+  if (paddingTop !== undefined) {
+    spacingProps.paddingTop = paddingTop;
+  }
+  if (pt !== undefined) {
+    spacingProps.pt = pt;
+  }
+  if (paddingRight !== undefined) {
+    spacingProps.paddingRight = paddingRight;
+  }
+  if (pr !== undefined) {
+    spacingProps.pr = pr;
+  }
+  if (paddingBottom !== undefined) {
+    spacingProps.paddingBottom = paddingBottom;
+  }
+  if (pb !== undefined) {
+    spacingProps.pb = pb;
+  }
+  if (paddingLeft !== undefined) {
+    spacingProps.paddingLeft = paddingLeft;
+  }
+  if (pl !== undefined) {
+    spacingProps.pl = pl;
+  }
+  if (margin !== undefined) {
+    spacingProps.margin = margin;
+  }
+  if (m !== undefined) {
+    spacingProps.m = m;
+  }
+  if (marginHorizontal !== undefined) {
     spacingProps.marginHorizontal = marginHorizontal;
-  if (mx !== undefined) spacingProps.mx = mx;
-  if (marginVertical !== undefined)
+  }
+  if (mx !== undefined) {
+    spacingProps.mx = mx;
+  }
+  if (marginVertical !== undefined) {
     spacingProps.marginVertical = marginVertical;
-  if (my !== undefined) spacingProps.my = my;
-  if (marginTop !== undefined) spacingProps.marginTop = marginTop;
-  if (mt !== undefined) spacingProps.mt = mt;
-  if (marginRight !== undefined) spacingProps.marginRight = marginRight;
-  if (mr !== undefined) spacingProps.mr = mr;
-  if (marginBottom !== undefined) spacingProps.marginBottom = marginBottom;
-  if (mb !== undefined) spacingProps.mb = mb;
-  if (marginLeft !== undefined) spacingProps.marginLeft = marginLeft;
-  if (ml !== undefined) spacingProps.ml = ml;
+  }
+  if (my !== undefined) {
+    spacingProps.my = my;
+  }
+  if (marginTop !== undefined) {
+    spacingProps.marginTop = marginTop;
+  }
+  if (mt !== undefined) {
+    spacingProps.mt = mt;
+  }
+  if (marginRight !== undefined) {
+    spacingProps.marginRight = marginRight;
+  }
+  if (mr !== undefined) {
+    spacingProps.mr = mr;
+  }
+  if (marginBottom !== undefined) {
+    spacingProps.marginBottom = marginBottom;
+  }
+  if (mb !== undefined) {
+    spacingProps.mb = mb;
+  }
+  if (marginLeft !== undefined) {
+    spacingProps.marginLeft = marginLeft;
+  }
+  if (ml !== undefined) {
+    spacingProps.ml = ml;
+  }
 
   return { spacingProps: spacingProps as SpacingProps, otherProps };
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { YStack, Text, Button as TButton } from 'tamagui';
+import { Button as TButton, Text, YStack } from 'tamagui';
 import { useColors } from '../styles/ThemeProvider';
 import { Illustration } from './Illustration';
 import { font } from './tokens';

@@ -4,7 +4,7 @@ import Animated, { FadeInUp } from 'react-native-reanimated';
 import { font } from '../../ui/tokens';
 import { Feather } from '@expo/vector-icons';
 import { FlatList } from 'react-native';
-import { Circle, ElevatedCard, AppIcon } from '../../ui';
+import { AppIcon, Circle, ElevatedCard } from '../../ui';
 import { useColors } from '../../styles/ThemeProvider';
 import { StatusVariant } from '../../ui/StatusBadge';
 

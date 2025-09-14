@@ -50,7 +50,9 @@ export function startUpdateListener(lifecycle?: UpdateEvents) {
   const sub = AppState.addEventListener('change', async (next) => {
     if (appState.match(/inactive|background/) && next === 'active') {
       // Skip checks in development / Expo Go reloads
-      if (__DEV__ || Constants.executionEnvironment !== 'standalone') return;
+      if (__DEV__ || Constants.executionEnvironment !== 'standalone') {
+        return;
+      }
       await checkForOTAUpdate(lifecycle);
     }
     appState = next;

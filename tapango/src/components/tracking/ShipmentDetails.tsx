@@ -1,6 +1,6 @@
 import React from 'react';
-import { XStack, YStack, Text, Separator } from 'tamagui';
-import { ElevatedCard, ProgressBar, AppIcon } from '../../ui';
+import { Separator, Text, XStack, YStack } from 'tamagui';
+import { AppIcon, ElevatedCard, ProgressBar } from '../../ui';
 import { font } from '../../ui/tokens';
 import { useColors } from '../../styles/ThemeProvider';
 
@@ -32,18 +32,18 @@ interface StatPairProps {
 // Style objects for consistent text styles
 const styles = {
   label: {
-    fontSize: font.subtitle as number,
+    fontSize: font.subtitle,
     color: '$textSecondary',
   },
   value: {
-    fontSize: font.subtitle as number,
+    fontSize: font.subtitle,
     color: '$text',
     fontWeight: '600',
     numberOfLines: 1,
     ellipsizeMode: 'tail',
   },
   caption: {
-    fontSize: font.caption as number,
+    fontSize: font.caption,
     color: '$textSecondary',
     textTransform: 'uppercase',
   },

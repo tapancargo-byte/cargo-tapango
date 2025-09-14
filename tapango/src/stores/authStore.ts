@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { User, Session } from '@supabase/supabase-js';
+import { Session, User } from '@supabase/supabase-js';
 import { AuthProfile } from '@/services/authService';
 
 export interface AuthState {

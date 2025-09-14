@@ -25,7 +25,9 @@ export function isSmsEnabled(): boolean {
     // @ts-ignore
     const flag = (Constants as any)?.expoConfig?.extra?.features
       ?.enableBookingSms;
-    if (typeof flag === 'boolean') return flag;
+    if (typeof flag === 'boolean') {
+      return flag;
+    }
   } catch {}
   const env = String(
     process.env.EXPO_PUBLIC_ENABLE_BOOKING_SMS || ''
@@ -35,8 +37,9 @@ export function isSmsEnabled(): boolean {
 
 async function post(body: Record<string, any>): Promise<SmsResponse> {
   const url = getFunctionUrl();
-  if (!url)
+  if (!url) {
     return { ok: false, status: 0, error: 'SMS function URL not configured' };
+  }
   try {
     const res = await fetch(url, {
       method: 'POST',

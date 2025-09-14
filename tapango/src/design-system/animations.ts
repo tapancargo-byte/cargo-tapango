@@ -1,9 +1,9 @@
 import Animated, {
   Easing,
-  useSharedValue,
-  withTiming,
-  withSpring,
   useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 
 export const easings = {

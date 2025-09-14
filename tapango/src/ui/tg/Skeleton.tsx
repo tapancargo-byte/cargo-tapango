@@ -1,11 +1,13 @@
 import React from 'react';
-import { YStack, useTheme } from 'tamagui';
+import { useTheme, YStack } from 'tamagui';
 import { Animated, Easing } from 'react-native';
 import { useColors } from '../../styles/ThemeProvider';
 
 export const Skeleton: React.FC<
-  { height?: number; width?: number; radius?: number } & React.ComponentProps<typeof YStack>
-> = ({ height = 16, width = '100%' as any, radius = 8, ...rest }) => {
+  { height?: number; width?: number | string; radius?: number } & React.ComponentProps<
+    typeof YStack
+  >
+> = ({ height = 16, width = '100%', radius = 8, ...rest }) => {
   const colors = useColors();
   const opacity = React.useRef(new Animated.Value(0.6)).current;
 
@@ -36,7 +38,7 @@ export const Skeleton: React.FC<
         backgroundColor={colors.surfaceVariant}
         borderRadius={radius}
         height={height}
-        width={width as any}
+        width={width}
         {...rest}
       />
     </Animated.View>
@@ -51,11 +53,7 @@ export const SkeletonText: React.FC<{ lines?: number; lineHeight?: number; gap?:
   return (
     <YStack space={gap}>
       {Array.from({ length: lines }).map((_, i) => (
-        <Skeleton
-          key={i}
-          height={lineHeight}
-          width={i === lines - 1 ? ('60%' as any) : ('100%' as any)}
-        />
+        <Skeleton key={i} height={lineHeight} width={i === lines - 1 ? '60%' : '100%'} />
       ))}
     </YStack>
   );

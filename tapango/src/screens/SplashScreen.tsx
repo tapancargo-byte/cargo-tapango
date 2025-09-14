@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  View,
-  StyleSheet,
+  ActivityIndicator,
   Dimensions,
+  Platform,
   StatusBar,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  ActivityIndicator,
-  Platform,
+  View,
 } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import LottieView from 'lottie-react-native';

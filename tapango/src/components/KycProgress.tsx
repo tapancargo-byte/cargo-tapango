@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useColors } from '../styles/ThemeProvider';
 
 export const KycProgress: React.FC<{ percent: number }> = ({ percent }) => {

@@ -17,7 +17,7 @@ export type TypographyWeight = 'light' | 'regular' | 'medium' | 'semibold' | 'bo
 export interface TypographyProps extends React.ComponentProps<typeof TText> {
   variant?: TypographyVariant;
   weight?: TypographyWeight;
-  color?: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'warning' | 'info' | string;
+  color?: string;
   align?: 'left' | 'center' | 'right' | 'justify';
   transform?: 'none' | 'uppercase' | 'lowercase' | 'capitalize';
   lineHeight?: 'tight' | 'normal' | 'relaxed' | 'loose';
@@ -127,7 +127,9 @@ export const Typography = memo<TypographyProps>(
     const colors = useColors();
 
     const getColor = () => {
-      if (!color) return colors.text;
+      if (!color) {
+        return colors.text;
+      }
 
       switch (color) {
         case 'primary':

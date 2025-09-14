@@ -45,7 +45,9 @@ export async function drainPendingBookings(
   onDrain?: (count: number) => Promise<void> | void
 ) {
   const list = await loadPendingBookings();
-  if (list.length === 0) return;
+  if (list.length === 0) {
+    return;
+  }
   // Simulate sending to server (replace with real API later)
   await new Promise((r) => setTimeout(r, 500));
   await clearPendingBookings();

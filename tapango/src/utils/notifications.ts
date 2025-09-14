@@ -22,7 +22,9 @@ Notifications.setNotificationHandler({
 });
 
 async function ensureAndroidChannel() {
-  if (Platform.OS !== 'android') return;
+  if (Platform.OS !== 'android') {
+    return;
+  }
   await Notifications.setNotificationChannelAsync('default', {
     name: 'General',
     importance: Notifications.AndroidImportance.DEFAULT,
@@ -35,7 +37,9 @@ async function ensureAndroidChannel() {
 
 export async function requestNotificationPermissions(): Promise<boolean> {
   const cur = await Notifications.getPermissionsAsync();
-  if (cur.status === 'granted') return true;
+  if (cur.status === 'granted') {
+    return true;
+  }
   const res = await Notifications.requestPermissionsAsync();
   return res.status === 'granted';
 }
@@ -65,10 +69,14 @@ export async function getPushToken(force = false): Promise<string | null> {
 
     if (!force) {
       const cached = await AsyncStorage.getItem(TOKEN_KEY);
-      if (cached) return cached;
+      if (cached) {
+        return cached;
+      }
     }
     const granted = await requestNotificationPermissions();
-    if (!granted) return null;
+    if (!granted) {
+      return null;
+    }
 
     await ensureAndroidChannel();
 
@@ -153,7 +161,9 @@ async function maybeRegisterToken(token: string) {
     // @ts-ignore
     const url: string | null | undefined =
       Constants?.expoConfig?.extra?.api?.pushRegisterUrl;
-    if (!url) return;
+    if (!url) {
+      return;
+    }
     await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -165,7 +175,9 @@ async function maybeRegisterToken(token: string) {
 }
 
 export async function initNotifications() {
-  if (initDone) return;
+  if (initDone) {
+    return;
+  }
   initDone = true;
   try {
     const granted = await requestNotificationPermissions();

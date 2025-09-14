@@ -1,4 +1,4 @@
-import { Card as TCard, YStack, type CardProps, Stack } from 'tamagui';
+import { type CardProps, Stack, Card as TCard, YStack } from 'tamagui';
 import { memo } from 'react';
 import { BlurView } from 'expo-blur';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';

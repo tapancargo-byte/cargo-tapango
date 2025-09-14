@@ -1,12 +1,14 @@
 import { Stack } from 'tamagui';
 import { memo } from 'react';
-import { Pressable, View, Text, Platform } from 'react-native';
+import { Platform, Pressable, Text, View } from 'react-native';
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+
+import { useColors } from '../../styles/ThemeProvider';
 
 export type Variant =
   | 'primary'
@@ -17,8 +19,6 @@ export type Variant =
   | 'danger'
   | 'success';
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-import { useColors } from '../../styles/ThemeProvider';
 
 export interface AppButtonProps {
   variant?: Variant;
@@ -164,7 +164,9 @@ export const Button = memo<AppButtonProps>(
 
     // Web-only boxShadow mapping per variant; native relies on elevation only
     const getWebShadowStyle = () => {
-      if (Platform.OS !== 'web') return {};
+      if (Platform.OS !== 'web') {
+        return {};
+      }
       switch (variant) {
         case 'primary':
           return { boxShadow: '0px 2px 8px rgba(0,0,0,0.15)' };

@@ -4,11 +4,13 @@
 export function initSentry() {
   try {
     const dsn = process.env.EXPO_PUBLIC_SENTRY_DSN;
-    if (!dsn) return; // Not configured
+    if (!dsn) {
+      return;
+    } // Not configured
 
     // Dynamic import so builds succeed even without the dependency.
     // If you add `sentry-expo`, this will wire up automatically.
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+
     // @ts-ignore - optional dependency
     import('sentry-expo')
       .then((SentryModule: any) => {

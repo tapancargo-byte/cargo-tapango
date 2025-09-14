@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
   ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { useColors } from '../styles/ThemeProvider';
 import { Input } from '../ui';
@@ -14,7 +14,7 @@ import {
   PlacePrediction,
   usePlacesAutocomplete,
 } from '../hooks/usePlacesAutocomplete';
-import { addRecentAddress, getRecentAddresses, AddressKind } from '../utils/addressHistory';
+import { addRecentAddress, AddressKind, getRecentAddresses } from '../utils/addressHistory';
 
 export type AddressSelection = {
   formatted: string;
@@ -63,8 +63,8 @@ export const AddressAutocomplete: React.FC<Props> = ({
     const sel: AddressSelection = {
       formatted,
       placeId: p.place_id,
-      ...(typeof geo?.lat === 'number' ? { lat: geo!.lat } : {}),
-      ...(typeof geo?.lng === 'number' ? { lng: geo!.lng } : {}),
+      ...(typeof geo?.lat === 'number' ? { lat: geo.lat } : {}),
+      ...(typeof geo?.lng === 'number' ? { lng: geo.lng } : {}),
       ...(geo?.pin ? { pin: geo.pin } : {}),
       ...(geo?.city ? { city: geo.city } : {}),
       ...(geo?.state ? { state: geo.state } : {}),

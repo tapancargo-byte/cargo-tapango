@@ -1,5 +1,5 @@
 import React from 'react';
-import { YStack, ScrollView } from 'tamagui';
+import { ScrollView, YStack } from 'tamagui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIsDark } from '../styles/ThemeProvider';
 import { RefreshControl } from 'react-native';

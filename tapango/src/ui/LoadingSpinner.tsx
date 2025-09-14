@@ -1,17 +1,18 @@
 import { Stack, Text } from 'tamagui';
 import { Circle } from './Primitives';
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withRepeat,
-  withTiming,
   withSequence,
+  withTiming,
 } from 'react-native-reanimated';
 import { useColors } from '../styles/ThemeProvider';
 import { useEffect } from 'react';
 
-const AnimatedStack = Animated.createAnimatedComponent(Stack) as any;
-const AnimatedCircle = Animated.createAnimatedComponent(Circle as any) as any;
+type AnimComp = React.ComponentType<object>;
+const AnimatedStack = Animated.createAnimatedComponent(Stack as unknown as AnimComp) as any;
+const AnimatedCircle = Animated.createAnimatedComponent(Circle as unknown as AnimComp) as any;
 
 export interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -121,7 +122,9 @@ export const LoadingOverlay = ({
 }) => {
   const colors = useColors();
 
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
 
   return (
     <Stack

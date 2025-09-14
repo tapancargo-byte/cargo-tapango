@@ -1,14 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react';
+/* eslint-disable react-native/no-unused-styles */
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  StatusBar,
   Animated,
-  TouchableOpacity,
-  ScrollView,
+  Dimensions,
   Platform,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -19,8 +20,8 @@ import SplashAnimation from '../../assets/lottie/splash.json';
 // Import blue theme colors
 import { colors } from '../styles/colors';
 import {
-  Headline as DsHeadline,
   Body as DsBody,
+  Headline as DsHeadline,
   Title as DsTitle,
 } from '../design-system/components/Typography';
 
@@ -299,7 +300,7 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({ onComplete, onSki
                   styles.pageIndicator,
                   {
                     backgroundColor:
-                      index === currentIndex ? current.textColor : current.textColor + '40',
+                      index === currentIndex ? current.textColor : `${current.textColor}40`,
                     transform: [{ scale: index === currentIndex ? 1.2 : 1 }],
                   },
                 ]}

@@ -196,6 +196,8 @@ export async function loadLocaleFromStorage() {
   try {
     const { StorageService } = await import('../utils/storage');
     const pref = await StorageService.getLanguagePreference?.();
-    if (pref && (pref === 'en' || pref === 'hi')) setLocale(pref);
+    if (pref && (pref === 'en' || pref === 'hi')) {
+      setLocale(pref);
+    }
   } catch {}
 }

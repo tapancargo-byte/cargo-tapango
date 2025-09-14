@@ -2,7 +2,7 @@ import React from 'react';
 import { router, usePathname } from 'expo-router';
 import { Text, XStack, YStack } from 'tamagui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button, AppIcon } from '../ui';
+import { AppIcon, Button } from '../ui';
 
 /**
  * Floating Action Hub (FAB hub)

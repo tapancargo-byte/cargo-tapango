@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { View, StyleSheet, AccessibilityInfo, ViewStyle } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { AccessibilityInfo, StyleSheet, View, ViewStyle } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { lottieConfig } from '../utils/animations';
 

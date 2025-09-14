@@ -1,5 +1,5 @@
 import React from 'react';
-import { XStack, YStack, Text, Square } from 'tamagui';
+import { Square, Text, XStack, YStack } from 'tamagui';
 import { useColors } from '../styles/ThemeProvider';
 import { AppIcon } from './AppIcon';
 
@@ -15,7 +15,7 @@ export interface StatChipProps {
 
 export const StatChip: React.FC<StatChipProps> = ({ icon, label, value, tint, onPress }) => {
   const colors = useColors();
-  const scale = React.useRef(new Animated.Value(1)).current as Animated.Value;
+  const scale = React.useRef(new Animated.Value(1)).current;
 
   const pressIn = () => {
     Animated.spring(scale, {

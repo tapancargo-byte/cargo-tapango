@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { Button } from '../tg/Button';
 import { AppIcon } from '../AppIcon';
 import { colors } from '../../styles/colors';
-import { spacing } from '../../styles/spacing';
 
 interface AuthButtonProps {
   title: string;
@@ -52,10 +50,3 @@ export function AuthButton({
     </Button>
   );
 }
-
-const styles = StyleSheet.create({
-  // Keep only the style actually used to avoid RNW shadow warnings in Storybook
-  buttonIcon: {
-    marginRight: spacing.sm,
-  },
-});

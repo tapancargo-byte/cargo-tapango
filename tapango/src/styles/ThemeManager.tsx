@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  withSpring,
   interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 import { StorageService } from '../utils/storage';
 
@@ -108,7 +108,7 @@ export const useThemeTransition = () => {
 
   const animatedStyle = useAnimatedStyle(() => {
     const backgroundColor = interpolateColor(
-      themeAnimationValue.value,
+      themeAnimationValue.value as number,
       [0, 1],
       ['#ffffff', '#1a1a1a'] // light to dark background
     );
@@ -120,7 +120,7 @@ export const useThemeTransition = () => {
 
   const textStyle = useAnimatedStyle(() => {
     const color = interpolateColor(
-      themeAnimationValue.value,
+      themeAnimationValue.value as number,
       [0, 1],
       ['#1a1a1a', '#ffffff'] // dark to light text
     );
@@ -161,21 +161,14 @@ export const ThemeModeToggle: React.FC<{
     onPress?.();
   };
 
-  if (showOptions) {
-    return (
-      <div>
-        {/* Theme mode options would go here */}
-        <button onClick={() => handleModeChange('light')}>Light</button>
-        <button onClick={() => handleModeChange('dark')}>Dark</button>
-        <button onClick={() => handleModeChange('auto')}>Auto</button>
-      </div>
-    );
-  }
-
+  // RN-friendly placeholder using plain text; avoid DOM-specific tags in native/web shared code
   return (
-    <button onClick={() => setShowOptions(true)} disabled={isTransitioning}>
-      {mode} theme
-    </button>
+    <Animated.View>
+      {/* In real UI, replace with proper RN buttons/touchables */}
+      <Animated.Text>
+        {mode} theme {isTransitioning ? '(transitioning...)' : ''}
+      </Animated.Text>
+    </Animated.View>
   );
 };
 

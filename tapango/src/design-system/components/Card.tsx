@@ -1,15 +1,15 @@
 import React from 'react';
-import { ViewStyle, StyleProp, Platform } from 'react-native';
+import { Platform, StyleProp, ViewStyle } from 'react-native';
 import { YStack } from 'tamagui';
 import { BlurView } from 'expo-blur';
 import Animated from 'react-native-reanimated';
 import { getTokens, type ThemeMode } from '../tokens';
 import { useIsDark } from '../../styles/ThemeProvider';
 import {
-  type SpaceValue,
   type BaseComponentProps,
-  type ThemedProps,
   type CardVariant as CardVariantType,
+  type SpaceValue,
+  type ThemedProps,
   toPixels,
 } from '../../ui/types';
 
@@ -34,7 +34,9 @@ export interface CardProps extends BaseComponentProps, ThemedProps {
 
 // Prefer explicit mode prop; otherwise fall back to ThemeProvider; finally default to light.
 const useEffectiveMode = (explicitMode?: ThemeMode): ThemeMode => {
-  if (explicitMode) return explicitMode;
+  if (explicitMode) {
+    return explicitMode;
+  }
   try {
     const isDark = useIsDark();
     return isDark ? 'dark' : 'light';
@@ -45,7 +47,9 @@ const useEffectiveMode = (explicitMode?: ThemeMode): ThemeMode => {
 
 // Helper to get the effective padding (handling both number and token strings)
 const getEffectivePadding = (padding?: SpaceValue): number => {
-  if (padding === undefined) return 12; // Default padding
+  if (padding === undefined) {
+    return 12;
+  } // Default padding
   return toPixels(padding);
 };
 
@@ -100,10 +104,18 @@ export const Card: React.FC<CardProps> = (props) => {
   const effectiveMode = useEffectiveMode(mode);
   const tokens = getTokens(effectiveMode);
 
-  if (variant === 'glass') return <GlassCard {...props} />;
-  if (variant === 'elevated') return <ElevatedCard {...props} />;
-  if (variant === 'outlined') return <OutlinedCard {...props} />;
-  if (variant === 'flat') return <FlatCard {...props} />;
+  if (variant === 'glass') {
+    return <GlassCard {...props} />;
+  }
+  if (variant === 'elevated') {
+    return <ElevatedCard {...props} />;
+  }
+  if (variant === 'outlined') {
+    return <OutlinedCard {...props} />;
+  }
+  if (variant === 'flat') {
+    return <FlatCard {...props} />;
+  }
 
   // Convert any string token padding to number
   const paddingValue = getEffectivePadding(padding || p);
@@ -270,7 +282,7 @@ export const OutlinedCard: React.FC<CardProps> = ({
       ? {
           ':hover': {
             borderColor: tokens.colors.borderHover,
-            backgroundColor: tokens.colors.surfaceVariant + '50', // Subtle background change
+            backgroundColor: `${tokens.colors.surfaceVariant}50`, // Subtle background change
           },
         }
       : {};

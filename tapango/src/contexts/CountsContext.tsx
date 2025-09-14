@@ -36,7 +36,7 @@ export function CountsProvider({ children }: { children: React.ReactNode }) {
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      let userId: string | undefined = undefined;
+      let userId: string | undefined;
       try {
         if (supabase) {
           const { data } = await supabase.auth.getUser();
@@ -89,8 +89,12 @@ export function CountsProvider({ children }: { children: React.ReactNode }) {
                     d.on_time_rate ??
                     NaN
                 );
-                if (!Number.isNaN(saved)) setSavedAmountInr(saved);
-                if (!Number.isNaN(onTime)) setOnTimePercent(Math.round(onTime));
+                if (!Number.isNaN(saved)) {
+                  setSavedAmountInr(saved);
+                }
+                if (!Number.isNaN(onTime)) {
+                  setOnTimePercent(Math.round(onTime));
+                }
                 break;
               }
             } catch {}

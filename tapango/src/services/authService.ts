@@ -1,9 +1,9 @@
 import {
+  AuthError,
   createClient,
+  Session,
   SupabaseClient,
   User,
-  Session,
-  AuthError,
 } from '@supabase/supabase-js';
 import * as SecureStore from 'expo-secure-store';
 import { z } from 'zod';

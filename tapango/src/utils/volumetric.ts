@@ -1,14 +1,18 @@
 export function parseDims(
   input: string
 ): { l: number; w: number; h: number } | null {
-  if (!input) return null;
+  if (!input) {
+    return null;
+  }
   const nums = input
     .toLowerCase()
     .replace(/x/gi, 'x')
     .split(/[^0-9.]+/)
     .map((n) => Number(n))
     .filter((n) => Number.isFinite(n));
-  if (nums.length < 3) return null;
+  if (nums.length < 3) {
+    return null;
+  }
   const [l, w, h] = nums.slice(0, 3) as [number, number, number];
   return { l, w, h };
 }
@@ -17,7 +21,9 @@ export function parseDims(
 export function volumetricKg(
   dims: { l: number; w: number; h: number } | null
 ): number {
-  if (!dims) return 0;
+  if (!dims) {
+    return 0;
+  }
   return (dims.l * dims.w * dims.h) / 5000;
 }
 

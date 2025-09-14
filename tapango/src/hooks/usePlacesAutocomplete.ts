@@ -16,9 +16,7 @@ const GOOGLE_KEY = process.env.EXPO_PUBLIC_GOOGLE_MAPS_KEY;
 
 function randomSession(): string {
   // lightweight UUID-ish token; good enough for session billing grouping
-  return (
-    'sess_' + Math.random().toString(36).slice(2) + Date.now().toString(36)
-  );
+  return `sess_${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`;
 }
 
 export function usePlacesAutocomplete(
@@ -50,7 +48,7 @@ export function usePlacesAutocomplete(
         `&key=${GOOGLE_KEY}` +
         `&sessiontoken=${sessionRef.current}` +
         `&components=country:${country}` +
-        `&types=address` +
+        '&types=address' +
         `&language=${language}`;
 
       const res = await fetch(url);
@@ -76,10 +74,14 @@ export function usePlacesAutocomplete(
       setPredictions([]);
       return;
     }
-    if (timerRef.current) clearTimeout(timerRef.current);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
     timerRef.current = setTimeout(() => fetchPredictions(query), debounceMs);
     return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
     };
   }, [query, country, language, debounceMs]);
 
@@ -98,16 +100,20 @@ export type GeocodeResult = {
 export async function geocodePlace(
   placeId: string
 ): Promise<GeocodeResult | null> {
-  if (!GOOGLE_KEY) return null;
+  if (!GOOGLE_KEY) {
+    return null;
+  }
   const url =
     'https://maps.googleapis.com/maps/api/geocode/json' +
     `?place_id=${encodeURIComponent(placeId)}` +
     `&key=${GOOGLE_KEY}` +
-    `&language=en-IN`;
+    '&language=en-IN';
   const res = await fetch(url);
   const json: any = await res.json();
-  const result = (json as any).results?.[0];
-  if (!result) return null;
+  const result = json.results?.[0];
+  if (!result) {
+    return null;
+  }
   const { geometry, address_components } = result;
   const get = (type: string) =>
     address_components?.find((c: any) => c.types?.includes(type))?.long_name;

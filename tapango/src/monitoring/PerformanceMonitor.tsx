@@ -23,7 +23,9 @@ class PerformanceMonitor {
 
   // Start tracking a metric
   startMetric(name: string, metadata?: Record<string, any>): void {
-    if (!this.isEnabled) return;
+    if (!this.isEnabled) {
+      return;
+    }
 
     const startTime = Performance.now() || Date.now();
     const entry: PerformanceMetric = {
@@ -36,7 +38,9 @@ class PerformanceMonitor {
 
   // End tracking a metric
   endMetric(name: string, additionalMetadata?: Record<string, any>): PerformanceMetric | null {
-    if (!this.isEnabled) return null;
+    if (!this.isEnabled) {
+      return null;
+    }
 
     const metric = this.metrics.get(name);
     if (!metric) {
@@ -217,7 +221,7 @@ export const useRenderPerformance = (componentName: string) => {
 // Hook for tracking async operations
 export const useAsyncOperationTracking = () => {
   const trackAsync = React.useCallback(
-    <T extends any>(
+    <T,>(
       operationName: string,
       asyncOperation: Promise<T>,
       metadata?: Record<string, any>
@@ -229,8 +233,8 @@ export const useAsyncOperationTracking = () => {
           tracker.success(metadata);
           return result;
         })
-        .catch((error) => {
-          tracker.error(error);
+        .catch((error: unknown) => {
+          tracker.error(error as Error);
           throw error;
         });
     },
@@ -251,7 +255,9 @@ export const PerformanceProvider: React.FC<PerformanceProviderProps> = ({
   onMetricCompleted,
 }) => {
   React.useEffect(() => {
-    if (!onMetricCompleted) return;
+    if (!onMetricCompleted) {
+      return;
+    }
 
     const unsubscribe = performanceMonitor.addListener(onMetricCompleted);
     return unsubscribe;
@@ -298,7 +304,9 @@ export const PerformanceOverlay: React.FC = () => {
   const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
-    if (!__DEV__) return;
+    if (!__DEV__) {
+      return;
+    }
 
     const unsubscribe = performanceMonitor.addListener((metric) => {
       setMetrics((prev) => [...prev.slice(-9), metric]); // Keep last 10 metrics

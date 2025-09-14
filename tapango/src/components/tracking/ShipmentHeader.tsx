@@ -1,9 +1,9 @@
 import React from 'react';
-import { Share, Alert } from 'react-native';
-import { XStack, YStack, Text, Theme } from 'tamagui';
+import { Alert, Share } from 'react-native';
+import { Text, Theme, XStack, YStack } from 'tamagui';
 import { font } from '../../ui/tokens';
 import { Feather } from '@expo/vector-icons';
-import { ElevatedCard, Button, StatusPill, Circle } from '../../ui';
+import { Button, Circle, ElevatedCard, StatusPill } from '../../ui';
 import { useColors } from '../../styles/ThemeProvider';
 import { StatusVariant } from '../../ui/StatusBadge';
 import { t } from '../../i18n';

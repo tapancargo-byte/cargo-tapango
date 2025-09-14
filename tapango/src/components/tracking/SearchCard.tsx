@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { XStack, YStack, Text } from 'tamagui';
+import React, { useEffect, useRef, useState } from 'react';
+import { Text, XStack, YStack } from 'tamagui';
 import { AnimatePresence } from '@tamagui/animate-presence';
 import { Feather } from '@expo/vector-icons';
-import { GlassCard, Input, Button, LoadingSpinner, FadeIn } from '../../ui';
+import { Button, FadeIn, GlassCard, Input, LoadingSpinner } from '../../ui';
 import { font } from '../../ui/tokens';
 import { useColors } from '../../styles/ThemeProvider';
 import { Circle } from '../../ui';
@@ -135,7 +135,7 @@ export function SearchCard({
     <GlassCard variant='glass' animation='quick' accessibilityLabel='Track Shipment Form'>
       <YStack space='$3'>
         <XStack alignItems='center' space='$3'>
-          <Circle size={40} backgroundColor={palette.info + '20'} role='presentation'>
+          <Circle size={40} backgroundColor={`${palette.info}20`} role='presentation'>
             <Feather
               name='search'
               size={20}

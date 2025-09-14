@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccessibilityInfo, Platform, findNodeHandle, UIManager } from 'react-native';
+import { AccessibilityInfo, findNodeHandle, Platform } from 'react-native';
 
 // Accessibility announcements
 export const announceForAccessibility = (message: string) => {
@@ -32,7 +32,7 @@ export const useScreenReader = () => {
       setIsScreenReaderEnabled(enabled);
     };
 
-    checkScreenReader();
+    void checkScreenReader();
 
     const subscription = AccessibilityInfo.addEventListener(
       'screenReaderChanged',
@@ -153,7 +153,9 @@ export const useFocusTrap = (isActive: boolean) => {
 
   React.useEffect(() => {
     if (isActive && firstElementRef.current) {
-      const nodeHandle = findNodeHandle(firstElementRef.current);
+      const nodeHandle = findNodeHandle(
+        firstElementRef.current as unknown as number | React.Component<any, any> | null
+      );
       if (nodeHandle) {
         setTimeout(() => setAccessibilityFocus(nodeHandle), 100);
       }
@@ -319,7 +321,9 @@ export const useFocusManagement = () => {
 
   const setFocus = React.useCallback((element: any) => {
     focusedElementRef.current = element;
-    const nodeHandle = findNodeHandle(element);
+    const nodeHandle = findNodeHandle(
+      element as unknown as number | React.Component<any, any> | null
+    );
     if (nodeHandle) {
       setAccessibilityFocus(nodeHandle);
     }

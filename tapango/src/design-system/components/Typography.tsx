@@ -2,7 +2,7 @@ import React from 'react';
 import { Text as TText } from 'tamagui';
 import { getTokens, type ThemeMode } from '../tokens';
 import { useIsDark } from '../../styles/ThemeProvider';
-import { type FontWeight, type BaseComponentProps } from '../../ui/types';
+import { type BaseComponentProps, type FontWeight } from '../../ui/types';
 
 export interface TypographyProps extends BaseComponentProps {
   mode?: ThemeMode;
@@ -12,7 +12,7 @@ export interface TypographyProps extends BaseComponentProps {
   align?: 'left' | 'center' | 'right';
   // Additional props for direct styling support
   fontSize?: number;
-  fontWeight?: FontWeight | string;
+  fontWeight?: FontWeight;
   fontFamily?: string;
   lineHeight?: number;
   letterSpacing?: number;
@@ -36,7 +36,9 @@ export const Typography: React.FC<TypographyProps> = ({ children }) => <>{childr
 // Resolve effective mode: if explicit `mode` prop is provided, prefer it.
 // Otherwise, try ThemeProvider's isDark; if unavailable, default to 'light'.
 const useEffectiveMode = (explicitMode?: ThemeMode): ThemeMode => {
-  if (explicitMode) return explicitMode;
+  if (explicitMode) {
+    return explicitMode;
+  }
   try {
     const isDark = useIsDark();
     return isDark ? 'dark' : 'light';
@@ -70,7 +72,7 @@ const makeType =
     const defaultSize = (t.typography as any)[key] as number;
     const fw = (weightMap as any)[weight];
 
-    const baseProps: any = {
+    const baseProps: Record<string, unknown> = {
       fontSize: fontSize || defaultSize,
       fontWeight: fontWeight || fw,
       textAlign: align as any,
@@ -86,16 +88,18 @@ const makeType =
     };
 
     // If an explicit color is provided, use it; otherwise let Tamagui theme color apply
-    if (color) baseProps.color = color;
+    if (color) {
+      (baseProps as any).color = color;
+    }
 
     // Remove undefined values
     Object.keys(baseProps).forEach((key) => {
-      if (baseProps[key] === undefined) {
-        delete baseProps[key];
+      if ((baseProps as any)[key] === undefined) {
+        delete (baseProps as any)[key];
       }
     });
 
-    return <TText {...baseProps}>{children}</TText>;
+    return <TText {...(baseProps as any)}>{children}</TText>;
   };
 
 export const Display = makeType('display');
@@ -108,19 +112,21 @@ export const Caption = makeType('caption');
 export const Overline = ({ children, mode, color, fontSize, ...rest }: TypographyProps) => {
   const effectiveMode = useEffectiveMode(mode);
   const t = getTokens(effectiveMode);
-  const props: any = {
+  const props: Record<string, unknown> = {
     fontSize: fontSize || t.typography.caption,
     textTransform: 'uppercase',
     ...rest,
   };
-  if (color) props.color = color;
+  if (color) {
+    (props as any).color = color;
+  }
 
   // Remove undefined values
   Object.keys(props).forEach((key) => {
-    if (props[key] === undefined) {
-      delete props[key];
+    if ((props as any)[key] === undefined) {
+      delete (props as any)[key];
     }
   });
 
-  return <TText {...props}>{children}</TText>;
+  return <TText {...(props as any)}>{children}</TText>;
 };

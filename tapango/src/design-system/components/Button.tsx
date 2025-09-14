@@ -1,6 +1,6 @@
 import React from 'react';
-import { Pressable, ViewStyle, StyleProp, PressableProps, Platform } from 'react-native';
-import { Text, XStack, Stack } from 'tamagui';
+import { Platform, Pressable, PressableProps, StyleProp, ViewStyle } from 'react-native';
+import { Stack, Text, XStack } from 'tamagui';
 import * as Haptics from 'expo-haptics';
 import Animated from 'react-native-reanimated';
 import { getTokens, type ThemeMode } from '../tokens';
@@ -9,10 +9,10 @@ import { useIsDark } from '../../styles/ThemeProvider';
 import { LinearGradient } from 'expo-linear-gradient';
 import { LoadingSpinner } from '../../ui/LoadingSpinner';
 import {
-  type SpaceValue,
   type BaseComponentProps,
-  type ThemedProps,
   type IconProps,
+  type SpaceValue,
+  type ThemedProps,
   toPixels,
 } from '../../ui/types';
 
@@ -58,7 +58,7 @@ export interface ButtonProps
   padding?: SpaceValue;
   pressStyle?: {
     backgroundColor?: string;
-    transform?: Array<{ scale?: number; translateY?: number }>;
+    transform?: { scale?: number; translateY?: number }[];
     scale?: number;
     opacity?: number;
   };
@@ -178,7 +178,9 @@ export const Button: React.FC<ButtonProps> = ({
   const buttonColors = getButtonColors();
 
   const handlePress = async () => {
-    if (disabled || loading) return;
+    if (disabled || loading) {
+      return;
+    }
     try {
       await Haptics.selectionAsync();
     } catch {}
@@ -202,7 +204,7 @@ export const Button: React.FC<ButtonProps> = ({
         style={[
           {
             height: dims.height,
-            minWidth: minWidth,
+            minWidth,
             paddingHorizontal: padding ? toPixels(padding) : dims.paddingHorizontal,
             alignItems: 'center',
             justifyContent: 'center',

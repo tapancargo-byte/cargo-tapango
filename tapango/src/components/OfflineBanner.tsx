@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NetInfo from '@react-native-community/netinfo';
-import { YStack, Text } from 'tamagui';
+import { Text, YStack } from 'tamagui';
 import { useColors as useAppColors } from '../styles/ThemeProvider';
 
 // Compact inline offline banner using Tamagui
@@ -31,7 +31,9 @@ export const OfflineBanner: React.FC<{ inline?: boolean }> = ({ inline = true })
     }
   }, [offline]);
 
-  if (!offline) return null;
+  if (!offline) {
+    return null;
+  }
 
   // Inline banner: shows as a rounded bar that can be placed under headers
   return (

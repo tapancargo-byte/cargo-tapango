@@ -10,7 +10,9 @@ export const INR = new Intl.NumberFormat('en-IN', {
 });
 
 export function formatINR(value: number): string {
-  if (!Number.isFinite(value)) return INR.format(0);
+  if (!Number.isFinite(value)) {
+    return INR.format(0);
+  }
   return INR.format(value);
 }
 

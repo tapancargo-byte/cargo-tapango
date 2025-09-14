@@ -25,7 +25,9 @@ export async function submitDriverOffer(
         })
         .select()
         .single();
-      if (!error) return { queued: false, id: data?.id };
+      if (!error) {
+        return { queued: false, id: data?.id };
+      }
     } catch {}
   }
   // Fallback to local queue
@@ -44,11 +46,15 @@ export async function submitDriverOffer(
 }
 
 export async function drainDriverOffers(): Promise<number> {
-  if (!supabase) return 0;
+  if (!supabase) {
+    return 0;
+  }
   try {
     const raw = await AsyncStorage.getItem(QUEUE_KEY);
     const list: DriverOffer[] = raw ? JSON.parse(raw) : [];
-    if (list.length === 0) return 0;
+    if (list.length === 0) {
+      return 0;
+    }
     const rows = list.map((o) => ({
       tracking_id: o.trackingId,
       amount_inr: o.amountINR,

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Platform, View, Text, StyleSheet } from 'react-native';
-import { YStack, XStack } from 'tamagui';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { YStack } from 'tamagui';
 import { useColors } from '../styles/ThemeProvider';
 import { Circle } from '../ui';
 import { AppIcon } from '../ui';
@@ -34,10 +34,10 @@ interface MarkerProps {
 }
 
 interface PolylineProps {
-  coordinates: Array<{
+  coordinates: {
     latitude: number;
     longitude: number;
-  }>;
+  }[];
   strokeColor?: string;
   strokeWidth?: number;
 }
@@ -153,7 +153,7 @@ const MapFallback: React.FC<{
   return (
     <View style={[styles.fallbackContainer, { height, backgroundColor: colors.surfaceVariant }]}>
       <YStack alignItems='center' justifyContent='center' space='$3' padding='$4'>
-        <Circle size={64} backgroundColor={colors.primary + '20'}>
+        <Circle size={64} backgroundColor={`${colors.primary}20`}>
           <AppIcon name='map' size={32} color={colors.primary} />
         </Circle>
         <YStack alignItems='center' space='$2'>

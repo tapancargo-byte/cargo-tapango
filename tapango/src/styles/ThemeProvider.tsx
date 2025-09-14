@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { typography, textStyles } from './typography';
-import { spacing, borderRadius, shadows } from './spacing';
-import { getTokens, type DesignTokens } from '../design-system/tokens';
+import { textStyles, typography } from './typography';
+import { borderRadius, shadows, spacing } from './spacing';
+import { type DesignTokens, getTokens } from '../design-system/tokens';
 
 export type ColorScheme = 'light' | 'dark' | 'system';
 

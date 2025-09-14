@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextInput, ViewStyle, StyleProp, TextInputProps } from 'react-native';
-import { Text, XStack, YStack, Stack } from 'tamagui';
+import { StyleProp, TextInput, TextInputProps, ViewStyle } from 'react-native';
+import { Stack, Text, XStack, YStack } from 'tamagui';
 import { getTokens, type ThemeMode } from '../tokens';
 import { useIsDark } from '../../styles/ThemeProvider';
 

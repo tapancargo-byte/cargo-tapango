@@ -4,7 +4,9 @@ import { QuotePayload, QuoteResponse } from './quote';
 export async function supaQuote(
   payload: QuotePayload
 ): Promise<QuoteResponse | null> {
-  if (!supabase) return null;
+  if (!supabase) {
+    return null;
+  }
   try {
     // Prefer an RPC if available
     // @ts-ignore - RPC may not exist in every project
@@ -15,8 +17,12 @@ export async function supaQuote(
       p_dims: payload.dimsCm,
       p_cargotype: payload.cargoType ?? null,
     });
-    if (error) return null;
-    if (data) return data as QuoteResponse;
+    if (error) {
+      return null;
+    }
+    if (data) {
+      return data as QuoteResponse;
+    }
   } catch {}
   return null;
 }
@@ -31,7 +37,9 @@ export type TrackingEvent = {
 export async function supaTracking(
   trackingId: string
 ): Promise<TrackingEvent[] | null> {
-  if (!supabase) return null;
+  if (!supabase) {
+    return null;
+  }
   try {
     // Prefer secure RPC if available (works with tightened RLS)
     // @ts-ignore rpc may not exist yet in some environments
@@ -48,7 +56,9 @@ export async function supaTracking(
       .select('*')
       .eq('tracking_id', trackingId)
       .order('timestamp', { ascending: false });
-    if (error) return null;
+    if (error) {
+      return null;
+    }
     return (data ?? []) as TrackingEvent[];
   } catch {
     return null;
@@ -82,7 +92,9 @@ export type BookingResponse = {
 export async function supaBooking(
   payload: BookingPayload
 ): Promise<BookingResponse | null> {
-  if (!supabase) return null;
+  if (!supabase) {
+    return null;
+  }
 
   try {
     // Generate tracking number
@@ -132,8 +144,8 @@ export async function supaBooking(
         return {
           success: true,
           bookingId: data.booking_id || data.id,
-          trackingNumber: trackingNumber,
-          estimatedCost: estimatedCost,
+          trackingNumber,
+          estimatedCost,
           message: 'Booking created successfully',
         };
       }
@@ -175,8 +187,8 @@ export async function supaBooking(
     return {
       success: true,
       bookingId: data?.id,
-      trackingNumber: trackingNumber,
-      estimatedCost: estimatedCost,
+      trackingNumber,
+      estimatedCost,
       message: 'Booking created successfully',
     };
   } catch (error) {
@@ -196,14 +208,20 @@ export type OrderRow = {
   status: 'Active' | 'Past';
 };
 export async function supaOrders(userId?: string): Promise<OrderRow[] | null> {
-  if (!supabase) return null;
+  if (!supabase) {
+    return null;
+  }
   try {
     let q = supabase
       .from('orders')
       .select('id, route, price, updated_at, status');
-    if (userId) q = q.eq('user_id', userId);
+    if (userId) {
+      q = q.eq('user_id', userId);
+    }
     const { data, error } = await q.order('updated_at', { ascending: false });
-    if (error) return null;
+    if (error) {
+      return null;
+    }
     return (data ?? []) as OrderRow[];
   } catch {
     return null;

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Animated, Dimensions, Platform } from 'react-native';
+import { Animated, Dimensions, Platform, StyleSheet, Text, View } from 'react-native';
 import { AppIcon } from '../../ui';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../styles/colors';
 import { textStyles, typography } from '../../styles/typography';
-import { spacing, borderRadius } from '../../styles/spacing';
+import { borderRadius, spacing } from '../../styles/spacing';
 
 const { width } = Dimensions.get('window');
 

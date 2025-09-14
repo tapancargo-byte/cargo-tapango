@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 import {
-  TouchableOpacity,
-  Text,
-  View,
   Animated,
-  ViewStyle,
-  TextStyle,
   GestureResponderEvent,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
-import { colors, textStyles, spacing, borderRadius, shadows } from '../styles';
+import { borderRadius, colors, shadows, spacing, textStyles } from '../styles';
 
 export interface AnimatedButtonProps {
   title: string;

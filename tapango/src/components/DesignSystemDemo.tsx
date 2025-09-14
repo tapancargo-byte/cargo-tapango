@@ -1,21 +1,21 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { YStack, XStack, Text, Separator } from 'tamagui';
+import { Separator, Text, XStack, YStack } from 'tamagui';
 import {
   Button,
+  Caption,
   Card,
-  GlassCard,
+  Circle,
   ElevatedCard,
-  OutlinedCard,
   FlatCard,
+  GlassCard,
   Input,
+  LoadingSpinner,
+  OutlinedCard,
   Screen,
   SectionTitle,
-  Title,
   Subtitle,
-  Caption,
-  Circle,
-  LoadingSpinner,
+  Title,
 } from '../ui';
 import { getTokens } from '../design-system/tokens';
 import { useIsDark } from '../styles/ThemeProvider';

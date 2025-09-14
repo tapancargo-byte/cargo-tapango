@@ -1,15 +1,15 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { YStack, XStack, Text } from 'tamagui';
+import { Text, XStack, YStack } from 'tamagui';
 import { useColors } from '../styles/ThemeProvider';
 import { Button } from './tg/Button';
 import { AppIcon } from './AppIcon';
 import { font } from './tokens';
 
 // Platform-specific map imports - temporarily disabled for web compatibility
-let MapView: any = null;
-let Marker: any = null;
-let PROVIDER_GOOGLE: any = null;
+const MapView: any = null;
+const Marker: any = null;
+const PROVIDER_GOOGLE: any = null;
 
 // TODO: Re-enable maps with proper web bundling exclusion
 // Maps functionality temporarily disabled to fix web build

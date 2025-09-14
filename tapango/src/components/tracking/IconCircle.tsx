@@ -1,5 +1,5 @@
 import React from 'react';
-import { Circle, AppIcon } from '../../ui';
+import { AppIcon, Circle } from '../../ui';
 
 interface IconCircleProps {
   size: number;

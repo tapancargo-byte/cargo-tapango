@@ -205,11 +205,7 @@ export function LiveMap({ origin, destination, currentLocation }: LiveMapProps) 
 
         <Stack {...MAP_STYLES.mapContainer} backgroundColor={palette.surfaceVariant}>
           {MapView && Marker && Polyline ? (
-            <MapSection
-              MapView={MapView as React.ComponentType<any>}
-              Marker={Marker as React.ComponentType<any>}
-              Polyline={Polyline as React.ComponentType<any>}
-            />
+            <MapSection MapView={MapView} Marker={Marker} Polyline={Polyline} />
           ) : (
             // Fallback for web - show route info
             <YStack flex={1} alignItems='center' justifyContent='center' space='$3'>
