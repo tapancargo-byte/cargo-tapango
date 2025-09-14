@@ -245,6 +245,7 @@ function AppNavigator() {
         <Stack.Screen name='(onboarding)' options={{ headerShown: false }} />
         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
         <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+        <Stack.Screen name='(driver)' options={{ headerShown: false }} />
         <Stack.Screen name='(modals)' options={{ presentation: 'modal', headerShown: false }} />
       </Stack>
     </CountsProvider>

@@ -9,6 +9,7 @@ export const STORAGE_KEYS = {
   LAST_APP_VERSION: 'last_app_version',
   SMS_PHONE_E164: 'sms_phone_e164',
   SMS_CONSENT_AT: 'sms_consent_at',
+  SELECTED_ROLE: 'selected_role',
 } as const;
 
 export interface UserPreferences {
@@ -17,6 +18,8 @@ export interface UserPreferences {
   theme: 'light' | 'dark' | 'system';
   language: string;
 }
+
+export type SelectedRole = 'customer' | 'driver';
 
 export const StorageService = {
   // Generic methods
@@ -190,6 +193,27 @@ export const StorageService = {
   },
   async getSmsConsentAt(): Promise<string | null> {
     return await this.getItem<string>(STORAGE_KEYS.SMS_CONSENT_AT, null as any);
+  },
+
+  // Role selection helpers
+  async setSelectedRole(role: SelectedRole): Promise<void> {
+    try {
+      await this.setItem(STORAGE_KEYS.SELECTED_ROLE, role);
+    } catch (e) {
+      console.warn('Failed to persist selected role (non-blocking):', e);
+    }
+  },
+  async getSelectedRole(): Promise<SelectedRole | null> {
+    try {
+      const role = await this.getItem<SelectedRole>(
+        STORAGE_KEYS.SELECTED_ROLE,
+        null as any
+      );
+      return (role as SelectedRole | null) ?? null;
+    } catch (e) {
+      console.warn('Failed to read selected role (non-blocking):', e);
+      return null;
+    }
   },
 
   // Development helpers

@@ -23,7 +23,7 @@ export default function OnboardingStep3() {
   const finish = async () => {
     await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     await StorageService.setOnboardingCompleted(true);
-    router.replace('/(auth)/sign-in');
+    router.replace('/(auth)/role');
   };
 
   return (

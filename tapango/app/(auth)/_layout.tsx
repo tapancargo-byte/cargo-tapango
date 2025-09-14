@@ -32,6 +32,7 @@ export default function AuthLayout() {
         headerShown: false, // Remove all headers for clean authentication UI
       }}
     >
+      <Stack.Screen name='role' options={{ headerShown: false }} />
       <Stack.Screen name='sign-in' options={{ headerShown: false }} />
       <Stack.Screen name='sign-in-working' options={{ headerShown: false }} />
       <Stack.Screen name='sign-up' options={{ headerShown: false }} />
