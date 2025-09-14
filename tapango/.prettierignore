@@ -1,0 +1,19 @@
+# Generated build outputs
+storybook-static/
+
+# Expo generated files and caches
+.expo/
+
+# Generated CSS (Tamagui web)
+tamagui-web.css
+
+# Common build artifacts (if present)
+dist/
+build/
+coverage/
+
+# Package manager logs (if present)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
