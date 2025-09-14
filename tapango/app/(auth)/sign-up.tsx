@@ -1,32 +1,48 @@
-import * as React from 'react'
-import { Text, TouchableOpacity, View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, Dimensions, Animated } from 'react-native'
-import { useSignUp } from '@clerk/clerk-expo'
-import { Link, useRouter } from 'expo-router'
-import { Ionicons } from '@expo/vector-icons'
-import { StatusBar } from 'expo-status-bar'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { AuthInput, AuthButton } from '../../src/ui/auth'
-import { colors } from '../../src/styles/colors'
-import { spacing, borderRadius, shadows } from '../../src/styles/spacing'
-import { textStyles, typography } from '../../src/styles/typography'
+import * as React from 'react';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Dimensions,
+  Animated,
+} from 'react-native';
+import { useSignUp } from '@clerk/clerk-expo';
+import { Link, useRouter } from 'expo-router';
+import { AppIcon } from '../../src/ui';
+import { StatusBar } from 'expo-status-bar';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AuthInput, AuthButton } from '../../src/ui/auth';
+import { notifyLoginSuccess } from '../../src/utils/notifications';
+import { initOneSignal, loginOneSignal } from '../../src/integrations/onesignal';
+import { colors } from '../../src/styles/colors';
+import { spacing, borderRadius, shadows } from '../../src/styles/spacing';
+import { textStyles, typography } from '../../src/styles/typography';
 
 const { width, height } = Dimensions.get('window');
 
 export default function SignUpScreen() {
-  const { isLoaded, signUp, setActive } = useSignUp()
-  const router = useRouter()
-  const insets = useSafeAreaInsets()
+  const { isLoaded, signUp, setActive } = useSignUp();
+  const router = useRouter();
+  const insets = useSafeAreaInsets();
 
-  const [emailAddress, setEmailAddress] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [pendingVerification, setPendingVerification] = React.useState(false)
-  const [code, setCode] = React.useState('')
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [showPassword, setShowPassword] = React.useState(false)
-  const [errors, setErrors] = React.useState<{email?: string; password?: string; general?: string}>({})
+  const [emailAddress, setEmailAddress] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [pendingVerification, setPendingVerification] = React.useState(false);
+  const [code, setCode] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [errors, setErrors] = React.useState<{
+    email?: string;
+    password?: string;
+    general?: string;
+  }>({});
   // Stabilize animated values across re-renders
-  const fadeAnim = React.useRef(new Animated.Value(0)).current
-  const slideAnim = React.useRef(new Animated.Value(50)).current
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+  const slideAnim = React.useRef(new Animated.Value(50)).current;
 
   React.useEffect(() => {
     Animated.parallel([
@@ -41,88 +57,102 @@ export default function SignUpScreen() {
         friction: 8,
         useNativeDriver: true,
       }),
-    ]).start()
-  }, [fadeAnim, slideAnim])
+    ]).start();
+  }, [fadeAnim, slideAnim]);
 
   // Handle submission of sign-up form
   const onSignUpPress = async () => {
-    if (!isLoaded || isLoading) return
-    setErrors({})
+    if (!isLoaded || isLoading) return;
+    setErrors({});
 
     if (!emailAddress) {
-      setErrors((e) => ({ ...e, email: 'Email is required' }))
-      return
+      setErrors((e) => ({ ...e, email: 'Email is required' }));
+      return;
     }
     if (!password) {
-      setErrors((e) => ({ ...e, password: 'Password is required' }))
-      return
+      setErrors((e) => ({ ...e, password: 'Password is required' }));
+      return;
     }
     if (password.length < 8) {
-      setErrors((e) => ({ ...e, password: 'Password must be at least 8 characters' }))
-      return
+      setErrors((e) => ({ ...e, password: 'Password must be at least 8 characters' }));
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       await signUp.create({
         emailAddress: emailAddress.trim(),
         password,
-      })
+      });
 
-      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' })
-      setPendingVerification(true)
+      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
+      setPendingVerification(true);
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2))
-      setErrors((e) => ({ ...e, general: err?.errors?.[0]?.message || 'Sign-up failed. Please try again.' }))
+      console.error(JSON.stringify(err, null, 2));
+      setErrors((e) => ({
+        ...e,
+        general: err?.errors?.[0]?.message || 'Sign-up failed. Please try again.',
+      }));
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   // Handle submission of verification form
   const onVerifyPress = async () => {
-    if (!isLoaded || isLoading) return
-    setErrors({})
+    if (!isLoaded || isLoading) return;
+    setErrors({});
 
     if (!code) {
-      setErrors((e) => ({ ...e, general: 'Verification code is required' }))
-      return
+      setErrors((e) => ({ ...e, general: 'Verification code is required' }));
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       const signUpAttempt = await signUp.attemptEmailAddressVerification({
         code,
-      })
+      });
 
       if (signUpAttempt.status === 'complete') {
-        await setActive({ session: signUpAttempt.createdSessionId })
-        router.replace('/(tabs)')
+        await setActive({ session: signUpAttempt.createdSessionId });
+        try {
+          await notifyLoginSuccess(emailAddress.trim());
+        } catch {}
+        try {
+          loginOneSignal((signUpAttempt as any)?.user?.id || emailAddress.trim());
+        } catch {}
+        router.replace('/(tabs)');
       } else {
-        console.error(JSON.stringify(signUpAttempt, null, 2))
-        setErrors((e) => ({ ...e, general: 'Additional steps required to complete verification.' }))
+        console.error(JSON.stringify(signUpAttempt, null, 2));
+        setErrors((e) => ({
+          ...e,
+          general: 'Additional steps required to complete verification.',
+        }));
       }
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2))
-      setErrors((e) => ({ ...e, general: err?.errors?.[0]?.message || 'Verification failed. Please try again.' }))
+      console.error(JSON.stringify(err, null, 2));
+      setErrors((e) => ({
+        ...e,
+        general: err?.errors?.[0]?.message || 'Verification failed. Please try again.',
+      }));
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   if (pendingVerification) {
     return (
-      <KeyboardAvoidingView 
-        style={styles.container} 
+      <KeyboardAvoidingView
+        style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <StatusBar style="light" />
-        
+        <StatusBar style='light' />
+
         <View style={styles.backgroundContainer}>
           <View style={[styles.content, { paddingTop: insets.top }]}>
-            
             {/* Header */}
             <View style={styles.header}>
               <TouchableOpacity
@@ -130,43 +160,49 @@ export default function SignUpScreen() {
                 onPress={() => setPendingVerification(false)}
                 activeOpacity={0.7}
               >
-                <Ionicons name="arrow-back" size={24} color="white" />
+                <AppIcon name='chevron-back' size={24} color='white' />
               </TouchableOpacity>
               <Text style={styles.headerTitle}>Verify Account</Text>
               <View style={styles.placeholder} />
             </View>
 
             {/* Form */}
-            <Animated.View style={[styles.formContainer, { 
-              opacity: fadeAnim, 
-              transform: [{ translateY: slideAnim }] 
-            }]}>
+            <Animated.View
+              style={[
+                styles.formContainer,
+                {
+                  opacity: fadeAnim,
+                  transform: [{ translateY: slideAnim }],
+                },
+              ]}
+            >
               <View style={styles.iconContainer}>
                 <View style={styles.iconCircle}>
-                  <Ionicons name="mail" size={32} color="white" />
+                  <AppIcon name='mail' size={32} color='white' />
                 </View>
               </View>
 
               <Text style={styles.title}>Check your email</Text>
               <Text style={styles.subtitle}>
-                We sent a verification code to {emailAddress}. Enter it below to verify your account.
+                We sent a verification code to {emailAddress}. Enter it below to verify your
+                account.
               </Text>
 
               <AuthInput
-                label="Verification Code"
-                icon="key"
+                label='Verification Code'
+                icon='key'
                 value={code}
                 onChangeText={setCode}
-                keyboardType="number-pad"
+                keyboardType='number-pad'
                 maxLength={6}
                 autoCorrect={false}
-                placeholder="Enter 6-digit code"
-                returnKeyType="go"
+                placeholder='Enter 6-digit code'
+                returnKeyType='go'
               />
 
               {errors.general && (
                 <View style={styles.generalErrorContainer}>
-                  <Ionicons name="warning" size={20} color={colors.status.error} />
+                  <AppIcon name='alert-circle' size={20} color={colors.status.error} />
                   <Text style={styles.errorText}>{errors.general}</Text>
                 </View>
               )}
@@ -176,13 +212,11 @@ export default function SignUpScreen() {
                 onPress={onVerifyPress}
                 loading={isLoading}
                 disabled={isLoading}
-                icon="checkmark-circle"
+                icon='checkmark-circle'
               />
 
               <TouchableOpacity style={styles.resendContainer}>
-                <Text style={styles.resendText}>
-                  Didn't receive the code? Resend
-                </Text>
+                <Text style={styles.resendText}>Didn't receive the code? Resend</Text>
               </TouchableOpacity>
             </Animated.View>
 
@@ -190,24 +224,23 @@ export default function SignUpScreen() {
           </View>
         </View>
       </KeyboardAvoidingView>
-    )
+    );
   }
 
   return (
-    <KeyboardAvoidingView 
-      style={styles.container} 
+    <KeyboardAvoidingView
+      style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <StatusBar style="light" />
-      
+      <StatusBar style='light' />
+
       <View style={styles.backgroundContainer}>
-        <ScrollView 
+        <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps='handled'
         >
-          <View style={[styles.content, { paddingTop: insets.top }]}>
-            
+          <View style={[styles.content, { paddingTop: Math.max(insets.top, 12) }]}>
             {/* Header */}
             <View style={styles.header}>
               <View style={styles.placeholder} />
@@ -216,13 +249,18 @@ export default function SignUpScreen() {
             </View>
 
             {/* Form */}
-            <Animated.View style={[styles.formContainer, { 
-              opacity: fadeAnim, 
-              transform: [{ translateY: slideAnim }] 
-            }]}>
+            <Animated.View
+              style={[
+                styles.formContainer,
+                {
+                  opacity: fadeAnim,
+                  transform: [{ translateY: slideAnim }],
+                },
+              ]}
+            >
               <View style={styles.iconContainer}>
                 <View style={styles.iconCircle}>
-                  <Ionicons name="person-add" size={32} color="white" />
+                  <AppIcon name='user-plus' size={32} color='white' />
                 </View>
               </View>
 
@@ -232,63 +270,91 @@ export default function SignUpScreen() {
               </Text>
 
               <AuthInput
-                label="Email Address"
-                icon="mail"
+                label='Email Address'
+                icon='mail'
                 value={emailAddress}
                 onChangeText={(text) => {
-                  setEmailAddress(text)
+                  setEmailAddress(text);
                   if (errors.email) {
-                    const newErrors = { ...errors }
-                    delete newErrors.email
-                    setErrors(newErrors)
+                    const newErrors = { ...errors };
+                    delete newErrors.email;
+                    setErrors(newErrors);
                   }
                 }}
                 error={errors.email}
-                autoCapitalize="none"
-                keyboardType="email-address"
+                autoCapitalize='none'
+                keyboardType='email-address'
+                textContentType='emailAddress'
+                autoComplete='email'
                 autoCorrect={false}
-                returnKeyType="next"
+                returnKeyType='next'
               />
 
               <AuthInput
-                label="Password"
-                icon="lock-closed"
+                label='Password'
+                icon='lock-closed'
                 value={password}
                 onChangeText={(text) => {
-                  setPassword(text)
+                  setPassword(text);
                   if (errors.password) {
-                    const newErrors = { ...errors }
-                    delete newErrors.password
-                    setErrors(newErrors)
+                    const newErrors = { ...errors };
+                    delete newErrors.password;
+                    setErrors(newErrors);
                   }
                 }}
                 error={errors.password}
                 isPassword
                 autoCorrect={false}
-                placeholder="Minimum 8 characters"
-                returnKeyType="go"
+                textContentType='newPassword'
+                autoComplete='password-new'
+                placeholder='Minimum 8 characters'
+                returnKeyType='go'
               />
 
               {/* Password Strength Indicator */}
               <View style={styles.passwordStrengthContainer}>
                 <Text style={styles.passwordStrengthTitle}>Password strength:</Text>
                 <View style={styles.passwordStrengthBar}>
-                  <View style={[
-                    styles.passwordStrengthFill,
-                    { width: password.length >= 8 ? '100%' : `${Math.min((password.length / 8) * 100, 100)}%` },
-                    { backgroundColor: password.length >= 8 ? colors.status.success : password.length >= 4 ? colors.status.warning : colors.status.error }
-                  ]} />
+                  <View
+                    style={[
+                      styles.passwordStrengthFill,
+                      {
+                        width:
+                          password.length >= 8
+                            ? '100%'
+                            : `${Math.min((password.length / 8) * 100, 100)}%`,
+                      },
+                      {
+                        backgroundColor:
+                          password.length >= 8
+                            ? colors.status.success
+                            : password.length >= 4
+                              ? colors.status.warning
+                              : colors.status.error,
+                      },
+                    ]}
+                  />
                 </View>
-                <Text style={[styles.passwordStrengthText, {
-                  color: password.length >= 8 ? colors.status.success : password.length >= 4 ? colors.status.warning : colors.status.error
-                }]}>
+                <Text
+                  style={[
+                    styles.passwordStrengthText,
+                    {
+                      color:
+                        password.length >= 8
+                          ? colors.status.success
+                          : password.length >= 4
+                            ? colors.status.warning
+                            : colors.status.error,
+                    },
+                  ]}
+                >
                   {password.length >= 8 ? 'Strong' : password.length >= 4 ? 'Medium' : 'Weak'}
                 </Text>
               </View>
 
               {errors.general && (
                 <View style={styles.generalErrorContainer}>
-                  <Ionicons name="warning" size={20} color={colors.status.error} />
+                  <AppIcon name='alert-circle' size={20} color={colors.status.error} />
                   <Text style={styles.errorText}>{errors.general}</Text>
                 </View>
               )}
@@ -298,15 +364,14 @@ export default function SignUpScreen() {
                 onPress={onSignUpPress}
                 loading={isLoading}
                 disabled={isLoading}
-                icon="person-add"
+                icon='person-add'
               />
 
               {/* Terms and Privacy */}
               <View style={styles.termsContainer}>
                 <Text style={styles.termsText}>
                   By creating an account, you agree to our{' '}
-                  <Text style={styles.termsLink}>Terms of Service</Text>
-                  {' '}and{' '}
+                  <Text style={styles.termsLink}>Terms of Service</Text> and{' '}
                   <Text style={styles.termsLink}>Privacy Policy</Text>
                 </Text>
               </View>
@@ -319,15 +384,13 @@ export default function SignUpScreen() {
               onPress={() => router.push('/(auth)/sign-in')}
               activeOpacity={0.7}
             >
-              <Text style={styles.signInText}>
-                Already have an account? Sign in
-              </Text>
+              <Text style={styles.signInText}>Already have an account? Sign in</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
     </KeyboardAvoidingView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -387,7 +450,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     ...(Platform.OS === 'web'
       ? { boxShadow: '0px 8px 16px rgba(30, 64, 175, 0.30)' }
-      : { ...shadows.lg, shadowColor: 'rgba(30, 64, 175, 0.3)' } as any),
+      : ({ ...shadows.lg, shadowColor: 'rgba(30, 64, 175, 0.3)' } as any)),
   },
   title: {
     ...textStyles.title,
@@ -441,7 +504,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.status.error,
-    ...(Platform.OS === 'web' ? { boxShadow: '0px 1px 4px rgba(0,0,0,0.18)' } : { ...shadows.sm } as any),
+    ...(Platform.OS === 'web'
+      ? { boxShadow: '0px 1px 4px rgba(0,0,0,0.18)' }
+      : ({ ...shadows.sm } as any)),
   },
   errorText: {
     ...textStyles.body,

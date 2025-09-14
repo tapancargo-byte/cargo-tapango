@@ -11,7 +11,7 @@ import {
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { useSignIn } from '@clerk/clerk-expo';
 import { AuthInput, AuthButton } from '../../src/ui/auth';
 import { colors } from '../../src/styles/colors';
@@ -63,6 +63,12 @@ export default function ForgotPasswordScreen() {
         strategy: 'reset_password_email_code',
         identifier: email.trim(),
       } as any);
+      try {
+        (await import('../../src/utils/notifications')).presentLocal({
+          title: 'Code sent',
+          body: 'Check your email for the verification code',
+        });
+      } catch {}
       setStep('code');
     } catch (err: any) {
       const message = err?.errors?.[0]?.message || 'Failed to start password reset';
@@ -88,6 +94,12 @@ export default function ForgotPasswordScreen() {
       } as any);
 
       if (result.status === 'needs_new_password') {
+        try {
+          (await import('../../src/utils/notifications')).presentLocal({
+            title: 'Code verified',
+            body: 'Enter your new password',
+          });
+        } catch {}
         setStep('password');
       } else if (result.status === 'complete') {
         await setActive({ session: result.createdSessionId });
@@ -117,6 +129,12 @@ export default function ForgotPasswordScreen() {
       const result = await signIn.resetPassword({ password: newPassword } as any);
       if (result.status === 'complete') {
         await setActive({ session: result.createdSessionId });
+        try {
+          (await import('../../src/utils/notifications')).presentLocal({
+            title: 'Password updated',
+            body: 'You are now signed in',
+          });
+        } catch {}
         setStep('success');
         setTimeout(() => router.replace('/(tabs)'), 1200);
       } else {
@@ -133,17 +151,15 @@ export default function ForgotPasswordScreen() {
   if (step === 'success') {
     return (
       <View style={styles.container}>
-        <StatusBar style="light" />
+        <StatusBar style='light' />
         <View style={styles.backgroundContainer}>
           <View style={[styles.content, { paddingTop: insets.top }]}>
             <Animated.View style={[styles.successContainer, { opacity: fadeAnim }]}>
               <View style={styles.successIconContainer}>
-                <Ionicons name="checkmark-circle" size={80} color={colors.status.success} />
+                <Feather name='check-circle' size={80} color={colors.status.success} />
               </View>
               <Text style={styles.successTitle}>Password updated</Text>
-              <Text style={styles.successMessage}>
-                You will be redirected shortly...
-              </Text>
+              <Text style={styles.successMessage}>You will be redirected shortly...</Text>
             </Animated.View>
           </View>
         </View>
@@ -152,15 +168,14 @@ export default function ForgotPasswordScreen() {
   }
 
   return (
-    <KeyboardAvoidingView 
-      style={styles.container} 
+    <KeyboardAvoidingView
+      style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <StatusBar style="light" />
-      
+      <StatusBar style='light' />
+
       <View style={styles.backgroundContainer}>
-        <View style={[styles.content, { paddingTop: insets.top }]}>
-          
+        <View style={[styles.content, { paddingTop: Math.max(insets.top, 12) }]}>
           {/* Header */}
           <View style={styles.header}>
             <TouchableOpacity
@@ -168,7 +183,7 @@ export default function ForgotPasswordScreen() {
               onPress={() => router.back()}
               activeOpacity={0.7}
             >
-              <Ionicons name="arrow-back" size={24} color="white" />
+              <Feather name='arrow-left' size={24} color='white' />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>Reset Password</Text>
             <View style={styles.placeholder} />
@@ -178,7 +193,7 @@ export default function ForgotPasswordScreen() {
           <Animated.View style={[styles.formContainer, { opacity: fadeAnim }]}>
             <View style={styles.iconContainer}>
               <View style={styles.iconCircle}>
-                <Ionicons name="lock-closed" size={32} color="white" />
+                <Feather name='lock' size={32} color='white' />
               </View>
             </View>
 
@@ -190,18 +205,20 @@ export default function ForgotPasswordScreen() {
                 </Text>
 
                 <AuthInput
-                  label="Email Address"
-                  icon="mail"
+                  label='Email Address'
+                  icon='mail'
                   value={email}
                   onChangeText={(text) => {
                     setEmail(text);
                     if (error) setError('');
                   }}
                   error={error}
-                  autoCapitalize="none"
-                  keyboardType="email-address"
+                  autoCapitalize='none'
+                  keyboardType='email-address'
+                  textContentType='emailAddress'
+                  autoComplete='email'
                   autoCorrect={false}
-                  returnKeyType="send"
+                  returnKeyType='send'
                 />
 
                 <AuthButton
@@ -209,7 +226,7 @@ export default function ForgotPasswordScreen() {
                   onPress={handleSendEmailCode}
                   loading={isLoading}
                   disabled={isLoading}
-                  icon="paper-plane"
+                  icon='paper-plane'
                 />
               </>
             )}
@@ -217,22 +234,21 @@ export default function ForgotPasswordScreen() {
             {step === 'code' && (
               <>
                 <Text style={styles.title}>Check your email</Text>
-                <Text style={styles.subtitle}>
-                  Enter the 6-digit code sent to {email}
-                </Text>
+                <Text style={styles.subtitle}>Enter the 6-digit code sent to {email}</Text>
 
                 <AuthInput
-                  label="Verification Code"
-                  icon="key"
+                  label='Verification Code'
+                  icon='key'
                   value={code}
                   onChangeText={(t) => {
                     setCode(t);
                     if (error) setError('');
                   }}
-                  keyboardType="number-pad"
+                  keyboardType='number-pad'
                   maxLength={6}
+                  textContentType='oneTimeCode'
                   autoCorrect={false}
-                  returnKeyType="go"
+                  returnKeyType='go'
                   error={error}
                 />
 
@@ -241,7 +257,7 @@ export default function ForgotPasswordScreen() {
                   onPress={handleVerifyCode}
                   loading={isLoading}
                   disabled={isLoading}
-                  icon="checkmark-circle"
+                  icon='checkmark-circle'
                 />
               </>
             )}
@@ -249,13 +265,11 @@ export default function ForgotPasswordScreen() {
             {step === 'password' && (
               <>
                 <Text style={styles.title}>Set a new password</Text>
-                <Text style={styles.subtitle}>
-                  Choose a strong password for your account.
-                </Text>
+                <Text style={styles.subtitle}>Choose a strong password for your account.</Text>
 
                 <AuthInput
-                  label="New Password"
-                  icon="lock-closed"
+                  label='New Password'
+                  icon='lock-closed'
                   value={newPassword}
                   onChangeText={(t) => {
                     setNewPassword(t);
@@ -263,8 +277,11 @@ export default function ForgotPasswordScreen() {
                   }}
                   error={error}
                   isPassword
+                  textContentType='newPassword'
+                  autoComplete='password-new'
                   autoCorrect={false}
-                  returnKeyType="go"
+                  returnKeyType='go'
+                  onSubmitEditing={handleSubmitNewPassword}
                 />
 
                 <AuthButton
@@ -272,7 +289,7 @@ export default function ForgotPasswordScreen() {
                   onPress={handleSubmitNewPassword}
                   loading={isLoading}
                   disabled={isLoading}
-                  icon="refresh"
+                  icon='refresh'
                 />
               </>
             )}
@@ -282,9 +299,7 @@ export default function ForgotPasswordScreen() {
               onPress={() => router.back()}
               activeOpacity={0.7}
             >
-              <Text style={styles.backToSignInText}>
-                Remember your password? Sign in
-              </Text>
+              <Text style={styles.backToSignInText}>Remember your password? Sign in</Text>
             </TouchableOpacity>
           </Animated.View>
 
@@ -349,7 +364,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     ...(Platform.OS === 'web'
       ? { boxShadow: '0px 8px 16px rgba(30, 64, 175, 0.30)' }
-      : { ...shadows.lg, shadowColor: 'rgba(30, 64, 175, 0.3)' } as any),
+      : ({ ...shadows.lg, shadowColor: 'rgba(30, 64, 175, 0.3)' } as any)),
   },
   title: {
     ...textStyles.title,

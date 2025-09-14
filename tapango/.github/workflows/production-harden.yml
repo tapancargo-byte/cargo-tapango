@@ -29,4 +29,3 @@ jobs:
         run: |
           echo "Running production hardening script against Supabase" 
           psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -f scripts/harden_supabase.sql
-

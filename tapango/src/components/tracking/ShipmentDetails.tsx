@@ -1,7 +1,6 @@
 import React from 'react';
 import { XStack, YStack, Text, Separator } from 'tamagui';
-import { Ionicons } from '@expo/vector-icons';
-import { ElevatedCard, ProgressBar } from '../../ui';
+import { ElevatedCard, ProgressBar, AppIcon } from '../../ui';
 import { font } from '../../ui/tokens';
 import { useColors } from '../../styles/ThemeProvider';
 
@@ -11,11 +10,11 @@ export enum ShipmentStatus {
   Delayed = 'delayed',
   Cancelled = 'cancelled',
   Pending = 'pending',
-  Delivered = 'delivered'
+  Delivered = 'delivered',
 }
 
 interface KeyValueRowProps {
-  icon: keyof typeof Ionicons.glyphMap;
+  icon: string;
   iconColor: string;
   label: string;
   value: string;
@@ -34,20 +33,20 @@ interface StatPairProps {
 const styles = {
   label: {
     fontSize: font.subtitle as number,
-    color: "$textSecondary"
+    color: '$textSecondary',
   },
   value: {
     fontSize: font.subtitle as number,
-    color: "$text",
-    fontWeight: "600",
+    color: '$text',
+    fontWeight: '600',
     numberOfLines: 1,
-    ellipsizeMode: "tail"
+    ellipsizeMode: 'tail',
   },
   caption: {
     fontSize: font.caption as number,
-    color: "$textSecondary",
-    textTransform: "uppercase"
-  }
+    color: '$textSecondary',
+    textTransform: 'uppercase',
+  },
 } as const;
 
 interface ShipmentDetailsProps {
@@ -64,27 +63,14 @@ interface ShipmentDetailsProps {
 
 function KeyValueRow({ icon, iconColor, label, value, testIDPrefix }: KeyValueRowProps) {
   return (
-    <XStack alignItems="center" justifyContent="space-between">
-      <XStack alignItems="center" space="$2">
-        <Ionicons 
-          name={icon} 
-          size={16} 
-          color={iconColor}
-          accessibilityRole="image"
-          accessibilityLabel={`${label} icon`}
-        />
-        <Text 
-          {...styles.label}
-          testID={`${testIDPrefix}-label`}
-        >
+    <XStack alignItems='center' justifyContent='space-between'>
+      <XStack alignItems='center' space='$2'>
+        <AppIcon name={icon} size={16} color={iconColor} />
+        <Text {...styles.label} testID={`${testIDPrefix}-label`}>
           {label}:
         </Text>
       </XStack>
-      <Text 
-        {...styles.value}
-        testID={`${testIDPrefix}-value`}
-        accessibilityLabel={value}
-      >
+      <Text {...styles.value} testID={`${testIDPrefix}-value`} accessibilityLabel={value}>
         {value}
       </Text>
     </XStack>
@@ -93,15 +79,12 @@ function KeyValueRow({ icon, iconColor, label, value, testIDPrefix }: KeyValueRo
 
 function StatPair({ leftLabel, leftValue, rightLabel, rightValue, testIDPrefix }: StatPairProps) {
   return (
-    <XStack space="$4">
-      <YStack flexShrink={1} space="$2">
-        <Text 
-          {...styles.caption}
-          testID={`${testIDPrefix}-left-label`}
-        >
+    <XStack space='$4'>
+      <YStack flexShrink={1} space='$2'>
+        <Text {...styles.caption} testID={`${testIDPrefix}-left-label`}>
           {leftLabel}
         </Text>
-        <Text 
+        <Text
           {...styles.value}
           testID={`${testIDPrefix}-left-value`}
           accessibilityLabel={leftValue}
@@ -109,15 +92,12 @@ function StatPair({ leftLabel, leftValue, rightLabel, rightValue, testIDPrefix }
           {leftValue}
         </Text>
       </YStack>
-      
-      <YStack flexShrink={1} space="$2">
-        <Text 
-          {...styles.caption}
-          testID={`${testIDPrefix}-right-label`}
-        >
+
+      <YStack flexShrink={1} space='$2'>
+        <Text {...styles.caption} testID={`${testIDPrefix}-right-label`}>
           {rightLabel}
         </Text>
-        <Text 
+        <Text
           {...styles.value}
           testID={`${testIDPrefix}-right-value`}
           accessibilityLabel={rightValue}
@@ -138,72 +118,72 @@ export function ShipmentDetails({
   weight,
   status,
   progressPercentage,
-  formatDateTime
+  formatDateTime,
 }: ShipmentDetailsProps) {
   const palette = useColors();
 
   return (
-    <ElevatedCard 
-      variant="elevated" 
-      accessibilityRole="region" 
-      accessibilityLabel="Shipment details"
-      testID="shipment-details-card"
+    <ElevatedCard
+      variant='elevated'
+      accessibilityRole='text'
+      accessibilityLabel='Shipment details'
+      testID='shipment-details-card'
     >
-      <YStack space="$3">
-<Text 
-          fontSize={font.section} 
-          fontWeight="700" 
+      <YStack space='$3'>
+        <Text
+          fontSize={font.section}
+          fontWeight='700'
           color={palette.text}
-          accessibilityRole="header"
-          testID="shipment-details-title"
+          accessibilityRole='header'
+          testID='shipment-details-title'
         >
           Shipment Details
         </Text>
-        
-        <YStack space="$3">
+
+        <YStack space='$3'>
           <KeyValueRow
-            icon="location"
+            icon='location'
             iconColor={palette.primary}
-            label="From"
+            label='From'
             value={origin}
-            testIDPrefix="origin"
+            testIDPrefix='origin'
           />
-          
-          <ProgressBar 
-            value={progressPercentage} 
-            height={8} 
+
+          <ProgressBar
+            value={progressPercentage}
+            height={8}
             backgroundColor={palette.surfaceVariant}
             aria-label={`Shipment progress: ${progressPercentage}%`}
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={progressPercentage}
-            testID="shipment-progress"
+            testID='shipment-progress'
           />
-          
+
           <KeyValueRow
-            icon="flag"
+            icon='flag'
             iconColor={palette.success}
-            label="To"
+            label='To'
             value={destination}
-            testIDPrefix="destination"
+            testIDPrefix='destination'
           />
-          
+
           <Separator />
-          
+
           <StatPair
-            leftLabel="Current Location"
+            leftLabel='Current Location'
             leftValue={currentLocation}
-            rightLabel="Est. Delivery"
+            rightLabel='Est. Delivery'
             rightValue={formatDateTime(estimatedDelivery)}
-            testIDPrefix="location-delivery"
+            testIDPrefix='location-delivery'
           />
-          
+
           <StatPair
-            leftLabel="Cargo Type"
+            leftLabel='Cargo Type'
             leftValue={cargoType}
-            rightLabel="Weight"
+            rightLabel='Weight'
             rightValue={weight}
-            testIDPrefix="cargo-weight"
+            testIDPrefix='cargo-weight'
           />
         </YStack>
       </YStack>

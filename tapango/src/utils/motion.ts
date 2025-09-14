@@ -7,7 +7,7 @@ export const MotionConfig = {
   fast: 200,
   normal: 300,
   slow: 600,
-  
+
   // Easing functions
   easing: {
     ease: Easing.bezier(0.4, 0.0, 0.2, 1),
@@ -16,7 +16,7 @@ export const MotionConfig = {
     easeInOut: Easing.bezier(0.4, 0.0, 0.2, 1),
     spring: Easing.elastic(1.2),
   },
-  
+
   // Scale values for press animations
   scale: {
     pressed: 0.96,
@@ -29,22 +29,25 @@ export const MotionConfig = {
 export const HapticFeedback = {
   // Light impact for button presses
   light: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light),
-  
+
   // Medium impact for important actions
   medium: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium),
-  
+
   // Heavy impact for critical actions
   heavy: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy),
-  
+
   // Success notification
-  success: () => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success),
-  
+  success: () =>
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success),
+
   // Warning notification
-  warning: () => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning),
-  
+  warning: () =>
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning),
+
   // Error notification
-  error: () => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error),
-  
+  error: () =>
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error),
+
   // Selection changed (iOS only)
   selection: () => Haptics.selectionAsync(),
 } as const;
@@ -68,7 +71,7 @@ export const AnimationHelpers = {
       }),
     ]);
   },
-  
+
   // Fade in animation
   fadeIn: (animatedValue: Animated.Value, duration = MotionConfig.normal) => {
     return Animated.timing(animatedValue, {
@@ -78,7 +81,7 @@ export const AnimationHelpers = {
       useNativeDriver: true,
     });
   },
-  
+
   // Fade out animation
   fadeOut: (animatedValue: Animated.Value, duration = MotionConfig.normal) => {
     return Animated.timing(animatedValue, {
@@ -88,9 +91,13 @@ export const AnimationHelpers = {
       useNativeDriver: true,
     });
   },
-  
+
   // Slide up animation (from bottom)
-  slideUp: (animatedValue: Animated.Value, distance = 50, duration = MotionConfig.normal) => {
+  slideUp: (
+    animatedValue: Animated.Value,
+    distance = 50,
+    duration = MotionConfig.normal
+  ) => {
     return Animated.timing(animatedValue, {
       toValue: 0,
       duration,
@@ -98,7 +105,7 @@ export const AnimationHelpers = {
       useNativeDriver: true,
     });
   },
-  
+
   // Scale in animation
   scaleIn: (animatedValue: Animated.Value, duration = MotionConfig.normal) => {
     return Animated.spring(animatedValue, {
@@ -108,12 +115,12 @@ export const AnimationHelpers = {
       useNativeDriver: true,
     });
   },
-  
+
   // Staggered animation helper
   stagger: (animations: Animated.CompositeAnimation[], delay = 100) => {
     return Animated.stagger(delay, animations);
   },
-  
+
   // Loading spinner rotation
   spin: (animatedValue: Animated.Value) => {
     return Animated.loop(
@@ -138,7 +145,7 @@ export const PageTransitions = {
       useNativeDriver: true,
     });
   },
-  
+
   // Fade transition
   fade: (animatedValue: Animated.Value) => {
     return Animated.timing(animatedValue, {
@@ -155,13 +162,29 @@ export const FormAnimations = {
   // Error shake animation
   shake: (animatedValue: Animated.Value) => {
     return Animated.sequence([
-      Animated.timing(animatedValue, { toValue: 10, duration: 50, useNativeDriver: true }),
-      Animated.timing(animatedValue, { toValue: -10, duration: 50, useNativeDriver: true }),
-      Animated.timing(animatedValue, { toValue: 10, duration: 50, useNativeDriver: true }),
-      Animated.timing(animatedValue, { toValue: 0, duration: 50, useNativeDriver: true }),
+      Animated.timing(animatedValue, {
+        toValue: 10,
+        duration: 50,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedValue, {
+        toValue: -10,
+        duration: 50,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedValue, {
+        toValue: 10,
+        duration: 50,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedValue, {
+        toValue: 0,
+        duration: 50,
+        useNativeDriver: true,
+      }),
     ]);
   },
-  
+
   // Field focus animation
   focus: (animatedValue: Animated.Value) => {
     return Animated.timing(animatedValue, {
@@ -171,7 +194,7 @@ export const FormAnimations = {
       useNativeDriver: false, // Border color changes require layout
     });
   },
-  
+
   // Field blur animation
   blur: (animatedValue: Animated.Value) => {
     return Animated.timing(animatedValue, {
@@ -202,7 +225,7 @@ export const FeedbackAnimations = {
       }),
     ]);
   },
-  
+
   // Error pulse animation
   error: (animatedValue: Animated.Value) => {
     return Animated.loop(

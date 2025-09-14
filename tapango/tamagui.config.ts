@@ -1,7 +1,7 @@
-import { createTamagui } from 'tamagui'
-import { defaultConfig } from '@tamagui/config/v4'
-import { createAnimations } from '@tamagui/animations-react-native'
-import { getUnifiedTheme, toTamaguiTheme } from './src/design-system/theme'
+import { createTamagui } from 'tamagui';
+import { defaultConfig } from '@tamagui/config/v4';
+import { createAnimations } from '@tamagui/animations-react-native';
+import { getUnifiedTheme, toTamaguiTheme } from './src/design-system/theme';
 
 // Define animations for Tamagui (must include every name used via `animation="..."` props)
 const animations = createAnimations({
@@ -16,7 +16,7 @@ const animations = createAnimations({
   bouncy: { type: 'spring', damping: 10, mass: 0.9, stiffness: 250 },
   lazy: { type: 'spring', damping: 20, stiffness: 60 },
   tooltip: { type: 'spring', damping: 10, mass: 0.9, stiffness: 100 },
-})
+});
 
 // TAPANGO Premium Design System
 const brand = {
@@ -25,39 +25,39 @@ const brand = {
   blueLight: '#42A5F5',
   blueDark: '#01579B',
   cyan: '#4FC3F7',
-  
+
   // Secondary palette - Premium purples
   indigo: '#5E35B1',
   purple: '#7B1FA2',
   purpleLight: '#B39DDB',
-  
+
   // Accent colors
   amber: '#FF8F00',
   orange: '#FF6D00',
   teal: '#00BCD4',
-  
+
   // Surface colors
   surface: '#FFFFFF',
   surfaceAlt: '#FAFBFF',
   surfaceVariant: '#F1F5FF',
-  
+
   // Text colors
   text: '#1A1C1E',
   textMuted: '#5F6368',
   textLight: '#9E9E9E',
-  
+
   // Status colors
   success: '#388E3C',
   warning: '#F57C00',
   danger: '#D32F2F',
   info: '#1976D2',
-  
+
   // Gradients (as CSS strings)
   gradientPrimary: 'linear-gradient(135deg, #0D47A1 0%, #42A5F5 100%)',
   gradientSecondary: 'linear-gradient(135deg, #5E35B1 0%, #B39DDB 100%)',
   gradientSuccess: 'linear-gradient(135deg, #388E3C 0%, #66BB6A 100%)',
   gradientDanger: 'linear-gradient(135deg, #D32F2F 0%, #EF5350 100%)',
-}
+};
 
 const themes = {
   ...defaultConfig.themes,
@@ -69,7 +69,7 @@ const themes = {
     ...defaultConfig.themes.dark,
     ...toTamaguiTheme(getUnifiedTheme('dark')),
   },
-}
+};
 
 const tokens = {
   ...(defaultConfig as any).tokens,
@@ -149,18 +149,18 @@ const tokens = {
     28: 112,
     32: 128,
   },
-}
+};
 
 export const tamaguiConfig = createTamagui({
   ...defaultConfig,
   animations,
   themes,
   tokens,
-})
+});
 
-export default tamaguiConfig
+export default tamaguiConfig;
 
-export type Conf = typeof tamaguiConfig
+export type Conf = typeof tamaguiConfig;
 
 declare module 'tamagui' {
   interface TamaguiCustomConfig extends Conf {}

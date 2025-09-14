@@ -17,7 +17,9 @@ export type QuoteResponse = {
 
 const API_URL = process.env.EXPO_PUBLIC_QUOTE_URL;
 
-export async function fetchQuote(payload: QuotePayload): Promise<QuoteResponse> {
+export async function fetchQuote(
+  payload: QuotePayload
+): Promise<QuoteResponse> {
   // Try Supabase RPC first
   try {
     const { supaQuote } = await import('./api');
@@ -51,7 +53,10 @@ export async function fetchQuote(payload: QuotePayload): Promise<QuoteResponse> 
     currency: 'INR',
     breakdown: [
       { label: 'Base (₹50/kg)', amount: Math.round(base * 100) / 100 },
-      { label: 'Distance factor', amount: Math.round((amount - base) * 100) / 100 },
+      {
+        label: 'Distance factor',
+        amount: Math.round((amount - base) * 100) / 100,
+      },
     ],
   };
 }

@@ -1,7 +1,8 @@
 import { Dimensions, Platform, StatusBar } from 'react-native';
 
 // Get device dimensions
-export const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+export const { width: screenWidth, height: screenHeight } =
+  Dimensions.get('window');
 
 // Platform checks
 export const isIOS = Platform.OS === 'ios';
@@ -11,7 +12,7 @@ export const isAndroid = Platform.OS === 'android';
 export const isTablet = () => {
   const { width, height } = Dimensions.get('window');
   const aspectRatio = height / width;
-  return Math.min(width, height) >= 600 && (aspectRatio < 1.6);
+  return Math.min(width, height) >= 600 && aspectRatio < 1.6;
 };
 
 export const isSmallDevice = () => {
@@ -33,7 +34,7 @@ export const getStatusBarHeight = () => {
 // Screen size categories
 export const getScreenSize = () => {
   const { width } = Dimensions.get('window');
-  
+
   if (width < 375) {
     return 'small';
   } else if (width >= 375 && width < 414) {

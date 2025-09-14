@@ -1,6 +1,6 @@
 /**
  * Reset Onboarding State Utility
- * 
+ *
  * This script can be used to reset the onboarding state for testing purposes.
  * Run this script to clear the onboarding completion flag so that the onboarding
  * screens will be shown again on the next app launch.

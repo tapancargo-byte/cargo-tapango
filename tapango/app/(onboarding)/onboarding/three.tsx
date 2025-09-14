@@ -7,7 +7,7 @@ import Pagination from '../../../components/Pagination';
 import * as Haptics from 'expo-haptics';
 import { StorageService } from '../../../src/utils/storage';
 import LottieView from 'lottie-react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { AppIcon } from '../../../src/ui';
 
 const TrackingAnimation = require('../../../assets/lottie/real_time_tracking.json');
 
@@ -29,25 +29,32 @@ export default function OnboardingStep3() {
   return (
     <View style={styles.container}>
       <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
-        <TouchableOpacity onPress={back} style={styles.backBtn} accessibilityRole="button">
-          <Ionicons name="chevron-back" size={24} color="#fff" />
+        <TouchableOpacity onPress={back} style={styles.backBtn} accessibilityRole='button'>
+          <AppIcon name='chevron-back' size={24} color='#fff' />
         </TouchableOpacity>
         <View style={{ width: 44 }} />
       </View>
 
       <View style={styles.body}>
         <AnimatedSquareCard>
-          <LottieView source={TrackingAnimation} autoPlay loop style={{ width: 180, height: 180 }} />
+          <LottieView
+            source={TrackingAnimation}
+            autoPlay
+            loop
+            style={{ width: 180, height: 180 }}
+          />
         </AnimatedSquareCard>
 
         <Text style={styles.overline}>Real-Time Monitoring</Text>
         <Text style={styles.title}>Live tracking, 99% on-time</Text>
-        <Text style={styles.sub}>GPS updates, push alerts, direct driver chat – all in one place.</Text>
+        <Text style={styles.sub}>
+          GPS updates, push alerts, direct driver chat – all in one place.
+        </Text>
       </View>
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + 24 }]}>
         <Pagination total={3} index={2} />
-        <TouchableOpacity style={styles.cta} onPress={finish} accessibilityRole="button">
+        <TouchableOpacity style={styles.cta} onPress={finish} accessibilityRole='button'>
           <Text style={styles.ctaText}>Get started</Text>
         </TouchableOpacity>
       </View>
@@ -77,4 +84,3 @@ const styles = StyleSheet.create({
   },
   ctaText: { color: '#001A36', fontSize: 17, fontWeight: '700' },
 });
-

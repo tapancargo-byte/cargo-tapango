@@ -2,7 +2,9 @@
 
 ## Overview
 
-This guide provides step-by-step instructions for implementing the TapanGo splash screen and onboarding flow with Lottie animations, following modern design principles and best practices.
+This guide provides step-by-step instructions for implementing the TapanGo
+splash screen and onboarding flow with Lottie animations, following modern
+design principles and best practices.
 
 ## Prerequisites
 
@@ -16,12 +18,15 @@ npm install --save @react-native-async-storage/async-storage
 ```
 
 ### iOS Setup (for react-native-lottie)
+
 ```bash
 cd ios && pod install
 ```
 
 ### Android Setup
+
 Add to `android/app/build.gradle`:
+
 ```gradle
 android {
   ...
@@ -66,6 +71,7 @@ src/
 ### Step 1: Create Color System
 
 Create `src/styles/colors.ts`:
+
 ```typescript
 export const colors = {
   primary: {
@@ -96,6 +102,7 @@ export const colors = {
 ### Step 2: Create Typography System
 
 Create `src/styles/typography.ts`:
+
 ```typescript
 import { Platform } from 'react-native';
 
@@ -138,6 +145,7 @@ export const typography = {
 ### Step 3: Create Animation Utilities
 
 Create `src/utils/animations.ts`:
+
 ```typescript
 import { Animated, Easing } from 'react-native';
 
@@ -199,6 +207,7 @@ export const createSlideAnimation = (
 ### Step 4: Create Storage Utilities
 
 Create `src/utils/storage.ts`:
+
 ```typescript
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -222,7 +231,9 @@ export const StorageService = {
 
   async getOnboardingCompleted(): Promise<boolean> {
     try {
-      const value = await AsyncStorage.getItem(STORAGE_KEYS.ONBOARDING_COMPLETED);
+      const value = await AsyncStorage.getItem(
+        STORAGE_KEYS.ONBOARDING_COMPLETED
+      );
       return value ? JSON.parse(value) : false;
     } catch (error) {
       console.error('Error reading onboarding status:', error);
@@ -256,6 +267,7 @@ export const StorageService = {
 ### Step 5: Create Reusable Lottie Component
 
 Create `src/components/LottieAnimation.tsx`:
+
 ```typescript
 import React, { useRef, useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
@@ -289,7 +301,7 @@ const LottieAnimation: React.FC<LottieAnimationProps> = ({
     if (reduceMotion) {
       animationRef.current?.pause();
     }
-    
+
     return () => {
       if (animationRef.current) {
         animationRef.current.reset();
@@ -330,6 +342,7 @@ export default LottieAnimation;
 ### Step 6: Create Main App Navigator
 
 Create `src/navigation/AppNavigator.tsx`:
+
 ```typescript
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -400,7 +413,7 @@ const AppNavigator: React.FC = () => {
             />
           )}
         </Stack.Screen>
-        
+
         {showOnboarding && (
           <Stack.Screen name="Onboarding">
             {() => (
@@ -411,7 +424,7 @@ const AppNavigator: React.FC = () => {
             )}
           </Stack.Screen>
         )}
-        
+
         <Stack.Screen
           name="Main"
           component={MainApp}
@@ -489,12 +502,12 @@ const [reduceMotionEnabled, setReduceMotionEnabled] = useState(false);
 
 useEffect(() => {
   AccessibilityInfo.isReduceMotionEnabled().then(setReduceMotionEnabled);
-  
+
   const subscription = AccessibilityInfo.addEventListener(
     'reduceMotionChanged',
     setReduceMotionEnabled
   );
-  
+
   return () => subscription?.remove();
 }, []);
 ```
@@ -529,6 +542,7 @@ useEffect(() => {
 ## Testing
 
 ### Unit Testing
+
 ```typescript
 // SplashScreen.test.tsx
 import React from 'react';
@@ -538,14 +552,14 @@ import SplashScreen from '../SplashScreen';
 describe('SplashScreen', () => {
   it('should call onAnimationComplete after minimum display time', async () => {
     const mockOnComplete = jest.fn();
-    
+
     render(
-      <SplashScreen 
+      <SplashScreen
         onAnimationComplete={mockOnComplete}
         minimumDisplayTime={1000}
       />
     );
-    
+
     await waitFor(
       () => {
         expect(mockOnComplete).toHaveBeenCalled();
@@ -557,6 +571,7 @@ describe('SplashScreen', () => {
 ```
 
 ### Integration Testing
+
 ```typescript
 // OnboardingFlow.test.tsx
 import React from 'react';
@@ -569,13 +584,13 @@ describe('OnboardingScreens', () => {
     const { getByText } = render(
       <OnboardingScreens onComplete={mockOnComplete} onSkip={() => {}} />
     );
-    
+
     // Navigate through screens
     fireEvent.press(getByText('Next'));
     fireEvent.press(getByText('Next'));
     fireEvent.press(getByText('Next'));
     fireEvent.press(getByText('Get Started'));
-    
+
     await waitFor(() => {
       expect(mockOnComplete).toHaveBeenCalled();
     });
@@ -588,16 +603,19 @@ describe('OnboardingScreens', () => {
 ### Common Issues
 
 1. **Lottie animations not playing**
+
    - Check file format (should be JSON)
    - Verify animation paths in import statements
    - Ensure animations are optimized for mobile
 
 2. **Performance issues**
+
    - Reduce animation complexity
    - Use smaller file sizes
    - Implement proper cleanup
 
 3. **Navigation issues**
+
    - Check AsyncStorage permissions
    - Verify navigation stack setup
    - Test on different device sizes
@@ -633,7 +651,8 @@ if (DEBUG_MODE) {
 
 ---
 
-For additional support and updates, refer to the main documentation and component library.
+For additional support and updates, refer to the main documentation and
+component library.
 
 **Version**: 1.0.0  
 **Last Updated**: $(Get-Date -Format "yyyy-MM-dd")  

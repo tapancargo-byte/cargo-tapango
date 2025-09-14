@@ -2,7 +2,7 @@ import { Stack } from 'expo-router';
 
 /**
  * Modals Layout
- * 
+ *
  * Provides stack navigation for modal screens
  */
 export default function ModalsLayout() {
@@ -20,14 +20,14 @@ export default function ModalsLayout() {
       }}
     >
       <Stack.Screen
-        name="receipt"
+        name='receipt'
         options={{
           title: 'Receipt',
           headerShown: true,
         }}
       />
       <Stack.Screen
-        name="scan"
+        name='scan'
         options={{
           title: 'Scan QR Code',
           headerShown: true,

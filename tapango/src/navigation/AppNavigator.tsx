@@ -41,7 +41,7 @@ const AppNavigator: React.FC = () => {
       } else {
         setShowOnboarding(false);
       }
-      
+
       setAppInitialized(true);
     } catch (error) {
       console.error('Error initializing app:', error);
@@ -54,7 +54,7 @@ const AppNavigator: React.FC = () => {
   const handleSplashComplete = () => {
     console.log('Splash complete, show onboarding:', showOnboarding);
     setSplashCompleted(true);
-    
+
     // Set the next screen based on onboarding status
     if (showOnboarding) {
       setCurrentScreen('Onboarding');
@@ -90,21 +90,13 @@ const AppNavigator: React.FC = () => {
 
   // Show splash screen first
   if (!splashCompleted) {
-    return (
-      <SplashScreen
-        onAnimationComplete={handleSplashComplete}
-        minimumDisplayTime={2500}
-      />
-    );
+    return <SplashScreen onAnimationComplete={handleSplashComplete} minimumDisplayTime={2500} />;
   }
 
   // After splash completion, show appropriate screen
   if (currentScreen === 'Onboarding') {
     return (
-      <OnboardingScreens
-        onComplete={handleOnboardingComplete}
-        onSkip={handleOnboardingSkip}
-      />
+      <OnboardingScreens onComplete={handleOnboardingComplete} onSkip={handleOnboardingSkip} />
     );
   }
 

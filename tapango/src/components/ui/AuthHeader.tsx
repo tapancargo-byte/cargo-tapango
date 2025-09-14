@@ -1,13 +1,6 @@
 import React, { useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Animated,
-  Dimensions,
-  Platform,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, Animated, Dimensions, Platform } from 'react-native';
+import { AppIcon } from '../../ui';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../styles/colors';
 import { textStyles, typography } from '../../styles/typography';
@@ -57,19 +50,21 @@ export const AuthHeader: React.FC<AuthHeaderProps> = ({
   return (
     <View style={[styles.container, { paddingTop }]}>
       {/* Animated Logo */}
-      <Animated.View style={[
-        styles.logoContainer,
-        { 
-          transform: [{ scale: logoScale }]
-        }
-      ]}>
+      <Animated.View
+        style={[
+          styles.logoContainer,
+          {
+            transform: [{ scale: logoScale }],
+          },
+        ]}
+      >
         <View style={styles.logoWrapper}>
           <LinearGradient
             colors={['rgba(255, 255, 255, 0.2)', 'rgba(255, 255, 255, 0.05)']}
             style={styles.logoGradient}
           >
             <View style={styles.logoInner}>
-              <Ionicons name={icon as any} size={48} color="white" />
+              <AppIcon name={icon as any} size={48} color='white' />
             </View>
           </LinearGradient>
         </View>
@@ -135,11 +130,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: spacing.sm,
     letterSpacing: -0.5,
-    ...(Platform.OS === 'web' ? {} : {
-      textShadowColor: 'rgba(0, 0, 0, 0.1)',
-      textShadowOffset: { width: 0, height: 2 },
-      textShadowRadius: 4,
-    }),
+    ...(Platform.OS === 'web'
+      ? {}
+      : {
+          textShadowColor: 'rgba(0, 0, 0, 0.1)',
+          textShadowOffset: { width: 0, height: 2 },
+          textShadowRadius: 4,
+        }),
   },
   subtitle: {
     ...textStyles.bodyLarge,
@@ -148,11 +145,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
     paddingHorizontal: spacing.lg,
-    ...(Platform.OS === 'web' ? {} : {
-      textShadowColor: 'rgba(0, 0, 0, 0.1)',
-      textShadowOffset: { width: 0, height: 1 },
-      textShadowRadius: 2,
-    }),
+    ...(Platform.OS === 'web'
+      ? {}
+      : {
+          textShadowColor: 'rgba(0, 0, 0, 0.1)',
+          textShadowOffset: { width: 0, height: 1 },
+          textShadowRadius: 2,
+        }),
   },
   decorativeContainer: {
     flexDirection: 'row',

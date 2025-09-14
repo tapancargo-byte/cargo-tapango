@@ -10,7 +10,10 @@ export default function DriverKyc() {
   const [loading, setLoading] = useState(false);
 
   const pick = async (setter: (uri: string) => void) => {
-    const res = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images, quality: 0.8 });
+    const res = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 0.8,
+    });
     if (!res.canceled && res.assets?.[0]?.uri) setter(res.assets[0].uri);
   };
 
@@ -18,27 +21,32 @@ export default function DriverKyc() {
     <View style={styles.container}>
       <Text style={styles.title}>KYC Upload</Text>
       <View style={styles.row}>
-        <Button variant="secondary" onPress={() => pick((u) => setRcUri(u))}>
+        <Button variant='secondary' onPress={() => pick((u) => setRcUri(u))}>
           {rcUri ? 'Replace RC' : 'Upload RC'}
         </Button>
         {rcUri && <Image source={{ uri: rcUri }} style={styles.preview} />}
       </View>
       <View style={styles.row}>
-        <Button variant="secondary" onPress={() => pick((u) => setLicenseUri(u))}>
+        <Button variant='secondary' onPress={() => pick((u) => setLicenseUri(u))}>
           {licenseUri ? 'Replace License' : 'Upload License'}
         </Button>
         {licenseUri && <Image source={{ uri: licenseUri }} style={styles.preview} />}
       </View>
       <Button
-        variant="primary"
+        variant='primary'
         onPress={async () => {
           setLoading(true);
           try {
             const res = await submitKyc({ rcUri, licenseUri, userId: 'driver' });
-            Alert.alert(res.queued ? 'Queued' : 'Uploaded', res.queued ? 'KYC will sync when online.' : 'KYC uploaded successfully.');
+            Alert.alert(
+              res.queued ? 'Queued' : 'Uploaded',
+              res.queued ? 'KYC will sync when online.' : 'KYC uploaded successfully.'
+            );
           } catch {
             Alert.alert('Error', 'Failed to submit KYC');
-          } finally { setLoading(false); }
+          } finally {
+            setLoading(false);
+          }
         }}
         fullWidth
         disabled={loading}

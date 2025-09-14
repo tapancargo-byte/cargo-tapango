@@ -1,3 +1,96 @@
+# TAPANGO Mobile — Notifications & SMS Setup
+
+What's Implemented
+
+- A consolidated list of major features and systems is available in
+  docs/IMPLEMENTED_FEATURES.md.
+- Latest release summary: docs/RELEASE_NOTES_2025-09-14.md.
+
+## Environment variables (.env)
+
+Set these client-safe variables:
+
+```
+EXPO_PUBLIC_ONESIGNAL_APP_ID=YOUR_ONESIGNAL_APP_ID
+EXPO_PUBLIC_PRIVACY_URL=https://www.privacypolicies.com/live/1485f8a9-f52f-4c73-a826-d2b51c4b4f23
+EXPO_PUBLIC_PUSH_REGISTER_URL=https://ehlzbibwyqxowhwxpuoh.supabase.co/functions/v1/register-push
+```
+
+## Supabase Edge Function: register-push (server)
+
+This function stores Expo push tokens.
+
+- Code: `supabase/functions/register-push/index.ts`
+- Table migration: `supabase/migrations/20250914_create_push_tokens.sql`
+
+Environment (server):
+
+- SUPABASE_URL
+- SUPABASE_SERVICE_ROLE_KEY
+
+## Supabase Edge Function: send-sms (server)
+
+Securely sends SMS via OneSignal using server-side credentials.
+
+- Code: `supabase/functions/send-sms/index.ts`
+- URL: `https://<project-ref>.supabase.co/functions/v1/send-sms`
+
+Required project secrets (never commit these):
+
+- ONESIGNAL_APP_ID
+- ONESIGNAL_API_KEY
+- Optional: ONESIGNAL_SMS_FROM (default sender configured in OneSignal)
+
+Example (PowerShell):
+
+```
+supabase secrets set ONESIGNAL_APP_ID="{{ONESIGNAL_APP_ID}}" --project-ref "$env:SUPABASE_PROJECT_REF"
+supabase secrets set ONESIGNAL_API_KEY="{{ONESIGNAL_API_KEY}}" --project-ref "$env:SUPABASE_PROJECT_REF"
+# Optional sender number
+# supabase secrets set ONESIGNAL_SMS_FROM="+1XXXXXXXXXX" --project-ref "$env:SUPABASE_PROJECT_REF"
+
+supabase functions deploy send-sms --project-ref "$env:SUPABASE_PROJECT_REF"
+```
+
+Client usage (uses EXPO_PUBLIC_SMS_SEND_URL and anon key):
+
+```
+import { sendSmsToExternalId, sendSmsToPhone } from './src/services/sms';
+await sendSmsToExternalId('user_123', 'Your booking was created');
+// or
+await sendSmsToPhone('+919876543210', 'Your driver is arriving');
+```
+
+## Development build (required for push & OneSignal)
+
+Expo Go does not support native push or OneSignal. Use a development build:
+
+```
+npx expo run:ios
+# or
+npx expo run:android
+
+# then
+npx expo start --dev-client
+```
+
+## India-only SMS
+
+- Profile > SMS Alerts:
+  - Validates +91 and 10 digit numbers
+  - Persists consent timestamp
+  - Adds OneSignal tags: `sms_opt_in=true`, `sms_region=IN`
+  - Reply STOP to unsubscribe, START to re-subscribe (text shown in UI)
+
+## OTA Updates
+
+`src/utils/updates.ts` uses expo-updates for startup and foreground checks.
+
+## Notes
+
+- OneSignal initialization is guarded to avoid crashes in Expo Go and web.
+- Push token retrieval is skipped in Expo Go and when projectId is missing.
+
 # TAPANGO Mobile – Android Edge-to-Edge Validation
 
 ## Validate on Android 15 (device or emulator)

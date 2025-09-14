@@ -18,7 +18,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import SplashAnimation from '../../assets/lottie/splash.json';
 // Import blue theme colors
 import { colors } from '../styles/colors';
-import { Headline as DsHeadline, Body as DsBody, Title as DsTitle } from '../design-system/components/Typography';
+import {
+  Headline as DsHeadline,
+  Body as DsBody,
+  Title as DsTitle,
+} from '../design-system/components/Typography';
 
 interface OnboardingScreen {
   id: string;
@@ -42,8 +46,9 @@ const onboardingData: OnboardingScreen[] = [
   {
     id: 'welcome',
     title: 'Welcome to TAPANGO',
-    subtitle: 'Northeast India\'s Premier Cargo Network',
-    description: 'Connecting Imphal to New Delhi with professional logistics services. Experience seamless cargo transportation with real-time tracking and trusted drivers.',
+    subtitle: "Northeast India's Premier Cargo Network",
+    description:
+      'Connecting Imphal to New Delhi with professional logistics services. Experience seamless cargo transportation with real-time tracking and trusted drivers.',
     primaryAnimation: SplashAnimation,
     backgroundColor: colors.gradients.primary,
     textColor: colors.neutral.white,
@@ -52,7 +57,8 @@ const onboardingData: OnboardingScreen[] = [
     id: 'booking',
     title: 'Smart Booking System',
     subtitle: 'Book Your Cargo in Under 2 Minutes',
-    description: 'Simply enter pickup and delivery locations, select cargo type, and confirm. Our AI-powered system instantly matches you with the best available driver.',
+    description:
+      'Simply enter pickup and delivery locations, select cargo type, and confirm. Our AI-powered system instantly matches you with the best available driver.',
     primaryAnimation: SplashAnimation,
     backgroundColor: colors.gradients.secondary,
     textColor: colors.primary.darkBlue,
@@ -61,7 +67,8 @@ const onboardingData: OnboardingScreen[] = [
     id: 'service',
     title: 'Real-Time Tracking',
     subtitle: '99.2% On-Time Delivery Record',
-    description: 'Monitor your cargo\'s journey with live GPS tracking, receive instant notifications, and communicate directly with your assigned driver throughout the delivery.',
+    description:
+      "Monitor your cargo's journey with live GPS tracking, receive instant notifications, and communicate directly with your assigned driver throughout the delivery.",
     primaryAnimation: SplashAnimation,
     backgroundColor: colors.gradients.accent,
     textColor: colors.neutral.white,
@@ -70,22 +77,20 @@ const onboardingData: OnboardingScreen[] = [
     id: 'getstarted',
     title: 'Ready to Ship?',
     subtitle: '5,000+ Successful Deliveries This Month',
-    description: 'Join businesses and individuals who trust TAPANGO for reliable cargo logistics. Competitive rates, insured shipments, and 24/7 customer support.',
+    description:
+      'Join businesses and individuals who trust TAPANGO for reliable cargo logistics. Competitive rates, insured shipments, and 24/7 customer support.',
     primaryAnimation: SplashAnimation,
     backgroundColor: colors.gradients.dark,
     textColor: colors.neutral.white,
   },
 ];
 
-const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
-  onComplete,
-  onSkip,
-}) => {
+const OnboardingScreens: React.FC<OnboardingScreensProps> = ({ onComplete, onSkip }) => {
   const insets = useSafeAreaInsets();
   const scrollViewRef = useRef<ScrollView>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLastScreen, setIsLastScreen] = useState(false);
-  
+
   // Safely resolve current screen values (avoid optional colors with exactOptionalPropertyTypes)
   const defaultScreen: OnboardingScreen = {
     id: 'default',
@@ -96,8 +101,9 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
     backgroundColor: colors.gradients.primary,
     textColor: colors.neutral.white,
   };
-  const current: OnboardingScreen = (onboardingData[currentIndex] ?? onboardingData[0]) ?? defaultScreen;
-  
+  const current: OnboardingScreen =
+    onboardingData[currentIndex] ?? onboardingData[0] ?? defaultScreen;
+
   // Animation values
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const slideAnim = useRef(new Animated.Value(0)).current;
@@ -178,7 +184,7 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
         useNativeDriver: true,
       }),
     ]).start();
-    
+
     setTimeout(callback, 150);
   };
 
@@ -206,20 +212,19 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
               autoPlay
               loop
               style={styles.primaryAnimation}
-              resizeMode="contain"
+              resizeMode='contain'
             />
-            
           </View>
 
           {/* Content */}
           <View style={styles.contentContainer}>
-            <DsBody color={screen.textColor} align="center">
+            <DsBody color={screen.textColor} align='center'>
               {screen.subtitle}
             </DsBody>
-            <DsHeadline color={screen.textColor} align="center" weight="extrabold">
+            <DsHeadline color={screen.textColor} align='center' weight='extrabold'>
               {screen.title}
             </DsHeadline>
-            <DsBody color={screen.textColor} align="center">
+            <DsBody color={screen.textColor} align='center'>
               {screen.description}
             </DsBody>
           </View>
@@ -230,8 +235,8 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
 
   return (
     <View style={styles.container}>
-      <StatusBar 
-        barStyle={currentIndex === 1 ? "dark-content" : "light-content"}
+      <StatusBar
+        barStyle={currentIndex === 1 ? 'dark-content' : 'light-content'}
         backgroundColor={current.backgroundColor[0]}
         translucent={false}
       />
@@ -241,12 +246,8 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
         <View style={[styles.header, { paddingTop: insets.top }]}>
           {/* Skip Button */}
           {!isLastScreen && (
-            <TouchableOpacity
-              style={styles.skipButton}
-              onPress={onSkip}
-              activeOpacity={0.7}
-            >
-              <DsBody color={current.textColor} align="center">
+            <TouchableOpacity style={styles.skipButton} onPress={onSkip} activeOpacity={0.7}>
+              <DsBody color={current.textColor} align='center'>
                 Skip
               </DsBody>
             </TouchableOpacity>
@@ -268,7 +269,7 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
                 ]}
               />
             </View>
-            <DsBody color={current.textColor} align="center">
+            <DsBody color={current.textColor} align='center'>
               {currentIndex + 1} / {onboardingData.length}
             </DsBody>
           </View>
@@ -297,9 +298,8 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
                 style={[
                   styles.pageIndicator,
                   {
-                    backgroundColor: index === currentIndex 
-                      ? current.textColor 
-                      : current.textColor + '40',
+                    backgroundColor:
+                      index === currentIndex ? current.textColor : current.textColor + '40',
                     transform: [{ scale: index === currentIndex ? 1.2 : 1 }],
                   },
                 ]}
@@ -311,15 +311,11 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
           <View style={styles.actionButtons}>
             {currentIndex > 0 && (
               <TouchableOpacity
-                style={[
-                  styles.button,
-                  styles.previousButton,
-                  { borderColor: current.textColor },
-                ]}
+                style={[styles.button, styles.previousButton, { borderColor: current.textColor }]}
                 onPress={handlePrevious}
                 activeOpacity={0.8}
               >
-                <DsBody color={current.textColor} align="center" weight="semibold">
+                <DsBody color={current.textColor} align='center' weight='semibold'>
                   Previous
                 </DsBody>
               </TouchableOpacity>
@@ -327,15 +323,11 @@ const OnboardingScreens: React.FC<OnboardingScreensProps> = ({
 
             <Animated.View style={{ transform: [{ scale: buttonScale }] }}>
               <TouchableOpacity
-                style={[
-                  styles.button,
-                  styles.nextButton,
-                  { backgroundColor: current.textColor },
-                ]}
+                style={[styles.button, styles.nextButton, { backgroundColor: current.textColor }]}
                 onPress={handleNext}
                 activeOpacity={0.8}
               >
-                <DsBody color={current.backgroundColor[0]} align="center" weight="bold">
+                <DsBody color={current.backgroundColor[0]} align='center' weight='bold'>
                   {isLastScreen ? 'Get Started' : 'Next'}
                 </DsBody>
               </TouchableOpacity>
@@ -475,14 +467,6 @@ const styles = StyleSheet.create({
   },
   nextButton: {
     elevation: 3,
-    ...(Platform.OS !== 'web'
-      ? {
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-        }
-      : {}),
     ...(Platform.OS === 'web' ? { boxShadow: '0px 2px 4px rgba(0,0,0,0.25)' } : {}),
   },
   buttonText: {

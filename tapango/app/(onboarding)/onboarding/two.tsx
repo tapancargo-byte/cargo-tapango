@@ -6,7 +6,7 @@ import AnimatedSquareCard from '../../../components/AnimatedSquareCard';
 import Pagination from '../../../components/Pagination';
 import * as Haptics from 'expo-haptics';
 import LottieView from 'lottie-react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { AppIcon } from '../../../src/ui';
 
 const BookingAnimation = require('../../../assets/lottie/smart_booking.json');
 
@@ -30,10 +30,10 @@ export default function OnboardingStep2() {
   return (
     <View style={styles.container}>
       <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
-        <TouchableOpacity onPress={back} style={styles.backBtn} accessibilityRole="button">
-          <Ionicons name="chevron-back" size={24} color="#fff" />
+        <TouchableOpacity onPress={back} style={styles.backBtn} accessibilityRole='button'>
+          <AppIcon name='chevron-back' size={24} color='#fff' />
         </TouchableOpacity>
-        <TouchableOpacity onPress={skip} style={styles.skipBtn} accessibilityRole="button">
+        <TouchableOpacity onPress={skip} style={styles.skipBtn} accessibilityRole='button'>
           <Text style={styles.skipText}>Skip</Text>
         </TouchableOpacity>
       </View>
@@ -49,7 +49,7 @@ export default function OnboardingStep2() {
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + 24 }]}>
         <Pagination total={3} index={1} />
-        <TouchableOpacity style={styles.cta} onPress={next} accessibilityRole="button">
+        <TouchableOpacity style={styles.cta} onPress={next} accessibilityRole='button'>
           <Text style={styles.ctaText}>Next</Text>
         </TouchableOpacity>
       </View>
@@ -81,4 +81,3 @@ const styles = StyleSheet.create({
   },
   ctaText: { color: '#001A36', fontSize: 17, fontWeight: '700' },
 });
-

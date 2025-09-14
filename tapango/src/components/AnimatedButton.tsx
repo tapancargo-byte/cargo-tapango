@@ -179,22 +179,14 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 
   const renderContent = () => {
     if (loading) {
-      return (
-        <Text style={[getTextStyles(), textStyle]}>
-          Loading...
-        </Text>
-      );
+      return <Text style={[getTextStyles(), textStyle]}>Loading...</Text>;
     }
 
     if (icon && iconPosition === 'left') {
       return (
         <>
-          <View style={{ marginRight: spacing.sm }}>
-            {icon}
-          </View>
-          <Text style={[getTextStyles(), textStyle]}>
-            {title}
-          </Text>
+          <View style={{ marginRight: spacing.sm }}>{icon}</View>
+          <Text style={[getTextStyles(), textStyle]}>{title}</Text>
         </>
       );
     }
@@ -202,21 +194,13 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     if (icon && iconPosition === 'right') {
       return (
         <>
-          <Text style={[getTextStyles(), textStyle]}>
-            {title}
-          </Text>
-          <View style={{ marginLeft: spacing.sm }}>
-            {icon}
-          </View>
+          <Text style={[getTextStyles(), textStyle]}>{title}</Text>
+          <View style={{ marginLeft: spacing.sm }}>{icon}</View>
         </>
       );
     }
 
-    return (
-      <Text style={[getTextStyles(), textStyle]}>
-        {title}
-      </Text>
-    );
+    return <Text style={[getTextStyles(), textStyle]}>{title}</Text>;
   };
 
   return (
@@ -227,7 +211,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
       disabled={disabled || loading}
       testID={testID}
       accessible={true}
-      accessibilityRole="button"
+      accessibilityRole='button'
       accessibilityLabel={accessibilityLabel || title}
       accessibilityHint={accessibilityHint}
       accessibilityState={{ disabled: disabled || loading }}

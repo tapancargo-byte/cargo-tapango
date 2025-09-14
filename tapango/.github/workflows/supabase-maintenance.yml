@@ -64,4 +64,3 @@ jobs:
         env:
           ADVISORS_ENDPOINT: ${{ secrets.ADVISORS_ENDPOINT }}
           ADVISORS_TOKEN: ${{ secrets.ADVISORS_TOKEN }}
-

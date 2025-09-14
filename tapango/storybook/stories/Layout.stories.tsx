@@ -1,19 +1,19 @@
 // @ts-nocheck
-import React from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
-import { Screen } from '../../src/ui/Screen'
-import { SectionHeader, ListRow } from '../../src/ui'
-import { YStack } from 'tamagui'
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Screen } from '../../src/ui/Screen';
+import { SectionHeader, ListRow } from '../../src/ui';
+import { YStack } from 'tamagui';
 
 const meta: Meta = {
   title: 'App/Layout/List Screen',
-}
-export default meta
+};
+export default meta;
 
 export const DenseList: StoryObj = {
   render: (_args, { globals }) => (
-    <Screen scroll header={<SectionHeader title="Shipments" subtitle="Recent" withShadow />}>
-      <YStack space="$3">
+    <Screen scroll header={<SectionHeader title='Shipments' subtitle='Recent' withShadow />}>
+      <YStack space='$3'>
         {Array.from({ length: 12 }).map((_, i) => (
           <ListRow
             key={i}
@@ -25,4 +25,4 @@ export const DenseList: StoryObj = {
       </YStack>
     </Screen>
   ),
-}
+};

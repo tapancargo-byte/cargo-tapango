@@ -37,13 +37,13 @@ export default function SplashRoute() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.content} accessibilityLabel="TAPANGO is loading">
+      <View style={styles.content} accessibilityLabel='TAPANGO is loading'>
         <LottieView
           source={SplashAnimation}
           autoPlay
           loop
           style={styles.lottie}
-          resizeMode="contain"
+          resizeMode='contain'
           speed={0.9}
         />
         <View style={styles.brandWrap}>
@@ -86,4 +86,3 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-

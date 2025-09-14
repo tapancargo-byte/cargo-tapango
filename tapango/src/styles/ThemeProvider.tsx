@@ -1,34 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { colors } from './colors';
 import { typography, textStyles } from './typography';
 import { spacing, borderRadius, shadows } from './spacing';
+import { getTokens, type DesignTokens } from '../design-system/tokens';
 
 export type ColorScheme = 'light' | 'dark' | 'system';
 
 interface Theme {
-  colors: {
-    background: string;
-    surface: string;
-    surfaceVariant: string;
-    primary: string;
-    primaryContainer: string;
-    secondary: string;
-    secondaryContainer: string;
-    text: string;
-    textSecondary: string;
-    textOnPrimary: string;
-    border: string;
-    borderFocus: string;
-    error: string;
-    errorContainer: string;
-    success: string;
-    warning: string;
-    info: string;
-    overlay: string;
-    shadow: string;
-  };
+  tokens: DesignTokens;
+  colors: DesignTokens['colors'];
   typography: typeof typography;
   textStyles: typeof textStyles;
   spacing: typeof spacing;
@@ -37,29 +18,13 @@ interface Theme {
   isDark: boolean;
 }
 
-// WCAG 2.2 AA compliant color themes
+// Derive Theme colors directly from unified design tokens to keep parity with Tamagui
+const lightTokens = getTokens('light');
+const darkTokens = getTokens('dark');
+
 const lightTheme: Theme = {
-  colors: {
-    background: '#FAFBFF',        // Subtle blue-tinted background
-    surface: '#FFFFFF',           // Pure white cards
-    surfaceVariant: '#F1F5FF',    // Light blue variant
-    primary: '#0D47A1',           // Rich royal blue
-    primaryContainer: '#E3F2FD',  // Light primary container
-    secondary: '#5E35B1',         // Premium purple
-    secondaryContainer: '#EDE7F6',
-    text: '#1A1C1E',              // Rich dark text
-    textSecondary: '#5F6368',     // Medium gray text
-    textOnPrimary: '#FFFFFF',
-    border: '#E8EAF6',            // Light border
-    borderFocus: '#0D47A1',       // Primary focus border
-    error: '#D32F2F',             // Material red
-    errorContainer: '#FFEBEE',
-    success: '#388E3C',           // Material green
-    warning: '#F57C00',           // Material orange
-    info: '#1976D2',              // Material blue
-    overlay: 'rgba(26, 28, 30, 0.6)',
-    shadow: 'rgba(26, 28, 30, 0.08)',
-  },
+  tokens: lightTokens,
+  colors: lightTokens.colors,
   typography,
   textStyles,
   spacing,
@@ -69,27 +34,8 @@ const lightTheme: Theme = {
 };
 
 const darkTheme: Theme = {
-  colors: {
-    background: '#0A0E1A',        // Deep space blue
-    surface: '#1A1F2E',          // Dark surface with blue tint
-    surfaceVariant: '#252D3F',    // Variant surface
-    primary: '#4FC3F7',           // Bright cyan for dark mode
-    primaryContainer: '#0D47A1',
-    secondary: '#B39DDB',         // Light purple
-    secondaryContainer: '#4527A0',
-    text: '#F8FAFF',              // Off-white with blue tint
-    textSecondary: '#B3C5EF',     // Light blue-gray
-    textOnPrimary: '#0A0E1A',     // Dark text on bright primary
-    border: '#37415A',            // Subtle blue-gray border
-    borderFocus: '#4FC3F7',       // Bright focus border
-    error: '#FF6B6B',             // Softer red for dark mode
-    errorContainer: '#5D1A1A',
-    success: '#4ECDC4',           // Turquoise success
-    warning: '#FFD93D',           // Bright warning yellow
-    info: '#4FC3F7',              // Primary info color
-    overlay: 'rgba(10, 14, 26, 0.8)',
-    shadow: 'rgba(0, 0, 0, 0.4)',
-  },
+  tokens: darkTokens,
+  colors: darkTokens.colors,
   typography,
   textStyles,
   spacing,
@@ -149,7 +95,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // Determine effective theme
   const effectiveScheme = colorScheme === 'system' ? systemColorScheme : colorScheme;
   const isDark = effectiveScheme === 'dark';
-  const theme = isDark ? darkTheme : lightTheme;
+  const theme = isDark ? darkTheme : lightTheme; // colors are unified with Tamagui tokens
 
   const contextValue: ThemeContextType = {
     theme,
@@ -158,11 +104,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     isDark,
   };
 
-  return (
-    <ThemeContext.Provider value={contextValue}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
 };
 
 export const useTheme = (): ThemeContextType => {
@@ -176,27 +118,7 @@ export const useTheme = (): ThemeContextType => {
 // Convenience hooks
 export const useColors = () => {
   const { theme } = useTheme();
-  return theme.colors as any as {
-    background: string;
-    surface: string;
-    surfaceVariant: string;
-    primary: string;
-    primaryContainer: string;
-    secondary: string;
-    secondaryContainer: string;
-    text: string;
-    textSecondary: string;
-    textOnPrimary: string;
-    border: string;
-    borderFocus: string;
-    error: string;
-    errorContainer: string;
-    success: string;
-    warning: string;
-    info: string;
-    overlay: string;
-    shadow: string;
-  };
+  return theme.colors;
 };
 
 export const useIsDark = () => {

@@ -3,6 +3,7 @@
 ## 🎯 **The Warning is Normal During Development!**
 
 The warning you're seeing:
+
 ```
 WARN Clerk: Clerk has been loaded with development keys...
 ```
@@ -12,6 +13,7 @@ WARN Clerk: Clerk has been loaded with development keys...
 ## 🔍 **Why You See This Warning**
 
 ### Current Setup (Development - Perfect for Testing):
+
 - **Key**: `pk_test_*` (development key)
 - **Purpose**: Testing, development, learning
 - **Limits**: 10,000 MAU, shared OAuth credentials
@@ -19,7 +21,8 @@ WARN Clerk: Clerk has been loaded with development keys...
 - **Warning**: Shows to remind you it's for development
 
 ### Production Setup (For Live Apps):
-- **Key**: `pk_live_*` (production key)  
+
+- **Key**: `pk_live_*` (production key)
 - **Purpose**: Real users, app store deployment
 - **Limits**: Higher limits based on plan
 - **Cost**: Paid plans available
@@ -28,7 +31,9 @@ WARN Clerk: Clerk has been loaded with development keys...
 ## 🚀 **What Should You Do?**
 
 ### **For Development/Testing (Current Situation):**
+
 ✅ **Keep using development keys** - they're perfect for:
+
 - Building and testing your app
 - Learning Clerk authentication
 - Development workflow
@@ -37,7 +42,9 @@ WARN Clerk: Clerk has been loaded with development keys...
 **The warning is just informational - your app works perfectly!**
 
 ### **For Production Deployment:**
+
 🎯 **Upgrade to production keys** when you're ready to:
+
 - Submit to App Store/Google Play
 - Have real users
 - Remove usage limitations
@@ -46,8 +53,9 @@ WARN Clerk: Clerk has been loaded with development keys...
 ## 📋 **Quick Decision Guide**
 
 **Are you:**
+
 - ✅ Still developing/testing? → **Keep development keys**
-- ✅ Learning authentication? → **Keep development keys**  
+- ✅ Learning authentication? → **Keep development keys**
 - ✅ Building features? → **Keep development keys**
 - ❌ Ready for app stores? → **Upgrade to production**
 - ❌ Launching to real users? → **Upgrade to production**
@@ -65,6 +73,8 @@ WARN Clerk: Clerk has been loaded with development keys...
 
 ## 💡 **Bottom Line**
 
-**The warning is Clerk being helpful** - reminding you about the difference between development and production environments. 
+**The warning is Clerk being helpful** - reminding you about the difference
+between development and production environments.
 
-**Your authentication is working perfectly!** The warning doesn't affect functionality at all. 🎉
+**Your authentication is working perfectly!** The warning doesn't affect
+functionality at all. 🎉

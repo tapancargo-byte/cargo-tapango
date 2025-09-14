@@ -75,16 +75,13 @@ export const createStaggeredAnimation = (
   count: number
 ): Animated.CompositeAnimation => {
   const animations: Animated.CompositeAnimation[] = [];
-  
+
   for (let i = 0; i < count; i++) {
     animations.push(
-      Animated.sequence([
-        Animated.delay(i * staggerDelay),
-        animationFunction(),
-      ])
+      Animated.sequence([Animated.delay(i * staggerDelay), animationFunction()])
     );
   }
-  
+
   return Animated.parallel(animations);
 };
 

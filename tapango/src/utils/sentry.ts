@@ -25,7 +25,9 @@ export function initSentry() {
         });
       })
       .catch(() => {
-        console.warn('Sentry DSN set but `sentry-expo` not installed. Skipping Sentry init.');
+        console.warn(
+          'Sentry DSN set but `sentry-expo` not installed. Skipping Sentry init.'
+        );
       });
   } catch (e) {
     console.warn('Sentry init failed:', e);

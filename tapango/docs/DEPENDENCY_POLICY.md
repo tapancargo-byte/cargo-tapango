@@ -2,16 +2,20 @@
 
 ## Overview
 
-This document outlines the policy for managing dependencies in the Tapango Mobile project. Following these guidelines helps maintain consistency and avoid issues when upgrading or adding dependencies.
+This document outlines the policy for managing dependencies in the Tapango
+Mobile project. Following these guidelines helps maintain consistency and avoid
+issues when upgrading or adding dependencies.
 
 ## Before Making Changes to Dependencies
 
 1. Check project health:
+
    ```bash
    npm run deps:check     # Runs expo doctor and npm outdated
    ```
 
 2. Ensure clean installation:
+
    ```bash
    npm run clean         # Removes node_modules and .expo
    npm run reinstall     # Runs npm ci for clean install
@@ -38,17 +42,25 @@ This document outlines the policy for managing dependencies in the Tapango Mobil
 ## Critical Dependencies
 
 ### react-native-safe-area-context
-Project uses the version specified in package.json rather than Expo's managed version to ensure consistent behavior across all builds.
+
+Project uses the version specified in package.json rather than Expo's managed
+version to ensure consistent behavior across all builds.
 
 ### sentry-expo
-Included in main dependencies (not devDependencies) as it's required for production error tracking. Configure Sentry environment variables in your CI/EAS build settings.
+
+Included in main dependencies (not devDependencies) as it's required for
+production error tracking. Configure Sentry environment variables in your CI/EAS
+build settings.
 
 ### Tamagui and Reanimated
-Verify babel plugin configuration for optimal performance. Reanimated plugin should be the last entry in the babel plugins list.
+
+Verify babel plugin configuration for optimal performance. Reanimated plugin
+should be the last entry in the babel plugins list.
 
 ## Automated Updates
 
 Dependency updates are automated via Dependabot with the following rules:
+
 - Security updates: Immediate
 - Minor updates: Weekly
 - Major updates: Manual review required

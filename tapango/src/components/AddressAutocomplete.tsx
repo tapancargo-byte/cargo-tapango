@@ -1,8 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import { useColors } from '../styles/ThemeProvider';
 import { Input } from '../ui';
-import { geocodePlace, PlacePrediction, usePlacesAutocomplete } from '../hooks/usePlacesAutocomplete';
+import {
+  geocodePlace,
+  PlacePrediction,
+  usePlacesAutocomplete,
+} from '../hooks/usePlacesAutocomplete';
 import { addRecentAddress, getRecentAddresses, AddressKind } from '../utils/addressHistory';
 
 export type AddressSelection = {
@@ -35,7 +46,11 @@ export const AddressAutocomplete: React.FC<Props> = ({
   kind = 'pickup',
 }) => {
   const [value, setValue] = useState(initialValue);
-  const { predictions, loading } = usePlacesAutocomplete(value, { country, language: 'en-IN', debounceMs: 400 });
+  const { predictions, loading } = usePlacesAutocomplete(value, {
+    country,
+    language: 'en-IN',
+    debounceMs: 400,
+  });
   const [recents, setRecents] = useState<AddressSelection[]>([]);
 
   useEffect(() => {
@@ -68,11 +83,11 @@ export const AddressAutocomplete: React.FC<Props> = ({
         onChangeText={setValue}
         placeholder={placeholder ?? 'Start typing address…'}
         required={!!required}
-        returnKeyType="search"
+        returnKeyType='search'
       />
       {loading && (
         <View style={styles.loadingRow}>
-          <ActivityIndicator size="small" color={palette.primary} />
+          <ActivityIndicator size='small' color={palette.primary} />
           <Text style={[styles.loadingText, { color: palette.textSecondary }]}>Searching…</Text>
         </View>
       )}
@@ -81,11 +96,18 @@ export const AddressAutocomplete: React.FC<Props> = ({
           <Text style={[styles.recentsTitle, { color: palette.textSecondary }]}>Recent</Text>
           <View style={styles.chipsRow}>
             {recents.map((r) => (
-              <TouchableOpacity key={r.formatted} style={[styles.chip, { backgroundColor: palette.surfaceVariant }]} onPress={() => {
-                setValue(r.formatted);
-                onSelect(r);
-              }} accessibilityRole="button">
-                <Text style={[styles.chipText, { color: palette.text }]} numberOfLines={1}>{r.formatted}</Text>
+              <TouchableOpacity
+                key={r.formatted}
+                style={[styles.chip, { backgroundColor: palette.surfaceVariant }]}
+                onPress={() => {
+                  setValue(r.formatted);
+                  onSelect(r);
+                }}
+                accessibilityRole='button'
+              >
+                <Text style={[styles.chipText, { color: palette.text }]} numberOfLines={1}>
+                  {r.formatted}
+                </Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -93,15 +115,29 @@ export const AddressAutocomplete: React.FC<Props> = ({
       )}
 
       {predictions.length > 0 && (
-        <View style={[styles.listContainer, { borderColor: palette.border, backgroundColor: palette.surface }]}>
+        <View
+          style={[
+            styles.listContainer,
+            { borderColor: palette.border, backgroundColor: palette.surface },
+          ]}
+        >
           <FlatList
             data={predictions}
             keyExtractor={(item) => item.place_id}
-            keyboardShouldPersistTaps="handled"
+            keyboardShouldPersistTaps='handled'
             renderItem={({ item }) => (
-              <TouchableOpacity style={[styles.item, { borderBottomColor: palette.surfaceVariant }]} onPress={() => handlePick(item)} accessibilityRole="button" accessibilityHint="Select this address">
-                <Text style={[styles.itemMain, { color: palette.text }]}>{item.structured_formatting?.main_text ?? item.description}</Text>
-                <Text style={[styles.itemSecondary, { color: palette.textSecondary }]}>{item.structured_formatting?.secondary_text ?? ''}</Text>
+              <TouchableOpacity
+                style={[styles.item, { borderBottomColor: palette.surfaceVariant }]}
+                onPress={() => handlePick(item)}
+                accessibilityRole='button'
+                accessibilityHint='Select this address'
+              >
+                <Text style={[styles.itemMain, { color: palette.text }]}>
+                  {item.structured_formatting?.main_text ?? item.description}
+                </Text>
+                <Text style={[styles.itemSecondary, { color: palette.textSecondary }]}>
+                  {item.structured_formatting?.secondary_text ?? ''}
+                </Text>
               </TouchableOpacity>
             )}
           />
@@ -113,12 +149,24 @@ export const AddressAutocomplete: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: { marginBottom: 16 },
-  loadingRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 4, paddingBottom: 8 },
+  loadingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    paddingHorizontal: 4,
+    paddingBottom: 8,
+  },
   loadingText: { color: '#6b7280', fontSize: 14 },
   recentsWrap: { paddingVertical: 4 },
   recentsTitle: { fontSize: 12, color: '#6b7280', marginBottom: 4, paddingHorizontal: 4 },
   chipsRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  chip: { backgroundColor: '#F3F4F6', borderRadius: 16, paddingHorizontal: 12, paddingVertical: 8, maxWidth: '100%' },
+  chip: {
+    backgroundColor: '#F3F4F6',
+    borderRadius: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    maxWidth: '100%',
+  },
   chipText: { color: '#374151', fontSize: 12, maxWidth: 240 },
   listContainer: {
     borderWidth: 1,
@@ -127,7 +175,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: '#fff',
   },
-  item: { padding: 12, minHeight: 44, justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#F3F4F6' },
+  item: {
+    padding: 12,
+    minHeight: 44,
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#F3F4F6',
+  },
   itemMain: { fontSize: 16, fontWeight: '600', color: '#111827' },
   itemSecondary: { fontSize: 12, color: '#6b7280', marginTop: 2 },
 });

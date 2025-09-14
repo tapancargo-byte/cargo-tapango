@@ -13,7 +13,11 @@ export async function enqueueBooking(payload: any) {
     const list: PendingBooking[] = raw ? JSON.parse(raw) : [];
     list.push({ payload, queuedAt: Date.now() });
     await AsyncStorage.setItem(KEY, JSON.stringify(list));
-    try { (await import('../stores/queueStore')).useQueueStore.getState().setBookings(list.length); } catch {}
+    try {
+      (await import('../stores/queueStore')).useQueueStore
+        .getState()
+        .setBookings(list.length);
+    } catch {}
   } catch {}
 }
 
@@ -27,15 +31,30 @@ export async function loadPendingBookings(): Promise<PendingBooking[]> {
 }
 
 export async function clearPendingBookings() {
-  try { await AsyncStorage.removeItem(KEY); try { (await import('../stores/queueStore')).useQueueStore.getState().setBookings(0); } catch {} } catch {}
+  try {
+    await AsyncStorage.removeItem(KEY);
+    try {
+      (await import('../stores/queueStore')).useQueueStore
+        .getState()
+        .setBookings(0);
+    } catch {}
+  } catch {}
 }
 
-export async function drainPendingBookings(onDrain?: (count: number) => Promise<void> | void) {
+export async function drainPendingBookings(
+  onDrain?: (count: number) => Promise<void> | void
+) {
   const list = await loadPendingBookings();
   if (list.length === 0) return;
   // Simulate sending to server (replace with real API later)
   await new Promise((r) => setTimeout(r, 500));
   await clearPendingBookings();
-  try { await onDrain?.(list.length); } catch {}
-  try { (await import('../stores/queueStore')).useQueueStore.getState().setBookings(0); } catch {}
+  try {
+    await onDrain?.(list.length);
+  } catch {}
+  try {
+    (await import('../stores/queueStore')).useQueueStore
+      .getState()
+      .setBookings(0);
+  } catch {}
 }

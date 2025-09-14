@@ -9,6 +9,14 @@ import { KycProgress } from '../../src/components/KycProgress';
 import { YStack, Text, XStack, Switch, Stack } from 'tamagui';
 import { Circle } from '../../src/ui';
 import {
+  addSmsSubscription,
+  removeSmsSubscription,
+  addSmsTags,
+  removeSmsTags,
+} from '../../src/integrations/onesignal';
+import { useAppToast } from '../../src/ui/tg/ToastHost';
+import Constants from 'expo-constants';
+import {
   Button,
   Card,
   AppIcon,
@@ -30,7 +38,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 /**
  * Profile Screen
@@ -45,6 +53,10 @@ export default function ProfileScreen() {
   const colors = useColors();
   const [isLoading, setIsLoading] = useState(false);
   const [gstin, setGstin] = useState('');
+  const [smsPhone, setSmsPhone] = useState('');
+  const [smsConsent, setSmsConsent] = useState(false);
+  const [smsConsentAt, setSmsConsentAt] = useState<string | null>(null);
+  const toast = useAppToast();
 
   const themeScale = useSharedValue(1);
   const themeOpacity = useSharedValue(1);
@@ -56,10 +68,28 @@ export default function ProfileScreen() {
     };
   });
 
-  const handleEditProfile = () => {
-    console.log('Edit profile pressed');
-    // TODO: Navigate to edit profile
+  const handleEditProfile = async () => {
+    try {
+      await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      router.push('/(modals)/edit-profile');
+    } catch (error) {
+      console.error('Navigation error:', error);
+    }
   };
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const storedPhone = await StorageService.getSmsPhoneE164();
+        const storedConsent = await StorageService.getSmsConsentAt();
+        if (storedPhone) setSmsPhone(storedPhone);
+        if (storedConsent) {
+          setSmsConsent(true);
+          setSmsConsentAt(storedConsent);
+        }
+      } catch {}
+    })();
+  }, []);
 
   const handleThemeToggle = async (isDark: boolean) => {
     try {
@@ -103,121 +133,170 @@ export default function ProfileScreen() {
   };
 
   return (
-    <Screen scroll padding='$0'>
+    <Screen scroll padding='$0' safeTop={true} safeBottom={false}>
       <FadeIn>
-        <YStack space='$4' paddingHorizontal='$4' paddingBottom={120}>
-          {/* Premium Header with Glassmorphism */}
-          <GlassCard variant='glass' animation='slide' hover>
-            <YStack alignItems='center' space='$4'>
-              {/* Premium Avatar with Gradient Border */}
-              <Stack position='relative'>
-                <Circle
-                  size={100}
-                  borderWidth={3}
-                  borderColor={colors.primary}
-                  backgroundColor={colors.primaryContainer}
-                  style={
-                    Platform.OS === 'web'
-                      ? { boxShadow: '0px 8px 16px rgba(0,0,0,0.2)' }
-                      : ({
-                          shadowColor: colors.shadow,
-                          shadowOffset: { width: 0, height: 8 },
-                          shadowOpacity: 0.2,
-                          shadowRadius: 16,
-                          elevation: 8,
-                        } as any)
-                  }
-                >
-                  <Stack
-                    width={94}
-                    height={94}
-                    borderRadius={47}
-                    backgroundColor={colors.primary}
-                    alignItems='center'
-                    justifyContent='center'
+        <YStack space='$5' paddingHorizontal='$4' paddingTop='$4' paddingBottom={24}>
+          {/* Modern Profile Header */}
+          <YStack space='$4' paddingTop='$4'>
+            {/* Enhanced User Profile Section */}
+            <ElevatedCard padding='$5' borderRadius={24} backgroundColor={colors.surface}>
+              <YStack alignItems='center' space='$5'>
+                {/* Enhanced Avatar with Modern Design */}
+                <Stack position='relative'>
+                  <Circle
+                    size={120}
+                    borderWidth={4}
+                    borderColor={colors.primary + '40'}
+                    backgroundColor={colors.surface}
+                    style={
+                      Platform.OS === 'web'
+                        ? { boxShadow: '0px 12px 24px rgba(0,0,0,0.15)' }
+                        : ({
+                            shadowColor: colors.shadow,
+                            shadowOffset: { width: 0, height: 12 },
+                            shadowOpacity: 0.15,
+                            shadowRadius: 24,
+                            elevation: 12,
+                          } as any)
+                    }
                   >
-                    <Text color={colors.textOnPrimary} fontSize={font.headline} fontWeight='800'>
-                      {getUserInitial()}
-                    </Text>
-                  </Stack>
-                </Circle>
+                    <Circle
+                      size={112}
+                      backgroundColor={colors.primary}
+                      alignItems='center'
+                      justifyContent='center'
+                    >
+                      <Text color={'white'} fontSize={32} fontWeight='800'>
+                        {getUserInitial()}
+                      </Text>
+                    </Circle>
+                  </Circle>
 
-                {/* Online Status Indicator */}
-                <Circle
-                  size={20}
-                  backgroundColor={colors.success}
-                  borderWidth={2}
-                  borderColor={colors.surface}
-                  position='absolute'
-                  bottom={5}
-                  right={5}
-                />
-              </Stack>
+                  {/* Enhanced Status Indicator */}
+                  <Circle
+                    size={28}
+                    backgroundColor={colors.success}
+                    borderWidth={4}
+                    borderColor={colors.surface}
+                    position='absolute'
+                    bottom={8}
+                    right={8}
+                    style={
+                      Platform.OS === 'web'
+                        ? { boxShadow: '0px 4px 8px rgba(0,0,0,0.1)' }
+                        : ({
+                            shadowColor: colors.shadow,
+                            shadowOffset: { width: 0, height: 4 },
+                            shadowOpacity: 0.1,
+                            shadowRadius: 8,
+                            elevation: 4,
+                          } as any)
+                    }
+                  >
+                    <Circle size={16} backgroundColor={colors.success} />
+                  </Circle>
+                </Stack>
 
-              <YStack alignItems='center' space='$2'>
-                <Title color={colors.text} weight='bold'>
-                  {getUserName()}
-                </Title>
-                <XStack alignItems='center' space='$2'>
-                  <Ionicons name='shield-checkmark' size={16} color={colors.success} />
-                  <Text fontSize={font.subtitle} color={colors.textSecondary}>
-                    {require('../../src/i18n').t('profileRoleCustomer')}
+                {/* Enhanced User Information */}
+                <YStack alignItems='center' space='$3'>
+                  <Text fontSize={24} fontWeight='800' color={colors.text} textAlign='center'>
+                    {getUserName()}
                   </Text>
-                </XStack>
-              </YStack>
-
-              {/* Premium Theme Toggle */}
-              <AnimatedYStack style={themeAnimatedStyle}>
-                <ElevatedCard variant='elevated'>
-                  <XStack alignItems='center' justifyContent='space-between' width={240}>
-                    <XStack alignItems='center' space='$3'>
-                      <Circle size={32} backgroundColor={colors.primaryContainer}>
-                        <Ionicons
-                          name={colorScheme === 'dark' ? 'moon' : 'sunny'}
-                          size={16}
-                          color={colors.primary}
-                        />
-                      </Circle>
-                      <YStack>
-                        <Text fontSize={font.body} fontWeight='600' color={colors.text}>
-                          Theme
-                        </Text>
-                        <Text fontSize={font.caption} color={colors.textSecondary}>
-                          {colorScheme === 'dark' ? 'Dark Mode' : 'Light Mode'}
-                        </Text>
-                      </YStack>
-                    </XStack>
-
-                    {isLoading ? (
-                      <LoadingSpinner size='sm' />
-                    ) : (
-                      <Switch
-                        size='$4'
-                        backgroundColor={colorScheme === 'dark' ? colors.primary : colors.border}
-                        checked={colorScheme === 'dark'}
-                        onCheckedChange={handleThemeToggle}
-                      >
-                        <Switch.Thumb
-                          backgroundColor={colors.surface}
-                          style={
-                            Platform.OS === 'web'
-                              ? { boxShadow: '0px 2px 4px rgba(0,0,0,0.2)' }
-                              : ({
-                                  shadowColor: colors.shadow,
-                                  shadowOffset: { width: 0, height: 2 },
-                                  shadowOpacity: 0.2,
-                                  shadowRadius: 4,
-                                  elevation: 3,
-                                } as any)
-                          }
-                        />
-                      </Switch>
-                    )}
+                  <XStack alignItems='center' space='$3'>
+                    <Circle size={24} backgroundColor={colors.success + '20'}>
+                      <Feather name='shield' size={12} color={colors.success} />
+                    </Circle>
+                    <Text fontSize={16} color={colors.textSecondary} fontWeight='500'>
+                      Verified Customer
+                    </Text>
                   </XStack>
-                </ElevatedCard>
-              </AnimatedYStack>
-            </YStack>
-          </GlassCard>
+
+                  {/* User stats or quick info */}
+                  <XStack space='$4' paddingTop='$2'>
+                    <YStack alignItems='center' space='$1'>
+                      <Text fontSize={18} fontWeight='700' color={colors.primary}>
+                        12
+                      </Text>
+                      <Text fontSize={12} color={colors.textSecondary} textTransform='uppercase'>
+                        Orders
+                      </Text>
+                    </YStack>
+                    <YStack alignItems='center' space='$1'>
+                      <Text fontSize={18} fontWeight='700' color={colors.success}>
+                        5
+                      </Text>
+                      <Text fontSize={12} color={colors.textSecondary} textTransform='uppercase'>
+                        Active
+                      </Text>
+                    </YStack>
+                    <YStack alignItems='center' space='$1'>
+                      <Text fontSize={18} fontWeight='700' color={colors.warning}>
+                        89%
+                      </Text>
+                      <Text fontSize={12} color={colors.textSecondary} textTransform='uppercase'>
+                        On-time
+                      </Text>
+                    </YStack>
+                  </XStack>
+                </YStack>
+
+                {/* Enhanced Theme Toggle */}
+                <AnimatedYStack style={themeAnimatedStyle}>
+                  <ElevatedCard
+                    padding='$4'
+                    borderRadius={16}
+                    backgroundColor={colors.surfaceVariant}
+                  >
+                    <XStack alignItems='center' justifyContent='space-between'>
+                      <XStack alignItems='center' space='$4'>
+                        <Circle size={40} backgroundColor={colors.primary + '20'}>
+                          <Feather
+                            name={colorScheme === 'dark' ? 'moon' : 'sun'}
+                            size={20}
+                            color={colors.primary}
+                          />
+                        </Circle>
+                        <YStack>
+                          <Text fontSize={16} fontWeight='700' color={colors.text}>
+                            Theme Preference
+                          </Text>
+                          <Text fontSize={13} color={colors.textSecondary}>
+                            {colorScheme === 'dark' ? 'Dark Mode Active' : 'Light Mode Active'}
+                          </Text>
+                        </YStack>
+                      </XStack>
+
+                      {isLoading ? (
+                        <LoadingSpinner size='sm' />
+                      ) : (
+                        <Switch
+                          size='$5'
+                          backgroundColor={colorScheme === 'dark' ? colors.primary : colors.border}
+                          checked={colorScheme === 'dark'}
+                          onCheckedChange={handleThemeToggle}
+                        >
+                          <Switch.Thumb
+                            backgroundColor={colors.surface}
+                            style={
+                              Platform.OS === 'web'
+                                ? { boxShadow: '0px 3px 6px rgba(0,0,0,0.15)' }
+                                : ({
+                                    shadowColor: colors.shadow,
+                                    shadowOffset: { width: 0, height: 3 },
+                                    shadowOpacity: 0.15,
+                                    shadowRadius: 6,
+                                    elevation: 4,
+                                  } as any)
+                            }
+                          />
+                        </Switch>
+                      )}
+                    </XStack>
+                  </ElevatedCard>
+                </AnimatedYStack>
+              </YStack>
+            </ElevatedCard>
+          </YStack>
 
           {/* Premium KYC Progress */}
           <ElevatedCard variant='elevated' animation='fade'>
@@ -231,62 +310,203 @@ export default function ProfileScreen() {
                 </Subtitle>
               </YStack>
               <Circle size={48} backgroundColor={colors.warning} opacity={0.2}>
-                <Ionicons name='warning' size={20} color={colors.warning} />
+                <Feather name='alert-triangle' size={20} color={colors.warning} />
               </Circle>
             </XStack>
             <KycProgress percent={30} />
             <Button
               variant='outline'
               size='sm'
-              marginTop='$3'
-              leftIcon={<Ionicons name='document-text' size={16} />}
+              marginTop='$4'
+              leftIcon={<Feather name='file-text' size={16} />}
+              borderRadius={12}
             >
               Continue Verification
             </Button>
           </ElevatedCard>
 
-          {/* Premium Settings Grid */}
-          <YStack space='$3'>
-            <SectionTitle color={colors.text}>Settings</SectionTitle>
+          {/* Modern Settings Section */}
+          <YStack space='$4'>
+            <Text fontSize={20} fontWeight='700' color={colors.text}>
+              Account Settings
+            </Text>
 
-            <XStack space='$3'>
-              <Card flex={1} hover>
+            {/* SMS Alerts */}
+            <ElevatedCard padding={16} borderRadius={16} backgroundColor={colors.surface}>
+              <YStack space='$3'>
                 <XStack alignItems='center' space='$3'>
-                  <Circle size={40} backgroundColor={colors.primaryContainer}>
-                    <Ionicons name='person-circle' size={20} color={colors.primary} />
+                  <Circle size={36} backgroundColor={colors.primary + '15'}>
+                    <Feather name='message-circle' size={16} color={colors.primary} />
                   </Circle>
-                  <YStack flex={1}>
-                    <Subtitle color={colors.text} weight='semibold'>
-                      Profile
-                    </Subtitle>
-                    <Subtitle color={colors.textSecondary}>Edit details</Subtitle>
+                  <YStack>
+                    <Text fontSize={16} fontWeight='700' color={colors.text}>
+                      SMS Alerts
+                    </Text>
+                    <Text fontSize={13} color={colors.textSecondary}>
+                      Get updates via text messages
+                    </Text>
                   </YStack>
-                  <Ionicons name='chevron-forward' size={16} color={colors.textSecondary} />
                 </XStack>
-              </Card>
 
-              <Card flex={1} hover>
-                <XStack alignItems='center' space='$3'>
-                  <Circle size={40} backgroundColor={colors.secondaryContainer}>
-                    <Ionicons name='notifications' size={20} color={colors.secondary} />
-                  </Circle>
-                  <YStack flex={1}>
-                    <Subtitle color={colors.text} weight='semibold'>
-                      Alerts
-                    </Subtitle>
-                    <Subtitle color={colors.textSecondary}>Push & Email</Subtitle>
-                  </YStack>
-                  <Ionicons name='chevron-forward' size={16} color={colors.textSecondary} />
+                <Input
+                  placeholder='+1 555 555 0000'
+                  value={smsPhone}
+                  onChangeText={setSmsPhone}
+                  keyboardType='phone-pad'
+                  autoCorrect={false}
+                />
+                <Text fontSize={12} color={colors.textSecondary}>
+                  India only: By enabling SMS, you agree to receive text messages about your
+                  shipments. Reply STOP to unsubscribe or START to re-subscribe. Message & data
+                  rates may apply.
+                </Text>
+                {smsConsentAt ? (
+                  <Text fontSize={12} color={colors.textSecondary}>
+                    Consent recorded on {new Date(smsConsentAt).toLocaleString()}
+                  </Text>
+                ) : null}
+                {(Constants as any)?.expoConfig?.extra?.privacyPolicyUrl ? (
+                  <Text
+                    fontSize={12}
+                    color={colors.primary}
+                    onPress={() =>
+                      Linking.openURL((Constants as any)?.expoConfig?.extra?.privacyPolicyUrl)
+                    }
+                    style={{ textDecorationLine: 'underline' }}
+                  >
+                    Privacy Policy
+                  </Text>
+                ) : null}
+
+                <XStack alignItems='center' justifyContent='space-between'>
+                  <Text fontSize={13} color={colors.textSecondary}>
+                    I agree to receive SMS and confirm I’m the owner of this number.
+                  </Text>
+                  <Switch
+                    checked={smsConsent}
+                    onCheckedChange={(v: boolean) => setSmsConsent(!!v)}
+                  />
                 </XStack>
-              </Card>
-            </XStack>
+
+                <XStack space='$2'>
+                  <Button
+                    variant='primary'
+                    onPress={async () => {
+                      if (!smsConsent) {
+                        toast.show('Consent required', 'Please accept SMS consent');
+                        return;
+                      }
+                      // India only (+91XXXXXXXXXX)
+                      const digits = smsPhone.replace(/[^\d+]/g, '');
+                      if (!/^\+91\d{10}$/.test(digits)) {
+                        toast.show('Invalid phone', 'India only. Use +91 followed by 10 digits');
+                        return;
+                      }
+                      try {
+                        await addSmsSubscription(digits);
+                        try {
+                          await StorageService.setSmsPhoneE164(digits);
+                          const ts = new Date().toISOString();
+                          await StorageService.setSmsConsentAt(ts);
+                          setSmsConsentAt(ts);
+                          await addSmsTags('IN');
+                        } catch {}
+                        toast.show('SMS enabled', 'You will receive text alerts');
+                      } catch {
+                        toast.show('Failed to enable SMS');
+                      }
+                    }}
+                  >
+                    Enable SMS
+                  </Button>
+                  <Button
+                    variant='outline'
+                    onPress={async () => {
+                      try {
+                        await removeSmsSubscription();
+                        try {
+                          await StorageService.setSmsPhoneE164('');
+                          await StorageService.setSmsConsentAt('');
+                          setSmsConsentAt(null);
+                          await removeSmsTags();
+                        } catch {}
+                        toast.show('SMS disabled', 'You will no longer receive texts');
+                      } catch {
+                        toast.show('Failed to disable SMS');
+                      }
+                    }}
+                  >
+                    Disable
+                  </Button>
+                </XStack>
+              </YStack>
+            </ElevatedCard>
+
+            <YStack space='$3'>
+              <ElevatedCard padding={16} borderRadius={16} backgroundColor={colors.surface} hover>
+                <XStack alignItems='center' space='$4'>
+                  <Circle size={48} backgroundColor={colors.primary + '15'}>
+                    <Feather name='user' size={24} color={colors.primary} />
+                  </Circle>
+                  <YStack flex={1} space='$1'>
+                    <Text fontSize={16} fontWeight='700' color={colors.text}>
+                      Edit Profile
+                    </Text>
+                    <Text fontSize={13} color={colors.textSecondary}>
+                      Personal information and preferences
+                    </Text>
+                  </YStack>
+                  <Circle size={32} backgroundColor={colors.border + '50'}>
+                    <Feather name='chevron-right' size={14} color={colors.textSecondary} />
+                  </Circle>
+                </XStack>
+              </ElevatedCard>
+
+              <ElevatedCard padding={16} borderRadius={16} backgroundColor={colors.surface} hover>
+                <XStack alignItems='center' space='$4'>
+                  <Circle size={48} backgroundColor={colors.warning + '15'}>
+                    <Feather name='bell' size={24} color={colors.warning} />
+                  </Circle>
+                  <YStack flex={1} space='$1'>
+                    <Text fontSize={16} fontWeight='700' color={colors.text}>
+                      Notifications
+                    </Text>
+                    <Text fontSize={13} color={colors.textSecondary}>
+                      Push notifications and email alerts
+                    </Text>
+                  </YStack>
+                  <Circle size={32} backgroundColor={colors.border + '50'}>
+                    <Feather name='chevron-right' size={14} color={colors.textSecondary} />
+                  </Circle>
+                </XStack>
+              </ElevatedCard>
+
+              <ElevatedCard padding={16} borderRadius={16} backgroundColor={colors.surface} hover>
+                <XStack alignItems='center' space='$4'>
+                  <Circle size={48} backgroundColor={colors.info + '15'}>
+                    <Feather name='shield' size={24} color={colors.info} />
+                  </Circle>
+                  <YStack flex={1} space='$1'>
+                    <Text fontSize={16} fontWeight='700' color={colors.text}>
+                      Security & Privacy
+                    </Text>
+                    <Text fontSize={13} color={colors.textSecondary}>
+                      Two-factor authentication and privacy
+                    </Text>
+                  </YStack>
+                  <Circle size={32} backgroundColor={colors.border + '50'}>
+                    <Feather name='chevron-right' size={14} color={colors.textSecondary} />
+                  </Circle>
+                </XStack>
+              </ElevatedCard>
+            </YStack>
           </YStack>
 
           {/* Premium Support Section */}
           <ElevatedCard variant='elevated'>
             <XStack alignItems='center' space='$3' marginBottom='$4'>
               <Circle size={40} backgroundColor={colors.info + '20'}>
-                <Ionicons name='headset' size={20} color={colors.info} />
+                <Feather name='headphones' size={20} color={colors.info} />
               </Circle>
               <YStack>
                 <SectionTitle color={colors.text}>Support & Help</SectionTitle>
@@ -298,7 +518,7 @@ export default function ProfileScreen() {
               <Button
                 variant='secondary'
                 size='md'
-                leftIcon={<Ionicons name='logo-whatsapp' size={18} color='#25D366' />}
+                leftIcon={<Feather name='message-circle' size={18} color='#25D366' />}
                 onPress={() => Linking.openURL('https://wa.me/919999999999')}
               >
                 WhatsApp Support
@@ -307,7 +527,7 @@ export default function ProfileScreen() {
               <Button
                 variant='ghost'
                 size='md'
-                leftIcon={<Ionicons name='help-circle' size={18} />}
+                leftIcon={<Feather name='help-circle' size={18} />}
                 onPress={() => console.log('Help pressed')}
               >
                 Help Center
@@ -316,7 +536,7 @@ export default function ProfileScreen() {
               <Button
                 variant='ghost'
                 size='md'
-                leftIcon={<Ionicons name='mail' size={18} />}
+                leftIcon={<Feather name='mail' size={18} />}
                 onPress={() => Linking.openURL('mailto:support@tapango.app')}
               >
                 Email Support
@@ -328,7 +548,7 @@ export default function ProfileScreen() {
           <ElevatedCard variant='elevated'>
             <XStack alignItems='center' space='$3' marginBottom='$4'>
               <Circle size={40} backgroundColor={colors.success + '20'}>
-                <Ionicons name='business' size={20} color={colors.success} />
+                <Feather name='briefcase' size={20} color={colors.success} />
               </Circle>
               <YStack>
                 <SectionTitle color={colors.text}>Business Details</SectionTitle>
@@ -351,7 +571,7 @@ export default function ProfileScreen() {
                     Alert.alert('Saved', 'GSTIN saved locally');
                   }
                 }}
-                leftIcon={<Ionicons name='document-text' size={16} />}
+                leftIcon={<Feather name='file-text' size={16} />}
                 variant='outlined'
               />
               <Subtitle color={colors.textSecondary}>Enter your GSTIN for tax compliance</Subtitle>
@@ -363,7 +583,7 @@ export default function ProfileScreen() {
             <Card variant='outlined'>
               <XStack alignItems='center' space='$3'>
                 <Circle size={32} backgroundColor={colors.warning + '20'}>
-                  <Ionicons name='code' size={16} color={colors.warning} />
+                  <Feather name='code' size={16} color={colors.warning} />
                 </Circle>
                 <Subtitle color={colors.warning} weight='semibold'>
                   Developer Tools
@@ -374,7 +594,8 @@ export default function ProfileScreen() {
                 size='sm'
                 marginTop='$3'
                 onPress={() => router.push('/developer' as any)}
-                leftIcon={<Ionicons name='build' size={16} />}
+                leftIcon={<Feather name='tool' size={16} />}
+                borderRadius={12}
               >
                 Open Developer Panel
               </Button>
@@ -386,7 +607,7 @@ export default function ProfileScreen() {
             <YStack space='$3'>
               <XStack alignItems='center' space='$3'>
                 <Circle size={32} backgroundColor={colors.error + '20'}>
-                  <Ionicons name='log-out' size={16} color={colors.error} />
+                  <Feather name='log-out' size={16} color={colors.error} />
                 </Circle>
                 <YStack>
                   <Subtitle color={colors.text} weight='semibold'>

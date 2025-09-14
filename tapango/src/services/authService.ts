@@ -1,4 +1,10 @@
-import { createClient, SupabaseClient, User, Session, AuthError } from '@supabase/supabase-js';
+import {
+  createClient,
+  SupabaseClient,
+  User,
+  Session,
+  AuthError,
+} from '@supabase/supabase-js';
 import * as SecureStore from 'expo-secure-store';
 import { z } from 'zod';
 
@@ -63,7 +69,7 @@ export interface AuthProfile {
 
 /**
  * Authentication service handling user authentication and profile management
- * 
+ *
  * Features:
  * - Email/password authentication
  * - Secure token storage
@@ -82,7 +88,8 @@ export class AuthService {
       auth: {
         storage: {
           getItem: (key: string) => SecureStore.getItemAsync(key),
-          setItem: (key: string, value: string) => SecureStore.setItemAsync(key, value),
+          setItem: (key: string, value: string) =>
+            SecureStore.setItemAsync(key, value),
           removeItem: (key: string) => SecureStore.deleteItemAsync(key),
         },
         autoRefreshToken: true,
@@ -95,7 +102,7 @@ export class AuthService {
     this.supabase.auth.onAuthStateChange(async (event, session) => {
       this.currentSession = session;
       this.currentUser = session?.user ?? null;
-      
+
       if (event === 'SIGNED_OUT') {
         await this.clearStoredData();
       }
@@ -104,17 +111,17 @@ export class AuthService {
 
   /**
    * Sign in user with email and password
-   * 
+   *
    * @param credentials - User sign in credentials
    * @returns Promise resolving to auth result
-   * 
+   *
    * @example
    * ```typescript
    * const result = await authService.signIn({
    *   email: 'user@example.com',
    *   password: 'securepassword'
    * });
-   * 
+   *
    * if (result.error) {
    *   console.error('Sign in failed:', result.error.message);
    * } else {
@@ -126,7 +133,7 @@ export class AuthService {
     try {
       // Validate input
       const validatedData = SignInSchema.parse(credentials);
-      
+
       const { data, error } = await this.supabase.auth.signInWithPassword({
         email: validatedData.email,
         password: validatedData.password,
@@ -136,10 +143,10 @@ export class AuthService {
         return { user: null, session: null, error };
       }
 
-      return { 
-        user: data.user, 
-        session: data.session, 
-        error: null 
+      return {
+        user: data.user,
+        session: data.session,
+        error: null,
       };
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -149,7 +156,7 @@ export class AuthService {
         };
         return { user: null, session: null, error: authError };
       }
-      
+
       const authError: CustomAuthError = {
         name: 'SignInError',
         message: 'Sign in failed. Please try again.',
@@ -160,7 +167,7 @@ export class AuthService {
 
   /**
    * Sign up new user with email and password
-   * 
+   *
    * @param userData - User registration data
    * @returns Promise resolving to auth result
    */
@@ -168,7 +175,7 @@ export class AuthService {
     try {
       // Validate input
       const validatedData = SignUpSchema.parse(userData);
-      
+
       const { data, error } = await this.supabase.auth.signUp({
         email: validatedData.email,
         password: validatedData.password,
@@ -186,10 +193,10 @@ export class AuthService {
         return { user: null, session: null, error };
       }
 
-      return { 
-        user: data.user, 
-        session: data.session, 
-        error: null 
+      return {
+        user: data.user,
+        session: data.session,
+        error: null,
       };
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -199,7 +206,7 @@ export class AuthService {
         };
         return { user: null, session: null, error: authError };
       }
-      
+
       const authError: CustomAuthError = {
         name: 'SignUpError',
         message: 'Sign up failed. Please try again.',
@@ -210,7 +217,7 @@ export class AuthService {
 
   /**
    * Sign out current user
-   * 
+   *
    * @returns Promise resolving when sign out completes
    */
   async signOut(): Promise<{ error: AuthError | CustomAuthError | null }> {
@@ -228,15 +235,17 @@ export class AuthService {
 
   /**
    * Request password reset email
-   * 
+   *
    * @param data - Reset password data
    * @returns Promise resolving when reset email is sent
    */
-  async resetPassword(data: ResetPasswordData): Promise<{ error: AuthError | CustomAuthError | null }> {
+  async resetPassword(
+    data: ResetPasswordData
+  ): Promise<{ error: AuthError | CustomAuthError | null }> {
     try {
       // Validate input
       const validatedData = ResetPasswordSchema.parse(data);
-      
+
       const { error } = await this.supabase.auth.resetPasswordForEmail(
         validatedData.email,
         {
@@ -253,7 +262,7 @@ export class AuthService {
         };
         return { error: authError };
       }
-      
+
       const authError: CustomAuthError = {
         name: 'ResetPasswordError',
         message: 'Password reset failed. Please try again.',
@@ -264,7 +273,7 @@ export class AuthService {
 
   /**
    * Get current authenticated user
-   * 
+   *
    * @returns Current user or null
    */
   getCurrentUser(): User | null {
@@ -273,7 +282,7 @@ export class AuthService {
 
   /**
    * Get current session
-   * 
+   *
    * @returns Current session or null
    */
   getCurrentSession(): Session | null {
@@ -282,7 +291,7 @@ export class AuthService {
 
   /**
    * Check if user is authenticated
-   * 
+   *
    * @returns True if user is signed in
    */
   isAuthenticated(): boolean {
@@ -291,10 +300,13 @@ export class AuthService {
 
   /**
    * Get user profile data
-   * 
+   *
    * @returns Promise resolving to user profile
    */
-  async getUserProfile(): Promise<{ data: AuthProfile | null; error: Error | null }> {
+  async getUserProfile(): Promise<{
+    data: AuthProfile | null;
+    error: Error | null;
+  }> {
     try {
       if (!this.currentUser) {
         return { data: null, error: new Error('User not authenticated') };
@@ -312,22 +324,25 @@ export class AuthService {
 
       return { data, error: null };
     } catch (error) {
-      return { 
-        data: null, 
-        error: error instanceof Error ? error : new Error('Failed to fetch profile')
+      return {
+        data: null,
+        error:
+          error instanceof Error ? error : new Error('Failed to fetch profile'),
       };
     }
   }
 
   /**
    * Update user profile
-   * 
+   *
    * @param updates - Profile fields to update
    * @returns Promise resolving to updated profile
    */
-  async updateProfile(updates: Partial<Omit<AuthProfile, 'id' | 'email' | 'createdAt'>>): Promise<{ 
-    data: AuthProfile | null; 
-    error: Error | null 
+  async updateProfile(
+    updates: Partial<Omit<AuthProfile, 'id' | 'email' | 'createdAt'>>
+  ): Promise<{
+    data: AuthProfile | null;
+    error: Error | null;
   }> {
     try {
       if (!this.currentUser) {
@@ -350,19 +365,25 @@ export class AuthService {
 
       return { data, error: null };
     } catch (error) {
-      return { 
-        data: null, 
-        error: error instanceof Error ? error : new Error('Failed to update profile')
+      return {
+        data: null,
+        error:
+          error instanceof Error
+            ? error
+            : new Error('Failed to update profile'),
       };
     }
   }
 
   /**
    * Refresh authentication token
-   * 
+   *
    * @returns Promise resolving to new session
    */
-  async refreshSession(): Promise<{ session: Session | null; error: AuthError | CustomAuthError | null }> {
+  async refreshSession(): Promise<{
+    session: Session | null;
+    error: AuthError | CustomAuthError | null;
+  }> {
     try {
       const { data, error } = await this.supabase.auth.refreshSession();
       return { session: data.session, error };
@@ -377,7 +398,7 @@ export class AuthService {
 
   /**
    * Clear all stored authentication data
-   * 
+   *
    * @private
    */
   private async clearStoredData(): Promise<void> {

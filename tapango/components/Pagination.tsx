@@ -8,7 +8,11 @@ interface PaginationProps {
 
 export default function Pagination({ total, index }: PaginationProps) {
   return (
-    <View style={styles.row} accessibilityRole="progressbar" accessibilityValue={{ min: 1, max: total, now: index + 1 }}>
+    <View
+      style={styles.row}
+      accessibilityRole='progressbar'
+      accessibilityValue={{ min: 1, max: total, now: index + 1 }}
+    >
       {Array.from({ length: total }).map((_, i) => (
         <View key={i} style={[styles.dot, i === index ? styles.dotActive : styles.dotInactive]} />
       ))}
@@ -36,4 +40,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.3)',
   },
 });
-

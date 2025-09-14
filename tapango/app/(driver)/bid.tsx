@@ -13,7 +13,11 @@ export default function DriverBid() {
   const onSubmit = async () => {
     setLoading(true);
     try {
-      const { queued, id } = await submitDriverOffer({ trackingId, amountINR: Number(amount) || 0, note });
+      const { queued, id } = await submitDriverOffer({
+        trackingId,
+        amountINR: Number(amount) || 0,
+        note,
+      });
       if (queued) {
         Alert.alert('Queued', 'Offer saved offline and will be synced when online.');
       } else {
@@ -29,10 +33,21 @@ export default function DriverBid() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Place an Offer</Text>
-      <Input label="Tracking ID" value={trackingId} onChangeText={setTrackingId} placeholder="TPG#########" />
-      <Input label="Amount (₹)" value={amount} onChangeText={setAmount} keyboardType="numeric" placeholder="1500" />
-      <Input label="Note" value={note} onChangeText={setNote} placeholder="Optional note" />
-      <Button onPress={onSubmit} variant="primary" fullWidth disabled={loading}>
+      <Input
+        label='Tracking ID'
+        value={trackingId}
+        onChangeText={setTrackingId}
+        placeholder='TPG#########'
+      />
+      <Input
+        label='Amount (₹)'
+        value={amount}
+        onChangeText={setAmount}
+        keyboardType='numeric'
+        placeholder='1500'
+      />
+      <Input label='Note' value={note} onChangeText={setNote} placeholder='Optional note' />
+      <Button onPress={onSubmit} variant='primary' fullWidth disabled={loading}>
         {loading ? 'Submitting...' : 'Submit Offer'}
       </Button>
     </View>

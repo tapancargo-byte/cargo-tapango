@@ -1,12 +1,19 @@
 // @ts-nocheck
-import React from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
-import { Title, Section, Subtitle, Caption, Overline, Headline } from '../../src/design-system/components/Typography'
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import {
+  Title,
+  Section,
+  Subtitle,
+  Caption,
+  Overline,
+  Headline,
+} from '../../src/design-system/components/Typography';
 
 const meta: Meta = {
   title: 'Design System/Typography',
-}
-export default meta
+};
+export default meta;
 
 export const Headers: StoryObj = {
   render: (_args, { globals }) => (
@@ -19,4 +26,4 @@ export const Headers: StoryObj = {
       <Caption mode={globals.mode}>Caption</Caption>
     </div>
   ),
-}
+};

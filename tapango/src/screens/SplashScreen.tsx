@@ -45,7 +45,7 @@ const TapangoSplashScreen: React.FC<SplashScreenProps> = ({
   const [appIsReady, setAppIsReady] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('Initializing...');
-  
+
   // Loading states for better UX - Logistics focused
   const loadingStates = [
     { text: 'Starting logistics engine...', duration: 800 },
@@ -60,31 +60,30 @@ const TapangoSplashScreen: React.FC<SplashScreenProps> = ({
       try {
         // Simulate loading states with progress
         let currentProgress = 0;
-        
+
         for (let i = 0; i < loadingStates.length; i++) {
           const state = loadingStates[i];
           if (state) {
             setLoadingText(state.text);
-            
+
             // Animate progress
             const targetProgress = ((i + 1) / loadingStates.length) * 100;
             const progressStep = (targetProgress - currentProgress) / 20;
-            
+
             for (let j = 0; j < 20; j++) {
               currentProgress += progressStep;
               setLoadingProgress(Math.min(currentProgress, 100));
-              await new Promise(resolve => setTimeout(resolve, state.duration / 20));
+              await new Promise((resolve) => setTimeout(resolve, state.duration / 20));
             }
           }
         }
-        
+
         // Ensure minimum display time
         const elapsed = Date.now();
         const remaining = minimumDisplayTime - elapsed;
         if (remaining > 0) {
-          await new Promise(resolve => setTimeout(resolve, remaining));
+          await new Promise((resolve) => setTimeout(resolve, remaining));
         }
-        
       } catch (error) {
         console.warn('Splash screen preparation error:', error);
       } finally {
@@ -101,7 +100,7 @@ const TapangoSplashScreen: React.FC<SplashScreenProps> = ({
       try {
         // Hide the native splash screen once our custom splash is ready
         await SplashScreen.hideAsync();
-        
+
         // Small delay before transitioning to main app
         setTimeout(() => {
           onAnimationComplete();
@@ -118,11 +117,14 @@ const TapangoSplashScreen: React.FC<SplashScreenProps> = ({
     return null;
   }
 
-
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.primary.blue} translucent={false} />
-      
+      <StatusBar
+        barStyle='light-content'
+        backgroundColor={colors.primary.blue}
+        translucent={false}
+      />
+
       {/* Modern Blue Gradient Background */}
       <LinearGradient
         colors={colors.gradients.primary}
@@ -132,7 +134,6 @@ const TapangoSplashScreen: React.FC<SplashScreenProps> = ({
       >
         {/* Main Content Container */}
         <View style={[styles.content, { paddingTop: insets.top }]}>
-          
           {/* Logo Section */}
           <View style={styles.logoSection}>
             {/* Animated Logo Container */}
@@ -143,16 +144,16 @@ const TapangoSplashScreen: React.FC<SplashScreenProps> = ({
                   autoPlay
                   loop
                   style={styles.logoIcon}
-                  resizeMode="contain"
+                  resizeMode='contain'
                   colorFilters={[
                     {
-                      keypath: "**",
+                      keypath: '**',
                       color: colors.neutral.white,
-                    }
+                    },
                   ]}
                 />
               </View>
-              
+
               {/* Brand Name */}
               <Text style={styles.brandTitle}>TAPANGO</Text>
               <Text style={styles.brandTagline}>Northeast India's Cargo Network</Text>
@@ -164,21 +165,16 @@ const TapangoSplashScreen: React.FC<SplashScreenProps> = ({
             {/* Progress Bar */}
             <View style={styles.progressContainer}>
               <View style={styles.progressTrack}>
-                <View 
-                  style={[
-                    styles.progressBar,
-                    { width: `${loadingProgress}%` }
-                  ]}
-                />
+                <View style={[styles.progressBar, { width: `${loadingProgress}%` }]} />
               </View>
               <Text style={styles.progressText}>{Math.round(loadingProgress)}%</Text>
             </View>
-            
+
             {/* Loading Status */}
             <View style={styles.statusContainer}>
-              <ActivityIndicator 
-                size="small" 
-                color={colors.neutral.white} 
+              <ActivityIndicator
+                size='small'
+                color={colors.neutral.white}
                 style={styles.loadingIndicator}
               />
               <Text style={styles.loadingText}>{loadingText}</Text>
@@ -189,7 +185,7 @@ const TapangoSplashScreen: React.FC<SplashScreenProps> = ({
           <View style={[styles.bottomSection, { paddingBottom: insets.bottom + 16 }]}>
             <Text style={styles.versionText}>Version 1.0.0</Text>
             <Text style={styles.poweredByText}>Powered by Expo SDK 53</Text>
-            
+
             {/* Development Helper */}
             {__DEV__ && (
               <TouchableOpacity
@@ -213,7 +209,6 @@ const TapangoSplashScreen: React.FC<SplashScreenProps> = ({
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -227,7 +222,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 32,
   },
-  
+
   // Logo Section - takes up most of the screen
   logoSection: {
     flex: 3,
@@ -249,16 +244,8 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     borderWidth: 2,
     borderColor: 'rgba(255, 255, 255, 0.2)',
-    // Native shadows
-    ...(Platform.OS !== 'web'
-      ? {
-          shadowColor: colors.primary.navy,
-          shadowOffset: { width: 0, height: 12 },
-          shadowOpacity: 0.2,
-          shadowRadius: 20,
-          elevation: 10,
-        }
-      : {}),
+    // Native elevation (no RN shadow* on native to satisfy web lint)
+    ...(Platform.OS !== 'web' ? { elevation: 10 } : {}),
     // Web-only CSS shadow to avoid RNW shadow* warnings
     ...(Platform.OS === 'web' ? { boxShadow: '0px 12px 20px rgba(15, 23, 42, 0.2)' } : {}),
   },
@@ -291,7 +278,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 24,
   },
-  
+
   // Progress Container
   progressContainer: {
     alignItems: 'center',
@@ -304,30 +291,14 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     overflow: 'hidden',
     marginBottom: 12,
-    ...(Platform.OS !== 'web'
-      ? {
-          shadowColor: colors.primary.navy,
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
-          elevation: 2,
-        }
-      : {}),
+    ...(Platform.OS !== 'web' ? { elevation: 2 } : {}),
     ...(Platform.OS === 'web' ? { boxShadow: '0px 2px 4px rgba(15, 23, 42, 0.1)' } : {}),
   },
   progressBar: {
     height: '100%',
     backgroundColor: colors.neutral.white,
     borderRadius: 3,
-    ...(Platform.OS !== 'web'
-      ? {
-          shadowColor: colors.neutral.white,
-          shadowOffset: { width: 0, height: 0 },
-          shadowOpacity: 0.6,
-          shadowRadius: 6,
-          elevation: 4,
-        }
-      : {}),
+    ...(Platform.OS !== 'web' ? { elevation: 4 } : {}),
     ...(Platform.OS === 'web' ? { boxShadow: '0 0 6px rgba(255,255,255,0.6)' } : {}),
   },
   progressText: {
@@ -336,7 +307,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     opacity: 0.9,
   },
-  
+
   // Status Container
   statusContainer: {
     flexDirection: 'row',

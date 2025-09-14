@@ -2,7 +2,7 @@ import React from 'react';
 import { Share, Alert } from 'react-native';
 import { XStack, YStack, Text, Theme } from 'tamagui';
 import { font } from '../../ui/tokens';
-import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { ElevatedCard, Button, StatusPill, Circle } from '../../ui';
 import { useColors } from '../../styles/ThemeProvider';
 import { StatusVariant } from '../../ui/StatusBadge';
@@ -49,37 +49,37 @@ const formatLastUpdate = (timestamp: string): string => {
 /** Displays tracking information and status */
 function TrackingInfo({ trackingNumber, status, lastUpdate }: TrackingInfoProps) {
   const { text, textSecondary, success } = useColors();
-  
+
   return (
     <YStack flexShrink={1}>
-      <XStack alignItems="center" space="$2">
-<Text 
-          fontSize={font.section} 
-          fontWeight="700" 
+      <XStack alignItems='center' space='$2'>
+        <Text
+          fontSize={font.section}
+          fontWeight='700'
           color={text}
           numberOfLines={1}
-          ellipsizeMode="tail"
-          accessibilityRole="text"
-          testID="tracking-number"
+          ellipsizeMode='tail'
+          accessibilityRole='text'
+          testID='tracking-number'
         >
           {trackingNumber}
         </Text>
-        <Circle 
-          size={CIRCLE_SIZE} 
+        <Circle
+          size={CIRCLE_SIZE}
           backgroundColor={success}
-          accessibilityRole="image"
-          accessibilityLabel="Active shipment indicator"
+          accessibilityRole='image'
+          accessibilityLabel='Active shipment indicator'
         />
       </XStack>
-      <XStack alignItems="center" space="$2" marginTop="$1">
+      <XStack alignItems='center' space='$2' marginTop='$1'>
         <StatusPill status={status as 'pending' | 'in-transit' | 'delivered' | 'delayed'} />
-<Text 
-          fontSize={font.caption} 
+        <Text
+          fontSize={font.caption}
           color={textSecondary}
           numberOfLines={1}
-          ellipsizeMode="tail"
-          accessibilityRole="text"
-          testID="last-update"
+          ellipsizeMode='tail'
+          accessibilityRole='text'
+          testID='last-update'
         >
           {t('Last updated')}: {formatLastUpdate(lastUpdate)}
         </Text>
@@ -91,29 +91,29 @@ function TrackingInfo({ trackingNumber, status, lastUpdate }: TrackingInfoProps)
 /** Action buttons for refreshing and sharing */
 function ActionButtons({ onRefresh, onShare, isRefreshing }: ActionButtonsProps) {
   const { text } = useColors();
-  
+
   return (
-    <XStack space="$2">
-      <Button 
-        size="sm" 
-        variant="outline" 
+    <XStack space='$2'>
+      <Button
+        size='sm'
+        variant='outline'
         onPress={onRefresh}
         disabled={isRefreshing || false}
         accessibilityLabel={t('Refresh shipment status')}
-        accessibilityRole="button"
-        testID="refresh-button"
+        accessibilityRole='button'
+        testID='refresh-button'
       >
-        <Ionicons name="refresh" size={ICON_SIZE} color={text} />
+        <Feather name='refresh-ccw' size={ICON_SIZE} color={text} />
       </Button>
-      <Button 
-        size="sm" 
-        variant="ghost" 
+      <Button
+        size='sm'
+        variant='ghost'
         onPress={onShare}
         accessibilityLabel={t('Share shipment details')}
-        accessibilityRole="button"
-        testID="share-button"
+        accessibilityRole='button'
+        testID='share-button'
       >
-        <Ionicons name="share" size={ICON_SIZE} color={text} />
+        <Feather name='share-2' size={ICON_SIZE} color={text} />
       </Button>
     </XStack>
   );
@@ -126,46 +126,33 @@ export function ShipmentHeader({
   lastUpdate,
   onRefresh,
   origin,
-  destination
+  destination,
 }: ShipmentHeaderProps) {
   const handleShare = async () => {
     try {
       const message = t('track_shipment_share_message', {
         trackingNumber,
         origin,
-        destination
+        destination,
       });
       await Share.share({ message });
-      Alert.alert(
-        t('Success'),
-        t('Shipment details have been shared successfully')
-      );
+      Alert.alert(t('Success'), t('Shipment details have been shared successfully'));
     } catch (error) {
       console.error('Share error:', error);
-      Alert.alert(
-        t('Error'),
-        t('Failed to share shipment details')
-      );
+      Alert.alert(t('Error'), t('Failed to share shipment details'));
     }
   };
 
   return (
-    <ElevatedCard 
-      variant="elevated" 
-      animation="slide"
-      accessibilityRole="header"
-      testID="shipment-header"
+    <ElevatedCard
+      variant='elevated'
+      animation='slide'
+      accessibilityRole='header'
+      testID='shipment-header'
     >
-      <XStack alignItems="center" justifyContent="space-between">
-        <TrackingInfo 
-          trackingNumber={trackingNumber}
-          status={status}
-          lastUpdate={lastUpdate}
-        />
-        <ActionButtons 
-          onRefresh={onRefresh}
-          onShare={handleShare}
-        />
+      <XStack alignItems='center' justifyContent='space-between'>
+        <TrackingInfo trackingNumber={trackingNumber} status={status} lastUpdate={lastUpdate} />
+        <ActionButtons onRefresh={onRefresh} onShare={handleShare} />
       </XStack>
     </ElevatedCard>
   );

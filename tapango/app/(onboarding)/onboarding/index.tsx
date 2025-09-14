@@ -27,7 +27,7 @@ export default function OnboardingStep1() {
     <View style={styles.container}>
       <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
         <View style={{ width: 44 }} />
-        <TouchableOpacity accessibilityRole="button" onPress={skip} style={styles.skipBtn}>
+        <TouchableOpacity accessibilityRole='button' onPress={skip} style={styles.skipBtn}>
           <Text style={styles.skipText}>Skip</Text>
         </TouchableOpacity>
       </View>
@@ -39,12 +39,14 @@ export default function OnboardingStep1() {
 
         <Text style={styles.overline}>Northeast India's premier cargo network</Text>
         <Text style={styles.title}>Welcome to TAPANGO</Text>
-        <Text style={styles.sub}>Connect Imphal ↔ Delhi with trusted drivers and real‑time tracking.</Text>
+        <Text style={styles.sub}>
+          Connect Imphal ↔ Delhi with trusted drivers and real‑time tracking.
+        </Text>
       </View>
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + 24 }]}>
         <Pagination total={3} index={0} />
-        <TouchableOpacity style={styles.cta} onPress={goNext} accessibilityRole="button">
+        <TouchableOpacity style={styles.cta} onPress={goNext} accessibilityRole='button'>
           <Text style={styles.ctaText}>Next</Text>
         </TouchableOpacity>
       </View>
@@ -75,4 +77,3 @@ const styles = StyleSheet.create({
   },
   ctaText: { color: '#001A36', fontSize: 17, fontWeight: '700' },
 });
-

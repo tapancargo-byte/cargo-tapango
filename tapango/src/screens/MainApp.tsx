@@ -3,14 +3,18 @@ import { View, StyleSheet, StatusBar } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing } from '../styles';
 import { Screen } from '../ui/Screen';
-import { Title as DsTitle, Subtitle as DsSubtitle, Body as DsBody } from '../design-system/components/Typography';
+import {
+  Title as DsTitle,
+  Subtitle as DsSubtitle,
+  Body as DsBody,
+} from '../design-system/components/Typography';
 
 const MainApp: React.FC = () => {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={colors.neutral.white} />
+      <StatusBar barStyle='dark-content' backgroundColor={colors.neutral.white} />
 
       <Screen scroll={false} safeTop safeBottom>
         <View style={[styles.content, { paddingTop: insets.top }]}>

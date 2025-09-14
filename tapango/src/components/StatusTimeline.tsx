@@ -13,7 +13,12 @@ export const StatusTimeline: React.FC<{ items: TimelineItem[] }> = ({ items }) =
   return (
     <View style={styles.timeline}>
       {items.map((event, index) => (
-        <View key={event.id} style={styles.item} accessibilityRole="text" accessibilityLabel={`${event.description} at ${event.location}`}> 
+        <View
+          key={event.id}
+          style={styles.item}
+          accessibilityRole='text'
+          accessibilityLabel={`${event.description} at ${event.location}`}
+        >
           <View style={styles.markerWrap}>
             <View style={[styles.dot, index === 0 && styles.dotCurrent]} />
             {index < items.length - 1 && <View style={styles.vertical} />}
@@ -34,17 +39,28 @@ export const StatusTimeline: React.FC<{ items: TimelineItem[] }> = ({ items }) =
 
 function formatTime(iso: string) {
   const d = new Date(iso);
-  return d.toLocaleString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  return d.toLocaleString('en-IN', {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }
 
 function statusColor(status: TimelineItem['status']) {
   switch (status) {
-    case 'confirmed': return { color: '#059669' };
-    case 'in-transit': return { color: '#2563EB' };
-    case 'delivered': return { color: '#1D4ED8' };
-    case 'delayed': return { color: '#D97706' };
-    case 'cancelled': return { color: '#DC2626' };
-    default: return { color: '#6B7280' };
+    case 'confirmed':
+      return { color: '#059669' };
+    case 'in-transit':
+      return { color: '#2563EB' };
+    case 'delivered':
+      return { color: '#1D4ED8' };
+    case 'delayed':
+      return { color: '#D97706' };
+    case 'cancelled':
+      return { color: '#DC2626' };
+    default:
+      return { color: '#6B7280' };
   }
 }
 

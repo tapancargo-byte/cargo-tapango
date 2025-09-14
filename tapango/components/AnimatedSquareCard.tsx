@@ -1,6 +1,11 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import { View, StyleSheet, ViewStyle } from 'react-native';
-import Animated, { useSharedValue, withSpring, withTiming, useAnimatedStyle } from 'react-native-reanimated';
+import Animated, {
+  useSharedValue,
+  withSpring,
+  withTiming,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 
 export interface AnimatedSquareCardProps extends PropsWithChildren {
   style?: ViewStyle;
@@ -28,11 +33,7 @@ export default function AnimatedSquareCard({ children, style }: AnimatedSquareCa
     opacity: opacity.value,
   }));
 
-  return (
-    <Animated.View style={[styles.card, animatedStyle, style]}> 
-      {children}
-    </Animated.View>
-  );
+  return <Animated.View style={[styles.card, animatedStyle, style]}>{children}</Animated.View>;
 }
 
 const styles = StyleSheet.create({
@@ -49,4 +50,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-

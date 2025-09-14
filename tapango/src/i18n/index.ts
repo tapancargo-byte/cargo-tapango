@@ -1,6 +1,6 @@
-export type Locale = 'en' | 'hi'
+export type Locale = 'en' | 'hi';
 
-let currentLocale: Locale = 'en'
+let currentLocale: Locale = 'en';
 
 const dict: Record<Locale, Record<string, string>> = {
   en: {
@@ -29,13 +29,15 @@ const dict: Record<Locale, Record<string, string>> = {
     tapToViewTracking: 'Tap to view real-time tracking',
     ordersActive: 'Active',
     ordersPast: 'Past',
-    showingDemoOrders: 'Showing demo orders. Sign in to Supabase or run the dev policy migration to view real orders.',
+    showingDemoOrders:
+      'Showing demo orders. Sign in to Supabase or run the dev policy migration to view real orders.',
     signInToSupabase: 'Sign in to Supabase',
     bookShipment: 'Book a Shipment',
     noOrdersTitle: 'No {segment} Orders',
     trackPackage: 'Track Package',
     trackYourShipment: 'Track Your Shipment',
-    enterTrackingToGetUpdates: 'Enter your tracking number to get real-time updates',
+    enterTrackingToGetUpdates:
+      'Enter your tracking number to get real-time updates',
     from: 'From',
     to: 'To',
     currentLocation: 'Current Location',
@@ -47,11 +49,13 @@ const dict: Record<Locale, Record<string, string>> = {
     dark: 'Dark',
     language: 'Language',
     dashboard: 'Dashboard',
-    priceDisclaimer: '*Final price may vary based on actual dimensions and route',
+    priceDisclaimer:
+      '*Final price may vary based on actual dimensions and route',
     receipt: 'Receipt',
     enterTrackingNumber: 'Please enter a tracking number',
     trackingNotFound: 'Tracking number not found. Please check and try again.',
-    trackingFetchFailed: 'Failed to fetch tracking information. Please try again.',
+    trackingFetchFailed:
+      'Failed to fetch tracking information. Please try again.',
 
     // Home specific
     activeShipmentsCount: '{count} Active Shipments',
@@ -87,7 +91,8 @@ const dict: Record<Locale, Record<string, string>> = {
     draftSavedTitle: 'Draft saved',
     draftSavedBody: 'Resume from Home → Drafts.',
     bookingSuccessTitle: 'Booking Successful!',
-    bookingSuccessBody: 'Your cargo booking has been submitted. You will receive a confirmation shortly.',
+    bookingSuccessBody:
+      'Your cargo booking has been submitted. You will receive a confirmation shortly.',
     viewOrders: 'View Orders',
     bookAnother: 'Book Another',
     offlineTitle: 'Offline',
@@ -147,13 +152,15 @@ const dict: Record<Locale, Record<string, string>> = {
     tapToViewTracking: 'रीयल-टाइम ट्रैकिंग देखने के लिए टैप करें',
     ordersActive: 'सक्रिय',
     ordersPast: 'पूर्व',
-    showingDemoOrders: 'डेमो ऑर्डर दिखाए जा रहे हैं। वास्तविक ऑर्डर देखने के लिए Supabase में साइन इन करें या dev नीति माइग्रेशन चलाएँ।',
+    showingDemoOrders:
+      'डेमो ऑर्डर दिखाए जा रहे हैं। वास्तविक ऑर्डर देखने के लिए Supabase में साइन इन करें या dev नीति माइग्रेशन चलाएँ।',
     signInToSupabase: 'Supabase में साइन इन करें',
     bookShipment: 'एक शिपमेंट बुक करें',
     noOrdersTitle: '{segment} ऑर्डर नहीं',
     trackPackage: 'पैकेज ट्रैक करें',
     trackYourShipment: 'अपने शिपमेंट को ट्रैक करें',
-    enterTrackingToGetUpdates: 'रीयल-टाइम अपडेट प्राप्त करने के लिए अपना ट्रैकिंग नंबर दर्ज करें',
+    enterTrackingToGetUpdates:
+      'रीयल-टाइम अपडेट प्राप्त करने के लिए अपना ट्रैकिंग नंबर दर्ज करें',
     from: 'से',
     to: 'तक',
     currentLocation: 'वर्तमान स्थान',
@@ -165,28 +172,30 @@ const dict: Record<Locale, Record<string, string>> = {
     dark: 'डार्क',
     language: 'भाषा',
   },
-}
+};
 
-export function t(key: string, params?: Record<string, string | number>): string {
-  const table = dict[currentLocale] || dict.en
-  let out = table[key] || key
+export function t(
+  key: string,
+  params?: Record<string, string | number>
+): string {
+  const table = dict[currentLocale] || dict.en;
+  let out = table[key] || key;
   if (params) {
     for (const [k, v] of Object.entries(params)) {
-      out = out.replace(new RegExp(`{${k}}`, 'g'), String(v))
+      out = out.replace(new RegExp(`{${k}}`, 'g'), String(v));
     }
   }
-  return out
+  return out;
 }
 
 export function setLocale(locale: Locale) {
-  currentLocale = locale
+  currentLocale = locale;
 }
 
 export async function loadLocaleFromStorage() {
   try {
-    const { StorageService } = await import('../utils/storage')
-    const pref = await StorageService.getLanguagePreference?.()
-    if (pref && (pref === 'en' || pref === 'hi')) setLocale(pref)
+    const { StorageService } = await import('../utils/storage');
+    const pref = await StorageService.getLanguagePreference?.();
+    if (pref && (pref === 'en' || pref === 'hi')) setLocale(pref);
   } catch {}
 }
-

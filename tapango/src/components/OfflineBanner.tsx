@@ -5,12 +5,12 @@ import { useColors as useAppColors } from '../styles/ThemeProvider';
 
 // Compact inline offline banner using Tamagui
 export const OfflineBanner: React.FC<{ inline?: boolean }> = ({ inline = true }) => {
+  // IMPORTANT: Hooks must not be conditional; read theme first to keep a stable order
+  const palette = useAppColors();
   const [offline, setOffline] = useState(false);
 
   useEffect(() => {
-    let unsub: (() => void) | undefined;
-
-    unsub = NetInfo.addEventListener((state) => {
+    const unsub = NetInfo.addEventListener((state) => {
       setOffline(!(state?.isConnected && state?.isInternetReachable !== false));
     });
 
@@ -18,32 +18,33 @@ export const OfflineBanner: React.FC<{ inline?: boolean }> = ({ inline = true })
       setOffline(!(state?.isConnected && state?.isInternetReachable !== false));
     });
 
-    return () => { unsub?.(); };
+    return () => {
+      unsub?.();
+    };
   }, []);
 
   useEffect(() => {
     if (!offline) {
-      import('../utils/offlineQueue').then(m => m.drainPendingBookings?.()).catch(() => {});
-      import('../services/driverOffers').then(m => m.drainDriverOffers?.()).catch(() => {});
-      import('../services/kyc').then(m => m.drainKycUploads?.()).catch(() => {});
+      import('../utils/offlineQueue').then((m) => m.drainPendingBookings?.()).catch(() => {});
+      import('../services/driverOffers').then((m) => m.drainDriverOffers?.()).catch(() => {});
+      import('../services/kyc').then((m) => m.drainKycUploads?.()).catch(() => {});
     }
   }, [offline]);
 
   if (!offline) return null;
 
   // Inline banner: shows as a rounded bar that can be placed under headers
-  const palette = useAppColors();
   return (
     <YStack
-      accessibilityRole="alert"
+      accessibilityRole='alert'
       backgroundColor={palette.warning}
-      borderRadius="$4"
+      borderRadius='$4'
       paddingVertical={8}
       paddingHorizontal={12}
       marginHorizontal={16}
       marginTop={8}
     >
-      <Text color={palette.text} fontWeight="700" textAlign="center">
+      <Text color={palette.text} fontWeight='700' textAlign='center'>
         You’re offline. Actions will be queued and retried.
       </Text>
     </YStack>

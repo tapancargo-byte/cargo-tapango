@@ -1,4 +1,6 @@
-export function parseDims(input: string): { l: number; w: number; h: number } | null {
+export function parseDims(
+  input: string
+): { l: number; w: number; h: number } | null {
   if (!input) return null;
   const nums = input
     .toLowerCase()
@@ -12,7 +14,9 @@ export function parseDims(input: string): { l: number; w: number; h: number } | 
 }
 
 // IATA standard divisor 5000 for cm → kg volumetric
-export function volumetricKg(dims: { l: number; w: number; h: number } | null): number {
+export function volumetricKg(
+  dims: { l: number; w: number; h: number } | null
+): number {
   if (!dims) return 0;
   return (dims.l * dims.w * dims.h) / 5000;
 }

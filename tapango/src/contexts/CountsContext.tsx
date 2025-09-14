@@ -63,14 +63,32 @@ export function CountsProvider({ children }: { children: React.ReactNode }) {
         setShipmentsActive(active);
         // Try fetching additional metrics via RPC if available
         try {
-          const rpcNames = ['get_dashboard_metrics_public', 'get_dashboard_metrics', 'dashboard_metrics'];
+          const rpcNames = [
+            'get_dashboard_metrics_public',
+            'get_dashboard_metrics',
+            'dashboard_metrics',
+          ];
           for (const rpcName of rpcNames) {
             try {
               const res = await (supabase as any).rpc?.(rpcName, { p_user_id: userId ?? null });
               if (res && !res.error && res.data) {
-                const d: any = Array.isArray(res.data) ? (res.data[0] || res.data) : res.data;
-                const saved = Number(d.saved_amount_inr ?? d.total_savings_inr ?? d.savings_inr ?? d.savings ?? d.total_savings ?? NaN);
-                const onTime = Number(d.on_time_percent ?? d.ontime_percent ?? d.on_time ?? d.ontime ?? d.on_time_rate ?? NaN);
+                const d: any = Array.isArray(res.data) ? res.data[0] || res.data : res.data;
+                const saved = Number(
+                  d.saved_amount_inr ??
+                    d.total_savings_inr ??
+                    d.savings_inr ??
+                    d.savings ??
+                    d.total_savings ??
+                    NaN
+                );
+                const onTime = Number(
+                  d.on_time_percent ??
+                    d.ontime_percent ??
+                    d.on_time ??
+                    d.ontime ??
+                    d.on_time_rate ??
+                    NaN
+                );
                 if (!Number.isNaN(saved)) setSavedAmountInr(saved);
                 if (!Number.isNaN(onTime)) setOnTimePercent(Math.round(onTime));
                 break;
@@ -105,8 +123,26 @@ export function CountsProvider({ children }: { children: React.ReactNode }) {
   }, [refresh]);
 
   const value = useMemo(
-    () => ({ ordersTotal, ordersActive, ordersPast, shipmentsActive, savedAmountInr, onTimePercent, loading, refresh }),
-    [ordersTotal, ordersActive, ordersPast, shipmentsActive, savedAmountInr, onTimePercent, loading, refresh]
+    () => ({
+      ordersTotal,
+      ordersActive,
+      ordersPast,
+      shipmentsActive,
+      savedAmountInr,
+      onTimePercent,
+      loading,
+      refresh,
+    }),
+    [
+      ordersTotal,
+      ordersActive,
+      ordersPast,
+      shipmentsActive,
+      savedAmountInr,
+      onTimePercent,
+      loading,
+      refresh,
+    ]
   );
 
   return <CountsContext.Provider value={value}>{children}</CountsContext.Provider>;
@@ -115,4 +151,3 @@ export function CountsProvider({ children }: { children: React.ReactNode }) {
 export function useCounts(): CountsContextValue {
   return useContext(CountsContext);
 }
-

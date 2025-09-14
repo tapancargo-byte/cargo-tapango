@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export type StatusVariant = 
+export type StatusVariant =
   | 'pending'
-  | 'confirmed' 
+  | 'confirmed'
   | 'in-transit'
   | 'delivered'
   | 'cancelled'
@@ -16,7 +16,7 @@ interface StatusBadgeProps {
 
 /**
  * StatusBadge Component
- * 
+ *
  * Displays order/shipment status with appropriate colors
  */
 export function StatusBadge({ status, size = 'medium' }: StatusBadgeProps) {
@@ -56,20 +56,8 @@ export function StatusBadge({ status, size = 'medium' }: StatusBadgeProps) {
   const config = statusConfig[status];
 
   return (
-    <View 
-      style={[
-        styles.badge,
-        styles[size],
-        { backgroundColor: config.backgroundColor }
-      ]}
-    >
-      <Text 
-        style={[
-          styles.text,
-          styles[`${size}Text`],
-          { color: config.textColor }
-        ]}
-      >
+    <View style={[styles.badge, styles[size], { backgroundColor: config.backgroundColor }]}>
+      <Text style={[styles.text, styles[`${size}Text`], { color: config.textColor }]}>
         {config.label}
       </Text>
     </View>

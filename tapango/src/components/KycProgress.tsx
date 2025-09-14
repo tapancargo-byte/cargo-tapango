@@ -1,23 +1,51 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useColors } from '../styles/ThemeProvider';
 
 export const KycProgress: React.FC<{ percent: number }> = ({ percent }) => {
+  const colors = useColors();
   const clamped = Math.max(0, Math.min(100, Math.round(percent)));
+
   return (
-    <View style={styles.card}>
-      <Text style={styles.title}>KYC Progress</Text>
-      <View style={styles.barBg}>
-        <View style={[styles.barFill, { width: `${clamped}%` }]} />
+    <View style={[styles.container, { backgroundColor: colors.surface }]}>
+      <View style={styles.progressContainer}>
+        <View style={[styles.barBg, { backgroundColor: colors.border }]}>
+          <View
+            style={[
+              styles.barFill,
+              {
+                width: `${clamped}%`,
+                backgroundColor: colors.success,
+              },
+            ]}
+          />
+        </View>
+        <Text style={[styles.caption, { color: colors.textSecondary }]}>{clamped}% completed</Text>
       </View>
-      <Text style={styles.caption}>{clamped}% completed</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: '#fff', borderRadius: 12, padding: 16, borderWidth: 1, borderColor: '#E5E7EB', margin: 16 },
-  title: { fontWeight: '700', marginBottom: 8, color: '#111827' },
-  barBg: { height: 10, borderRadius: 5, backgroundColor: '#E5E7EB', overflow: 'hidden' },
-  barFill: { height: 10, backgroundColor: '#10B981' },
-  caption: { color: '#6B7280', marginTop: 6 },
+  container: {
+    paddingVertical: 8,
+  },
+  progressContainer: {
+    gap: 8,
+  },
+  barBg: {
+    height: 8,
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  barFill: {
+    height: 8,
+    borderRadius: 4,
+    // Note: CSS transitions are not supported in React Native
+  },
+  caption: {
+    fontSize: 14,
+    fontWeight: '500',
+    textAlign: 'right',
+  },
 });

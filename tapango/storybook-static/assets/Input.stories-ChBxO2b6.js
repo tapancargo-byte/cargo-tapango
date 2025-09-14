@@ -1,0 +1,208 @@
+import { j as r } from './jsx-runtime-BjG_zV1W.js';
+import './helpers-dEnf9ZHf.js';
+import './index-D_zSVikN.js';
+import { u as X, g as Y, S as m } from './ThemeProvider-CPKCwPQ2.js';
+import './GorhomPortal-CbY2Y53n.js';
+import './index-VT2245Mq.js';
+import { T as c } from './Text-DBu9YOJb.js';
+import { T as _ } from './index-C4hRfBNc.js';
+import { Y as v, X as H } from './Stacks-CaMMwnuE.js';
+import './styled-BAAga49T.js';
+import './index-DaADHxGU.js';
+import './async-storage-CbWkip1I.js';
+const o = ({
+    label: e,
+    value: L,
+    placeholder: w,
+    onChangeText: A,
+    error: l,
+    variant: d = 'default',
+    leftIcon: p,
+    rightIcon: u,
+    mode: E = 'light',
+    required: M,
+    style: $,
+    secureTextEntry: z,
+    keyboardType: C,
+    ...D
+  }) => {
+    const O = (() => {
+        try {
+          return X();
+        } catch {
+          return E === 'dark';
+        }
+      })(),
+      t = Y(O ? 'dark' : 'light'),
+      P = d === 'filled' ? t.colors.surfaceVariant : 'transparent',
+      R = 1,
+      q = l ? t.colors.danger : t.colors.border;
+    return r.jsxs(v, {
+      space: '$1',
+      children: [
+        e
+          ? r.jsxs(c, {
+              fontSize: t.typography.subtitle,
+              fontWeight: '600',
+              color: t.colors.text,
+              children: [
+                e,
+                ' ',
+                M ? r.jsx(c, { color: t.colors.danger, children: '*' }) : null,
+              ],
+            })
+          : null,
+        r.jsxs(H, {
+          alignItems: 'center',
+          borderRadius: 12,
+          paddingHorizontal: '$3',
+          backgroundColor: P,
+          borderWidth: R,
+          borderColor: q,
+          style: $,
+          children: [
+            p ? r.jsx(m, { marginRight: '$2', children: p }) : null,
+            r.jsx(_, {
+              style: { flex: 1, height: 44, color: t.colors.text },
+              placeholder: w,
+              placeholderTextColor: t.colors.textSecondary,
+              value: L,
+              onChangeText: A,
+              secureTextEntry: z,
+              keyboardType: C,
+              accessible: !0,
+              accessibilityLabel: e,
+              ...D,
+            }),
+            u ? r.jsx(m, { marginLeft: '$2', children: u }) : null,
+          ],
+        }),
+        l
+          ? r.jsx(c, {
+              fontSize: t.typography.caption,
+              color: t.colors.danger,
+              children: l,
+            })
+          : null,
+      ],
+    });
+  },
+  tr = {
+    title: 'Design System/Input',
+    component: o,
+    argTypes: {
+      mode: { control: { type: 'inline-radio' }, options: ['light', 'dark'] },
+      variant: {
+        control: { type: 'select' },
+        options: ['default', 'filled', 'outlined', 'ghost'],
+      },
+    },
+    args: {
+      mode: 'light',
+      variant: 'default',
+      label: 'Label',
+      placeholder: 'Placeholder',
+    },
+  },
+  s = { render: (e) => r.jsx(o, { ...e }) },
+  n = { render: (e) => r.jsx(o, { ...e, error: 'This field is required' }) },
+  i = {
+    render: (e) =>
+      r.jsx(o, {
+        ...e,
+        leftIcon: r.jsx('span', {
+          style: { display: 'inline-block', width: 16, textAlign: 'center' },
+          children: '🔎',
+        }),
+        rightIcon: r.jsx('span', {
+          style: { display: 'inline-block', width: 16, textAlign: 'center' },
+          children: '▦',
+        }),
+      }),
+  },
+  a = {
+    render: (e) =>
+      r.jsx(o, {
+        ...e,
+        multiline: !0,
+        numberOfLines: 3,
+        placeholder: 'Multiline input...',
+      }),
+  };
+var g, h, x;
+s.parameters = {
+  ...s.parameters,
+  docs: {
+    ...((g = s.parameters) == null ? void 0 : g.docs),
+    source: {
+      originalSource: `{
+  render: args => <Input {...args} />
+}`,
+      ...((x = (h = s.parameters) == null ? void 0 : h.docs) == null
+        ? void 0
+        : x.source),
+    },
+  },
+};
+var f, y, b;
+n.parameters = {
+  ...n.parameters,
+  docs: {
+    ...((f = n.parameters) == null ? void 0 : f.docs),
+    source: {
+      originalSource: `{
+  render: args => <Input {...args} error="This field is required" />
+}`,
+      ...((b = (y = n.parameters) == null ? void 0 : y.docs) == null
+        ? void 0
+        : b.source),
+    },
+  },
+};
+var j, k, I;
+i.parameters = {
+  ...i.parameters,
+  docs: {
+    ...((j = i.parameters) == null ? void 0 : j.docs),
+    source: {
+      originalSource: `{
+  render: args => <Input {...args} leftIcon={<span style={{
+    display: 'inline-block',
+    width: 16,
+    textAlign: 'center'
+  }}>🔎</span>} rightIcon={<span style={{
+    display: 'inline-block',
+    width: 16,
+    textAlign: 'center'
+  }}>▦</span>} />
+}`,
+      ...((I = (k = i.parameters) == null ? void 0 : k.docs) == null
+        ? void 0
+        : I.source),
+    },
+  },
+};
+var S, T, W;
+a.parameters = {
+  ...a.parameters,
+  docs: {
+    ...((S = a.parameters) == null ? void 0 : S.docs),
+    source: {
+      originalSource: `{
+  render: args => <Input {...args} multiline numberOfLines={3} placeholder="Multiline input..." />
+}`,
+      ...((W = (T = a.parameters) == null ? void 0 : T.docs) == null
+        ? void 0
+        : W.source),
+    },
+  },
+};
+const or = ['Playground', 'WithError', 'WithIcons', 'Multiline'];
+export {
+  a as Multiline,
+  s as Playground,
+  n as WithError,
+  i as WithIcons,
+  or as __namedExportsOrder,
+  tr as default,
+};

@@ -1,10 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  AccessibilityInfo,
-  ViewStyle,
-} from 'react-native';
+import { View, StyleSheet, AccessibilityInfo, ViewStyle } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { lottieConfig } from '../utils/animations';
 
@@ -112,14 +107,13 @@ const LottieAnimation: React.FC<LottieAnimationProps> = ({
     }
   };
 
-
   return (
-    <View 
+    <View
       style={[styles.container, style]}
       accessible={!!accessibilityLabel}
       accessibilityLabel={accessibilityLabel}
       accessibilityHint={accessibilityHint}
-      accessibilityRole="image"
+      accessibilityRole='image'
       testID={testID}
     >
       <LottieView

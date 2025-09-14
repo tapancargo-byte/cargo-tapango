@@ -2,7 +2,9 @@
 
 ## Overview
 
-This guide provides instructions for integrating Tamagui UI components into the TAPANGO mobile logistics platform. Tamagui offers optimized, cross-platform UI components that work seamlessly with Expo Router.
+This guide provides instructions for integrating Tamagui UI components into the
+TAPANGO mobile logistics platform. Tamagui offers optimized, cross-platform UI
+components that work seamlessly with Expo Router.
 
 ## Prerequisites
 
@@ -136,7 +138,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     initSentry();
-    
+
     async function prepare() {
       try {
         // Load custom fonts if needed
@@ -144,8 +146,8 @@ export default function RootLayout() {
         //   Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
         //   InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
         // });
-        
-        await new Promise(resolve => setTimeout(resolve, 200));
+
+        await new Promise((resolve) => setTimeout(resolve, 200));
       } catch (e) {
         console.warn('Error during app preparation:', e);
       } finally {
@@ -159,19 +161,25 @@ export default function RootLayout() {
 
   if (!appIsReady) {
     return (
-      <View style={{
-        flex: 1, 
-        backgroundColor: '#1E40AF',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <ActivityIndicator size="large" color="white" />
-        <Text style={{
-          color: 'white',
-          marginTop: 16,
-          fontSize: 16,
-          fontWeight: '500'
-        }}>Loading TAPANGO...</Text>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#1E40AF',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <ActivityIndicator size='large' color='white' />
+        <Text
+          style={{
+            color: 'white',
+            marginTop: 16,
+            fontSize: 16,
+            fontWeight: '500',
+          }}
+        >
+          Loading TAPANGO...
+        </Text>
       </View>
     );
   }
@@ -179,25 +187,33 @@ export default function RootLayout() {
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
       <ReactQueryProvider>
-        <TamaguiProvider 
-          config={tamaguiConfig} 
-          defaultTheme={colorScheme === 'dark' ? 'tapango_dark' : 'tapango_light'}
+        <TamaguiProvider
+          config={tamaguiConfig}
+          defaultTheme={
+            colorScheme === 'dark' ? 'tapango_dark' : 'tapango_light'
+          }
         >
           <ThemeProvider>
             <SafeAreaProvider>
-              <StatusBar style="auto" />
+              <StatusBar style='auto' />
               <OfflineBanner />
               <Stack
                 screenOptions={{
                   headerShown: false,
                 }}
               >
-                <Stack.Screen name="index" options={{ headerShown: false }} />
-                <Stack.Screen name="splash" options={{ headerShown: false }} />
-                <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-                <Stack.Screen name="(modals)" options={{ presentation: 'modal', headerShown: false }} />
+                <Stack.Screen name='index' options={{ headerShown: false }} />
+                <Stack.Screen name='splash' options={{ headerShown: false }} />
+                <Stack.Screen
+                  name='(onboarding)'
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+                <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+                <Stack.Screen
+                  name='(modals)'
+                  options={{ presentation: 'modal', headerShown: false }}
+                />
               </Stack>
             </SafeAreaProvider>
           </ThemeProvider>
@@ -242,7 +258,14 @@ Create a `tamagui-web.css` file in your project root:
 ```css
 /* tamagui-web.css */
 html {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
 }
 
 body {
@@ -271,18 +294,18 @@ import { YStack, XStack, Button, Text, Card, H2 } from 'tamagui';
 
 export default function ExampleScreen() {
   return (
-    <YStack flex={1} padding="$4" space="$4" backgroundColor="$background">
+    <YStack flex={1} padding='$4' space='$4' backgroundColor='$background'>
       <H2>TAPANGO Logistics</H2>
-      
-      <Card elevate bordered padding="$4">
-        <YStack space="$3">
-          <Text fontSize="$5">Quick Actions</Text>
-          
-          <XStack space="$2">
-            <Button flex={1} theme="primary">
+
+      <Card elevate bordered padding='$4'>
+        <YStack space='$3'>
+          <Text fontSize='$5'>Quick Actions</Text>
+
+          <XStack space='$2'>
+            <Button flex={1} theme='primary'>
               New Booking
             </Button>
-            <Button flex={1} theme="secondary">
+            <Button flex={1} theme='secondary'>
               Track Order
             </Button>
           </XStack>
@@ -313,7 +336,7 @@ const OldButton = ({ title, onPress }) => (
 import { Button } from 'tamagui';
 
 const NewButton = ({ title, onPress }) => (
-  <Button onPress={onPress} theme="primary">
+  <Button onPress={onPress} theme='primary'>
     {title}
   </Button>
 );
@@ -347,7 +370,8 @@ Update your `package.json` scripts for optimal development:
 ### 2. Performance Optimization
 
 - Enable the Babel plugin for production builds
-- Use `disableExtraction: process.env.NODE_ENV === 'development'` for faster development
+- Use `disableExtraction: process.env.NODE_ENV === 'development'` for faster
+  development
 - Leverage Tamagui's tree-shaking capabilities
 
 ### 3. Component Migration Strategy
@@ -362,7 +386,7 @@ Update your `package.json` scripts for optimal development:
 ```tsx
 // Use Tamagui's responsive props for different screen sizes
 <YStack
-  padding="$2" // Small screens
+  padding='$2' // Small screens
   $gtSm={{ padding: '$4' }} // Medium screens and up
   $gtMd={{ padding: '$6' }} // Large screens and up
 >
@@ -374,10 +398,13 @@ Update your `package.json` scripts for optimal development:
 
 ### Common Issues
 
-1. **Metro Cache Issues**: Always start with `expo start -c` after installing Tamagui
-2. **Font Loading**: Ensure fonts are properly loaded before rendering components
+1. **Metro Cache Issues**: Always start with `expo start -c` after installing
+   Tamagui
+2. **Font Loading**: Ensure fonts are properly loaded before rendering
+   components
 3. **Web Compatibility**: Test web builds after adding Tamagui components
-4. **Theme Conflicts**: Ensure Tamagui themes don't conflict with your existing theme system
+4. **Theme Conflicts**: Ensure Tamagui themes don't conflict with your existing
+   theme system
 
 ### Clear Cache Command
 
@@ -395,7 +422,8 @@ npx expo start -c --reset-cache
 5. Test on all target platforms (iOS, Android, Web)
 6. Optimize for production builds
 
-For more detailed documentation, visit the [official Tamagui documentation](https://tamagui.dev/).
+For more detailed documentation, visit the
+[official Tamagui documentation](https://tamagui.dev/).
 
 ## TAPANGO-Specific Notes
 
@@ -407,4 +435,5 @@ For more detailed documentation, visit the [official Tamagui documentation](http
 
 ---
 
-*This guide is specifically tailored for the TAPANGO logistics platform. For general Tamagui documentation, refer to the official docs.*
+_This guide is specifically tailored for the TAPANGO logistics platform. For
+general Tamagui documentation, refer to the official docs._

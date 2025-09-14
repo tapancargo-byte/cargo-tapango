@@ -11,7 +11,10 @@ export default function CustomerSupabaseSignIn() {
 
   const onSignIn = async () => {
     if (!supabase) {
-      Alert.alert('Not configured', 'Set EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY.');
+      Alert.alert(
+        'Not configured',
+        'Set EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY.'
+      );
       return;
     }
     setLoading(true);
@@ -24,7 +27,9 @@ export default function CustomerSupabaseSignIn() {
       }
     } catch (e: any) {
       Alert.alert('Error', e?.message ?? 'Failed to sign in');
-    } finally { setLoading(false); }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,26 +38,21 @@ export default function CustomerSupabaseSignIn() {
       <Text style={styles.subtitle}>This enables secure Orders access under production RLS.</Text>
 
       <TextInput
-        placeholder="you@example.com"
-        autoCapitalize="none"
-        keyboardType="email-address"
+        placeholder='you@example.com'
+        autoCapitalize='none'
+        keyboardType='email-address'
         style={styles.input}
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
-        placeholder="Password"
+        placeholder='Password'
         secureTextEntry
         style={styles.input}
         value={password}
         onChangeText={setPassword}
       />
-      <Button
-        variant="primary"
-        onPress={onSignIn}
-        fullWidth
-        disabled={loading}
-      >
+      <Button variant='primary' onPress={onSignIn} fullWidth disabled={loading}>
         {loading ? 'Signing in...' : 'Sign in'}
       </Button>
     </View>
@@ -63,6 +63,12 @@ const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, backgroundColor: '#F8FAFC' },
   title: { fontSize: 24, fontWeight: '800', color: '#111827' },
   subtitle: { color: '#6B7280', marginTop: 8, marginBottom: 12 },
-  input: { borderWidth: 1, borderColor: '#D1D5DB', borderRadius: 8, padding: 12, backgroundColor: '#fff', marginBottom: 8 },
+  input: {
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    borderRadius: 8,
+    padding: 12,
+    backgroundColor: '#fff',
+    marginBottom: 8,
+  },
 });
-

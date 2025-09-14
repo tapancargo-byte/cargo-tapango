@@ -8,10 +8,10 @@ export const splashContent = {
   // Main branding taglines
   taglines: [
     "Northeast India's Cargo Network",
-    "Imphal to Delhi Express Logistics",
-    "Your Trusted Logistics Partner",
-    "Professional Cargo Transportation",
-    "Connecting Northeast India",
+    'Imphal to Delhi Express Logistics',
+    'Your Trusted Logistics Partner',
+    'Professional Cargo Transportation',
+    'Connecting Northeast India',
   ],
 
   // Loading messages that build anticipation
@@ -35,7 +35,7 @@ export const splashContent = {
       'Connecting trusted drivers...',
       'Loading delivery solutions...',
       'Preparing cost estimates...',
-      'Let\'s move your cargo!',
+      "Let's move your cargo!",
     ],
   },
 };
@@ -48,18 +48,21 @@ export const onboardingContent = {
       variations: {
         professional: {
           title: 'Welcome to TAPANGO',
-          subtitle: 'Northeast India\'s Premier Cargo Network',
-          description: 'Connecting Imphal to New Delhi with professional logistics services. Experience seamless cargo transportation with real-time tracking and trusted drivers.',
+          subtitle: "Northeast India's Premier Cargo Network",
+          description:
+            'Connecting Imphal to New Delhi with professional logistics services. Experience seamless cargo transportation with real-time tracking and trusted drivers.',
         },
         businessFocused: {
           title: 'TAPANGO Logistics',
           subtitle: 'Enterprise Cargo Solutions',
-          description: 'Scale your business with reliable cargo transportation. Competitive rates, insured shipments, and dedicated support for your logistics needs.',
+          description:
+            'Scale your business with reliable cargo transportation. Competitive rates, insured shipments, and dedicated support for your logistics needs.',
         },
         personalApproach: {
           title: 'Welcome to TAPANGO',
           subtitle: 'Your Cargo, Our Priority',
-          description: 'Whether it\'s personal items or business cargo, we ensure safe and timely delivery across Northeast India with complete peace of mind.',
+          description:
+            "Whether it's personal items or business cargo, we ensure safe and timely delivery across Northeast India with complete peace of mind.",
         },
       },
     },
@@ -69,17 +72,20 @@ export const onboardingContent = {
         efficiency: {
           title: 'Smart Booking System',
           subtitle: 'Book Your Cargo in Under 2 Minutes',
-          description: 'Simply enter pickup and delivery locations, select cargo type, and confirm. Our AI-powered system instantly matches you with the best available driver.',
+          description:
+            'Simply enter pickup and delivery locations, select cargo type, and confirm. Our AI-powered system instantly matches you with the best available driver.',
         },
         simplicity: {
           title: 'Simple Booking Process',
           subtitle: 'Three Steps to Delivery',
-          description: 'Pick location, choose cargo type, book instantly. No complex forms, no waiting - just fast, efficient booking designed for your convenience.',
+          description:
+            'Pick location, choose cargo type, book instantly. No complex forms, no waiting - just fast, efficient booking designed for your convenience.',
         },
         technology: {
           title: 'Intelligent Booking',
           subtitle: 'AI-Powered Route Optimization',
-          description: 'Our smart system analyzes traffic, weather, and driver availability to provide the fastest, most cost-effective delivery solution for your cargo.',
+          description:
+            'Our smart system analyzes traffic, weather, and driver availability to provide the fastest, most cost-effective delivery solution for your cargo.',
         },
       },
     },
@@ -89,17 +95,20 @@ export const onboardingContent = {
         reliability: {
           title: 'Real-Time Tracking',
           subtitle: '99.2% On-Time Delivery Record',
-          description: 'Monitor your cargo\'s journey with live GPS tracking, receive instant notifications, and communicate directly with your assigned driver throughout the delivery.',
+          description:
+            "Monitor your cargo's journey with live GPS tracking, receive instant notifications, and communicate directly with your assigned driver throughout the delivery.",
         },
         transparency: {
           title: 'Complete Visibility',
           subtitle: 'Know Where Your Cargo Is, Always',
-          description: 'Live GPS tracking, photo confirmations, and instant updates keep you informed every step of the way. Full transparency from pickup to delivery.',
+          description:
+            'Live GPS tracking, photo confirmations, and instant updates keep you informed every step of the way. Full transparency from pickup to delivery.',
         },
         security: {
           title: 'Secure Tracking',
           subtitle: 'Your Cargo, Protected & Monitored',
-          description: 'Advanced security features including real-time GPS, driver verification, and instant alerts ensure your cargo is safe throughout its journey.',
+          description:
+            'Advanced security features including real-time GPS, driver verification, and instant alerts ensure your cargo is safe throughout its journey.',
         },
       },
     },
@@ -109,17 +118,20 @@ export const onboardingContent = {
         social_proof: {
           title: 'Ready to Ship?',
           subtitle: '5,000+ Successful Deliveries This Month',
-          description: 'Join businesses and individuals who trust TAPANGO for reliable cargo logistics. Competitive rates, insured shipments, and 24/7 customer support.',
+          description:
+            'Join businesses and individuals who trust TAPANGO for reliable cargo logistics. Competitive rates, insured shipments, and 24/7 customer support.',
         },
         value_proposition: {
           title: 'Start Shipping Smart',
           subtitle: 'Save Time, Money & Effort',
-          description: 'Experience the most efficient cargo delivery service in Northeast India. Instant quotes, flexible scheduling, and guaranteed delivery times.',
+          description:
+            'Experience the most efficient cargo delivery service in Northeast India. Instant quotes, flexible scheduling, and guaranteed delivery times.',
         },
         trust_building: {
           title: 'Join TAPANGO Today',
           subtitle: 'Trusted by 10,000+ Customers',
-          description: 'Licensed, insured, and verified drivers. Comprehensive cargo insurance. 24/7 customer support. Your logistics partner you can count on.',
+          description:
+            'Licensed, insured, and verified drivers. Comprehensive cargo insurance. 24/7 customer support. Your logistics partner you can count on.',
         },
       },
     },
@@ -127,8 +139,18 @@ export const onboardingContent = {
 
   // Call-to-action variations
   cta_buttons: {
-    action_oriented: ['Get Started', 'Ship Now', 'Book Delivery', 'Start Moving'],
-    benefit_focused: ['Save Time', 'Get Quote', 'Try Free', 'Experience Better'],
+    action_oriented: [
+      'Get Started',
+      'Ship Now',
+      'Book Delivery',
+      'Start Moving',
+    ],
+    benefit_focused: [
+      'Save Time',
+      'Get Quote',
+      'Try Free',
+      'Experience Better',
+    ],
     urgency_driven: ['Book Now', 'Ship Today', 'Get Moving', 'Start Delivery'],
   },
 
@@ -178,24 +200,35 @@ export const onboardingContent = {
 // Content selection utility functions
 export const selectContent = {
   // Select content based on user type or A/B test
-  getOnboardingContent: (userType: 'business' | 'individual' | 'ecommerce' = 'individual', variation: string = 'professional') => {
-    return onboardingContent.screens.map(screen => ({
+  getOnboardingContent: (
+    userType: 'business' | 'individual' | 'ecommerce' = 'individual',
+    variation: string = 'professional'
+  ) => {
+    return onboardingContent.screens.map((screen) => ({
       ...screen,
-      content: screen.variations[variation as keyof typeof screen.variations] || screen.variations.professional
+      content:
+        screen.variations[variation as keyof typeof screen.variations] ||
+        screen.variations.professional,
     }));
   },
 
   // Get appropriate loading messages
-  getLoadingMessages: (context: 'logistics' | 'technical' | 'business' = 'logistics') => {
+  getLoadingMessages: (
+    context: 'logistics' | 'technical' | 'business' = 'logistics'
+  ) => {
     return splashContent.loadingMessages[context];
   },
 
   // Get trust signal for specific context
   getTrustSignal: (index?: number) => {
     if (index !== undefined) {
-      return onboardingContent.trust_signals[index % onboardingContent.trust_signals.length];
+      return onboardingContent.trust_signals[
+        index % onboardingContent.trust_signals.length
+      ];
     }
-    return onboardingContent.trust_signals[Math.floor(Math.random() * onboardingContent.trust_signals.length)];
+    return onboardingContent.trust_signals[
+      Math.floor(Math.random() * onboardingContent.trust_signals.length)
+    ];
   },
 };
 

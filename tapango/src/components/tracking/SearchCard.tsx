@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { XStack, YStack, Text } from 'tamagui';
 import { AnimatePresence } from '@tamagui/animate-presence';
-import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { GlassCard, Input, Button, LoadingSpinner, FadeIn } from '../../ui';
 import { font } from '../../ui/tokens';
 import { useColors } from '../../styles/ThemeProvider';
@@ -36,7 +36,7 @@ function LoadingButton({ isLoading, onPress, disabled = false, children }: Loadi
     } else if (!isLoading && loadingSince) {
       const elapsed = Date.now() - loadingSince;
       const remainingTime = Math.max(0, 500 - elapsed); // Minimum 500ms loading time
-      
+
       if (remainingTime > 0) {
         if (loadingTimer.current) {
           clearTimeout(loadingTimer.current);
@@ -60,23 +60,23 @@ function LoadingButton({ isLoading, onPress, disabled = false, children }: Loadi
   return (
     <AnimatePresence>
       {loading ? (
-        <FadeIn key="loading">
-          <Button fullWidth size="lg" disabled>
-            <LoadingSpinner size="sm" />
-            <Text marginLeft="$2" animation="quick">
+        <FadeIn key='loading'>
+          <Button fullWidth size='lg' disabled>
+            <LoadingSpinner size='sm' />
+            <Text marginLeft='$2' animation='quick'>
               Searching...
             </Text>
           </Button>
         </FadeIn>
       ) : (
-        <FadeIn key="default">
-          <Button 
-            fullWidth 
-            size="lg" 
-            onPress={onPress} 
-            variant="primary" 
+        <FadeIn key='default'>
+          <Button
+            fullWidth
+            size='lg'
+            onPress={onPress}
+            variant='primary'
             disabled={disabled}
-            animation="quick"
+            animation='quick'
           >
             {children}
           </Button>
@@ -92,7 +92,7 @@ export function SearchCard({
   error,
   isLoading,
   onTrack,
-  minLoadingTime = 500
+  minLoadingTime = 500,
 }: SearchCardProps) {
   const errorId = useRef(`error-${Math.random().toString(36).slice(2)}`).current;
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -132,78 +132,87 @@ export function SearchCard({
   const palette = useColors();
 
   return (
-    <GlassCard variant="glass" animation="quick" role="region" aria-label="Track Shipment Form">
-      <YStack space="$3">
-        <XStack alignItems="center" space="$3">
-          <Circle size={40} backgroundColor={palette.info + '20'} role="presentation">
-            <Ionicons name="search" size={20} color={palette.info} accessibilityRole="image" accessibilityLabel="Search icon" />
+    <GlassCard variant='glass' animation='quick' accessibilityLabel='Track Shipment Form'>
+      <YStack space='$3'>
+        <XStack alignItems='center' space='$3'>
+          <Circle size={40} backgroundColor={palette.info + '20'} role='presentation'>
+            <Feather
+              name='search'
+              size={20}
+              color={palette.info}
+              accessibilityRole='image'
+              accessibilityLabel='Search icon'
+            />
           </Circle>
           <YStack>
-<Text fontSize={font.section} fontWeight="700" color={palette.text} role="heading" aria-level={2}>
+            <Text
+              fontSize={font.section}
+              fontWeight='700'
+              color={palette.text}
+              role='heading'
+              aria-level={2}
+            >
               Track Shipment
             </Text>
-<Text fontSize={font.caption} color={palette.textSecondary} role="text">
+            <Text fontSize={font.caption} color={palette.textSecondary} role='text'>
               Enter tracking number or scan QR code
             </Text>
           </YStack>
         </XStack>
-        
+
         <Input
-          label="Tracking Number"
+          label='Tracking Number'
           value={trackingNumber}
           onChangeText={handleChangeTracking}
-          placeholder="TPG123456789"
-          error={(validationError ?? error) ?? undefined}
+          placeholder='TPG123456789'
+          error={validationError ?? error ?? undefined}
           aria-describedby={(validationError ?? error) ? errorId : undefined}
-          aria-invalid={(validationError ?? error) ? "true" : "false"}
-          variant="filled"
+          aria-invalid={(validationError ?? error) ? 'true' : 'false'}
+          variant='filled'
           rightIcon={
-            <Ionicons 
-              name="qr-code" 
-              size={20} 
-              color={palette.textSecondary} 
-              accessibilityRole="button"
-              accessibilityLabel="Open QR code scanner"
+            <Feather
+              name='camera'
+              size={20}
+              color={palette.textSecondary}
+              accessibilityRole='button'
+              accessibilityLabel='Open QR code scanner'
             />
           }
-          accessibilityLabel="Enter your tracking number"
-          accessibilityHint="Enter your tracking number to locate your shipment"
-          returnKeyType="search"
+          accessibilityLabel='Enter your tracking number'
+          accessibilityHint='Enter your tracking number to locate your shipment'
+          returnKeyType='search'
           onSubmitEditing={handleTrack}
         />
-        
+
         <AnimatePresence>
           {(validationError ?? error) && (
             <FadeIn>
-              <XStack 
+              <XStack
                 backgroundColor={`${palette.error}15`}
-                paddingHorizontal="$3"
-                paddingVertical="$2"
-                borderRadius="$2"
-                role="alert"
+                paddingHorizontal='$3'
+                paddingVertical='$2'
+                borderRadius='$2'
+                role='alert'
                 id={errorId}
-                alignItems="center"
-                space="$2"
+                alignItems='center'
+                space='$2'
               >
-                <Ionicons name="alert-circle" size={16} color={palette.error} />
-<Text 
-                  color={palette.error}
-                  fontSize={font.caption}
-                >
+                <Feather name='alert-circle' size={16} color={palette.error} />
+                <Text color={palette.error} fontSize={font.caption}>
                   {validationError ?? error}
                 </Text>
               </XStack>
             </FadeIn>
           )}
         </AnimatePresence>
-        
-        <LoadingButton 
-          isLoading={isLoading} 
-          onPress={handleTrack} 
+
+        <LoadingButton
+          isLoading={isLoading}
+          onPress={handleTrack}
           disabled={!trackingNumber.trim()}
         >
-          <Ionicons name="search" size={20} color="white" />
-          <Text color="white" fontWeight="700" marginLeft="$2">
+          <Feather name='search' size={20} color='white' />
+          <Text color='white' fontWeight='700' marginLeft='$2'>
             Track Package
           </Text>
         </LoadingButton>

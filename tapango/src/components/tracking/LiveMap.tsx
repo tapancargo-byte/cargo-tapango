@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { AppIcon } from '../../ui';
 import { StyleSheet } from 'react-native';
 import { Stack, Text, XStack, YStack } from 'tamagui';
 import { LiveTrackingPulse } from '@/components/tracking/LiveTrackingPulse';
@@ -10,26 +10,35 @@ import { useColors } from '../../styles/ThemeProvider';
 
 // Helper function to create alpha colors
 const withAlpha = (color: string, alpha: number): string => {
-  const hexAlpha = Math.round(alpha * 255).toString(16).padStart(2, '0');
+  const hexAlpha = Math.round(alpha * 255)
+    .toString(16)
+    .padStart(2, '0');
   return `${color}${hexAlpha}`;
 };
 
-const MarkerIconCircle = memo(({ size, color, iconName, iconSize }: {
-  size: number;
-  color: string;
-  iconName: keyof typeof Ionicons.glyphMap;
-  iconSize: number;
-}) => (
-  <IconCircle
-    size={size}
-    backgroundColor={color}
-    borderWidth={2}
-    borderColor="white"
-    iconName={iconName}
-    iconSize={iconSize}
-    testID={`marker-${String(iconName)}`}
-  />
-));
+const MarkerIconCircle = memo(
+  ({
+    size,
+    color,
+    iconName,
+    iconSize,
+  }: {
+    size: number;
+    color: string;
+    iconName: string;
+    iconSize: number;
+  }) => (
+    <IconCircle
+      size={size}
+      backgroundColor={color}
+      borderWidth={2}
+      borderColor='white'
+      iconName={iconName}
+      iconSize={iconSize}
+      testID={`marker-${String(iconName)}`}
+    />
+  )
+);
 
 type MapsModule = {
   default?: React.ComponentType<any>;
@@ -80,7 +89,7 @@ const INITIAL_REGION = {
 };
 
 const ROUTE_COORDINATES = [
-  { latitude: 24.8170, longitude: 93.9368 }, // Imphal
+  { latitude: 24.817, longitude: 93.9368 }, // Imphal
   { latitude: 26.1445, longitude: 91.7362 }, // Guwahati
   { latitude: 26.8467, longitude: 80.9462 }, // Lucknow
   { latitude: 28.7041, longitude: 77.1025 }, // Delhi
@@ -122,8 +131,8 @@ export function LiveMap({ origin, destination, currentLocation }: LiveMapProps) 
     <>
       {!isMapReady && (
         <YStack {...MAP_STYLES.loadingContainer}>
-          <LoadingSpinner size="lg" />
-<Text fontSize={font.caption} color={palette.textSecondary} marginTop="$2">
+          <LoadingSpinner size='lg' />
+          <Text fontSize={font.caption} color={palette.textSecondary} marginTop='$2'>
             Loading map...
           </Text>
         </YStack>
@@ -134,84 +143,62 @@ export function LiveMap({ origin, destination, currentLocation }: LiveMapProps) 
         initialRegion={INITIAL_REGION}
         onMapReady={() => setIsMapReady(true)}
       >
-        <Polyline
-          coordinates={ROUTE_COORDINATES}
-          strokeColor={palette.primary}
-          strokeWidth={3}
-        />
+        <Polyline coordinates={ROUTE_COORDINATES} strokeColor={palette.primary} strokeWidth={3} />
 
-        <Marker
-          coordinate={ROUTE_COORDINATES[0]}
-          title="Origin"
-          description={origin}
-        >
-          <MarkerIconCircle
-            size={20}
-            color={palette.success}
-            iconName="business"
-            iconSize={10}
-          />
+        <Marker coordinate={ROUTE_COORDINATES[0]} title='Origin' description={origin}>
+          <MarkerIconCircle size={20} color={palette.success} iconName='business' iconSize={10} />
         </Marker>
 
         <Marker
           coordinate={ROUTE_COORDINATES[1]}
-          title="Current Location"
+          title='Current Location'
           description={currentLocation}
         >
-          <Stack position="relative">
+          <Stack position='relative'>
             <LiveTrackingPulse />
-            <MarkerIconCircle
-              size={16}
-              color={palette.primary}
-              iconName="car"
-              iconSize={8}
-            />
+            <MarkerIconCircle size={16} color={palette.primary} iconName='car' iconSize={8} />
           </Stack>
         </Marker>
 
-        <Marker
-          coordinate={ROUTE_COORDINATES[3]}
-          title="Destination"
-          description={destination}
-        >
-          <MarkerIconCircle
-            size={20}
-            color={palette.warning}
-            iconName="flag"
-            iconSize={10}
-          />
+        <Marker coordinate={ROUTE_COORDINATES[3]} title='Destination' description={destination}>
+          <MarkerIconCircle size={20} color={palette.warning} iconName='flag' iconSize={10} />
         </Marker>
       </MapView>
     </>
   );
 
   return (
-    <ElevatedCard variant="elevated">
-      <YStack space="$3">
-        <XStack alignItems="center" justifyContent="space-between">
-          <XStack alignItems="center" space="$3">
-            <Stack position="relative">
+    <ElevatedCard variant='elevated'>
+      <YStack space='$3'>
+        <XStack alignItems='center' justifyContent='space-between'>
+          <XStack alignItems='center' space='$3'>
+            <Stack position='relative'>
               <LiveTrackingPulse />
               <IconCircle
                 size={40}
                 backgroundColor={palette.primary}
                 borderWidth={2}
-                borderColor="white"
-                iconName="location"
+                borderColor='white'
+                iconName='location'
                 iconSize={20}
               />
             </Stack>
             <YStack>
-<Text fontSize={font.section} fontWeight="700" color={palette.text}>
+              <Text fontSize={font.section} fontWeight='700' color={palette.text}>
                 Live Route Map
               </Text>
-<Text fontSize={font.caption} color={palette.textSecondary}>
+              <Text fontSize={font.caption} color={palette.textSecondary}>
                 Real-time location tracking
               </Text>
             </YStack>
           </XStack>
 
-<Text fontSize={font.caption} color={palette.success} fontWeight="600" textTransform="uppercase">
+          <Text
+            fontSize={font.caption}
+            color={palette.success}
+            fontWeight='600'
+            textTransform='uppercase'
+          >
             LIVE
           </Text>
         </XStack>
@@ -225,42 +212,84 @@ export function LiveMap({ origin, destination, currentLocation }: LiveMapProps) 
             />
           ) : (
             // Fallback for web - show route info
-            <YStack flex={1} alignItems="center" justifyContent="center" space="$3">
+            <YStack flex={1} alignItems='center' justifyContent='center' space='$3'>
               <IconCircle
                 size={80}
                 backgroundColor={withAlpha(palette.primary, 0.1)}
-                iconName="navigate"
+                iconName='navigate'
                 iconSize={40}
                 iconColor={palette.primary}
-                testID="fallback-icon"
+                testID='fallback-icon'
               />
-              <Text fontSize={16} fontWeight={"600"} color={palette.text} accessibilityRole="header">
+              <Text
+                fontSize={16}
+                fontWeight={'600'}
+                color={palette.text}
+                accessibilityRole='header'
+              >
                 Live Route Tracking
               </Text>
-              <Text fontSize={12} color={palette.textSecondary} textAlign="center" accessibilityRole="text">
+              <Text
+                fontSize={12}
+                color={palette.textSecondary}
+                textAlign='center'
+                accessibilityRole='text'
+              >
                 Interactive map available on mobile app
               </Text>
 
-              <YStack width="100%" maxWidth={280} space="$3">
-                <XStack alignItems="center" justifyContent="space-between">
-                  <MarkerIconCircle size={32} color={palette.success} iconName="business" iconSize={16} />
-                  <Stack flex={1} marginHorizontal="$3" height={4} backgroundColor={palette.primary} borderRadius={2} />
-                  <Stack position="relative">
+              <YStack width='100%' maxWidth={280} space='$3'>
+                <XStack alignItems='center' justifyContent='space-between'>
+                  <MarkerIconCircle
+                    size={32}
+                    color={palette.success}
+                    iconName='business'
+                    iconSize={16}
+                  />
+                  <Stack
+                    flex={1}
+                    marginHorizontal='$3'
+                    height={4}
+                    backgroundColor={palette.primary}
+                    borderRadius={2}
+                  />
+                  <Stack position='relative'>
                     <LiveTrackingPulse />
-                    <MarkerIconCircle size={24} color={palette.primary} iconName="car" iconSize={12} />
+                    <MarkerIconCircle
+                      size={24}
+                      color={palette.primary}
+                      iconName='car'
+                      iconSize={12}
+                    />
                   </Stack>
-                  <Stack flex={1} marginHorizontal="$3" height={4} backgroundColor={palette.surfaceVariant} borderRadius={2} />
-                  <MarkerIconCircle size={32} color={palette.warning} iconName="flag" iconSize={16} />
+                  <Stack
+                    flex={1}
+                    marginHorizontal='$3'
+                    height={4}
+                    backgroundColor={palette.surfaceVariant}
+                    borderRadius={2}
+                  />
+                  <MarkerIconCircle
+                    size={32}
+                    color={palette.warning}
+                    iconName='flag'
+                    iconSize={16}
+                  />
                 </XStack>
 
-                <XStack alignItems="center" justifyContent="space-between">
-                  <Text fontSize={10} color={palette.textSecondary} accessibilityRole="text">
+                <XStack alignItems='center' justifyContent='space-between'>
+                  <Text fontSize={10} color={palette.textSecondary} accessibilityRole='text'>
                     Origin
                   </Text>
-                  <Text fontSize={10} color={palette.primary} fontWeight="600" accessibilityRole="text">
+                  <Text
+                    fontSize={10}
+                    color={palette.primary}
+                    fontWeight='600'
+                    accessibilityRole='text'
+                  >
                     Current
                   </Text>
-                  <Text fontSize={10} color={palette.textSecondary} accessibilityRole="text">
+                  <Text fontSize={10} color={palette.textSecondary} accessibilityRole='text'>
                     Destination
                   </Text>
                 </XStack>

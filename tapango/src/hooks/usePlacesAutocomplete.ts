@@ -16,10 +16,15 @@ const GOOGLE_KEY = process.env.EXPO_PUBLIC_GOOGLE_MAPS_KEY;
 
 function randomSession(): string {
   // lightweight UUID-ish token; good enough for session billing grouping
-  return 'sess_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+  return (
+    'sess_' + Math.random().toString(36).slice(2) + Date.now().toString(36)
+  );
 }
 
-export function usePlacesAutocomplete(query: string, opts: UsePlacesOptions = {}) {
+export function usePlacesAutocomplete(
+  query: string,
+  opts: UsePlacesOptions = {}
+) {
   const [predictions, setPredictions] = useState<PlacePrediction[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -90,7 +95,9 @@ export type GeocodeResult = {
   state?: string;
 };
 
-export async function geocodePlace(placeId: string): Promise<GeocodeResult | null> {
+export async function geocodePlace(
+  placeId: string
+): Promise<GeocodeResult | null> {
   if (!GOOGLE_KEY) return null;
   const url =
     'https://maps.googleapis.com/maps/api/geocode/json' +
@@ -102,7 +109,8 @@ export async function geocodePlace(placeId: string): Promise<GeocodeResult | nul
   const result = (json as any).results?.[0];
   if (!result) return null;
   const { geometry, address_components } = result;
-  const get = (type: string) => address_components?.find((c: any) => c.types?.includes(type))?.long_name;
+  const get = (type: string) =>
+    address_components?.find((c: any) => c.types?.includes(type))?.long_name;
   return {
     lat: geometry.location.lat,
     lng: geometry.location.lng,

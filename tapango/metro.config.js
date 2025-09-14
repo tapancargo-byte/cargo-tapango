@@ -5,17 +5,7 @@ const config = getDefaultConfig(__dirname);
 // SDK 54: Enhanced features
 config.resolver.platforms = ['ios', 'android', 'native', 'web'];
 
-// SDK 54: CSS auto-prefixing with lightningcss is now enabled by default
-// Configure browserslist in package.json if needed
-
-// SDK 54: experimentalImportSupport is now enabled by default
-// Can be disabled if needed:
-// config.resolver.experimentalImportSupport = false;
-
-// SDK 54: Live bindings enabled by default
-// Disable with EXPO_UNSTABLE_LIVE_BINDINGS=false if needed
-
-// Transformer configuration for better performance
+// Transformer configuration for better performance (no custom SVG transformer needed)
 config.transformer.minifierConfig = {
   keep_classnames: true,
   keep_fnames: true,
@@ -25,7 +15,10 @@ config.transformer.minifierConfig = {
   },
 };
 
-// SDK 54: Support for new file extensions and optimizations
-config.resolver.sourceExts.push('mjs', 'cjs');
+// Support extra source extensions used by some RN libs
+if (!config.resolver.sourceExts.includes('mjs'))
+  config.resolver.sourceExts.push('mjs');
+if (!config.resolver.sourceExts.includes('cjs'))
+  config.resolver.sourceExts.push('cjs');
 
 module.exports = config;

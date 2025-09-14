@@ -6,7 +6,7 @@ import { colors } from '../src/styles/colors';
 
 /**
  * Welcome screen - Entry point after onboarding completion
- * 
+ *
  * This screen displays the app welcome and allows users to:
  * - Sign in to existing account
  * - Create new account
@@ -41,23 +41,18 @@ export default function WelcomeScreen() {
         {/* Update Button usages below if present, otherwise leave as is. */}
 
         <View style={styles.buttonContainer}>
-          <Button
-            title="Sign In"
-            variant="primary"
-            onPress={handleSignIn}
-            style={styles.button}
-          />
+          <Button title='Sign In' variant='primary' onPress={handleSignIn} style={styles.button} />
 
           <Button
-            title="Create Account"
-            variant="secondary"
+            title='Create Account'
+            variant='secondary'
             onPress={handleSignUp}
             style={styles.button}
           />
 
           <Button
-            title="Continue as Guest"
-            variant="ghost"
+            title='Continue as Guest'
+            variant='ghost'
             onPress={handleGuestMode}
             style={styles.button}
           />
@@ -65,9 +60,7 @@ export default function WelcomeScreen() {
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.footerText}>
-          Built with React Native & Expo SDK 53
-        </Text>
+        <Text style={styles.footerText}>Built with React Native & Expo SDK 53</Text>
       </View>
     </View>
   );
