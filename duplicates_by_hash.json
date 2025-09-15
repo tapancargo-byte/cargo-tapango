@@ -1,0 +1,231 @@
+[
+  {
+    "Hash": "03D70962A0BEEA2BB6AB1A838B015D90DA6C33ADB045FF85F7B198ACA70DF08D",
+    "Files": [
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    ]
+  },
+  {
+    "Hash": "0AC1230AD967C0A9359631D8BCFCA2F284C8DB887AF89F2E1A6CFD9D254494F5",
+    "Files": [
+      "C:\\cargo\\tapango\\public\\favicon.svg",
+      "C:\\cargo\\tapango\\storybook\\public\\favicon.svg",
+      "C:\\cargo\\tapango\\storybook-static\\favicon.svg"
+    ]
+  },
+  {
+    "Hash": "124D243A1C7A0DD3FB578793A02EBEFD7686B97494A05C3EFA58067D18FE8741",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_144.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
+    ]
+  },
+  {
+    "Hash": "19B954C4664799CB5AB2A9CBA54F90BA3F9D0CA6E822E80DCEFBD2C950B20267",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_48.png",
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\favicon\\favicon-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-contain-transparent\\favicon-48.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp"
+    ]
+  },
+  {
+    "Hash": "1E43E48C7D06F49A5E05A7838C70ED3FB13CB16122BBE36933575A1A019E3ADF",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_96.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp"
+    ]
+  },
+  {
+    "Hash": "27ABB4AFFAED83AE85739B62B71E5E860D2E6EE7B4FA91C915F5A3C26227B944",
+    "Files": [
+      "C:\\cargo\\tapango\\storybook\\tests\\a11y_and_more.spec.ts-snapshots\\design-system-input--playground-win32.png",
+      "C:\\cargo\\tapango\\storybook\\tests\\onboarding.spec.ts-snapshots\\onboarding-welcome-win32.png",
+      "C:\\cargo\\tapango\\test-results\\driver-e2e-Driver-tabs-nav-96e64--render-labels-and-navigate\\test-failed-1.png",
+      "C:\\cargo\\tapango\\test-results\\driver-e2e-offline-banner-placeholder\\test-failed-1.png"
+    ]
+  },
+  {
+    "Hash": "292FF4B7DE5BD2570B198C5C530D747AD683731F1BA49483E612C05A95A06F9A",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_144.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    ]
+  },
+  {
+    "Hash": "36AADF15D24DFA97C0446C9CA713B9D004F0F5674D1043B2B51C75105962CAB9",
+    "Files": [
+      "C:\\cargo\\tapango\\storybook-static\\nunito-sans-bold-italic.woff2",
+      "C:\\cargo\\tapango\\storybook-static\\sb-common-assets\\nunito-sans-bold-italic.woff2"
+    ]
+  },
+  {
+    "Hash": "36B71EBDF7D62AFC0D21751F444A890FA497A39369A98AAA38C77BC07E354B7C",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_432.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
+    ]
+  },
+  {
+    "Hash": "3D10F7DA6C603178340081668C4AC5B3AE9743CA9A262AB0FCD312FBB9F48BDD",
+    "Files": [
+      "C:\\cargo\\admin\\build\\favicon.ico",
+      "C:\\cargo\\admin\\dist\\favicon.ico",
+      "C:\\cargo\\admin\\public\\favicon.ico"
+    ]
+  },
+  {
+    "Hash": "49FE05EC477BB0F2F815A7494C933070606B5C68E84F96E11374E07C59A64D61",
+    "Files": [
+      "C:\\cargo\\tapango\\storybook-static\\nunito-sans-regular.woff2",
+      "C:\\cargo\\tapango\\storybook-static\\sb-common-assets\\nunito-sans-regular.woff2"
+    ]
+  },
+  {
+    "Hash": "4EE6C3ACD7E6115F2F905A54D960ABD468588378D6DEBD665680D8C95BC63D39",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_72.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.webp"
+    ]
+  },
+  {
+    "Hash": "55331B37CD48D2FA0BDBD7C9F63C61F83DD67BB488C0C80A5854FA6D85CE9540",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_162.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_foreground.webp"
+    ]
+  },
+  {
+    "Hash": "557AEA7D424CE83E0BB3215C0BEA8E632B6523739F431BB1188DF871E5B31222",
+    "Files": [
+      "C:\\cargo\\tapango\\.storybook\\favicon.svg",
+      "C:\\cargo\\tapango\\.storybook\\public\\favicon.svg"
+    ]
+  },
+  {
+    "Hash": "6BCCBFAA70688E0348109160E90C771587866C21717BFD3ADEC38EA606362CF8",
+    "Files": [
+      "C:\\cargo\\tapango\\storybook-static\\nunito-sans-bold.woff2",
+      "C:\\cargo\\tapango\\storybook-static\\sb-common-assets\\nunito-sans-bold.woff2"
+    ]
+  },
+  {
+    "Hash": "7DCF47C64009420E550F6438795614F150413A0DCC2809D641F3EC12490FD546",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_96.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp"
+    ]
+  },
+  {
+    "Hash": "870415032C7FE7CDD9E20FC6B32E3C69DA7D84D9F1E77DB594701291FB5F0514",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_108.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_foreground.webp"
+    ]
+  },
+  {
+    "Hash": "8F88818979B54E7892B0AD6A38A29439A567B08431B65FC89C8C3D2411288792",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_72.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.webp"
+    ]
+  },
+  {
+    "Hash": "90D24BC3BF698AC1E173739502298CCCA72ADF1F564FAB05F484B8C48D1CADD2",
+    "Files": [
+      "C:\\cargo\\admin\\build\\robots.txt",
+      "C:\\cargo\\admin\\dist\\robots.txt",
+      "C:\\cargo\\admin\\public\\robots.txt"
+    ]
+  },
+  {
+    "Hash": "96B82DEA05EFCB87B0EC87F9729F1C3F1CF461C539957E131F9FCC411DBE3389",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_192.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.webp"
+    ]
+  },
+  {
+    "Hash": "992F331636DEDA09193AC0453C274AC3FB7E66F70AF98E1CBFF119A7384F09AE",
+    "Files": [
+      "C:\\cargo\\tapango\\storybook-static\\nunito-sans-italic.woff2",
+      "C:\\cargo\\tapango\\storybook-static\\sb-common-assets\\nunito-sans-italic.woff2"
+    ]
+  },
+  {
+    "Hash": "9A129D9D96FB91068501B929661047997A7683C40BFEEE85416A659C40770E3A",
+    "Files": [
+      "C:\\cargo\\admin\\build\\manifest.json",
+      "C:\\cargo\\admin\\dist\\manifest.json",
+      "C:\\cargo\\admin\\public\\manifest.json"
+    ]
+  },
+  {
+    "Hash": "9EA4F4DA7050C0CC408926F6A39C253624E9BABB1D43C7977CD821445A60B461",
+    "Files": [
+      "C:\\cargo\\admin\\build\\logo512.png",
+      "C:\\cargo\\admin\\dist\\logo512.png",
+      "C:\\cargo\\admin\\public\\logo512.png"
+    ]
+  },
+  {
+    "Hash": "AC1E6B5F6A84D1CDF7C44CD465D66C05100669066493819FF662282F1A294EB7",
+    "Files": [
+      "C:\\cargo\\admin\\dist\\admin-bg.png",
+      "C:\\cargo\\admin\\public\\admin-bg.png"
+    ]
+  },
+  {
+    "Hash": "C386396EC70DB3608075B5FBFAAC4AB1CCAA86BA05A68AB393EC551EB66C3E00",
+    "Files": [
+      "C:\\cargo\\admin\\build\\logo192.png",
+      "C:\\cargo\\admin\\dist\\logo192.png",
+      "C:\\cargo\\admin\\public\\logo192.png"
+    ]
+  },
+  {
+    "Hash": "C706B5381AEFDE99CCA1FCCC21F99C2288A7F3A90247ED0BA53B04F397C30F2F",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_216.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_foreground.webp"
+    ]
+  },
+  {
+    "Hash": "CFA219825498061C158E88BF89549DE5CEEE5F2D4F4F7D455C0781063B703BEE",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_48.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
+    ]
+  },
+  {
+    "Hash": "D2C5544E91E1148513CBF6ED909644E596837FF35E9E473BA9DF43ED09FB11E3",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_192.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    ]
+  },
+  {
+    "Hash": "DB4463805C74BA292C08117C8B465F7B7D1798A02425769BC6BBB7999FF0303C",
+    "Files": [
+      "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_324.png",
+      "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
+    ]
+  },
+  {
+    "Hash": "EA872FE80988D03D43B1C0AA5DA6107895FBB228A97A94836FF260DCFCD17CEB",
+    "Files": [
+      "C:\\cargo\\tapango\\assets\\adaptive-icon.png",
+      "C:\\cargo\\tapango\\assets\\favicon.png",
+      "C:\\cargo\\tapango\\assets\\icon.png",
+      "C:\\cargo\\tapango\\assets\\splash-icon.png",
+      "C:\\cargo\\tapango\\assets\\splash.png"
+    ]
+  },
+  {
+    "Hash": "EB4AAAFC3F82609CE109818FF1831F6F8A6D013A6B7EA6F34D13B189CB8EF89C",
+    "Files": [
+      "C:\\cargo\\tapango\\src\\ui\\index.design-only.ts",
+      "C:\\cargo\\tapango\\src\\ui\\index.new-ui.ts"
+    ]
+  }
+]

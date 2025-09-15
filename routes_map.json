@@ -1,0 +1,427 @@
+{
+  "summary": {
+    "expoRouterScreens": 30,
+    "expoRouterLayouts": 6,
+    "expoRouterGroups": 5,
+    "reactRouterRoutes": 15,
+    "reactRouterComponents": 12
+  },
+  "routes": {
+    "expoRouter": {
+      "appDirectory": "tapango/app",
+      "screens": [
+        {
+          "name": "forgot-password",
+          "file": "forgot-password.tsx",
+          "path": "tapango\\app\\(auth)\\forgot-password.tsx",
+          "route": "(auth)/forgot-password",
+          "isIndex": false
+        },
+        {
+          "name": "role",
+          "file": "role.tsx",
+          "path": "tapango\\app\\(auth)\\role.tsx",
+          "route": "(auth)/role",
+          "isIndex": false
+        },
+        {
+          "name": "sign-in-working",
+          "file": "sign-in-working.tsx",
+          "path": "tapango\\app\\(auth)\\sign-in-working.tsx",
+          "route": "(auth)/sign-in-working",
+          "isIndex": false
+        },
+        {
+          "name": "sign-in",
+          "file": "sign-in.tsx",
+          "path": "tapango\\app\\(auth)\\sign-in.tsx",
+          "route": "(auth)/sign-in",
+          "isIndex": false
+        },
+        {
+          "name": "sign-up",
+          "file": "sign-up.tsx",
+          "path": "tapango\\app\\(auth)\\sign-up.tsx",
+          "route": "(auth)/sign-up",
+          "isIndex": false
+        },
+        {
+          "name": "supabase-sign-in",
+          "file": "supabase-sign-in.tsx",
+          "path": "tapango\\app\\(auth)\\supabase-sign-in.tsx",
+          "route": "(auth)/supabase-sign-in",
+          "isIndex": false
+        },
+        {
+          "name": "bid",
+          "file": "bid.tsx",
+          "path": "tapango\\app\\(driver)\\bid.tsx",
+          "route": "(driver)/bid",
+          "isIndex": false
+        },
+        {
+          "name": "forgot-password",
+          "file": "forgot-password.tsx",
+          "path": "tapango\\app\\(driver)\\forgot-password.tsx",
+          "route": "(driver)/forgot-password",
+          "isIndex": false
+        },
+        {
+          "name": "index",
+          "file": "index.tsx",
+          "path": "tapango\\app\\(driver)\\index.tsx",
+          "route": "(driver)/index",
+          "isIndex": true
+        },
+        {
+          "name": "profile",
+          "file": "profile.tsx",
+          "path": "tapango\\app\\(driver)\\profile.tsx",
+          "route": "(driver)/profile",
+          "isIndex": false
+        },
+        {
+          "name": "sign-in",
+          "file": "sign-in.tsx",
+          "path": "tapango\\app\\(driver)\\sign-in.tsx",
+          "route": "(driver)/sign-in",
+          "isIndex": false
+        },
+        {
+          "name": "sign-up",
+          "file": "sign-up.tsx",
+          "path": "tapango\\app\\(driver)\\sign-up.tsx",
+          "route": "(driver)/sign-up",
+          "isIndex": false
+        },
+        {
+          "name": "wallet",
+          "file": "wallet.tsx",
+          "path": "tapango\\app\\(driver)\\wallet.tsx",
+          "route": "(driver)/wallet",
+          "isIndex": false
+        },
+        {
+          "name": "edit-profile",
+          "file": "edit-profile.tsx",
+          "path": "tapango\\app\\(modals)\\edit-profile.tsx",
+          "route": "(modals)/edit-profile",
+          "isIndex": false
+        },
+        {
+          "name": "receipt",
+          "file": "receipt.tsx",
+          "path": "tapango\\app\\(modals)\\receipt.tsx",
+          "route": "(modals)/receipt",
+          "isIndex": false
+        },
+        {
+          "name": "scan",
+          "file": "scan.tsx",
+          "path": "tapango\\app\\(modals)\\scan.tsx",
+          "route": "(modals)/scan",
+          "isIndex": false
+        },
+        {
+          "name": "index",
+          "file": "index.tsx",
+          "path": "tapango\\app\\(onboarding)\\onboarding\\index.tsx",
+          "route": "(onboarding)/onboarding/index",
+          "isIndex": true
+        },
+        {
+          "name": "three",
+          "file": "three.tsx",
+          "path": "tapango\\app\\(onboarding)\\onboarding\\three.tsx",
+          "route": "(onboarding)/onboarding/three",
+          "isIndex": false
+        },
+        {
+          "name": "two",
+          "file": "two.tsx",
+          "path": "tapango\\app\\(onboarding)\\onboarding\\two.tsx",
+          "route": "(onboarding)/onboarding/two",
+          "isIndex": false
+        },
+        {
+          "name": "booking",
+          "file": "booking.tsx",
+          "path": "tapango\\app\\(tabs)\\booking.tsx",
+          "route": "(tabs)/booking",
+          "isIndex": false
+        },
+        {
+          "name": "developer",
+          "file": "developer.tsx",
+          "path": "tapango\\app\\(tabs)\\developer.tsx",
+          "route": "(tabs)/developer",
+          "isIndex": false
+        },
+        {
+          "name": "index",
+          "file": "index.tsx",
+          "path": "tapango\\app\\(tabs)\\index.tsx",
+          "route": "(tabs)/index",
+          "isIndex": true
+        },
+        {
+          "name": "orders",
+          "file": "orders.tsx",
+          "path": "tapango\\app\\(tabs)\\orders.tsx",
+          "route": "(tabs)/orders",
+          "isIndex": false
+        },
+        {
+          "name": "profile",
+          "file": "profile.tsx",
+          "path": "tapango\\app\\(tabs)\\profile.tsx",
+          "route": "(tabs)/profile",
+          "isIndex": false
+        },
+        {
+          "name": "tracking",
+          "file": "tracking.tsx",
+          "path": "tapango\\app\\(tabs)\\tracking.tsx",
+          "route": "(tabs)/tracking",
+          "isIndex": false
+        },
+        {
+          "name": "+not-found",
+          "file": "+not-found.tsx",
+          "path": "tapango\\app\\+not-found.tsx",
+          "route": "+not-found",
+          "isIndex": false
+        },
+        {
+          "name": "SignOutButton",
+          "file": "SignOutButton.tsx",
+          "path": "tapango\\app\\components\\SignOutButton.tsx",
+          "route": "components/SignOutButton",
+          "isIndex": false
+        },
+        {
+          "name": "index",
+          "file": "index.tsx",
+          "path": "tapango\\app\\index.tsx",
+          "route": "index",
+          "isIndex": true
+        },
+        {
+          "name": "splash",
+          "file": "splash.tsx",
+          "path": "tapango\\app\\splash.tsx",
+          "route": "splash",
+          "isIndex": false
+        },
+        {
+          "name": "welcome",
+          "file": "welcome.tsx",
+          "path": "tapango\\app\\welcome.tsx",
+          "route": "welcome",
+          "isIndex": false
+        }
+      ],
+      "layouts": [
+        {
+          "name": "_layout.tsx",
+          "path": "tapango\\app\\(auth)\\_layout.tsx",
+          "route": "(auth)/"
+        },
+        {
+          "name": "_layout.tsx",
+          "path": "tapango\\app\\(driver)\\_layout.tsx",
+          "route": "(driver)/"
+        },
+        {
+          "name": "_layout.tsx",
+          "path": "tapango\\app\\(modals)\\_layout.tsx",
+          "route": "(modals)/"
+        },
+        {
+          "name": "_layout.tsx",
+          "path": "tapango\\app\\(onboarding)\\_layout.tsx",
+          "route": "(onboarding)/"
+        },
+        {
+          "name": "_layout.tsx",
+          "path": "tapango\\app\\(tabs)\\_layout.tsx",
+          "route": "(tabs)/"
+        },
+        {
+          "name": "_layout.tsx",
+          "path": "tapango\\app\\_layout.tsx",
+          "route": ""
+        }
+      ],
+      "groups": [
+        {
+          "name": "(auth)",
+          "path": "tapango\\app\\(auth)",
+          "route": "(auth)"
+        },
+        {
+          "name": "(driver)",
+          "path": "tapango\\app\\(driver)",
+          "route": "(driver)"
+        },
+        {
+          "name": "(modals)",
+          "path": "tapango\\app\\(modals)",
+          "route": "(modals)"
+        },
+        {
+          "name": "(onboarding)",
+          "path": "tapango\\app\\(onboarding)",
+          "route": "(onboarding)"
+        },
+        {
+          "name": "(tabs)",
+          "path": "tapango\\app\\(tabs)",
+          "route": "(tabs)"
+        }
+      ]
+    },
+    "reactRouter": {
+      "adminDirectory": "admin/src",
+      "routes": [
+        {
+          "path": "/",
+          "component": "Dashboard",
+          "routeTag": "<Route path=\"/\" element={<Dashboard />"
+        },
+        {
+          "path": "/dashboard",
+          "component": "Dashboard",
+          "routeTag": "<Route path=\"/dashboard\" element={<Dashboard />"
+        },
+        {
+          "path": "/orders",
+          "component": "Orders",
+          "routeTag": "<Route path=\"/orders\" element={<Orders />"
+        },
+        {
+          "path": "/drivers",
+          "component": "Drivers",
+          "routeTag": "<Route path=\"/drivers\" element={<Drivers />"
+        },
+        {
+          "path": "/customers",
+          "component": "Customers",
+          "routeTag": "<Route path=\"/customers\" element={<Customers />"
+        },
+        {
+          "path": "/invoices",
+          "component": "Invoices",
+          "routeTag": "<Route path=\"/invoices\" element={<Invoices />"
+        },
+        {
+          "path": "/tracking-events",
+          "component": "TrackingEvents",
+          "routeTag": "<Route path=\"/tracking-events\" element={<TrackingEvents />"
+        },
+        {
+          "path": "/kyc",
+          "component": "AdminGuard",
+          "routeTag": "<Route \n                    path=\"/kyc\" \n                    element={\n                      <AdminGuard>"
+        },
+        {
+          "path": "/notifications",
+          "component": "Notifications",
+          "routeTag": "<Route path=\"/notifications\" element={<Notifications />"
+        },
+        {
+          "path": "/analytics",
+          "component": "Analytics",
+          "routeTag": "<Route path=\"/analytics\" element={<Analytics />"
+        },
+        {
+          "path": "/roles",
+          "component": "AdminGuard",
+          "routeTag": "<Route \n                    path=\"/roles\" \n                    element={\n                      <AdminGuard>"
+        },
+        {
+          "path": "/super-admin",
+          "component": "SuperAdminGuard",
+          "routeTag": "<Route \n                    path=\"/super-admin\" \n                    element={\n                      <SuperAdminGuard>"
+        },
+        {
+          "path": "/settings",
+          "component": "Settings",
+          "routeTag": "<Route path=\"/settings\" element={<Settings />"
+        },
+        {
+          "path": "/sentry-test",
+          "component": "SentryTest",
+          "routeTag": "<Route path=\"/sentry-test\" element={<SentryTest />"
+        },
+        {
+          "path": "/unauthorized",
+          "component": "div",
+          "routeTag": "<Route \n                    path=\"/unauthorized\" \n                    element={\n                      <div className=\"flex items-center justify-center h-64\">"
+        }
+      ],
+      "components": [
+        {
+          "name": "Analytics",
+          "file": "Analytics.tsx",
+          "path": "admin\\src\\pages\\Analytics.tsx"
+        },
+        {
+          "name": "Customers",
+          "file": "Customers.tsx",
+          "path": "admin\\src\\pages\\Customers.tsx"
+        },
+        {
+          "name": "Dashboard",
+          "file": "Dashboard.tsx",
+          "path": "admin\\src\\pages\\Dashboard.tsx"
+        },
+        {
+          "name": "Drivers",
+          "file": "Drivers.tsx",
+          "path": "admin\\src\\pages\\Drivers.tsx"
+        },
+        {
+          "name": "Invoices",
+          "file": "Invoices.tsx",
+          "path": "admin\\src\\pages\\Invoices.tsx"
+        },
+        {
+          "name": "Kyc",
+          "file": "Kyc.tsx",
+          "path": "admin\\src\\pages\\Kyc.tsx"
+        },
+        {
+          "name": "Notifications",
+          "file": "Notifications.tsx",
+          "path": "admin\\src\\pages\\Notifications.tsx"
+        },
+        {
+          "name": "Orders",
+          "file": "Orders.tsx",
+          "path": "admin\\src\\pages\\Orders.tsx"
+        },
+        {
+          "name": "RoleManagement",
+          "file": "RoleManagement.tsx",
+          "path": "admin\\src\\pages\\RoleManagement.tsx"
+        },
+        {
+          "name": "Settings",
+          "file": "Settings.tsx",
+          "path": "admin\\src\\pages\\Settings.tsx"
+        },
+        {
+          "name": "SuperAdmin",
+          "file": "SuperAdmin.tsx",
+          "path": "admin\\src\\pages\\SuperAdmin.tsx"
+        },
+        {
+          "name": "TrackingEvents",
+          "file": "TrackingEvents.tsx",
+          "path": "admin\\src\\pages\\TrackingEvents.tsx"
+        }
+      ]
+    }
+  }
+}
