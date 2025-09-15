@@ -53,3 +53,8 @@ export { LoadingSpinner, LoadingOverlay } from './LoadingSpinner';
 export { StatusBadge, type StatusVariant } from './StatusBadge';
 export { AuthButton, AuthInput } from './auth';
 export { BottomTabBar } from './BottomTabBar';
+// Driver UI building blocks
+export { JobCard } from './driver/JobCard';
+export { TransactionRow } from './driver/TransactionRow';
+export { ProfileAvatar } from './driver/ProfileAvatar';
+export { KycUploader } from './driver/KycUploader';

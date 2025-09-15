@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Alert, ScrollView } from 'react-native';
-import { Button } from '../../src/ui';
+import { Alert } from 'react-native';
+import { Screen, Title, Button, Card } from '../../src/ui';
 import { supabase } from '../../src/services/supabaseClient';
 import { submitKyc } from '../../src/services/kyc';
+import { KycUploader } from '../../src/ui/driver/KycUploader';
+import { useTheme, useColors } from '../../src/styles/ThemeProvider';
+import { OfflineBanner } from '../../src/components/OfflineBanner';
 
 export default function DriverProfile() {
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [rcUri, setRcUri] = useState<string | null>(null);
   const [licenseUri, setLicenseUri] = useState<string | null>(null);
+  const { colorScheme, toggleColorScheme } = useTheme();
+  const colors = useColors();
 
   useEffect(() => {
     if (!supabase) return;
@@ -34,28 +39,33 @@ export default function DriverProfile() {
 
   if (!supabase) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Driver Profile</Text>
-        <Text style={styles.subtitle}>
-          Supabase not configured. Set EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY.
-        </Text>
-      </View>
+      <Screen scroll>
+        <Title>Driver Profile</Title>
+        <Card>
+          <Title fontSize={14}>Supabase not configured.</Title>
+          <Title fontSize={12}>
+            Set EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY.
+          </Title>
+        </Card>
+      </Screen>
     );
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 24 }}>
-      <Text style={styles.title}>Driver Profile</Text>
+    <Screen scroll>
+      <OfflineBanner />
+      <Title>Driver Profile</Title>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Account</Text>
-        <Text style={styles.muted}>Signed in as:</Text>
-        <Text style={styles.bold}>{userId}</Text>
+      <Card>
+        <Title fontSize={16}>Account</Title>
+        <Title fontSize={12}>Signed in as:</Title>
+        <Title fontSize={14}>{userId}</Title>
         <Button
           variant='secondary'
           onPress={async () => {
             setLoading(true);
             try {
+              if (!supabase) throw new Error('Supabase not configured');
               await supabase.auth.signOut();
               Alert.alert('Signed out');
             } catch (e: any) {
@@ -64,49 +74,17 @@ export default function DriverProfile() {
               setLoading(false);
             }
           }}
-          style={{ marginTop: 8 }}
+          marginTop={'$2' as any}
         >
           {loading ? 'Signing out…' : 'Sign out'}
         </Button>
-      </View>
+      </Card>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>KYC</Text>
-        <Text style={styles.muted}>Upload your RC and Driver’s License</Text>
-        <View style={styles.row}>
-          <Button
-            variant='secondary'
-            onPress={async () => {
-              const picker = await import('expo-image-picker');
-              const res = await picker.launchImageLibraryAsync({
-                mediaTypes: picker.MediaTypeOptions.Images,
-                quality: 0.8,
-              });
-              if (!res.canceled && res.assets?.[0]?.uri) setRcUri(res.assets[0].uri);
-            }}
-          >
-            {' '}
-            {rcUri ? 'Replace RC' : 'Upload RC'}{' '}
-          </Button>
-          {rcUri ? <Image source={{ uri: rcUri }} style={styles.preview} /> : null}
-        </View>
-        <View style={styles.row}>
-          <Button
-            variant='secondary'
-            onPress={async () => {
-              const picker = await import('expo-image-picker');
-              const res = await picker.launchImageLibraryAsync({
-                mediaTypes: picker.MediaTypeOptions.Images,
-                quality: 0.8,
-              });
-              if (!res.canceled && res.assets?.[0]?.uri) setLicenseUri(res.assets[0].uri);
-            }}
-          >
-            {' '}
-            {licenseUri ? 'Replace License' : 'Upload License'}{' '}
-          </Button>
-          {licenseUri ? <Image source={{ uri: licenseUri }} style={styles.preview} /> : null}
-        </View>
+      <Card>
+        <Title fontSize={16}>KYC</Title>
+        <Title fontSize={12}>Upload your RC and Driver’s License</Title>
+        <KycUploader label='Registration Certificate (RC)' value={rcUri} onPick={setRcUri} />
+        <KycUploader label='Driver’s License' value={licenseUri} onPick={setLicenseUri} />
         <Button
           variant='primary'
           onPress={async () => {
@@ -125,29 +103,44 @@ export default function DriverProfile() {
           }}
           fullWidth
           disabled={loading}
+          marginTop={'$2' as any}
         >
           {loading ? 'Submitting…' : 'Submit KYC'}
         </Button>
-      </View>
-    </ScrollView>
+      </Card>
+
+      <Card>
+        <Title fontSize={16}>Settings</Title>
+        <Title fontSize={12} color={colors.textSecondary}>
+          Theme
+        </Title>
+        <Button
+          variant={colorScheme === 'light' ? 'primary' : 'outline'}
+          size='sm'
+          onPress={() => toggleColorScheme('light')}
+          accessibilityLabel='Light theme'
+          style={{ marginRight: 8 }}
+        >
+          Light
+        </Button>
+        <Button
+          variant={colorScheme === 'dark' ? 'primary' : 'outline'}
+          size='sm'
+          onPress={() => toggleColorScheme('dark')}
+          accessibilityLabel='Dark theme'
+          style={{ marginRight: 8 }}
+        >
+          Dark
+        </Button>
+        <Button
+          variant={colorScheme === 'system' ? 'primary' : 'outline'}
+          size='sm'
+          onPress={() => toggleColorScheme('system')}
+          accessibilityLabel='System theme'
+        >
+          System
+        </Button>
+      </Card>
+    </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F8FAFC', padding: 16 },
-  title: { fontSize: 24, fontWeight: '800', color: '#111827', marginBottom: 12 },
-  subtitle: { color: '#6B7280', marginTop: 8 },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    marginBottom: 12,
-  },
-  cardTitle: { fontWeight: '700', color: '#111827', marginBottom: 8 },
-  bold: { fontWeight: '700', color: '#111827' },
-  muted: { color: '#6B7280', marginBottom: 6 },
-  row: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 12 },
-  preview: { width: 60, height: 60, borderRadius: 8, borderWidth: 1, borderColor: '#E5E7EB' },
-});

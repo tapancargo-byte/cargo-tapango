@@ -1,0 +1,3776 @@
+[
+  {
+    "FullName": "C:\\cargo\\.prettierignore",
+    "Length": 632,
+    "LastWriteTime": "2025-09-09T00:57:37.1778832+05:30",
+    "Extension": ".prettierignore"
+  },
+  {
+    "FullName": "C:\\cargo\\.prettierrc.js",
+    "Length": 1032,
+    "LastWriteTime": "2025-09-09T00:57:28.2273438+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\CODEBASE_INDEX.md",
+    "Length": 10095,
+    "LastWriteTime": "2025-09-13T02:03:28.6252749+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\Comprehensive_Codebase_Architecture_Analysis_Migration_Recommendations.md",
+    "Length": 74352,
+    "LastWriteTime": "2025-09-02T21:42:13.9160564+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\EXPO_SDK_54_COMPREHENSIVE_DOCUMENTATION.md",
+    "Length": 22465,
+    "LastWriteTime": "2025-09-12T21:18:41.0603232+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\EXPO_SDK_54_UPGRADE_SUMMARY.md",
+    "Length": 6562,
+    "LastWriteTime": "2025-09-12T21:22:59.5298341+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\filelist.json",
+    "Length": 0,
+    "LastWriteTime": "2025-09-15T20:09:21.716653+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\package-lock.json",
+    "Length": 84,
+    "LastWriteTime": "2025-09-10T21:53:35.1917777+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\README.md",
+    "Length": 13441,
+    "LastWriteTime": "2025-09-10T03:51:43.5792483+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\repo_files_before.txt",
+    "Length": 24507,
+    "LastWriteTime": "2025-09-15T20:09:15.4625628+05:30",
+    "Extension": ".txt"
+  },
+  {
+    "FullName": "C:\\cargo\\supabase-migration.sql",
+    "Length": 9782,
+    "LastWriteTime": "2025-08-28T01:09:16.2392655+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\TAPANGO_COMPLETE_DOCUMENTATION.md",
+    "Length": 52485,
+    "LastWriteTime": "2025-09-02T22:11:52.9518049+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tsconfig.json",
+    "Length": 133,
+    "LastWriteTime": "2025-09-02T04:51:50.8276492+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\UNIFIED_TAPANGO_DOCUMENTATION.md",
+    "Length": 65341,
+    "LastWriteTime": "2025-09-09T00:44:19.0585532+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\WARP.md",
+    "Length": 10728,
+    "LastWriteTime": "2025-09-15T19:47:22.2557996+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\.husky\\pre-commit",
+    "Length": 485,
+    "LastWriteTime": "2025-09-09T01:00:44.5143103+05:30",
+    "Extension": ""
+  },
+  {
+    "FullName": "C:\\cargo\\.vscode\\settings.json",
+    "Length": 86,
+    "LastWriteTime": "2025-09-12T21:49:00.0082125+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\.env",
+    "Length": 624,
+    "LastWriteTime": "2025-08-28T03:12:22.8760826+05:30",
+    "Extension": ".env"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\.env.example",
+    "Length": 266,
+    "LastWriteTime": "2025-08-26T19:25:49.9598941+05:30",
+    "Extension": ".example"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\.env.local",
+    "Length": 342,
+    "LastWriteTime": "2025-09-09T01:18:31.2288502+05:30",
+    "Extension": ".local"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\.env.local.example",
+    "Length": 637,
+    "LastWriteTime": "2025-09-11T07:04:36.1629955+05:30",
+    "Extension": ".example"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\craco.config.js",
+    "Length": 496,
+    "LastWriteTime": "2025-08-27T19:30:37.4827405+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\index.html",
+    "Length": 303,
+    "LastWriteTime": "2025-09-11T06:48:32.9498767+05:30",
+    "Extension": ".html"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\package-lock.json",
+    "Length": 227516,
+    "LastWriteTime": "2025-09-11T07:25:45.9414707+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\package.json",
+    "Length": 3033,
+    "LastWriteTime": "2025-09-11T07:44:04.1891467+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\playwright.config.ts",
+    "Length": 600,
+    "LastWriteTime": "2025-09-11T07:47:25.1628238+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\postcss.config.js",
+    "Length": 96,
+    "LastWriteTime": "2025-08-28T00:46:38.9742144+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\tailwind.config.js",
+    "Length": 2144,
+    "LastWriteTime": "2025-08-27T20:10:58.0918008+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\tsconfig.json",
+    "Length": 600,
+    "LastWriteTime": "2025-08-27T19:25:33.2744657+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\tsconfig.paths.json",
+    "Length": 253,
+    "LastWriteTime": "2025-08-27T19:25:28.7914646+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\vite.config.ts",
+    "Length": 832,
+    "LastWriteTime": "2025-09-11T07:00:52.8511138+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\build\\favicon.ico",
+    "Length": 3870,
+    "LastWriteTime": "2025-08-24T05:17:20.8578502+05:30",
+    "Extension": ".ico"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\build\\logo192.png",
+    "Length": 5347,
+    "LastWriteTime": "2025-08-24T05:17:21.8222726+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\build\\logo512.png",
+    "Length": 9664,
+    "LastWriteTime": "2025-08-24T05:17:22.011387+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\build\\manifest.json",
+    "Length": 482,
+    "LastWriteTime": "2025-08-28T04:39:21.4272334+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\build\\robots.txt",
+    "Length": 67,
+    "LastWriteTime": "2025-08-24T05:17:23.0665567+05:30",
+    "Extension": ".txt"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\admin-bg.png",
+    "Length": 6014138,
+    "LastWriteTime": "2025-09-11T03:55:46.1631444+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\favicon.ico",
+    "Length": 3870,
+    "LastWriteTime": "2025-08-24T05:17:20.8578502+05:30",
+    "Extension": ".ico"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\index.html",
+    "Length": 400,
+    "LastWriteTime": "2025-09-11T07:54:34.6606316+05:30",
+    "Extension": ".html"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\logo192.png",
+    "Length": 5347,
+    "LastWriteTime": "2025-08-24T05:17:21.8222726+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\logo512.png",
+    "Length": 9664,
+    "LastWriteTime": "2025-08-24T05:17:22.011387+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\manifest.json",
+    "Length": 482,
+    "LastWriteTime": "2025-08-28T04:39:21.4272334+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\robots.txt",
+    "Length": 67,
+    "LastWriteTime": "2025-08-24T05:17:23.0665567+05:30",
+    "Extension": ".txt"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\assets\\EDEL3XIZ-DPHAZQgn.js",
+    "Length": 223335,
+    "LastWriteTime": "2025-09-11T07:54:34.6606316+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\assets\\EDEL3XIZ-DPHAZQgn.js.map",
+    "Length": 752822,
+    "LastWriteTime": "2025-09-11T07:54:34.6606316+05:30",
+    "Extension": ".map"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\assets\\index-DDXEuXGs.css",
+    "Length": 75888,
+    "LastWriteTime": "2025-09-11T07:54:34.6506136+05:30",
+    "Extension": ".css"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\assets\\index-uqNopkIn.js",
+    "Length": 1813606,
+    "LastWriteTime": "2025-09-11T07:54:34.6640955+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\assets\\index-uqNopkIn.js.map",
+    "Length": 7474601,
+    "LastWriteTime": "2025-09-11T07:54:34.6706509+05:30",
+    "Extension": ".map"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\assets\\Kyc-DNE-Lxbj.js",
+    "Length": 8112,
+    "LastWriteTime": "2025-09-11T07:54:34.6606316+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\dist\\assets\\Kyc-DNE-Lxbj.js.map",
+    "Length": 13935,
+    "LastWriteTime": "2025-09-11T07:54:34.6606316+05:30",
+    "Extension": ".map"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\docs\\ADMIN_E2E_TESTS.md",
+    "Length": 1358,
+    "LastWriteTime": "2025-09-11T07:24:08.1882781+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\docs\\ADMIN_PROGRESS_AND_TODO.md",
+    "Length": 5185,
+    "LastWriteTime": "2025-09-11T07:42:03.9020973+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\e2e\\auth.spec.ts",
+    "Length": 1432,
+    "LastWriteTime": "2025-09-11T07:47:25.1628238+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\e2e\\kyc.spec.ts",
+    "Length": 1525,
+    "LastWriteTime": "2025-09-11T07:47:25.1628238+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\e2e\\orders.spec.ts",
+    "Length": 1735,
+    "LastWriteTime": "2025-09-11T07:47:25.1628238+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\public\\admin-bg.png",
+    "Length": 6014138,
+    "LastWriteTime": "2025-09-11T03:55:46.1631444+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\public\\favicon.ico",
+    "Length": 3870,
+    "LastWriteTime": "2025-08-24T05:17:20.8578502+05:30",
+    "Extension": ".ico"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\public\\index.html",
+    "Length": 1739,
+    "LastWriteTime": "2025-08-28T19:54:29.7338776+05:30",
+    "Extension": ".html"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\public\\logo192.png",
+    "Length": 5347,
+    "LastWriteTime": "2025-08-24T05:17:21.8222726+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\public\\logo512.png",
+    "Length": 9664,
+    "LastWriteTime": "2025-08-24T05:17:22.011387+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\public\\manifest.json",
+    "Length": 482,
+    "LastWriteTime": "2025-08-28T04:39:21.4272334+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\public\\robots.txt",
+    "Length": 67,
+    "LastWriteTime": "2025-08-24T05:17:23.0665567+05:30",
+    "Extension": ".txt"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\App.css",
+    "Length": 564,
+    "LastWriteTime": "2025-08-24T05:17:19.4962328+05:30",
+    "Extension": ".css"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\App.test.tsx",
+    "Length": 273,
+    "LastWriteTime": "2025-08-24T05:17:22.6676837+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\App.tsx",
+    "Length": 3714,
+    "LastWriteTime": "2025-09-11T07:51:27.9735547+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\index.css",
+    "Length": 5066,
+    "LastWriteTime": "2025-08-28T21:53:14.6647547+05:30",
+    "Extension": ".css"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\index.tsx",
+    "Length": 580,
+    "LastWriteTime": "2025-08-27T21:54:01.6423905+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\logo.svg",
+    "Length": 2632,
+    "LastWriteTime": "2025-08-24T05:17:22.2682164+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\react-app-env.d.ts",
+    "Length": 119,
+    "LastWriteTime": "2025-08-24T20:16:53.0878543+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\reportWebVitals.ts",
+    "Length": 425,
+    "LastWriteTime": "2025-08-24T05:17:22.4248134+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\setupTests.ts",
+    "Length": 312,
+    "LastWriteTime": "2025-09-11T06:55:35.9967754+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ErrorBoundary.tsx",
+    "Length": 2895,
+    "LastWriteTime": "2025-08-28T00:27:07.3296472+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\PermissionGuard.tsx",
+    "Length": 3367,
+    "LastWriteTime": "2025-09-11T07:31:53.5333718+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\SentryTest.tsx",
+    "Length": 1715,
+    "LastWriteTime": "2025-08-27T21:54:16.9690281+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\auth\\AuthGuard.tsx",
+    "Length": 2513,
+    "LastWriteTime": "2025-08-28T04:42:40.9620352+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\auth\\LoginForm.tsx",
+    "Length": 7642,
+    "LastWriteTime": "2025-09-11T07:35:16.7243892+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\charts\\InteractiveChart.tsx",
+    "Length": 11514,
+    "LastWriteTime": "2025-08-28T21:25:40.0909576+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\drawer\\MobileActionDrawer.tsx",
+    "Length": 9939,
+    "LastWriteTime": "2025-08-28T21:26:00.6265239+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\layout\\AppSidebar.tsx",
+    "Length": 7228,
+    "LastWriteTime": "2025-09-11T07:20:57.56646+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\layout\\Header.tsx",
+    "Length": 2272,
+    "LastWriteTime": "2025-08-28T21:47:54.138497+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\layout\\Layout.tsx",
+    "Length": 1706,
+    "LastWriteTime": "2025-08-28T20:49:28.5586119+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\layout\\ResponsiveContainer.tsx",
+    "Length": 3980,
+    "LastWriteTime": "2025-08-28T20:55:32.7972841+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\layout\\Sidebar.tsx",
+    "Length": 8058,
+    "LastWriteTime": "2025-08-28T20:15:48.5594182+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\tables\\AdvancedDataTable.tsx",
+    "Length": 14744,
+    "LastWriteTime": "2025-08-28T22:39:46.6330539+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\alert.tsx",
+    "Length": 1588,
+    "LastWriteTime": "2025-08-27T19:36:50.115764+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\avatar.tsx",
+    "Length": 1408,
+    "LastWriteTime": "2025-08-28T20:49:06.1023613+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\badge.tsx",
+    "Length": 1132,
+    "LastWriteTime": "2025-08-27T19:39:57.2186807+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\breadcrumb.tsx",
+    "Length": 2732,
+    "LastWriteTime": "2025-08-28T20:49:49.9536852+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\button.tsx",
+    "Length": 1839,
+    "LastWriteTime": "2025-08-27T19:37:00.5247608+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\card.tsx",
+    "Length": 1853,
+    "LastWriteTime": "2025-08-27T19:37:09.5390658+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\checkbox.tsx",
+    "Length": 1086,
+    "LastWriteTime": "2025-08-27T19:40:16.0603753+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\dialog.tsx",
+    "Length": 3860,
+    "LastWriteTime": "2025-08-27T19:40:24.6382659+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\drawer.tsx",
+    "Length": 3000,
+    "LastWriteTime": "2025-08-28T20:57:15.9552388+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\dropdown-menu.tsx",
+    "Length": 7298,
+    "LastWriteTime": "2025-08-28T20:48:53.3848656+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\form.tsx",
+    "Length": 4075,
+    "LastWriteTime": "2025-08-27T19:40:45.3883472+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\input.tsx",
+    "Length": 828,
+    "LastWriteTime": "2025-08-27T19:37:18.8598243+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\label.tsx",
+    "Length": 714,
+    "LastWriteTime": "2025-08-27T19:40:56.8313401+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\select.tsx",
+    "Length": 5619,
+    "LastWriteTime": "2025-08-27T19:41:07.4591142+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\separator.tsx",
+    "Length": 760,
+    "LastWriteTime": "2025-08-27T19:41:18.2081769+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\sheet.tsx",
+    "Length": 4268,
+    "LastWriteTime": "2025-08-28T20:46:40.3302438+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\sidebar.tsx",
+    "Length": 21666,
+    "LastWriteTime": "2025-08-28T21:26:38.1152111+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\skeleton.tsx",
+    "Length": 265,
+    "LastWriteTime": "2025-08-28T20:46:50.4934371+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\switch.tsx",
+    "Length": 1143,
+    "LastWriteTime": "2025-08-27T19:41:27.4256446+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\table.tsx",
+    "Length": 2769,
+    "LastWriteTime": "2025-08-27T19:41:43.0313687+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\textarea.tsx",
+    "Length": 776,
+    "LastWriteTime": "2025-08-27T19:41:52.6629259+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\toast.tsx",
+    "Length": 4843,
+    "LastWriteTime": "2025-08-27T19:42:03.4383308+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\tooltip.tsx",
+    "Length": 1148,
+    "LastWriteTime": "2025-08-28T20:47:05.8283285+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\components\\ui\\use-toast.tsx",
+    "Length": 3904,
+    "LastWriteTime": "2025-08-26T21:26:55.6558752+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\config\\sentry.ts",
+    "Length": 1034,
+    "LastWriteTime": "2025-09-11T07:00:52.8491025+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\data\\drivers.json",
+    "Length": 2960,
+    "LastWriteTime": "2025-08-24T20:35:35.5785567+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\data\\mockData.ts",
+    "Length": 5892,
+    "LastWriteTime": "2025-08-24T20:36:49.7710652+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\data\\orders.json",
+    "Length": 7684,
+    "LastWriteTime": "2025-08-24T20:35:07.3108936+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\data\\payments.json",
+    "Length": 2545,
+    "LastWriteTime": "2025-08-24T20:36:38.3521967+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\data\\profiles.json",
+    "Length": 1520,
+    "LastWriteTime": "2025-08-24T20:36:12.2809819+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\hooks\\useAnalytics.ts",
+    "Length": 5609,
+    "LastWriteTime": "2025-08-26T21:32:23.5105554+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\hooks\\useCustomers.ts",
+    "Length": 4450,
+    "LastWriteTime": "2025-08-26T22:03:34.0756864+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\hooks\\useDrivers.ts",
+    "Length": 5501,
+    "LastWriteTime": "2025-09-11T07:19:18.9735935+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\hooks\\useInvoices.ts",
+    "Length": 7612,
+    "LastWriteTime": "2025-09-11T07:23:18.2682446+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\hooks\\useOrders.ts",
+    "Length": 7860,
+    "LastWriteTime": "2025-09-11T07:11:27.6495168+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\hooks\\useRoles.ts",
+    "Length": 7115,
+    "LastWriteTime": "2025-08-28T02:09:31.3208758+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\hooks\\useSupabaseData.tsx",
+    "Length": 10305,
+    "LastWriteTime": "2025-08-28T01:44:52.3554426+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\hooks\\useTrackingEvents.ts",
+    "Length": 1408,
+    "LastWriteTime": "2025-09-11T07:20:34.5150493+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\lib\\csv.ts",
+    "Length": 485,
+    "LastWriteTime": "2025-09-11T07:04:36.1660308+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\lib\\database.types.ts",
+    "Length": 15252,
+    "LastWriteTime": "2025-08-28T01:39:52.9851614+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\lib\\supabase.ts",
+    "Length": 3511,
+    "LastWriteTime": "2025-09-11T07:00:52.8531251+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\lib\\utils.ts",
+    "Length": 166,
+    "LastWriteTime": "2025-08-26T18:48:07.5346114+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\lib\\validations.ts",
+    "Length": 5230,
+    "LastWriteTime": "2025-09-11T07:19:18.9735935+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\lib\\validations\\invoice.ts",
+    "Length": 2444,
+    "LastWriteTime": "2025-08-28T01:57:04.923773+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\lib\\validations\\rbac.ts",
+    "Length": 6904,
+    "LastWriteTime": "2025-08-26T20:29:02.4673016+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\Analytics.tsx",
+    "Length": 7393,
+    "LastWriteTime": "2025-08-27T19:37:58.0590084+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\Customers.tsx",
+    "Length": 7931,
+    "LastWriteTime": "2025-08-28T22:38:46.5504275+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\Dashboard.tsx",
+    "Length": 21503,
+    "LastWriteTime": "2025-08-28T23:14:57.9514075+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\Drivers.tsx",
+    "Length": 12369,
+    "LastWriteTime": "2025-09-11T07:49:47.6652466+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\Invoices.tsx",
+    "Length": 29765,
+    "LastWriteTime": "2025-09-11T07:49:47.6652466+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\Kyc.tsx",
+    "Length": 6396,
+    "LastWriteTime": "2025-09-11T07:35:46.4491791+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\Notifications.tsx",
+    "Length": 6570,
+    "LastWriteTime": "2025-08-28T22:39:07.2038625+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\Orders.tsx",
+    "Length": 10942,
+    "LastWriteTime": "2025-09-11T07:49:47.6614795+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\RoleManagement.tsx",
+    "Length": 20789,
+    "LastWriteTime": "2025-08-27T22:01:38.5172583+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\Settings.tsx",
+    "Length": 21211,
+    "LastWriteTime": "2025-08-27T19:43:02.0101269+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\SuperAdmin.tsx",
+    "Length": 17793,
+    "LastWriteTime": "2025-08-28T02:10:24.4411376+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\pages\\TrackingEvents.tsx",
+    "Length": 6141,
+    "LastWriteTime": "2025-09-11T07:49:47.6614795+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\providers\\AuthProvider.tsx",
+    "Length": 6852,
+    "LastWriteTime": "2025-09-11T07:28:09.8789247+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\providers\\QueryProvider.tsx",
+    "Length": 811,
+    "LastWriteTime": "2025-08-26T19:24:26.1903474+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\providers\\ThemeProvider.tsx",
+    "Length": 1637,
+    "LastWriteTime": "2025-08-28T19:52:36.0029074+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\src\\types\\database.types.ts",
+    "Length": 12465,
+    "LastWriteTime": "2025-08-26T19:40:42.4018198+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\admin\\test-results\\.last-run.json",
+    "Length": 45,
+    "LastWriteTime": "2025-09-11T07:52:18.791368+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\docs\\api.md",
+    "Length": 10845,
+    "LastWriteTime": "2025-09-09T01:09:27.3044724+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\supabase\\config.toml",
+    "Length": 5427,
+    "LastWriteTime": "2025-09-09T01:19:14.91619+05:30",
+    "Extension": ".toml"
+  },
+  {
+    "FullName": "C:\\cargo\\supabase\\migrations\\001_initial_schema.sql",
+    "Length": 11679,
+    "LastWriteTime": "2025-08-26T18:25:48.3257328+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\supabase\\migrations\\002_rls_policies.sql",
+    "Length": 9925,
+    "LastWriteTime": "2025-08-26T18:26:24.7269285+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\supabase\\migrations\\003_seed_data.sql",
+    "Length": 12033,
+    "LastWriteTime": "2025-08-26T18:27:19.5165105+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\supabase\\migrations\\004_fix_admin_compatibility.sql",
+    "Length": 5957,
+    "LastWriteTime": "2025-08-26T22:09:25.147042+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\supabase\\migrations\\005_add_roles_tables.sql",
+    "Length": 5005,
+    "LastWriteTime": "2025-08-28T04:30:10.4016742+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\supabase\\migrations\\006_enhanced_tracking_schema.sql",
+    "Length": 14395,
+    "LastWriteTime": "2025-09-01T01:34:18.1185759+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\supabase\\seed\\development_data.sql",
+    "Length": 9506,
+    "LastWriteTime": "2025-09-09T01:07:15.5747298+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.env",
+    "Length": 1150,
+    "LastWriteTime": "2025-09-14T19:19:30.0425397+05:30",
+    "Extension": ".env"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.env.example",
+    "Length": 1254,
+    "LastWriteTime": "2025-09-15T02:48:08.3508862+05:30",
+    "Extension": ".example"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.eslintcache",
+    "Length": 333702,
+    "LastWriteTime": "2025-09-15T04:04:53.3033801+05:30",
+    "Extension": ".eslintcache"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.eslintrc.js",
+    "Length": 3141,
+    "LastWriteTime": "2025-09-15T02:50:46.4329298+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.prettierignore",
+    "Length": 314,
+    "LastWriteTime": "2025-09-15T03:01:40.9850518+05:30",
+    "Extension": ".prettierignore"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app.config.js",
+    "Length": 3792,
+    "LastWriteTime": "2025-09-15T02:50:46.7342248+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\babel.config.js",
+    "Length": 452,
+    "LastWriteTime": "2025-09-15T02:50:51.525563+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\babel.config.js.bak",
+    "Length": 12,
+    "LastWriteTime": "2025-09-13T20:46:42.3844405+05:30",
+    "Extension": ".bak"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\CLERK_KEYS_EXPLAINED.md",
+    "Length": 2301,
+    "LastWriteTime": "2025-09-15T02:50:46.5553069+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\COMPREHENSIVE_UI_MODERNIZATION_SUMMARY.md",
+    "Length": 10482,
+    "LastWriteTime": "2025-09-15T02:50:47.1121262+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\CONTRIBUTING.md",
+    "Length": 673,
+    "LastWriteTime": "2025-09-13T22:46:33.1712892+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\DESIGN_TRANSFORMATION.md",
+    "Length": 10623,
+    "LastWriteTime": "2025-09-15T02:50:47.4948459+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\eas.json",
+    "Length": 1139,
+    "LastWriteTime": "2025-09-13T23:46:39.8610564+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\expo-env.d.ts",
+    "Length": 110,
+    "LastWriteTime": "2025-09-15T08:34:54.0496937+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\FINAL-STATUS-REPORT.md",
+    "Length": 9230,
+    "LastWriteTime": "2025-09-15T02:50:47.957621+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\FIX-SUMMARY.md",
+    "Length": 6444,
+    "LastWriteTime": "2025-09-15T02:50:48.2524486+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\google-address-autocomplete-implementation.md.txt",
+    "Length": 7932,
+    "LastWriteTime": "2025-09-11T02:36:52.6107411+05:30",
+    "Extension": ".txt"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\jest.config.js",
+    "Length": 813,
+    "LastWriteTime": "2025-09-15T20:09:05.3111202+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\jest.setup.js",
+    "Length": 780,
+    "LastWriteTime": "2025-09-15T20:09:05.3400332+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\metro.config.js",
+    "Length": 706,
+    "LastWriteTime": "2025-09-15T02:50:46.4817615+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\package-lock.json",
+    "Length": 913757,
+    "LastWriteTime": "2025-09-15T07:21:47.9323272+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\package.json",
+    "Length": 5184,
+    "LastWriteTime": "2025-09-15T07:20:26.28909+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\playwright.config.json",
+    "Length": 163,
+    "LastWriteTime": "2025-09-13T23:46:40.1056887+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\playwright.config.ts",
+    "Length": 275,
+    "LastWriteTime": "2025-09-15T20:09:05.3428934+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\PRODUCTION_SETUP.md",
+    "Length": 2502,
+    "LastWriteTime": "2025-09-15T02:50:48.4782847+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\QUICK_PRODUCTION_UPGRADE.md",
+    "Length": 1656,
+    "LastWriteTime": "2025-09-15T02:50:48.6105344+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\README_DEV_CLIENT.md",
+    "Length": 875,
+    "LastWriteTime": "2025-09-15T02:50:48.8378485+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\README.md",
+    "Length": 7625,
+    "LastWriteTime": "2025-09-15T20:09:04.5269169+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\reset-onboarding-state.js",
+    "Length": 1546,
+    "LastWriteTime": "2025-09-15T02:50:46.7453572+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\reset-onboarding.js",
+    "Length": 1521,
+    "LastWriteTime": "2025-09-15T02:50:46.7917477+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\tamagui-web.css",
+    "Length": 268,
+    "LastWriteTime": "2025-09-15T02:48:09.1061402+05:30",
+    "Extension": ".css"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\tamagui.config.ts",
+    "Length": 3701,
+    "LastWriteTime": "2025-09-15T02:51:07.5125242+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\TAPANGO_UI_REDESIGN_PLAN.md",
+    "Length": 2744,
+    "LastWriteTime": "2025-09-15T02:50:48.9780245+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\tsc-errors.log",
+    "Length": 13105,
+    "LastWriteTime": "2025-09-14T07:25:17.6309748+05:30",
+    "Extension": ".log"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\tsconfig.json",
+    "Length": 1464,
+    "LastWriteTime": "2025-09-15T07:46:38.2179039+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\typescript-errors-categorized.md",
+    "Length": 4698,
+    "LastWriteTime": "2025-09-15T02:50:47.6696338+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\devices.json",
+    "Length": 20,
+    "LastWriteTime": "2025-09-09T01:29:34.3736385+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\README.md",
+    "Length": 778,
+    "LastWriteTime": "2025-09-13T23:46:32.9176974+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\settings.json",
+    "Length": 138,
+    "LastWriteTime": "2025-09-12T20:02:46.1804577+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\types\\router.d.ts",
+    "Length": 12145,
+    "LastWriteTime": "2025-09-15T08:34:55.8650352+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_108.png",
+    "Length": 11966,
+    "LastWriteTime": "2025-09-13T22:35:12.7081533+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_162.png",
+    "Length": 24577,
+    "LastWriteTime": "2025-09-13T22:35:12.5496272+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_216.png",
+    "Length": 42937,
+    "LastWriteTime": "2025-09-13T22:35:12.7081533+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_324.png",
+    "Length": 97879,
+    "LastWriteTime": "2025-09-13T22:35:12.8071639+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-adaptive-foreground\\android-adaptive-foreground-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-transparent\\icon_432.png",
+    "Length": 176964,
+    "LastWriteTime": "2025-09-13T22:35:12.9710418+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_144.png",
+    "Length": 20865,
+    "LastWriteTime": "2025-09-13T22:35:11.7609634+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_192.png",
+    "Length": 35579,
+    "LastWriteTime": "2025-09-13T22:35:11.9482289+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_48.png",
+    "Length": 3630,
+    "LastWriteTime": "2025-09-13T22:35:11.7609634+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_72.png",
+    "Length": 6750,
+    "LastWriteTime": "2025-09-13T22:35:11.7609634+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-circle\\android-standard-circle-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_96.png",
+    "Length": 10543,
+    "LastWriteTime": "2025-09-13T22:35:11.8175679+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_144.png",
+    "Length": 19946,
+    "LastWriteTime": "2025-09-13T22:35:10.8785591+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_192.png",
+    "Length": 34425,
+    "LastWriteTime": "2025-09-13T22:35:11.0180239+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_48.png",
+    "Length": 3236,
+    "LastWriteTime": "2025-09-13T22:35:10.9047152+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_72.png",
+    "Length": 6232,
+    "LastWriteTime": "2025-09-13T22:35:10.9047152+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\android-standard-square\\android-standard-square-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-cover-#ffffff\\icon_96.png",
+    "Length": 9811,
+    "LastWriteTime": "2025-09-13T22:35:10.7870711+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.expo\\web\\cache\\production\\images\\favicon\\favicon-ea872fe80988d03d43b1c0aa5da6107895fbb228a97a94836ff260dcfcd17ceb-contain-transparent\\favicon-48.png",
+    "Length": 3236,
+    "LastWriteTime": "2025-09-09T22:14:32.756442+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.husky\\pre-commit",
+    "Length": 396,
+    "LastWriteTime": "2025-09-15T07:20:43.221856+05:30",
+    "Extension": ""
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.husky\\_\\husky.sh",
+    "Length": 428,
+    "LastWriteTime": "2025-09-13T19:15:18.4322205+05:30",
+    "Extension": ".sh"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.storybook\\favicon.svg",
+    "Length": 455,
+    "LastWriteTime": "2025-09-13T19:04:24.4200233+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.storybook\\main.ts",
+    "Length": 86,
+    "LastWriteTime": "2025-09-15T02:50:46.5666606+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.storybook\\preview.ts",
+    "Length": 92,
+    "LastWriteTime": "2025-09-15T02:50:46.6004722+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.storybook\\tsconfig.json",
+    "Length": 256,
+    "LastWriteTime": "2025-09-15T02:50:46.3582498+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.storybook\\public\\favicon.svg",
+    "Length": 455,
+    "LastWriteTime": "2025-09-13T18:54:55.565479+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\.tamagui\\tamagui.config.json",
+    "Length": 2781732,
+    "LastWriteTime": "2025-09-15T08:36:47.2098068+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\build.gradle",
+    "Length": 556,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".gradle"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\gradle.properties",
+    "Length": 2526,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".properties"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\gradlew",
+    "Length": 8744,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ""
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\gradlew.bat",
+    "Length": 2937,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".bat"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\settings.gradle",
+    "Length": 1260,
+    "LastWriteTime": "2025-09-13T22:35:08.9366828+05:30",
+    "Extension": ".gradle"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\build.gradle",
+    "Length": 8125,
+    "LastWriteTime": "2025-09-13T22:35:08.9366828+05:30",
+    "Extension": ".gradle"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\debug.keystore",
+    "Length": 2257,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".keystore"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\proguard-rules.pro",
+    "Length": 562,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".pro"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\debug\\AndroidManifest.xml",
+    "Length": 374,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".xml"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\AndroidManifest.xml",
+    "Length": 1613,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".xml"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\java\\com\\tapango\\mobile\\MainActivity.kt",
+    "Length": 2188,
+    "LastWriteTime": "2025-09-13T22:35:09.9842628+05:30",
+    "Extension": ".kt"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\java\\com\\tapango\\mobile\\MainApplication.kt",
+    "Length": 2031,
+    "LastWriteTime": "2025-09-13T22:35:09.9842628+05:30",
+    "Extension": ".kt"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml",
+    "Length": 245,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".xml"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\drawable\\rn_edit_text_material.xml",
+    "Length": 1917,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".xml"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\drawable-hdpi\\splashscreen_logo.png",
+    "Length": 20754,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\drawable-mdpi\\splashscreen_logo.png",
+    "Length": 12863,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\drawable-xhdpi\\splashscreen_logo.png",
+    "Length": 29081,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\drawable-xxhdpi\\splashscreen_logo.png",
+    "Length": 47123,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\drawable-xxxhdpi\\splashscreen_logo.png",
+    "Length": 66529,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml",
+    "Length": 257,
+    "LastWriteTime": "2025-09-13T22:35:12.9811267+05:30",
+    "Extension": ".xml"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml",
+    "Length": 257,
+    "LastWriteTime": "2025-09-13T22:35:12.9811267+05:30",
+    "Extension": ".xml"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_foreground.webp",
+    "Length": 24577,
+    "LastWriteTime": "2025-09-13T22:35:12.9710418+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.webp",
+    "Length": 6750,
+    "LastWriteTime": "2025-09-13T22:35:11.9445837+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.webp",
+    "Length": 6232,
+    "LastWriteTime": "2025-09-13T22:35:11.0180239+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_foreground.webp",
+    "Length": 11966,
+    "LastWriteTime": "2025-09-13T22:35:12.9791124+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp",
+    "Length": 3630,
+    "LastWriteTime": "2025-09-13T22:35:11.9445837+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp",
+    "Length": 3236,
+    "LastWriteTime": "2025-09-13T22:35:11.0162695+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_foreground.webp",
+    "Length": 42937,
+    "LastWriteTime": "2025-09-13T22:35:12.9710418+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp",
+    "Length": 10543,
+    "LastWriteTime": "2025-09-13T22:35:11.9445837+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp",
+    "Length": 9811,
+    "LastWriteTime": "2025-09-13T22:35:10.9670676+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_foreground.webp",
+    "Length": 97879,
+    "LastWriteTime": "2025-09-13T22:35:12.9791124+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp",
+    "Length": 20865,
+    "LastWriteTime": "2025-09-13T22:35:11.8870971+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp",
+    "Length": 19946,
+    "LastWriteTime": "2025-09-13T22:35:10.9670676+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_foreground.webp",
+    "Length": 176964,
+    "LastWriteTime": "2025-09-13T22:35:12.9811267+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.webp",
+    "Length": 35579,
+    "LastWriteTime": "2025-09-13T22:35:11.9517369+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.webp",
+    "Length": 34425,
+    "LastWriteTime": "2025-09-13T22:35:11.0180239+05:30",
+    "Extension": ".webp"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\values\\colors.xml",
+    "Length": 136,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".xml"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\values\\strings.xml",
+    "Length": 70,
+    "LastWriteTime": "2025-09-13T22:35:08.9366828+05:30",
+    "Extension": ".xml"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\app\\src\\main\\res\\values\\styles.xml",
+    "Length": 337,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".xml"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\gradle\\wrapper\\gradle-wrapper.jar",
+    "Length": 43764,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".jar"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\android\\gradle\\wrapper\\gradle-wrapper.properties",
+    "Length": 253,
+    "LastWriteTime": "1985-10-26T13:45:00+05:30",
+    "Extension": ".properties"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\_layout.tsx",
+    "Length": 8490,
+    "LastWriteTime": "2025-09-15T07:10:35.89649+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\+not-found.tsx",
+    "Length": 2149,
+    "LastWriteTime": "2025-09-15T20:09:05.1778732+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\index.tsx",
+    "Length": 1210,
+    "LastWriteTime": "2025-09-13T23:46:37.2714643+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\splash.tsx",
+    "Length": 2249,
+    "LastWriteTime": "2025-09-15T02:50:51.455079+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\welcome.tsx",
+    "Length": 2727,
+    "LastWriteTime": "2025-09-15T03:40:17.8443591+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(auth)\\_layout.tsx",
+    "Length": 1216,
+    "LastWriteTime": "2025-09-15T03:40:17.8443591+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(auth)\\forgot-password.tsx",
+    "Length": 12952,
+    "LastWriteTime": "2025-09-15T02:50:47.2726438+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(auth)\\role.tsx",
+    "Length": 4008,
+    "LastWriteTime": "2025-09-15T03:48:33.0548807+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(auth)\\sign-in-working.tsx",
+    "Length": 8820,
+    "LastWriteTime": "2025-09-15T02:50:47.5790709+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(auth)\\sign-in.tsx",
+    "Length": 10510,
+    "LastWriteTime": "2025-09-15T02:50:47.9010008+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(auth)\\sign-up.tsx",
+    "Length": 17027,
+    "LastWriteTime": "2025-09-15T03:41:32.8844956+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(auth)\\supabase-sign-in.tsx",
+    "Length": 2266,
+    "LastWriteTime": "2025-09-15T02:50:48.3636978+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(driver)\\_layout.tsx",
+    "Length": 3731,
+    "LastWriteTime": "2025-09-15T20:09:04.6652364+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(driver)\\bid.tsx",
+    "Length": 2580,
+    "LastWriteTime": "2025-09-15T20:09:04.7127897+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(driver)\\forgot-password.tsx",
+    "Length": 5950,
+    "LastWriteTime": "2025-09-15T20:09:04.8538997+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(driver)\\index.tsx",
+    "Length": 2747,
+    "LastWriteTime": "2025-09-15T20:09:04.9027705+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(driver)\\profile.tsx",
+    "Length": 4618,
+    "LastWriteTime": "2025-09-15T20:09:04.9710518+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(driver)\\sign-in.tsx",
+    "Length": 7409,
+    "LastWriteTime": "2025-09-15T20:09:05.0520611+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(driver)\\sign-up.tsx",
+    "Length": 9841,
+    "LastWriteTime": "2025-09-15T20:09:05.127732+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(driver)\\wallet.tsx",
+    "Length": 2053,
+    "LastWriteTime": "2025-09-15T20:09:05.1485089+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(modals)\\_layout.tsx",
+    "Length": 719,
+    "LastWriteTime": "2025-09-15T02:50:48.9572922+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(modals)\\edit-profile.tsx",
+    "Length": 12899,
+    "LastWriteTime": "2025-09-15T02:50:49.1405537+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(modals)\\receipt.tsx",
+    "Length": 2423,
+    "LastWriteTime": "2025-09-15T02:50:49.2401434+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(modals)\\scan.tsx",
+    "Length": 2184,
+    "LastWriteTime": "2025-09-15T02:50:49.4002029+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(onboarding)\\_layout.tsx",
+    "Length": 350,
+    "LastWriteTime": "2025-09-15T02:50:49.564486+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(onboarding)\\onboarding\\index.tsx",
+    "Length": 2929,
+    "LastWriteTime": "2025-09-15T02:50:49.6405345+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(onboarding)\\onboarding\\three.tsx",
+    "Length": 3083,
+    "LastWriteTime": "2025-09-15T03:40:17.8443591+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(onboarding)\\onboarding\\two.tsx",
+    "Length": 3236,
+    "LastWriteTime": "2025-09-15T02:50:49.8375536+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(tabs)\\_layout.tsx",
+    "Length": 2194,
+    "LastWriteTime": "2025-09-15T02:50:49.9045228+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(tabs)\\booking.tsx",
+    "Length": 9382,
+    "LastWriteTime": "2025-09-15T02:50:50.1231451+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(tabs)\\developer.tsx",
+    "Length": 17188,
+    "LastWriteTime": "2025-09-15T02:50:50.2977261+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(tabs)\\index.tsx",
+    "Length": 25379,
+    "LastWriteTime": "2025-09-15T02:50:50.5955184+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(tabs)\\orders.tsx",
+    "Length": 6576,
+    "LastWriteTime": "2025-09-15T02:50:50.6957273+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(tabs)\\profile.tsx",
+    "Length": 24986,
+    "LastWriteTime": "2025-09-15T02:50:50.9381158+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\(tabs)\\tracking.tsx",
+    "Length": 38159,
+    "LastWriteTime": "2025-09-15T02:50:51.2408967+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\app\\components\\SignOutButton.tsx",
+    "Length": 1400,
+    "LastWriteTime": "2025-09-15T02:50:51.4141532+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\adaptive-icon.png",
+    "Length": 1193242,
+    "LastWriteTime": "2025-09-07T06:02:14.5481+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\favicon.png",
+    "Length": 1193242,
+    "LastWriteTime": "2025-09-07T06:02:14.5481+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\icon.png",
+    "Length": 1193242,
+    "LastWriteTime": "2025-09-07T06:02:14.5481+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\splash-icon.png",
+    "Length": 1193242,
+    "LastWriteTime": "2025-09-07T06:02:14.5481+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\splash.png",
+    "Length": 1193242,
+    "LastWriteTime": "2025-09-07T06:02:14.5481+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\icons\\book.svg",
+    "Length": 550,
+    "LastWriteTime": "2025-09-09T03:24:07.7877026+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\icons\\Home.svg",
+    "Length": 562,
+    "LastWriteTime": "2025-09-09T03:23:49.6886574+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\icons\\orders.svg",
+    "Length": 428,
+    "LastWriteTime": "2025-09-09T03:25:00.012525+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\icons\\profile.svg",
+    "Length": 579,
+    "LastWriteTime": "2025-09-09T03:25:16.8961734+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\icons\\track.svg",
+    "Length": 386,
+    "LastWriteTime": "2025-09-09T03:24:22.3514333+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\images\\README.md",
+    "Length": 184,
+    "LastWriteTime": "2025-09-15T02:50:49.3283337+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\lottie\\get_started.json",
+    "Length": 163556,
+    "LastWriteTime": "2025-09-15T02:50:50.4184946+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\lottie\\home-section.json",
+    "Length": 847748,
+    "LastWriteTime": "2025-09-15T02:50:52.62559+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\lottie\\real_time_tracking.json",
+    "Length": 83757,
+    "LastWriteTime": "2025-09-15T02:50:52.8765899+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\lottie\\smart_booking.json",
+    "Length": 195965,
+    "LastWriteTime": "2025-09-15T02:50:53.3459368+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\lottie\\splash.json",
+    "Length": 125282,
+    "LastWriteTime": "2025-09-15T02:50:53.5339525+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\lottie\\welcome.json",
+    "Length": 328356,
+    "LastWriteTime": "2025-09-15T02:50:53.9955539+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\onboarding\\COMPLETION_SUMMARY.md",
+    "Length": 4407,
+    "LastWriteTime": "2025-09-15T02:50:54.0894676+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\onboarding\\design_specs.json",
+    "Length": 3992,
+    "LastWriteTime": "2025-09-15T02:50:54.2484373+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\onboarding\\README.md",
+    "Length": 4415,
+    "LastWriteTime": "2025-09-15T02:50:54.2210719+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\onboarding\\spinner_lottie.json",
+    "Length": 10003,
+    "LastWriteTime": "2025-09-13T23:46:38.7678756+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\onboarding\\spinner.svg",
+    "Length": 2577,
+    "LastWriteTime": "2025-09-09T04:16:11.433712+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\onboarding\\splash_dark.png.txt",
+    "Length": 1690,
+    "LastWriteTime": "2025-09-09T04:18:33.5099356+05:30",
+    "Extension": ".txt"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\onboarding\\splash_light.png.txt",
+    "Length": 1435,
+    "LastWriteTime": "2025-09-09T04:18:12.0763332+05:30",
+    "Extension": ".txt"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\assets\\onboarding\\splash.svg",
+    "Length": 3755,
+    "LastWriteTime": "2025-09-09T04:15:49.446111+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\components\\AnimatedSquareCard.tsx",
+    "Length": 1471,
+    "LastWriteTime": "2025-09-15T02:50:51.6017639+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\components\\Pagination.tsx",
+    "Length": 905,
+    "LastWriteTime": "2025-09-15T02:50:51.6672476+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\ACCESSIBILITY_GUIDELINES.md",
+    "Length": 1511,
+    "LastWriteTime": "2025-09-15T02:50:54.2779526+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\ADDRESS_AUTOCOMPLETE_AND_UX_PLAN.md",
+    "Length": 9810,
+    "LastWriteTime": "2025-09-15T02:50:54.370457+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\AUTH_FLOW.md",
+    "Length": 1456,
+    "LastWriteTime": "2025-09-15T03:48:32.9291708+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\AUTH_UI_REDESIGN.md",
+    "Length": 5763,
+    "LastWriteTime": "2025-09-15T02:50:54.4648632+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\awards-grade-master-plan.md",
+    "Length": 11035,
+    "LastWriteTime": "2025-09-15T02:50:49.4633774+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\CLERK_SUPABASE_INTEGRATION.md",
+    "Length": 5169,
+    "LastWriteTime": "2025-09-15T20:09:04.7640179+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\COMPONENT_MIGRATION_GUIDE.md",
+    "Length": 1369,
+    "LastWriteTime": "2025-09-15T02:50:54.4981982+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\DEPENDENCY_POLICY.md",
+    "Length": 2253,
+    "LastWriteTime": "2025-09-15T02:50:54.5301884+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\DESIGN_SYSTEM.md",
+    "Length": 6918,
+    "LastWriteTime": "2025-09-15T02:50:54.6313733+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\DESIGN_TOKENS_REFERENCE.md",
+    "Length": 833,
+    "LastWriteTime": "2025-09-15T02:50:54.6521825+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\DRIVER_ADMIN_SCAFFOLDING.md",
+    "Length": 625,
+    "LastWriteTime": "2025-09-15T02:50:54.6675833+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\driver-ui.md",
+    "Length": 1970,
+    "LastWriteTime": "2025-09-15T20:09:04.8042055+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\ENHANCED_DESIGN_SYSTEM_GUIDE.md",
+    "Length": 9645,
+    "LastWriteTime": "2025-09-15T02:50:54.7889254+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\EXPO_SDK54_DEVELOPMENT_STANDARDS.md",
+    "Length": 12632,
+    "LastWriteTime": "2025-09-15T02:50:55.0106492+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\GOOGLE_PLACES_KEY_SETUP.md",
+    "Length": 1178,
+    "LastWriteTime": "2025-09-15T02:50:55.041988+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\IMPLEMENTATION_GUIDE.md",
+    "Length": 14841,
+    "LastWriteTime": "2025-09-15T02:50:55.2045779+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\IMPLEMENTED_FEATURES.md",
+    "Length": 8756,
+    "LastWriteTime": "2025-09-15T02:50:55.2994813+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\INTEGRATION_GUIDE.md",
+    "Length": 5619,
+    "LastWriteTime": "2025-09-15T02:50:46.9162128+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\PROJECT_STATUS_AND_SUPABASE.md",
+    "Length": 6648,
+    "LastWriteTime": "2025-09-15T02:50:47.1832576+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\REDESIGN_IMPLEMENTATION_SUMMARY.md",
+    "Length": 8977,
+    "LastWriteTime": "2025-09-15T02:50:47.5656802+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\RELEASE_NOTES_2025-09-14.md",
+    "Length": 1561,
+    "LastWriteTime": "2025-09-15T02:50:47.7244438+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\ROUTING_ARCHITECTURE_FIXES.md",
+    "Length": 6006,
+    "LastWriteTime": "2025-09-15T02:50:48.0976328+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\routing-notes.md",
+    "Length": 5171,
+    "LastWriteTime": "2025-09-15T20:09:04.9806124+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\SENTRY_SETUP.md",
+    "Length": 716,
+    "LastWriteTime": "2025-09-15T02:50:48.2504293+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\SPLASH_SCREEN_FIXES.md",
+    "Length": 4719,
+    "LastWriteTime": "2025-09-15T02:50:48.3748155+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\storybook-mocks.md",
+    "Length": 2511,
+    "LastWriteTime": "2025-09-15T02:50:49.5060553+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\SUPABASE_SETUP_GUIDE.md",
+    "Length": 4270,
+    "LastWriteTime": "2025-09-15T02:50:48.6014522+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\TAMAGUI_SETUP.md",
+    "Length": 11189,
+    "LastWriteTime": "2025-09-15T02:50:49.1607515+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\docs\\UI_ENHANCEMENTS_SUMMARY.md",
+    "Length": 5502,
+    "LastWriteTime": "2025-09-15T02:50:49.295441+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\public\\favicon.svg",
+    "Length": 457,
+    "LastWriteTime": "2025-09-13T18:42:41.2792593+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\scripts\\check-storybook-runtime.mjs",
+    "Length": 2651,
+    "LastWriteTime": "2025-09-15T03:02:05.4523904+05:30",
+    "Extension": ".mjs"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\scripts\\lint-rnw-shadows.mjs",
+    "Length": 1640,
+    "LastWriteTime": "2025-09-15T03:02:05.4883764+05:30",
+    "Extension": ".mjs"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\scripts\\scan-fonts.js",
+    "Length": 1272,
+    "LastWriteTime": "2025-09-15T02:50:46.9690265+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\README.md",
+    "Length": 3799,
+    "LastWriteTime": "2025-09-15T02:50:50.6258709+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\accessibility\\AccessibilityHelper.tsx",
+    "Length": 9769,
+    "LastWriteTime": "2025-09-15T03:19:27.2969179+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\animations\\AdvancedAnimations.tsx",
+    "Length": 8575,
+    "LastWriteTime": "2025-09-15T03:19:27.5001514+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\AddressAutocomplete.tsx",
+    "Length": 5583,
+    "LastWriteTime": "2025-09-15T03:19:27.6317944+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\AnimatedButton.tsx",
+    "Length": 5647,
+    "LastWriteTime": "2025-09-15T03:19:27.735348+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\DesignSystemDemo.tsx",
+    "Length": 10902,
+    "LastWriteTime": "2025-09-15T03:19:27.8569434+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\FabHub.tsx",
+    "Length": 2485,
+    "LastWriteTime": "2025-09-15T03:19:27.896159+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\GlobalErrorCatcher.tsx",
+    "Length": 957,
+    "LastWriteTime": "2025-09-15T03:19:27.9356252+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\index.ts",
+    "Length": 251,
+    "LastWriteTime": "2025-09-13T23:46:40.3703479+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\KycProgress.tsx",
+    "Length": 1282,
+    "LastWriteTime": "2025-09-15T03:17:14.8804241+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\LottieAnimation.tsx",
+    "Length": 3711,
+    "LastWriteTime": "2025-09-15T03:19:28.0152431+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\MapWrapper.tsx",
+    "Length": 5930,
+    "LastWriteTime": "2025-09-15T03:19:28.0651095+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\OfflineBanner.tsx",
+    "Length": 1719,
+    "LastWriteTime": "2025-09-15T03:19:28.0768741+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\QuoteCard.tsx",
+    "Length": 2637,
+    "LastWriteTime": "2025-09-15T03:19:28.1217135+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\ReviewCard.tsx",
+    "Length": 1865,
+    "LastWriteTime": "2025-09-15T03:17:14.8804241+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\StatusTimeline.tsx",
+    "Length": 2654,
+    "LastWriteTime": "2025-09-15T03:19:28.1890955+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\StepIndicator.tsx",
+    "Length": 1864,
+    "LastWriteTime": "2025-09-15T03:19:28.2189391+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\examples\\AuthenticatedSupabaseExample.tsx",
+    "Length": 5263,
+    "LastWriteTime": "2025-09-15T20:09:05.4911607+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\tracking\\IconCircle.tsx",
+    "Length": 781,
+    "LastWriteTime": "2025-09-15T03:17:14.8804241+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\tracking\\index.ts",
+    "Length": 229,
+    "LastWriteTime": "2025-09-15T02:50:50.8433553+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\tracking\\LiveMap.tsx",
+    "Length": 9229,
+    "LastWriteTime": "2025-09-15T03:19:28.3577704+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\tracking\\LiveTrackingPulse.tsx",
+    "Length": 2194,
+    "LastWriteTime": "2025-09-15T03:19:28.389577+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\tracking\\SearchCard.tsx",
+    "Length": 6693,
+    "LastWriteTime": "2025-09-15T03:19:28.4488441+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\tracking\\ShipmentDetails.tsx",
+    "Length": 4756,
+    "LastWriteTime": "2025-09-15T03:19:28.4935004+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\tracking\\ShipmentHeader.tsx",
+    "Length": 4501,
+    "LastWriteTime": "2025-09-15T03:19:28.5229052+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\tracking\\TrackingTimeline.tsx",
+    "Length": 6703,
+    "LastWriteTime": "2025-09-15T03:19:28.5735253+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\ui\\AnimatedContainer.tsx",
+    "Length": 1715,
+    "LastWriteTime": "2025-09-13T23:46:40.7575492+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\components\\ui\\AuthHeader.tsx",
+    "Length": 4734,
+    "LastWriteTime": "2025-09-15T03:19:28.6290198+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\content\\marketingContent.md",
+    "Length": 6958,
+    "LastWriteTime": "2025-09-15T02:50:50.8335315+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\content\\splashContent.ts",
+    "Length": 8167,
+    "LastWriteTime": "2025-09-15T03:19:28.6784934+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\contexts\\AuthenticatedSupabaseContext.tsx",
+    "Length": 4739,
+    "LastWriteTime": "2025-09-15T20:09:05.522531+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\contexts\\CountsContext.tsx",
+    "Length": 4780,
+    "LastWriteTime": "2025-09-15T03:19:28.7360585+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\design-system\\animations.ts",
+    "Length": 876,
+    "LastWriteTime": "2025-09-15T03:17:14.8804241+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\design-system\\theme.ts",
+    "Length": 1322,
+    "LastWriteTime": "2025-09-15T03:17:14.8804241+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\design-system\\tokens.ts",
+    "Length": 7966,
+    "LastWriteTime": "2025-09-15T03:17:14.8804241+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\design-system\\components\\Button.tsx",
+    "Length": 7628,
+    "LastWriteTime": "2025-09-15T03:19:28.8322481+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\design-system\\components\\Card.tsx",
+    "Length": 10015,
+    "LastWriteTime": "2025-09-15T03:19:28.8937234+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\design-system\\components\\Input.tsx",
+    "Length": 2729,
+    "LastWriteTime": "2025-09-15T03:19:28.9120517+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\design-system\\components\\Typography.tsx",
+    "Length": 3680,
+    "LastWriteTime": "2025-09-15T03:19:28.9368602+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\hooks\\usePlacesAutocomplete.ts",
+    "Length": 3689,
+    "LastWriteTime": "2025-09-15T03:19:29.0161133+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\i18n\\index.ts",
+    "Length": 7881,
+    "LastWriteTime": "2025-09-15T03:19:29.0532274+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\integrations\\onesignal.ts",
+    "Length": 2781,
+    "LastWriteTime": "2025-09-15T03:19:29.0760712+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\monitoring\\PerformanceMonitor.tsx",
+    "Length": 10005,
+    "LastWriteTime": "2025-09-15T03:19:29.153887+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\navigation\\AppNavigator.tsx",
+    "Length": 3088,
+    "LastWriteTime": "2025-09-15T03:17:14.8804241+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\screens\\MainApp.tsx",
+    "Length": 1399,
+    "LastWriteTime": "2025-09-15T03:19:29.2120832+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\screens\\OnboardingScreen.tsx",
+    "Length": 13348,
+    "LastWriteTime": "2025-09-15T03:19:29.259783+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\screens\\SplashScreen.tsx",
+    "Length": 10473,
+    "LastWriteTime": "2025-09-15T03:19:29.3182702+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\services\\api.ts",
+    "Length": 6069,
+    "LastWriteTime": "2025-09-15T03:19:29.3530563+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\services\\authService.ts",
+    "Length": 10606,
+    "LastWriteTime": "2025-09-15T03:19:29.4007592+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\services\\driverData.ts",
+    "Length": 2233,
+    "LastWriteTime": "2025-09-15T20:09:05.547474+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\services\\driverOffers.ts",
+    "Length": 2015,
+    "LastWriteTime": "2025-09-15T03:19:29.4181924+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\services\\kyc.ts",
+    "Length": 2994,
+    "LastWriteTime": "2025-09-15T03:19:29.4393981+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\services\\quote.ts",
+    "Length": 1853,
+    "LastWriteTime": "2025-09-15T03:19:29.4568037+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\services\\README.md",
+    "Length": 8369,
+    "LastWriteTime": "2025-09-15T02:50:51.1577122+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\services\\sms.ts",
+    "Length": 1953,
+    "LastWriteTime": "2025-09-15T03:19:29.4739186+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\services\\supabaseClient.ts",
+    "Length": 2669,
+    "LastWriteTime": "2025-09-15T20:09:05.5711059+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\stores\\authStore.ts",
+    "Length": 4415,
+    "LastWriteTime": "2025-09-15T03:17:14.8804241+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\stores\\queueStore.ts",
+    "Length": 532,
+    "LastWriteTime": "2025-09-13T23:46:41.9221124+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\styles\\colors.ts",
+    "Length": 2016,
+    "LastWriteTime": "2025-09-15T02:50:53.241542+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\styles\\index.ts",
+    "Length": 679,
+    "LastWriteTime": "2025-09-15T03:17:14.8804241+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\styles\\spacing.ts",
+    "Length": 1335,
+    "LastWriteTime": "2025-09-13T23:46:41.9650778+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\styles\\ThemeManager.tsx",
+    "Length": 4956,
+    "LastWriteTime": "2025-09-15T20:09:05.6102115+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\styles\\ThemeProvider.tsx",
+    "Length": 4651,
+    "LastWriteTime": "2025-09-15T03:19:29.5609444+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\styles\\typography.ts",
+    "Length": 3272,
+    "LastWriteTime": "2025-09-13T23:46:42.0134188+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\types\\svg.d.ts",
+    "Length": 192,
+    "LastWriteTime": "2025-09-15T02:50:53.2768392+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\types\\tamagui-compat.d.ts",
+    "Length": 1090,
+    "LastWriteTime": "2025-09-15T02:50:53.325173+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\AnimatedBadge.tsx",
+    "Length": 944,
+    "LastWriteTime": "2025-09-15T02:50:53.3489798+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\AppHeader.tsx",
+    "Length": 1047,
+    "LastWriteTime": "2025-09-15T03:19:29.5853033+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\AppIcon.tsx",
+    "Length": 2910,
+    "LastWriteTime": "2025-09-15T04:15:17.718051+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\BottomTabBar.tsx",
+    "Length": 8118,
+    "LastWriteTime": "2025-09-15T20:09:05.6783525+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\EmptyState.tsx",
+    "Length": 1159,
+    "LastWriteTime": "2025-09-15T03:19:29.6334973+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\FadeIn.tsx",
+    "Length": 774,
+    "LastWriteTime": "2025-09-15T02:50:47.0726999+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\Illustration.tsx",
+    "Length": 588,
+    "LastWriteTime": "2025-09-15T03:19:29.6445622+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\index.design-only.ts",
+    "Length": 209,
+    "LastWriteTime": "2025-09-15T02:50:49.8132702+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\index.new-ui.ts",
+    "Length": 209,
+    "LastWriteTime": "2025-09-15T02:50:49.8638106+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\index.ts",
+    "Length": 2036,
+    "LastWriteTime": "2025-09-15T04:37:30.9790584+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\InlineBadge.tsx",
+    "Length": 2760,
+    "LastWriteTime": "2025-09-15T03:19:27.2115016+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\ListRow.tsx",
+    "Length": 1101,
+    "LastWriteTime": "2025-09-15T03:19:27.2580854+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\LoadingSpinner.tsx",
+    "Length": 3880,
+    "LastWriteTime": "2025-09-15T03:19:27.3583633+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\MapCard.tsx",
+    "Length": 3226,
+    "LastWriteTime": "2025-09-15T03:19:27.423487+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\Primitives.tsx",
+    "Length": 443,
+    "LastWriteTime": "2025-09-15T03:19:27.4573519+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\ProgressBar.tsx",
+    "Length": 831,
+    "LastWriteTime": "2025-09-15T03:19:27.4805002+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\Screen.tsx",
+    "Length": 2539,
+    "LastWriteTime": "2025-09-15T03:19:27.5197039+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\SectionHeader.tsx",
+    "Length": 1208,
+    "LastWriteTime": "2025-09-15T03:19:27.5463578+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\StatChip.tsx",
+    "Length": 1844,
+    "LastWriteTime": "2025-09-15T03:19:27.608696+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\StatusBadge.tsx",
+    "Length": 2077,
+    "LastWriteTime": "2025-09-15T03:19:27.6577806+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\StatusPill.tsx",
+    "Length": 1669,
+    "LastWriteTime": "2025-09-15T03:19:27.7008975+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\TabBarBackground.tsx",
+    "Length": 381,
+    "LastWriteTime": "2025-09-15T03:19:27.7154238+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\tabOptions.tsx",
+    "Length": 330,
+    "LastWriteTime": "2025-09-15T02:50:49.9458507+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\tokens.ts",
+    "Length": 406,
+    "LastWriteTime": "2025-09-15T02:50:50.9282562+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\types.ts",
+    "Length": 7965,
+    "LastWriteTime": "2025-09-15T03:19:28.2600881+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\Typography.tsx",
+    "Length": 5692,
+    "LastWriteTime": "2025-09-15T03:19:27.8030838+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\auth\\AuthButton.tsx",
+    "Length": 1066,
+    "LastWriteTime": "2025-09-15T03:19:27.8308214+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\auth\\AuthInput.tsx",
+    "Length": 3084,
+    "LastWriteTime": "2025-09-15T03:19:27.8667506+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\auth\\index.ts",
+    "Length": 84,
+    "LastWriteTime": "2025-09-15T02:50:49.7304833+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\driver\\JobCard.tsx",
+    "Length": 2581,
+    "LastWriteTime": "2025-09-15T20:09:05.6969663+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\driver\\KycUploader.tsx",
+    "Length": 1220,
+    "LastWriteTime": "2025-09-15T20:09:05.7170336+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\driver\\ProfileAvatar.tsx",
+    "Length": 627,
+    "LastWriteTime": "2025-09-15T20:09:05.7254036+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\driver\\TransactionRow.tsx",
+    "Length": 1625,
+    "LastWriteTime": "2025-09-15T20:09:05.7432996+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\tg\\Button.tsx",
+    "Length": 6745,
+    "LastWriteTime": "2025-09-15T03:19:27.9547738+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\tg\\Card.tsx",
+    "Length": 4063,
+    "LastWriteTime": "2025-09-15T03:19:28.0104551+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\tg\\Input.tsx",
+    "Length": 5706,
+    "LastWriteTime": "2025-09-15T03:19:28.0532886+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\tg\\Select.tsx",
+    "Length": 1869,
+    "LastWriteTime": "2025-09-15T03:19:28.0768741+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\tg\\Sheet.tsx",
+    "Length": 466,
+    "LastWriteTime": "2025-09-15T03:19:28.1007367+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\tg\\Skeleton.tsx",
+    "Length": 1596,
+    "LastWriteTime": "2025-09-15T03:19:28.1355469+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\ui\\tg\\ToastHost.tsx",
+    "Length": 5429,
+    "LastWriteTime": "2025-09-15T03:19:28.1940185+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\addressHistory.ts",
+    "Length": 1133,
+    "LastWriteTime": "2025-09-15T03:19:28.3085046+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\animations.ts",
+    "Length": 3765,
+    "LastWriteTime": "2025-09-15T03:19:28.3521369+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\currency.ts",
+    "Length": 703,
+    "LastWriteTime": "2025-09-15T03:19:28.3974021+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\device.ts",
+    "Length": 2405,
+    "LastWriteTime": "2025-09-15T02:50:51.4121408+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\drafts.ts",
+    "Length": 1153,
+    "LastWriteTime": "2025-09-13T23:46:42.7307588+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\format.ts",
+    "Length": 325,
+    "LastWriteTime": "2025-09-15T03:19:28.4091636+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\motion.ts",
+    "Length": 7045,
+    "LastWriteTime": "2025-09-15T03:19:28.4782819+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\notifications.ts",
+    "Length": 5618,
+    "LastWriteTime": "2025-09-15T03:19:28.5300978+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\offlineQueue.ts",
+    "Length": 1585,
+    "LastWriteTime": "2025-09-15T03:19:28.5577385+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\reactQuery.tsx",
+    "Length": 582,
+    "LastWriteTime": "2025-09-13T23:46:42.8272526+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\sentry.ts",
+    "Length": 1064,
+    "LastWriteTime": "2025-09-15T03:19:28.5795771+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\storage.ts",
+    "Length": 8282,
+    "LastWriteTime": "2025-09-15T03:39:54.6586121+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\updates.ts",
+    "Length": 1888,
+    "LastWriteTime": "2025-09-15T03:19:28.6963427+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\utils\\volumetric.ts",
+    "Length": 762,
+    "LastWriteTime": "2025-09-15T03:19:28.7381034+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\src\\__tests__\\AuthenticatedSupabase.test.tsx",
+    "Length": 7189,
+    "LastWriteTime": "2025-09-15T20:09:05.4333674+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\main.ts",
+    "Length": 4047,
+    "LastWriteTime": "2025-09-15T02:51:06.8466097+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\preview.ts",
+    "Length": 1703,
+    "LastWriteTime": "2025-09-15T02:51:07.0684671+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\async-storage.ts",
+    "Length": 924,
+    "LastWriteTime": "2025-09-15T02:51:06.8743601+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\empty.ts",
+    "Length": 34,
+    "LastWriteTime": "2025-09-15T02:51:06.8809557+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\expo-blur.tsx",
+    "Length": 211,
+    "LastWriteTime": "2025-09-15T02:51:06.8997519+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\expo-haptics.ts",
+    "Length": 1150,
+    "LastWriteTime": "2025-09-15T02:51:06.9257678+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\expo-linear-gradient.tsx",
+    "Length": 309,
+    "LastWriteTime": "2025-09-15T02:51:06.9415727+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\expo-modules-core.ts",
+    "Length": 345,
+    "LastWriteTime": "2025-09-15T02:51:06.9508275+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\expo-vector-icons.tsx",
+    "Length": 4160,
+    "LastWriteTime": "2025-09-15T02:51:06.9888034+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\lottie.tsx",
+    "Length": 629,
+    "LastWriteTime": "2025-09-15T02:51:07.0009773+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\reanimated.ts",
+    "Length": 1064,
+    "LastWriteTime": "2025-09-15T02:51:07.0207897+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\reanimated.tsx",
+    "Length": 1226,
+    "LastWriteTime": "2025-09-15T02:51:07.0368654+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\mocks\\safe-area-context.ts",
+    "Length": 145,
+    "LastWriteTime": "2025-09-15T02:51:07.0526918+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\public\\_redirects",
+    "Length": 119,
+    "LastWriteTime": "2025-09-13T18:50:41.1514517+05:30",
+    "Extension": ""
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\public\\favicon.svg",
+    "Length": 457,
+    "LastWriteTime": "2025-09-13T18:50:49.7809654+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\public\\README.md",
+    "Length": 112,
+    "LastWriteTime": "2025-09-15T02:50:46.8791115+05:30",
+    "Extension": ".md"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\BottomTabBar.stories.tsx",
+    "Length": 2355,
+    "LastWriteTime": "2025-09-15T02:51:07.0952789+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\Button.stories.tsx",
+    "Length": 1524,
+    "LastWriteTime": "2025-09-13T07:45:56.9468797+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\Card.stories.tsx",
+    "Length": 1363,
+    "LastWriteTime": "2025-09-15T02:51:07.1078122+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\CardExamples.stories.tsx",
+    "Length": 1400,
+    "LastWriteTime": "2025-09-15T02:51:07.1365024+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\Input.stories.tsx",
+    "Length": 1377,
+    "LastWriteTime": "2025-09-15T02:51:07.158662+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\Layout.stories.tsx",
+    "Length": 826,
+    "LastWriteTime": "2025-09-15T02:51:07.170609+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\Onboarding.stories.tsx",
+    "Length": 1142,
+    "LastWriteTime": "2025-09-15T02:51:07.1831631+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\ProgressBar.stories.tsx",
+    "Length": 890,
+    "LastWriteTime": "2025-09-15T02:51:07.1947962+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\Screen.stories.tsx",
+    "Length": 3948,
+    "LastWriteTime": "2025-09-15T02:51:07.2424657+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\Splash.stories.tsx",
+    "Length": 400,
+    "LastWriteTime": "2025-09-15T02:51:07.2563338+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\StatusPill.stories.tsx",
+    "Length": 1059,
+    "LastWriteTime": "2025-09-15T02:51:07.2619847+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\stories\\Typography.stories.tsx",
+    "Length": 772,
+    "LastWriteTime": "2025-09-15T02:51:07.2741588+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\a11y_and_more.spec.ts",
+    "Length": 2858,
+    "LastWriteTime": "2025-09-15T02:51:07.309843+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\card_contrast.spec.ts",
+    "Length": 3298,
+    "LastWriteTime": "2025-09-15T02:51:07.3371661+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\contrast.spec.ts",
+    "Length": 2567,
+    "LastWriteTime": "2025-09-15T02:51:07.3685238+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\more_a11y_and_contrast.spec.ts",
+    "Length": 5347,
+    "LastWriteTime": "2025-09-15T02:51:07.4061319+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\onboarding.spec.ts",
+    "Length": 492,
+    "LastWriteTime": "2025-09-15T02:51:07.4158293+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\visual.spec.ts",
+    "Length": 2712,
+    "LastWriteTime": "2025-09-15T02:51:07.4349161+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\a11y_and_more.spec.ts-snapshots\\design-system-input--playground-win32.png",
+    "Length": 4253,
+    "LastWriteTime": "2025-09-13T08:15:09.7454156+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\a11y_and_more.spec.ts-snapshots\\design-system-statuspill--playground-win32.png",
+    "Length": 5242,
+    "LastWriteTime": "2025-09-13T07:48:24.4029764+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\more_a11y_and_contrast.spec.ts-snapshots\\card-examples-with-content-dark-win32.png",
+    "Length": 13515,
+    "LastWriteTime": "2025-09-13T08:38:49.5630855+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\more_a11y_and_contrast.spec.ts-snapshots\\card-examples-with-content-light-win32.png",
+    "Length": 13696,
+    "LastWriteTime": "2025-09-13T08:38:43.978983+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\onboarding.spec.ts-snapshots\\onboarding-welcome-win32.png",
+    "Length": 4253,
+    "LastWriteTime": "2025-09-13T08:22:15.7300542+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\visual.spec.ts-snapshots\\button-all-variants-dark-win32.png",
+    "Length": 10981,
+    "LastWriteTime": "2025-09-13T07:48:04.0694744+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\visual.spec.ts-snapshots\\button-all-variants-light-win32.png",
+    "Length": 11061,
+    "LastWriteTime": "2025-09-13T07:48:00.2712129+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook\\tests\\visual.spec.ts-snapshots\\card-variants-win32.png",
+    "Length": 11510,
+    "LastWriteTime": "2025-09-13T07:48:06.3236424+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\favicon.svg",
+    "Length": 457,
+    "LastWriteTime": "2025-09-13T18:42:41.2792593+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\iframe.html",
+    "Length": 18269,
+    "LastWriteTime": "2025-09-15T03:15:24.0757384+05:30",
+    "Extension": ".html"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\index.html",
+    "Length": 4493,
+    "LastWriteTime": "2025-09-15T03:15:24.0774979+05:30",
+    "Extension": ".html"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\index.json",
+    "Length": 6583,
+    "LastWriteTime": "2025-09-15T03:15:24.0795141+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\nunito-sans-bold-italic.woff2",
+    "Length": 49460,
+    "LastWriteTime": "2025-09-13T05:44:27.5816179+05:30",
+    "Extension": ".woff2"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\nunito-sans-bold.woff2",
+    "Length": 47144,
+    "LastWriteTime": "2025-09-13T05:44:27.84797+05:30",
+    "Extension": ".woff2"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\nunito-sans-italic.woff2",
+    "Length": 49620,
+    "LastWriteTime": "2025-09-13T05:44:27.9907145+05:30",
+    "Extension": ".woff2"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\nunito-sans-regular.woff2",
+    "Length": 47072,
+    "LastWriteTime": "2025-09-13T05:44:28.1177978+05:30",
+    "Extension": ".woff2"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\project.json",
+    "Length": 778,
+    "LastWriteTime": "2025-09-15T03:15:24.0820463+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\async-storage-CbWkip1I.js",
+    "Length": 542,
+    "LastWriteTime": "2025-09-15T03:15:24.0101905+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\AuthInput-Ck71U4Ms.js",
+    "Length": 11288,
+    "LastWriteTime": "2025-09-15T03:15:23.9704143+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\BottomTabBar.stories-C9uDQ6Th.js",
+    "Length": 7824,
+    "LastWriteTime": "2025-09-15T03:15:23.9724243+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Button.stories-DQWLVjbE.js",
+    "Length": 6317,
+    "LastWriteTime": "2025-09-15T03:15:23.9724243+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Card-Ba261Cte.js",
+    "Length": 3678,
+    "LastWriteTime": "2025-09-15T03:15:23.9744363+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Card.stories-qcVtbcKp.js",
+    "Length": 2230,
+    "LastWriteTime": "2025-09-15T03:15:23.9744363+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\CardExamples.stories-C_J_dGOj.js",
+    "Length": 2667,
+    "LastWriteTime": "2025-09-15T03:15:23.9764476+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\chunk-XP5HYGXS-D5tuasO7.js",
+    "Length": 716,
+    "LastWriteTime": "2025-09-15T03:15:24.0120623+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Color-YHDXOIA2-Bf1p4Mqi.js",
+    "Length": 29374,
+    "LastWriteTime": "2025-09-15T03:15:23.9784595+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\colors-DZ76hqBL.js",
+    "Length": 155,
+    "LastWriteTime": "2025-09-15T03:15:24.0120623+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\CountsContext-Bw8ENlWH.js",
+    "Length": 125647,
+    "LastWriteTime": "2025-09-15T03:15:23.9804709+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\DocsRenderer-CFRXHY34-Cm4xOfkf.js",
+    "Length": 894237,
+    "LastWriteTime": "2025-09-15T03:15:23.99056+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\entry-preview-BYi3Nq5I.js",
+    "Length": 29854,
+    "LastWriteTime": "2025-09-15T03:15:24.0138027+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\entry-preview-docs-D-rh7v6y.js",
+    "Length": 247128,
+    "LastWriteTime": "2025-09-15T03:15:24.0178282+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\expo-linear-gradient-DAXGVG3E.js",
+    "Length": 222,
+    "LastWriteTime": "2025-09-15T03:15:24.0198405+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\helpers-1oZkv_34.js",
+    "Length": 117928,
+    "LastWriteTime": "2025-09-15T03:15:24.0218523+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\iframe-Bgd7y2ez.js",
+    "Length": 215079,
+    "LastWriteTime": "2025-09-15T03:15:24.0243634+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-BjajBSh7.js",
+    "Length": 8904,
+    "LastWriteTime": "2025-09-15T03:15:24.0263957+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-BpqH_MAA.js",
+    "Length": 17709,
+    "LastWriteTime": "2025-09-15T03:15:24.0284079+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-D2X6w8_q.js",
+    "Length": 127,
+    "LastWriteTime": "2025-09-15T03:15:24.0299197+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-D5cAGXoc.js",
+    "Length": 423,
+    "LastWriteTime": "2025-09-15T03:15:24.0299197+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-DoKxeWzX.js",
+    "Length": 57162,
+    "LastWriteTime": "2025-09-15T03:15:24.0346402+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-DrFu-skq.js",
+    "Length": 773,
+    "LastWriteTime": "2025-09-15T03:15:24.0366515+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-DSP_w2Dc.js",
+    "Length": 3416,
+    "LastWriteTime": "2025-09-15T03:15:24.0319326+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-dXIajnYi.js",
+    "Length": 6115,
+    "LastWriteTime": "2025-09-15T03:15:24.0406891+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-DXO60C_r.js",
+    "Length": 5481,
+    "LastWriteTime": "2025-09-15T03:15:24.0319326+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-I9HeoSGT.js",
+    "Length": 70259,
+    "LastWriteTime": "2025-09-15T03:15:24.0386609+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-K9F-JguH.js",
+    "Length": 5352,
+    "LastWriteTime": "2025-09-15T03:15:24.0406891+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\index-kvkrzUxT.js",
+    "Length": 3901,
+    "LastWriteTime": "2025-09-15T03:15:24.0427001+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Input.stories-DHNV6DjB.js",
+    "Length": 3640,
+    "LastWriteTime": "2025-09-15T03:15:23.99056+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\jsx-runtime-D_zvdyIk.js",
+    "Length": 734,
+    "LastWriteTime": "2025-09-15T03:15:24.0447114+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Layout.stories-ffDMu4B5.js",
+    "Length": 2805,
+    "LastWriteTime": "2025-09-15T03:15:23.9920779+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Onboarding.stories-DqAoYA--.js",
+    "Length": 2063,
+    "LastWriteTime": "2025-09-15T03:15:23.9940912+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\preview-B8lJiyuQ.js",
+    "Length": 5098,
+    "LastWriteTime": "2025-09-15T03:15:24.0457231+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\preview-BBWR9nbA.js",
+    "Length": 8118,
+    "LastWriteTime": "2025-09-15T03:15:24.0477371+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\preview-BWzBA1C2.js",
+    "Length": 8019,
+    "LastWriteTime": "2025-09-15T03:15:24.0497479+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\preview-CvbIS5ZJ.js",
+    "Length": 185,
+    "LastWriteTime": "2025-09-15T03:15:24.0517575+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\preview-DAeX1mDI.css",
+    "Length": 147,
+    "LastWriteTime": "2025-09-15T03:15:24.0537699+05:30",
+    "Extension": ".css"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\preview-DD_OYowb.js",
+    "Length": 3508,
+    "LastWriteTime": "2025-09-15T03:15:24.0555817+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\preview-DGUiP6tS.js",
+    "Length": 718,
+    "LastWriteTime": "2025-09-15T03:15:24.0575923+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\preview-DpSpE5_5.js",
+    "Length": 1195,
+    "LastWriteTime": "2025-09-15T03:15:24.0575923+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\preview-if5a7zwH.js",
+    "Length": 975,
+    "LastWriteTime": "2025-09-15T03:15:24.0596037+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\ProgressBar.stories-Do-VPdnS.js",
+    "Length": 2165,
+    "LastWriteTime": "2025-09-15T03:15:23.9940912+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\react-18-DLNnoojD.js",
+    "Length": 174546,
+    "LastWriteTime": "2025-09-15T03:15:24.0636295+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\reanimated-BQgZ-mHc.js",
+    "Length": 527,
+    "LastWriteTime": "2025-09-15T03:15:24.0656473+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\safe-area-context-CkXQAMo9.js",
+    "Length": 63,
+    "LastWriteTime": "2025-09-15T03:15:24.0676656+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Screen-BQEPliQP.js",
+    "Length": 1146,
+    "LastWriteTime": "2025-09-15T03:15:23.9961034+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Screen.stories-CaVcbq-7.js",
+    "Length": 6743,
+    "LastWriteTime": "2025-09-15T03:15:23.9961034+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Splash.stories-D_IVeHzW.js",
+    "Length": 51131,
+    "LastWriteTime": "2025-09-15T03:15:23.9981201+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Stacks-D13vZedA.js",
+    "Length": 891,
+    "LastWriteTime": "2025-09-15T03:15:24.0001328+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\StatusPill.stories-C8ONco9_.js",
+    "Length": 10290,
+    "LastWriteTime": "2025-09-15T03:15:24.002142+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\styled-mWt79f12.js",
+    "Length": 1891,
+    "LastWriteTime": "2025-09-15T03:15:24.0696851+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\tamagui.config-DyWDXkOg.js",
+    "Length": 166426,
+    "LastWriteTime": "2025-09-15T03:15:24.0717038+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\test-utils-BdLvGyKJ.js",
+    "Length": 1124,
+    "LastWriteTime": "2025-09-15T03:15:24.0737223+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Text-ByT7FWjR.js",
+    "Length": 222,
+    "LastWriteTime": "2025-09-15T03:15:24.002142+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\ThemeProvider-D9J6blKF.js",
+    "Length": 100537,
+    "LastWriteTime": "2025-09-15T03:15:24.004151+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\types-DJ5WtwRU.js",
+    "Length": 138,
+    "LastWriteTime": "2025-09-15T03:15:24.0757384+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Typography-UhZPoaOe.js",
+    "Length": 1237,
+    "LastWriteTime": "2025-09-15T03:15:24.0061633+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\assets\\Typography.stories-Bqe7JpCb.js",
+    "Length": 1381,
+    "LastWriteTime": "2025-09-15T03:15:24.0081783+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-addons\\essentials-actions-2\\manager-bundle.js",
+    "Length": 41421,
+    "LastWriteTime": "2025-09-15T03:15:24.0830869+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-addons\\essentials-backgrounds-4\\manager-bundle.js",
+    "Length": 15177,
+    "LastWriteTime": "2025-09-15T03:15:24.0851003+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-addons\\essentials-controls-1\\manager-bundle.js",
+    "Length": 424681,
+    "LastWriteTime": "2025-09-15T03:15:24.0911408+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-addons\\essentials-docs-3\\manager-bundle.js",
+    "Length": 379489,
+    "LastWriteTime": "2025-09-15T03:15:24.0971916+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-addons\\essentials-measure-7\\manager-bundle.js",
+    "Length": 6671,
+    "LastWriteTime": "2025-09-15T03:15:24.0971916+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-addons\\essentials-outline-8\\manager-bundle.js",
+    "Length": 6713,
+    "LastWriteTime": "2025-09-15T03:15:24.0992056+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-addons\\essentials-toolbars-6\\manager-bundle.js",
+    "Length": 5392,
+    "LastWriteTime": "2025-09-15T03:15:24.1012205+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-addons\\essentials-viewport-5\\manager-bundle.js",
+    "Length": 16874,
+    "LastWriteTime": "2025-09-15T03:15:24.1032333+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-addons\\storybook-core-core-server-presets-0\\common-manager-bundle.js",
+    "Length": 1232,
+    "LastWriteTime": "2025-09-15T03:15:24.1052488+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-common-assets\\favicon.svg",
+    "Length": 1251,
+    "LastWriteTime": "2025-09-13T05:44:27.444+05:30",
+    "Extension": ".svg"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-common-assets\\nunito-sans-bold-italic.woff2",
+    "Length": 49460,
+    "LastWriteTime": "2025-09-13T05:44:27.582+05:30",
+    "Extension": ".woff2"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-common-assets\\nunito-sans-bold.woff2",
+    "Length": 47144,
+    "LastWriteTime": "2025-09-13T05:44:27.848+05:30",
+    "Extension": ".woff2"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-common-assets\\nunito-sans-italic.woff2",
+    "Length": 49620,
+    "LastWriteTime": "2025-09-13T05:44:27.991+05:30",
+    "Extension": ".woff2"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-common-assets\\nunito-sans-regular.woff2",
+    "Length": 47072,
+    "LastWriteTime": "2025-09-13T05:44:28.118+05:30",
+    "Extension": ".woff2"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-manager\\globals-module-info.js",
+    "Length": 24500,
+    "LastWriteTime": "2025-09-15T03:15:24.1072628+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-manager\\globals-runtime.js",
+    "Length": 1515330,
+    "LastWriteTime": "2025-09-15T03:15:24.1231185+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-manager\\globals.js",
+    "Length": 2476,
+    "LastWriteTime": "2025-09-15T03:15:24.1246317+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\storybook-static\\sb-manager\\runtime.js",
+    "Length": 425088,
+    "LastWriteTime": "2025-09-15T03:15:24.128683+05:30",
+    "Extension": ".js"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\.temp\\cli-latest",
+    "Length": 7,
+    "LastWriteTime": "2025-09-11T05:24:48.3483669+05:30",
+    "Extension": ""
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\functions\\register-push\\index.ts",
+    "Length": 2529,
+    "LastWriteTime": "2025-09-15T02:51:07.4633665+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\functions\\send-sms\\index.ts",
+    "Length": 3725,
+    "LastWriteTime": "2025-09-15T02:51:07.4878582+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\migrations\\20250910_core_tables.sql",
+    "Length": 2201,
+    "LastWriteTime": "2025-09-11T04:36:37.6499695+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\migrations\\20250910_dev_orders_open.sql",
+    "Length": 318,
+    "LastWriteTime": "2025-09-11T05:17:47.3631856+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\migrations\\20250910_kyc_reviews.sql",
+    "Length": 828,
+    "LastWriteTime": "2025-09-11T04:46:57.6719993+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\migrations\\20250910_policies_hardening_phase2.sql",
+    "Length": 1476,
+    "LastWriteTime": "2025-09-11T05:12:22.8233993+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\migrations\\20250910_policies_hardening_phase3_storage_prefix.sql",
+    "Length": 495,
+    "LastWriteTime": "2025-09-11T05:11:32.4138986+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\migrations\\20250910_policies_hardening.sql",
+    "Length": 2449,
+    "LastWriteTime": "2025-09-11T05:12:22.8233993+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\migrations\\20250910_policies.sql",
+    "Length": 1520,
+    "LastWriteTime": "2025-09-11T04:37:37.5824581+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\migrations\\20250910_tracking_events_access.sql",
+    "Length": 1089,
+    "LastWriteTime": "2025-09-11T05:12:22.8233993+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\migrations\\20250914_create_push_tokens.sql",
+    "Length": 910,
+    "LastWriteTime": "2025-09-15T02:48:09.1041306+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\supabase\\seeds\\20250910_demo_data.sql",
+    "Length": 633,
+    "LastWriteTime": "2025-09-11T04:36:37.6535685+05:30",
+    "Extension": ".sql"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\test-results\\.last-run.json",
+    "Length": 134,
+    "LastWriteTime": "2025-09-15T20:09:05.5068742+05:30",
+    "Extension": ".json"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\test-results\\driver-e2e-Driver-tabs-nav-96e64--render-labels-and-navigate\\test-failed-1.png",
+    "Length": 4253,
+    "LastWriteTime": "2025-09-15T07:04:35.9689291+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\test-results\\driver-e2e-Driver-tabs-nav-96e64--render-labels-and-navigate\\trace.zip",
+    "Length": 6279,
+    "LastWriteTime": "2025-09-15T07:04:36.171872+05:30",
+    "Extension": ".zip"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\test-results\\driver-e2e-offline-banner-placeholder\\test-failed-1.png",
+    "Length": 4253,
+    "LastWriteTime": "2025-09-15T07:04:40.7862914+05:30",
+    "Extension": ".png"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\test-results\\driver-e2e-offline-banner-placeholder\\trace.zip",
+    "Length": 6293,
+    "LastWriteTime": "2025-09-15T07:04:41.0072087+05:30",
+    "Extension": ".zip"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\tests\\driver-e2e.spec.ts",
+    "Length": 866,
+    "LastWriteTime": "2025-09-15T20:09:05.7644248+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\tests\\design-system\\Button.test.tsx",
+    "Length": 191,
+    "LastWriteTime": "2025-09-15T02:51:07.5221066+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\tests\\e2e\\driver-e2e.spec.ts",
+    "Length": 1376,
+    "LastWriteTime": "2025-09-15T20:09:05.7786887+05:30",
+    "Extension": ".ts"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\__tests__\\driver-ui.test.tsx",
+    "Length": 1504,
+    "LastWriteTime": "2025-09-15T20:09:04.5635493+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\__tests__\\jobs-loading.test.tsx",
+    "Length": 446,
+    "LastWriteTime": "2025-09-15T20:09:04.5704967+05:30",
+    "Extension": ".tsx"
+  },
+  {
+    "FullName": "C:\\cargo\\tapango\\__tests__\\kyc-uploader.test.tsx",
+    "Length": 578,
+    "LastWriteTime": "2025-09-15T20:09:04.6021824+05:30",
+    "Extension": ".tsx"
+  }
+]

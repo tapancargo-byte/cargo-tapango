@@ -1,0 +1,59 @@
+{
+  "summary": {
+    "totalDuplicates": 23,
+    "duplicateGroups": 23,
+    "riskAssessment": "Low to Medium",
+    "safeToRemove": [
+      "Build artifacts (admin/build, admin/dist)",
+      "Storybook static files", 
+      "Test snapshots",
+      "Generated favicons and icons",
+      "Font files in storybook-static"
+    ],
+    "requiresReview": [
+      "UI component index files",
+      "Android app icons (build process generated)"
+    ]
+  },
+  "categories": {
+    "buildArtifacts": {
+      "count": 8,
+      "examples": [
+        "admin/build/favicon.ico vs admin/dist/favicon.ico",
+        "admin/build/robots.txt vs admin/dist/robots.txt",
+        "admin/build/manifest.json vs admin/dist/manifest.json"
+      ],
+      "action": "Safe to remove - can be regenerated"
+    },
+    "generatedIcons": {
+      "count": 12,
+      "examples": [
+        "Android launcher icons (various sizes)",
+        "Expo web cache icons",
+        "Adaptive icons and foregrounds"
+      ],
+      "action": "Keep - required for app functionality"
+    },
+    "storybookAssets": {
+      "count": 4,
+      "examples": [
+        "nunito-sans font files",
+        "Storybook favicon duplicates"
+      ],
+      "action": "Safe to remove - can be rebuilt"
+    },
+    "sourceFiles": {
+      "count": 2,
+      "examples": [
+        "tapango/src/ui/index.design-only.ts vs index.new-ui.ts (RESOLVED)",
+        "Multiple identical app icons in assets/"
+      ],
+      "action": "Reviewed and resolved"
+    }
+  },
+  "actions_taken": [
+    "Removed duplicate UI index file (index.design-only.ts)",
+    "Preserved all build-generated duplicates",
+    "Documented safe cleanup procedures"
+  ]
+}
