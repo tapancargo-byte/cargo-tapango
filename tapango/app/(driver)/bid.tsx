@@ -1,38 +1,51 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
-import { Input } from '../../src/ui';
-import { Button } from '../../src/ui';
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
+import { Screen, Button, Input, Title } from '../../src/ui';
+import { useColors } from '../../src/styles/ThemeProvider';
 import { submitDriverOffer } from '../../src/services/driverOffers';
+import { useLocalSearchParams } from 'expo-router';
+import { useAppToast } from '../../src/ui/tg/ToastHost';
+import { OfflineBanner } from '../../src/components/OfflineBanner';
 
 export default function DriverBid() {
-  const [trackingId, setTrackingId] = useState('TPG123456789');
+  const colors = useColors();
+  const params = useLocalSearchParams();
+  const toast = useAppToast();
+  const [trackingId, setTrackingId] = useState('');
   const [amount, setAmount] = useState('1500');
   const [note, setNote] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const t = String((params as any)?.trackingId || '').trim();
+    if (t) setTrackingId(t);
+  }, [params]);
 
   const onSubmit = async () => {
+    setError(null);
+    const amt = Number(amount);
+    if (!trackingId.trim()) return setError('Tracking ID is required');
+    if (!amt || amt <= 0) return setError('Enter a valid amount');
     setLoading(true);
     try {
-      const { queued, id } = await submitDriverOffer({
-        trackingId,
-        amountINR: Number(amount) || 0,
-        note,
-      });
+      const { queued, id } = await submitDriverOffer({ trackingId, amountINR: amt, note });
       if (queued) {
-        Alert.alert('Queued', 'Offer saved offline and will be synced when online.');
+        toast.show('Offer queued', 'Will sync when online');
       } else {
-        Alert.alert('Offer Submitted', `Offer ID: ${id ?? 'N/A'}`);
+        toast.show('Offer submitted', `Offer ID: ${id ?? 'N/A'}`);
       }
     } catch (e) {
-      Alert.alert('Error', 'Failed to submit offer');
+      setError('Failed to submit offer');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Place an Offer</Text>
+    <Screen scroll>
+      <OfflineBanner />
+      <Title>Place an Offer</Title>
       <Input
         label='Tracking ID'
         value={trackingId}
@@ -46,15 +59,29 @@ export default function DriverBid() {
         keyboardType='numeric'
         placeholder='1500'
       />
-      <Input label='Note' value={note} onChangeText={setNote} placeholder='Optional note' />
-      <Button onPress={onSubmit} variant='primary' fullWidth disabled={loading}>
-        {loading ? 'Submitting...' : 'Submit Offer'}
+      <Input
+        label='Note'
+        value={note}
+        onChangeText={setNote}
+        placeholder='Optional note'
+        multiline
+        numberOfLines={3}
+      />
+      {error ? (
+        <Title fontSize={14} color={colors.danger}>
+          {error}
+        </Title>
+      ) : null}
+      <Button
+        onPress={onSubmit}
+        variant='primary'
+        fullWidth
+        disabled={loading}
+        loading={loading}
+        accessibilityHint='Submits your offer; queues if offline.'
+      >
+        Submit Offer
       </Button>
-    </View>
+    </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#F8FAFC' },
-  title: { fontSize: 24, fontWeight: '800', color: '#111827', marginBottom: 12 },
-});

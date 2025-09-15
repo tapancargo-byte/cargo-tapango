@@ -23,6 +23,7 @@ import { GlobalErrorCatcher } from '../src/components/GlobalErrorCatcher';
 import { initNotifications } from '../src/utils/notifications';
 import { useAuth, useUser } from '@clerk/clerk-expo';
 import { initOneSignal, loginOneSignal, logoutOneSignal } from '../src/integrations/onesignal';
+import { AuthenticatedSupabaseProvider } from '../src/contexts/AuthenticatedSupabaseContext';
 
 // Clerk token cache configuration
 const tokenCache = {
@@ -145,16 +146,18 @@ export default function RootLayout() {
 
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
-      <ReactQueryProvider>
-        <TamaguiProvider
-          config={tamaguiConfig}
-          defaultTheme={systemColorScheme === 'dark' ? 'tapango_dark' : 'tapango_light'}
-        >
-          <ThemeProvider>
-            <ThemedApp />
-          </ThemeProvider>
-        </TamaguiProvider>
-      </ReactQueryProvider>
+      <AuthenticatedSupabaseProvider>
+        <ReactQueryProvider>
+          <TamaguiProvider
+            config={tamaguiConfig}
+            defaultTheme={systemColorScheme === 'dark' ? 'tapango_dark' : 'tapango_light'}
+          >
+            <ThemeProvider>
+              <ThemedApp />
+            </ThemeProvider>
+          </TamaguiProvider>
+        </ReactQueryProvider>
+      </AuthenticatedSupabaseProvider>
     </ClerkProvider>
   );
 }

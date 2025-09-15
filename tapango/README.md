@@ -1,3 +1,32 @@
+# TAPANGO Mobile - Driver UI Notes
+
+## Running unit tests
+
+- Install dependencies (you already have them after npm i):
+  - npm run test:unit
+
+## Running Playwright E2E (web)
+
+- Start web dev server:
+  - npm run web
+- Run tests (defaults to http://localhost:8081):
+  - npm run test:ui
+- To override base URL:
+  - PowerShell: $env:PW_BASE_URL="http://localhost:19006"; npm run test:ui
+
+## E2E auth bypass
+
+- For web E2E, the driver tabs bypass auth if either is true:
+  - EXPO_PUBLIC_E2E_BYPASS_AUTH=1 environment variable
+  - URL query contains ?e2e=1
+
+## Supabase env for real data
+
+- Jobs: EXPO_PUBLIC_JOBS_RPC (default driver_get_jobs) or EXPO_PUBLIC_JOBS_TABLE
+  (default driver_jobs)
+- Wallet: EXPO_PUBLIC_WALLET_TXNS_RPC (default driver_get_wallet_txns) or
+  EXPO_PUBLIC_WALLET_TXNS_TABLE (default wallet_transactions)
+
 # TAPANGO Mobile — Notifications & SMS Setup
 
 What's Implemented

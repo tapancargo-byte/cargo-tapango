@@ -17,7 +17,7 @@ interface ThemeContextType {
   colorScheme: ColorScheme;
   setThemeMode: (mode: ThemeMode) => Promise<void>;
   isTransitioning: boolean;
-  themeAnimationValue: any; // SharedValue<number>, typed loosely to avoid dependency on reanimated types
+  themeAnimationValue: { value: number }; // keep minimal shape compatible with Reanimated SharedValue
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);

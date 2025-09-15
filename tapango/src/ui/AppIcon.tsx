@@ -54,6 +54,9 @@ const ionToFeather: Record<string, string> = {
   'stats-chart-outline': 'bar-chart-2',
   'cash-outline': 'dollar-sign',
   'storefront-outline': 'shopping-bag',
+  // Additional fallbacks to avoid noisy warnings when Ion names are passed
+  'lock-closed': 'lock',
+  cart: 'shopping-cart',
   pricetag: 'tag',
   wallet: 'credit-card',
   'id-card': 'credit-card',

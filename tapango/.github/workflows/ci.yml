@@ -2,6 +2,39 @@ name: CI
 
 on:
   push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Unit tests (Jest)
+        run: npm run test:unit
+      - name: Build web (Expo export)
+        run: npx expo export --platform web --output-dir web-build
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+      - name: Serve exported web and run E2E
+        env:
+          PW_BASE_URL: http://localhost:8081
+          EXPO_PUBLIC_E2E_BYPASS_AUTH: "1"
+        run: |
+          npx http-server -p 8081 web-build &
+          sleep 5
+          npm run test:ui
+
+name: CI
+
+on:
+  push:
     branches: [main]
   pull_request:
     branches: [main]
