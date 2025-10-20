@@ -7,6 +7,7 @@ if (-not (Test-Path $dest)) {
 
 $files = @(
   'CLEANUP_COMPLETION_SUMMARY.md',
+  'MISSION_COMPLETE.md',
   'cleanup_patch.diff',
   'final_cleanup_patch.diff',
   'cleanup_plan.md',
