@@ -1,8 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 import { Database } from './database.types';
 
-const supabaseUrl = (import.meta as any)?.env?.VITE_SUPABASE_URL || process.env.REACT_APP_SUPABASE_URL || '';
-const supabaseAnonKey = (import.meta as any)?.env?.VITE_SUPABASE_ANON_KEY || process.env.REACT_APP_SUPABASE_ANON_KEY || '';
+const env = (import.meta as any)?.env ?? {};
+const supabaseUrl = env.VITE_SUPABASE_URL || '';
+const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY || '';
 
 // Temporary: Allow development without Supabase for testing
 if (!supabaseUrl || !supabaseAnonKey) {

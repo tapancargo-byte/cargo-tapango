@@ -30,35 +30,35 @@ export const Card = memo<PremiumCardProps>(
       switch (variant) {
         case 'glass':
           return {
-            backgroundColor: '$backgroundTransparent',
+            background: '$backgroundTransparent',
             borderColor: '$borderColor',
             borderWidth: 1,
             elevation: 8,
           };
         case 'elevated':
           return {
-            backgroundColor: '$backgroundStrong',
+            background: '$backgroundStrong',
             borderColor: 'transparent',
             borderWidth: 0,
             elevation: 12,
           };
         case 'outlined':
           return {
-            backgroundColor: 'transparent',
+            background: 'transparent',
             borderColor: '$borderColor',
             borderWidth: 1.5,
             elevation: 0,
           };
         case 'flat':
           return {
-            backgroundColor: '$backgroundStrong',
+            background: '$backgroundStrong',
             borderColor: 'transparent',
             borderWidth: 0,
             elevation: 0,
           };
         default:
           return {
-            backgroundColor: '$backgroundStrong',
+            background: '$backgroundStrong',
             borderColor: '$borderColor',
             borderWidth: 0.5,
             elevation: 3,
@@ -100,7 +100,7 @@ export const Card = memo<PremiumCardProps>(
     if (blur && variant === 'glass') {
       return (
         <AnimatedView {...getAnimationProps()}>
-          <TCard {...cardStyles} backgroundColor='transparent' {...props}>
+          <TCard {...cardStyles} background='transparent' {...props}>
             <AnimatedBlurView
               intensity={20}
               tint='light'

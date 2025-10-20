@@ -4,6 +4,8 @@
     "lib": ["esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "noResolve": false,
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
@@ -32,9 +34,18 @@
     },
     "types": ["tamagui"]
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "src/types/**/*.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "src/types/**/*.d.ts"
+  ],
   "exclude": [
     "node_modules",
+    "node_modules/**/*",
     "babel.config.js",
     "metro.config.js",
     "storybook",

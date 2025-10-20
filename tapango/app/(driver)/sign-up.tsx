@@ -44,7 +44,7 @@ export default function DriverSignUpScreen() {
           router.replace('/(driver)/index' as any);
           return;
         }
-        const { data: sub } = client.auth.onAuthStateChange((_e, session) => {
+        const { data: sub } = client.auth.onAuthStateChange((_e: any, session: any) => {
           if (session) router.replace('/(driver)/index' as any);
         });
         unsub = () => sub.subscription.unsubscribe();
@@ -172,8 +172,8 @@ export default function DriverSignUpScreen() {
                       password.length >= 8
                         ? colors.status.success
                         : password.length >= 4
-                          ? colors.status.warning
-                          : colors.status.error,
+                        ? colors.status.warning
+                        : colors.status.error,
                   },
                 ]}
               />
@@ -186,8 +186,8 @@ export default function DriverSignUpScreen() {
                     password.length >= 8
                       ? colors.status.success
                       : password.length >= 4
-                        ? colors.status.warning
-                        : colors.status.error,
+                      ? colors.status.warning
+                      : colors.status.error,
                 },
               ]}
             >

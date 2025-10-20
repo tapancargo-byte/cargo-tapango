@@ -18,7 +18,7 @@ Notifications.setNotificationHandler({
       // SDK 54: include banner/list flags to satisfy NotificationBehavior type
       shouldShowBanner: true,
       shouldShowList: true,
-    }) as any,
+    } as any),
 });
 
 async function ensureAndroidChannel() {
@@ -37,11 +37,11 @@ async function ensureAndroidChannel() {
 
 export async function requestNotificationPermissions(): Promise<boolean> {
   const cur = await Notifications.getPermissionsAsync();
-  if (cur.status === 'granted') {
+  if ((cur as any).status === 'granted') {
     return true;
   }
   const res = await Notifications.requestPermissionsAsync();
-  return res.status === 'granted';
+  return (res as any).status === 'granted';
 }
 
 export async function getExpoProjectId(): Promise<string | undefined> {

@@ -9,6 +9,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import { Feather } from '@expo/vector-icons';
 import { ClerkProvider } from '@clerk/clerk-expo';
+import { useRouter } from 'expo-router';
 import { ReactQueryProvider } from '../src/utils/reactQuery';
 import { OfflineBanner } from '../src/components/OfflineBanner';
 import { drainPendingBookings } from '../src/utils/offlineQueue';
@@ -50,6 +51,9 @@ if (!publishableKey) {
     'Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env'
   );
 }
+
+// Log the key (partially masked) for debugging
+console.log('Clerk publishable key loaded:', publishableKey.substring(0, 10) + '...');
 
 // Suppress development key warnings in development (optional)
 if (__DEV__ && publishableKey.startsWith('pk_test_')) {
@@ -145,7 +149,13 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={publishableKey}
+      telemetry={{
+        disabled: true,
+      }}
+    >
       <AuthenticatedSupabaseProvider>
         <ReactQueryProvider>
           <TamaguiProvider

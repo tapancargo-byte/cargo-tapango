@@ -2,18 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 import { useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useAuth } from '@clerk/clerk-expo';
-import { StorageService } from '../src/utils/storage';
 
 /**
  * App entry gate (no fake splash).
  * - Hides native splash ASAP.
- * - Routes to onboarding if not seen.
- * - Otherwise waits for Clerk and routes to tabs or auth.
+ * - Immediately routes to splash screen for auth handling.
  */
 export default function IndexScreen() {
   const router = useRouter();
-  const { isSignedIn, isLoaded } = useAuth();
   const navigatedRef = useRef(false);
   const [hidden, setHidden] = useState(false);
 

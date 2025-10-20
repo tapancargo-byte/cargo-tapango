@@ -1,10 +1,4 @@
-import {
-  AuthError,
-  createClient,
-  Session,
-  SupabaseClient,
-  User,
-} from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import * as SecureStore from 'expo-secure-store';
 import { z } from 'zod';
 
@@ -49,10 +43,14 @@ interface CustomAuthError {
   __isAuthError?: boolean;
 }
 
+type SupaUser = any;
+type SupaSession = any;
+type SupaAuthError = any;
+
 export interface AuthResult {
-  user: User | null;
-  session: Session | null;
-  error: AuthError | CustomAuthError | null;
+  user: SupaUser | null;
+  session: SupaSession | null;
+  error: SupaAuthError | CustomAuthError | null;
 }
 
 export interface AuthProfile {
@@ -80,8 +78,8 @@ export interface AuthProfile {
  */
 export class AuthService {
   private supabase: SupabaseClient;
-  private currentUser: User | null = null;
-  private currentSession: Session | null = null;
+  private currentUser: SupaUser | null = null;
+  private currentSession: SupaSession | null = null;
 
   constructor() {
     this.supabase = createClient(supabaseUrl!, supabaseAnonKey!, {
@@ -99,7 +97,7 @@ export class AuthService {
     });
 
     // Listen to auth changes
-    this.supabase.auth.onAuthStateChange(async (event, session) => {
+    this.supabase.auth.onAuthStateChange(async (event: any, session: any) => {
       this.currentSession = session;
       this.currentUser = session?.user ?? null;
 
@@ -220,7 +218,7 @@ export class AuthService {
    *
    * @returns Promise resolving when sign out completes
    */
-  async signOut(): Promise<{ error: AuthError | CustomAuthError | null }> {
+  async signOut(): Promise<{ error: SupaAuthError | CustomAuthError | null }> {
     try {
       const { error } = await this.supabase.auth.signOut();
       return { error };
@@ -241,7 +239,7 @@ export class AuthService {
    */
   async resetPassword(
     data: ResetPasswordData
-  ): Promise<{ error: AuthError | CustomAuthError | null }> {
+  ): Promise<{ error: SupaAuthError | CustomAuthError | null }> {
     try {
       // Validate input
       const validatedData = ResetPasswordSchema.parse(data);
@@ -276,7 +274,7 @@ export class AuthService {
    *
    * @returns Current user or null
    */
-  getCurrentUser(): User | null {
+  getCurrentUser(): SupaUser | null {
     return this.currentUser;
   }
 
@@ -285,7 +283,7 @@ export class AuthService {
    *
    * @returns Current session or null
    */
-  getCurrentSession(): Session | null {
+  getCurrentSession(): SupaSession | null {
     return this.currentSession;
   }
 
@@ -381,8 +379,8 @@ export class AuthService {
    * @returns Promise resolving to new session
    */
   async refreshSession(): Promise<{
-    session: Session | null;
-    error: AuthError | CustomAuthError | null;
+    session: SupaSession | null;
+    error: SupaAuthError | CustomAuthError | null;
   }> {
     try {
       const { data, error } = await this.supabase.auth.refreshSession();

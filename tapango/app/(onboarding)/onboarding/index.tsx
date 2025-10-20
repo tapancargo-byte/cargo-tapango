@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import AnimatedSquareCard from '../../../components/AnimatedSquareCard';
-import Pagination from '../../../components/Pagination';
 import * as Haptics from 'expo-haptics';
 import LottieView from 'lottie-react-native';
 
@@ -33,9 +31,9 @@ export default function OnboardingStep1() {
       </View>
 
       <View style={styles.body}>
-        <AnimatedSquareCard>
+        <View style={styles.card}>
           <LottieView source={WelcomeAnimation} autoPlay loop style={{ width: 180, height: 180 }} />
-        </AnimatedSquareCard>
+        </View>
 
         <Text style={styles.overline}>Northeast India's premier cargo network</Text>
         <Text style={styles.title}>Welcome to TAPANGO</Text>
@@ -45,7 +43,11 @@ export default function OnboardingStep1() {
       </View>
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + 24 }]}>
-        <Pagination total={3} index={0} />
+        <View style={styles.pagination}>
+          <View style={[styles.dot, styles.dotActive]} />
+          <View style={styles.dot} />
+          <View style={styles.dot} />
+        </View>
         <TouchableOpacity style={styles.cta} onPress={goNext} accessibilityRole='button'>
           <Text style={styles.ctaText}>Next</Text>
         </TouchableOpacity>
@@ -69,6 +71,33 @@ const styles = StyleSheet.create({
   title: { color: '#fff', fontSize: 28, fontWeight: '800', marginTop: 8 },
   sub: { color: 'rgba(255,255,255,0.9)', fontSize: 16, lineHeight: 24, marginTop: 12 },
   footer: { paddingHorizontal: 24 },
+  card: {
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+    alignSelf: 'center',
+  },
+  pagination: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    marginBottom: 16,
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255,255,255,0.4)',
+  },
+  dotActive: {
+    backgroundColor: '#ffffff',
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+  },
   cta: {
     backgroundColor: '#ffffff',
     borderRadius: 28,

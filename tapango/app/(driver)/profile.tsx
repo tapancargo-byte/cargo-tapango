@@ -24,7 +24,7 @@ export default function DriverProfile() {
         setUserId((data as any)?.user?.id ?? null);
       } catch {}
       try {
-        const { data: sub } = supabase.auth.onAuthStateChange((_e, s: any) => {
+        const { data: sub } = supabase.auth.onAuthStateChange((_e: any, s: any) => {
           setUserId(s?.user?.id ?? null);
         });
         unsub = () => sub.subscription.unsubscribe();

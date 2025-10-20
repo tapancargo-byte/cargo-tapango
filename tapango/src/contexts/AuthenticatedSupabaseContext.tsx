@@ -37,14 +37,15 @@ export function AuthenticatedSupabaseProvider({ children }: AuthenticatedSupabas
 
         if (!isLoaded) {
           // Clerk is still loading, keep loading state
-          setIsLoading(true);
           return;
         }
 
         if (!isSignedIn) {
           // User is not signed in, clear the client
-          setSupabase(null);
-          setIsLoading(false);
+          if (isMounted) {
+            setSupabase(null);
+            setIsLoading(false);
+          }
           return;
         }
 
@@ -64,7 +65,9 @@ export function AuthenticatedSupabaseProvider({ children }: AuthenticatedSupabas
           throw new Error('Failed to create authenticated Supabase client');
         }
 
-        setSupabase(authenticatedClient);
+        if (isMounted) {
+          setSupabase(authenticatedClient);
+        }
       } catch (err) {
         if (!isMounted) return;
         console.error('Error initializing authenticated Supabase client:', err);
@@ -82,32 +85,29 @@ export function AuthenticatedSupabaseProvider({ children }: AuthenticatedSupabas
     return () => {
       isMounted = false;
     };
-  }, [getToken, isSignedIn, isLoaded]);
+  }, [isSignedIn, isLoaded]); // Removed getToken from dependencies to prevent infinite re-renders
 
   // Periodically refresh the client to ensure fresh tokens
   useEffect(() => {
     if (!supabase || !isSignedIn) return;
 
-    const refreshInterval = setInterval(
-      async () => {
-        try {
-          const token = await getToken();
-          if (token) {
-            const freshClient = createAuthenticatedSupabaseClient(token);
-            if (freshClient) {
-              setSupabase(freshClient);
-            }
+    const refreshInterval = setInterval(async () => {
+      try {
+        const token = await getToken();
+        if (token) {
+          const freshClient = createAuthenticatedSupabaseClient(token);
+          if (freshClient) {
+            setSupabase(freshClient);
           }
-        } catch (err) {
-          console.warn('Failed to refresh Supabase client token:', err);
-          // Don't set error here as it's a background refresh
         }
-      },
-      10 * 60 * 1000
-    ); // Refresh every 10 minutes
+      } catch (err) {
+        console.warn('Failed to refresh Supabase client token:', err);
+        // Don't set error here as it's a background refresh
+      }
+    }, 10 * 60 * 1000); // Refresh every 10 minutes
 
     return () => clearInterval(refreshInterval);
-  }, [supabase, isSignedIn, getToken]);
+  }, [supabase, isSignedIn]); // Removed getToken to prevent re-renders
 
   const value: AuthenticatedSupabaseContextType = {
     supabase,

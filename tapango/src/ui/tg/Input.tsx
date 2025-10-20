@@ -70,7 +70,7 @@ export const Input = memo<PremiumInputProps>(
           // Use a valid token from our Tamagui theme. `$backgroundStrong` maps to
           // surface colors in both light and dark modes.
           return {
-            backgroundColor: '$backgroundStrong',
+            background: '$backgroundStrong',
             borderWidth: 0,
             borderColor: 'transparent',
           };
@@ -88,7 +88,7 @@ export const Input = memo<PremiumInputProps>(
           };
         default:
           return {
-            backgroundColor: '$backgroundStrong',
+            background: '$backgroundStrong',
             borderWidth: 1,
             borderColor: error ? '$danger' : isFocused ? '$borderColorFocus' : '$borderColor',
           };

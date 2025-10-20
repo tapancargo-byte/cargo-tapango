@@ -93,6 +93,12 @@ export default {
           color: '#ffffff',
         },
       ],
+      [
+        'sentry-expo',
+        {
+          project: 'react-native',
+        },
+      ],
     ],
     experiments: {
       typedRoutes: true,

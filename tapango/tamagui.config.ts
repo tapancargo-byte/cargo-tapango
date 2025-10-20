@@ -1,7 +1,6 @@
 import { createTamagui } from 'tamagui';
 import { defaultConfig } from '@tamagui/config/v4';
 import { createAnimations } from '@tamagui/animations-react-native';
-import { getUnifiedTheme, toTamaguiTheme } from './src/design-system/theme';
 
 // Define animations for Tamagui (must include every name used via `animation="..."` props)
 const animations = createAnimations({
@@ -59,15 +58,26 @@ const brand = {
   gradientDanger: 'linear-gradient(135deg, #D32F2F 0%, #EF5350 100%)',
 };
 
+// Use default themes with TAPANGO customizations
 const themes = {
   ...defaultConfig.themes,
   tapango_light: {
     ...defaultConfig.themes.light,
-    ...toTamaguiTheme(getUnifiedTheme('light')),
+    primary: brand.blue,
+    secondary: brand.indigo,
+    background: brand.surface,
+    backgroundFocus: brand.surfaceVariant,
+    color: brand.text,
+    colorFocus: brand.text,
   },
   tapango_dark: {
     ...defaultConfig.themes.dark,
-    ...toTamaguiTheme(getUnifiedTheme('dark')),
+    primary: brand.blueLight,
+    secondary: brand.purpleLight,
+    background: '#121212',
+    backgroundFocus: '#1E1E1E',
+    color: '#FFFFFF',
+    colorFocus: '#FFFFFF',
   },
 };
 

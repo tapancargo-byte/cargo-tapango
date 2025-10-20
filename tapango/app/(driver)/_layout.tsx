@@ -33,7 +33,7 @@ export default function DriverLayout() {
         if (supabase) {
           const { data } = await supabase.auth.getSession();
           setIsSignedIn(!!data.session);
-          const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+          const { data: sub } = supabase.auth.onAuthStateChange((_e: any, session: any) => {
             setIsSignedIn(!!session);
           });
           unsubscribe = () => sub.subscription.unsubscribe();

@@ -30,7 +30,7 @@ export default function DriverForgotPasswordScreen() {
           router.replace('/(driver)/index' as any);
           return;
         }
-        const { data: sub } = client.auth.onAuthStateChange((_e, session) => {
+        const { data: sub } = client.auth.onAuthStateChange((_e: any, session: any) => {
           if (session) router.replace('/(driver)/index' as any);
         });
         unsub = () => sub.subscription.unsubscribe();

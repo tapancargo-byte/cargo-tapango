@@ -27,6 +27,7 @@ import { formatDate } from '../../src/utils/format';
 import { loadBookingDraft } from '../../src/utils/drafts';
 import { getRecentAddresses } from '../../src/utils/addressHistory';
 import { StorageService } from '../../src/utils/storage';
+import { MCPTestComponent } from '../../src/components/MCPTestComponent';
 // Use AppIcon for consistent cross-family icon mapping
 import { useColors as useAppColors } from '../../src/styles/ThemeProvider';
 import { useIsDark } from '../../src/styles/ThemeProvider';
@@ -513,8 +514,8 @@ export default function DashboardScreen() {
                     shipment.status === 'delivered'
                       ? 'checkmark'
                       : shipment.status === 'in-transit'
-                        ? 'car'
-                        : 'time'
+                      ? 'car'
+                      : 'time'
                   }
                   size={14}
                   color={getStatusColor(shipment.status)}
@@ -731,6 +732,9 @@ export default function DashboardScreen() {
                 </XStack>
               </GlassCard>
             )}
+
+            {/* MCP Integration Test Component - Development Only */}
+            {process.env.NODE_ENV === 'development' && <MCPTestComponent />}
           </YStack>
         </FadeIn>
       </RNScrollView>
