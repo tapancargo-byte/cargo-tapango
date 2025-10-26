@@ -21,6 +21,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '../components/ui/use-toast';
 import { toCSV } from '../lib/csv';
 
+import { formatINR } from '../lib/currency';
+
 const Invoices: React.FC = () => {
   const [filters, setFilters] = useState<{
     status: 'all' | 'draft' | 'issued' | 'paid' | 'overdue' | 'void';
@@ -154,12 +156,7 @@ const Invoices: React.FC = () => {
     }
   };
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
-  };
+const formatCurrency = (amount: number) => formatINR(amount);
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return 'N/A';
@@ -603,13 +600,13 @@ const Invoices: React.FC = () => {
                   <TableCell>
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4 text-muted-foreground" />
-                      {invoice.issued_date ? formatDate(invoice.issued_date) : 'N/A'}
+{invoice.issued_date ? new Date(invoice.issued_date).toLocaleDateString('en-IN') : 'N/A'}
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4 text-muted-foreground" />
-                      {invoice.due_date ? formatDate(invoice.due_date) : 'N/A'}
+{invoice.due_date ? new Date(invoice.due_date).toLocaleDateString('en-IN') : 'N/A'}
                     </div>
                   </TableCell>
                   <TableCell>
@@ -700,11 +697,11 @@ const Invoices: React.FC = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Issued Date</Label>
-                  <p className="text-sm">{formatDate(selectedInvoice.issued_date)}</p>
+<p className="text-sm">{new Date(selectedInvoice.issued_date as any).toLocaleDateString('en-IN')}</p>
                 </div>
                 <div>
                   <Label>Due Date</Label>
-                  <p className="text-sm">{formatDate(selectedInvoice.due_date)}</p>
+<p className="text-sm">{new Date(selectedInvoice.due_date as any).toLocaleDateString('en-IN')}</p>
                 </div>
               </div>
               {selectedInvoice.notes && (

@@ -10,6 +10,7 @@ import { useOrders, useAssignDriver, OrderFilters } from '../hooks/useOrders';
 import { useDrivers } from '../hooks/useDrivers';
 import { OrderWithRelations } from '../lib/supabase';
 import { toCSV } from '../lib/csv';
+import { formatINR } from '../lib/currency';
 
 const Orders: React.FC = () => {
   const [filters, setFilters] = useState<OrderFilters>({ 
@@ -188,7 +189,7 @@ const Orders: React.FC = () => {
                         </span>
                       </div>
                     </TableCell>
-                    <TableCell>${(order as any).total_price || 0}</TableCell>
+<TableCell>{formatINR((order as any).total_price || 0)}</TableCell>
                     <TableCell>{order.created_at ? new Date(order.created_at).toLocaleDateString() : 'N/A'}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">

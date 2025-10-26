@@ -371,6 +371,7 @@ Closes #issue-number
 ## 📚 Documentation
 
 ### Available Documentation
+- [Consolidated Documentation](DOCUMENTATION.md) - Single source of truth
 - [API Documentation](docs/api.md) - REST API endpoints and usage
 - [Component Library](docs/components.md) - UI component documentation
 - [Architecture Guide](docs/architecture.md) - System architecture overview

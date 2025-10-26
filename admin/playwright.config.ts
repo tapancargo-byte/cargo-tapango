@@ -14,9 +14,6 @@ export default defineConfig({
     command: 'npm run preview:e2e',
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
-    env: {
-      VITE_DEV_EMERGENCY_ADMIN: '1',
-    },
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },

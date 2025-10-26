@@ -15,9 +15,7 @@ export const GlobalErrorCatcher: React.FC = () => {
       try {
         toast.show(title, msg, { variant: 'error' });
       } catch {}
-      try {
-        require('../utils/sentry').captureException?.(error);
-      } catch {}
+      // Sentry removed
     };
     // @ts-ignore
     const prev = (global as any).ErrorUtils?.getGlobalHandler?.();

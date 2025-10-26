@@ -38,8 +38,7 @@
       "ios": {
         "appleId": "${process.env.APPLE_ID}",
         "ascAppId": "${process.env.ASC_APP_ID}",
-        "appleTeamId": "${process.env.APPLE_TEAM_ID}",
-        "betaGroups": ["Beta Testers"]
+        "appleTeamId": "${process.env.APPLE_TEAM_ID}"
       }
     }
   }

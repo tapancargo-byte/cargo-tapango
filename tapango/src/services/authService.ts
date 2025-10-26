@@ -1,14 +1,9 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import * as SecureStore from 'expo-secure-store';
 import { z } from 'zod';
 
 // Environment configuration
-const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase configuration');
-}
+const supabaseUrl = '';
+const supabaseAnonKey = '';
 
 // Validation schemas
 const SignInSchema = z.object({
@@ -77,35 +72,10 @@ export interface AuthProfile {
  * - Error handling
  */
 export class AuthService {
-  private supabase: SupabaseClient;
   private currentUser: SupaUser | null = null;
   private currentSession: SupaSession | null = null;
 
-  constructor() {
-    this.supabase = createClient(supabaseUrl!, supabaseAnonKey!, {
-      auth: {
-        storage: {
-          getItem: (key: string) => SecureStore.getItemAsync(key),
-          setItem: (key: string, value: string) =>
-            SecureStore.setItemAsync(key, value),
-          removeItem: (key: string) => SecureStore.deleteItemAsync(key),
-        },
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: false,
-      },
-    });
-
-    // Listen to auth changes
-    this.supabase.auth.onAuthStateChange(async (event: any, session: any) => {
-      this.currentSession = session;
-      this.currentUser = session?.user ?? null;
-
-      if (event === 'SIGNED_OUT') {
-        await this.clearStoredData();
-      }
-    });
-  }
+  constructor() {}
 
   /**
    * Sign in user with email and password
@@ -132,20 +102,11 @@ export class AuthService {
       // Validate input
       const validatedData = SignInSchema.parse(credentials);
 
-      const { data, error } = await this.supabase.auth.signInWithPassword({
-        email: validatedData.email,
-        password: validatedData.password,
-      });
-
-      if (error) {
-        return { user: null, session: null, error };
-      }
-
-      return {
-        user: data.user,
-        session: data.session,
-        error: null,
+      const authError: CustomAuthError = {
+        name: 'SignInDisabled',
+        message: 'Supabase has been removed. Authentication is disabled.',
       };
+      return { user: null, session: null, error: authError };
     } catch (error) {
       if (error instanceof z.ZodError) {
         const authError: CustomAuthError = {
@@ -174,28 +135,11 @@ export class AuthService {
       // Validate input
       const validatedData = SignUpSchema.parse(userData);
 
-      const { data, error } = await this.supabase.auth.signUp({
-        email: validatedData.email,
-        password: validatedData.password,
-        options: {
-          data: {
-            first_name: validatedData.firstName,
-            last_name: validatedData.lastName,
-            phone: validatedData.phone,
-            role: validatedData.role,
-          },
-        },
-      });
-
-      if (error) {
-        return { user: null, session: null, error };
-      }
-
-      return {
-        user: data.user,
-        session: data.session,
-        error: null,
+      const authError: CustomAuthError = {
+        name: 'SignUpDisabled',
+        message: 'Supabase has been removed. Registration is disabled.',
       };
+      return { user: null, session: null, error: authError };
     } catch (error) {
       if (error instanceof z.ZodError) {
         const authError: CustomAuthError = {
@@ -220,8 +164,10 @@ export class AuthService {
    */
   async signOut(): Promise<{ error: SupaAuthError | CustomAuthError | null }> {
     try {
-      const { error } = await this.supabase.auth.signOut();
-      return { error };
+      const authError: CustomAuthError | null = null;
+      this.currentUser = null;
+      this.currentSession = null;
+      return { error: authError };
     } catch (error) {
       const authError: CustomAuthError = {
         name: 'SignOutError',
@@ -244,14 +190,11 @@ export class AuthService {
       // Validate input
       const validatedData = ResetPasswordSchema.parse(data);
 
-      const { error } = await this.supabase.auth.resetPasswordForEmail(
-        validatedData.email,
-        {
-          redirectTo: 'tapango://reset-password',
-        }
-      );
-
-      return { error };
+      const authError: CustomAuthError = {
+        name: 'ResetDisabled',
+        message: 'Supabase has been removed. Password reset is disabled.',
+      };
+      return { error: authError };
     } catch (error) {
       if (error instanceof z.ZodError) {
         const authError: CustomAuthError = {
@@ -310,17 +253,7 @@ export class AuthService {
         return { data: null, error: new Error('User not authenticated') };
       }
 
-      const { data, error } = await this.supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', this.currentUser.id)
-        .single();
-
-      if (error) {
-        return { data: null, error };
-      }
-
-      return { data, error: null };
+      return { data: null, error: new Error('Supabase has been removed.') };
     } catch (error) {
       return {
         data: null,
@@ -347,21 +280,7 @@ export class AuthService {
         return { data: null, error: new Error('User not authenticated') };
       }
 
-      const { data, error } = await this.supabase
-        .from('profiles')
-        .update({
-          ...updates,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', this.currentUser.id)
-        .select()
-        .single();
-
-      if (error) {
-        return { data: null, error };
-      }
-
-      return { data, error: null };
+      return { data: null, error: new Error('Supabase has been removed.') };
     } catch (error) {
       return {
         data: null,
@@ -383,8 +302,11 @@ export class AuthService {
     error: SupaAuthError | CustomAuthError | null;
   }> {
     try {
-      const { data, error } = await this.supabase.auth.refreshSession();
-      return { session: data.session, error };
+      const authError: CustomAuthError = {
+        name: 'RefreshDisabled',
+        message: 'Supabase has been removed. Token refresh is disabled.',
+      };
+      return { session: null, error: authError };
     } catch (error) {
       const authError: CustomAuthError = {
         name: 'RefreshTokenError',

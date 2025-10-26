@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase, Invoice, InvoiceWithOrder, InvoiceInsert, InvoiceUpdate } from '../lib/supabase';
+import { supabase, Invoice, InvoiceWithOrder, InvoiceInsert, InvoiceUpdate, logSupabaseError } from '../lib/supabase';
 
 // Query keys
 export const invoiceKeys = {
@@ -66,6 +66,7 @@ export function useInvoices(filters: InvoicesQueryFilters = {}) {
       const { data, error } = await query;
 
       if (error) {
+        logSupabaseError('invoices', 'select', error, { filters });
         throw new Error(`Failed to fetch invoices: ${error.message}`);
       }
 
@@ -104,6 +105,7 @@ export function useInvoice(id: string) {
         if (error.code === 'PGRST116') {
           return null; // Not found
         }
+        logSupabaseError('invoices', 'selectOne', error, { id });
         throw new Error(`Failed to fetch invoice: ${error.message}`);
       }
 

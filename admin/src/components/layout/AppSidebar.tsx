@@ -150,7 +150,7 @@ export function AppSidebar() {
                   <Car className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">TapanGo</span>
+<span className="truncate font-semibold">Tapan Associate Cargo</span>
                   <span className="truncate text-xs">Admin Dashboard</span>
                 </div>
               </Link>

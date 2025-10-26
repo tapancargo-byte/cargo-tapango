@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '../lib/supabase';
+import { supabase, logSupabaseError } from '../lib/supabase';
+import type { Tables } from '../types/supabase.gen';
 
 export interface TrackingEventFilters {
   tracking_code?: string;
@@ -12,8 +13,8 @@ export interface TrackingEventFilters {
 export function useTrackingEvents(filters: TrackingEventFilters = {}) {
   return useQuery({
     queryKey: ['tracking_events', { filters }],
-    queryFn: async (): Promise<any[]> => {
-      let query = (supabase as any)
+    queryFn: async (): Promise<Tables<'tracking_events'>[]> => {
+      let query = supabase
         .from('tracking_events')
         .select('*')
         .order('created_at', { ascending: false });
@@ -31,6 +32,7 @@ export function useTrackingEvents(filters: TrackingEventFilters = {}) {
 
       const { data, error } = await query;
       if (error) {
+        logSupabaseError('tracking_events', 'select', error, { filters });
         throw new Error(`Failed to fetch tracking events: ${error.message}`);
       }
 

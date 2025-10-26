@@ -54,6 +54,14 @@ export default {
     scheme: 'tapango',
     plugins: [
       [
+        '@sentry/react-native/expo',
+        {
+          url: 'https://de.sentry.io/',
+          organization: 'tapan-cargo-az',
+          project: 'react-native',
+        },
+      ],
+      [
         'onesignal-expo-plugin',
         {
           mode:
@@ -93,12 +101,6 @@ export default {
           color: '#ffffff',
         },
       ],
-      [
-        'sentry-expo',
-        {
-          project: 'react-native',
-        },
-      ],
     ],
     experiments: {
       typedRoutes: true,
@@ -108,6 +110,9 @@ export default {
 
     // Public runtime values available via Constants.expoConfig.extra
     extra: {
+      eas: {
+        projectId: 'd8061070-0ffa-4ca0-bdc7-ff233e9307d0',
+      },
       api: {
         // Optional: set EXPO_PUBLIC_PUSH_REGISTER_URL to enable push token upload
         pushRegisterUrl: process.env.EXPO_PUBLIC_PUSH_REGISTER_URL || null,

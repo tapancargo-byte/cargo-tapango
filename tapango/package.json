@@ -25,9 +25,6 @@
     "clean": "rimraf node_modules .expo",
     "reinstall": "npm ci",
     "prebuild": "expo prebuild",
-    "db:apply": "supabase db push",
-    "db:login": "supabase login",
-    "db:version": "supabase --version",
     "audit": "npm audit --audit-level=moderate",
     "deps:check": "expo doctor && npm outdated",
     "storybook:dev": "storybook dev -p 6006 -c storybook",
@@ -45,12 +42,13 @@
     "@react-native-community/netinfo": "11.4.1",
     "@react-navigation/native": "^7.1.6",
     "@react-navigation/native-stack": "^7.3.10",
-    "@supabase/supabase-js": "^2.57.4",
+    "@sentry/react-native": "^7.4.0",
+    "@supabase/supabase-js": "^2.76.1",
+    "@tamagui/animations-react-native": "1.133.0",
     "@tamagui/config": "1.133.0",
     "@tamagui/font-inter": "1.133.0",
     "@tamagui/lucide-icons": "1.133.0",
     "@tamagui/toast": "1.133.0",
-    "@tamagui/animations-react-native": "1.133.0",
     "@tamagui/web": "1.133.0",
     "@tanstack/react-query": "^5.87.4",
     "expo": "54.0.13",
@@ -94,7 +92,6 @@
     "react-native-svg": "15.12.1",
     "react-native-web": "0.21.1",
     "react-native-worklets": "^0.5.1",
-    "sentry-expo": "~7.0.0",
     "tamagui": "1.133.0"
   },
   "devDependencies": {
@@ -126,7 +123,7 @@
     "rimraf": "5.0.5",
     "storybook": "8.6.14",
     "typescript": "5.9.2",
-    "vite": "6.3.6",
+    "vite": "^6.4.1",
     "zod": "^3.25.76",
     "zustand": "^5.0.8"
   },
@@ -140,9 +137,6 @@
   },
   "overrides": {
     "semver": "^7.5.4",
-    "@sentry/browser": "^7.119.1",
-    "@sentry/react": "^7.119.1",
-    "@sentry/react-native": ">=5.34.2",
     "react-native-web": "0.21.1",
     "@tamagui/*": "1.133.0"
   },

@@ -28,7 +28,10 @@ export function useRoles() {
 
       return (data || []).map((role: any) => ({
         ...role,
+        is_system_role: !!role.is_system_role,
         description: role.description || undefined,
+        created_at: role.created_at || undefined,
+        updated_at: role.updated_at || undefined,
       }));
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
@@ -55,7 +58,10 @@ export function useRole(id: string) {
 
       return data ? {
         ...data,
+        is_system_role: !!data.is_system_role,
         description: data.description || undefined,
+        created_at: data.created_at || undefined,
+        updated_at: data.updated_at || undefined,
       } : null;
     },
     enabled: !!id,

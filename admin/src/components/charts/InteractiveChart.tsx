@@ -19,6 +19,7 @@ import { Button } from '../ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { Calendar, TrendingUp, BarChart3, PieChart as PieChartIcon, Clock } from 'lucide-react'
 import { useTheme } from '../../providers/ThemeProvider'
+import { formatINR } from '../../lib/currency'
 
 // Sample data - in real app this would come from API
 const generateSampleData = (days: number): ChartDataPoint[] => {
@@ -101,7 +102,7 @@ export const InteractiveChart: React.FC<InteractiveChartProps> = ({
           <p className="font-medium mb-1">{label}</p>
           {payload.map((item: any, index: number) => (
             <p key={index} style={{ color: item.color }} className="text-sm">
-              {`${item.name}: ${item.name.includes('Revenue') ? '$' : ''}${item.value.toLocaleString()}`}
+{`${item.name}: ${item.name.includes('Revenue') ? formatINR(item.value) : item.value.toLocaleString()}`}
             </p>
           ))}
         </div>

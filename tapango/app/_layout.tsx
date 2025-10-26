@@ -9,6 +9,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import { Feather } from '@expo/vector-icons';
 import { ClerkProvider } from '@clerk/clerk-expo';
+import * as Sentry from '@sentry/react-native';
 import { useRouter } from 'expo-router';
 import { ReactQueryProvider } from '../src/utils/reactQuery';
 import { OfflineBanner } from '../src/components/OfflineBanner';
@@ -24,7 +25,6 @@ import { GlobalErrorCatcher } from '../src/components/GlobalErrorCatcher';
 import { initNotifications } from '../src/utils/notifications';
 import { useAuth, useUser } from '@clerk/clerk-expo';
 import { initOneSignal, loginOneSignal, logoutOneSignal } from '../src/integrations/onesignal';
-import { AuthenticatedSupabaseProvider } from '../src/contexts/AuthenticatedSupabaseContext';
 
 // Clerk token cache configuration
 const tokenCache = {
@@ -45,6 +45,23 @@ const tokenCache = {
 };
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
+
+const sentryDsn = process.env.EXPO_PUBLIC_SENTRY_DSN as string | undefined;
+if (sentryDsn) {
+  Sentry.init({
+    dsn: sentryDsn,
+    environment: process.env.EXPO_PUBLIC_ENVIRONMENT || 'development',
+    sendDefaultPii: true,
+    tracesSampleRate: 1.0,
+  });
+}
+
+if (__DEV__ && !(globalThis as any).__SENTRY_FIRST_EVENT_MOBILE) {
+  (globalThis as any).__SENTRY_FIRST_EVENT_MOBILE = true;
+  try {
+    Sentry.captureException(new Error('Sentry setup test error (mobile)'));
+  } catch {}
+}
 
 if (!publishableKey) {
   throw new Error(
@@ -69,8 +86,6 @@ SplashScreen.preventAutoHideAsync().catch((e) =>
 // Note: SplashScreen.setOptions is not available in Expo Go
 // Use development builds or remove for Expo Go compatibility
 
-import { initSentry } from '../src/utils/sentry';
-
 /**
  * Root layout for the TAPANGO mobile app following Expo Router best practices
  *
@@ -81,13 +96,12 @@ import { initSentry } from '../src/utils/sentry';
  * - Status bar configuration
  */
 
-export default function RootLayout() {
+function RootLayout() {
   const [appIsReady, setAppIsReady] = useState(false);
   const systemColorScheme = (useColorScheme() ?? 'light') as 'light' | 'dark';
 
   useEffect(() => {
     // Initialize Sentry (no-op if DSN/package not present)
-    initSentry();
 
     async function prepare() {
       try {
@@ -156,18 +170,16 @@ export default function RootLayout() {
         disabled: true,
       }}
     >
-      <AuthenticatedSupabaseProvider>
-        <ReactQueryProvider>
-          <TamaguiProvider
-            config={tamaguiConfig}
-            defaultTheme={systemColorScheme === 'dark' ? 'tapango_dark' : 'tapango_light'}
-          >
-            <ThemeProvider>
-              <ThemedApp />
-            </ThemeProvider>
-          </TamaguiProvider>
-        </ReactQueryProvider>
-      </AuthenticatedSupabaseProvider>
+      <ReactQueryProvider>
+        <TamaguiProvider
+          config={tamaguiConfig}
+          defaultTheme={systemColorScheme === 'dark' ? 'tapango_dark' : 'tapango_light'}
+        >
+          <ThemeProvider>
+            <ThemedApp />
+          </ThemeProvider>
+        </TamaguiProvider>
+      </ReactQueryProvider>
     </ClerkProvider>
   );
 }
@@ -264,3 +276,5 @@ function AppNavigator() {
     </CountsProvider>
   );
 }
+
+export default Sentry.wrap(RootLayout);
