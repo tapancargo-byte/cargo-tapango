@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useColors } from '../../src/styles/ThemeProvider';
-import { Button } from '../../src/ui';
 import { formatINR } from '../../src/utils/currency';
 
 // Minimal redesign of Orders screen:
@@ -47,7 +46,9 @@ export default function OrdersScreen() {
   const colors = useColors();
   const styles = useMemo(() => makeStyles(colors), [colors]);
 
-  const [segment, setSegment] = useState<'Active' | 'Past'>('Active');
+  const params = useLocalSearchParams();
+  const initialSegment = (params.segment === 'Past' ? 'Past' : 'Active') as 'Active' | 'Past';
+  const [segment, setSegment] = useState<'Active' | 'Past'>(initialSegment);
   const [query, setQuery] = useState('');
   const [sortBy, setSortBy] = useState<'date' | 'amount'>('date');
 
@@ -76,8 +77,7 @@ export default function OrdersScreen() {
   );
 
   const Filters = () => (
-    <View style={styles.card}>
-      <Text style={styles.cardTitle}>Filters</Text>
+    <View style={styles.searchCard}>
       <TextInput
         value={query}
         onChangeText={setQuery}
@@ -85,59 +85,36 @@ export default function OrdersScreen() {
         placeholderTextColor={colors.textSecondary}
         style={styles.input}
       />
-      <View style={styles.row}>
-        <Button
-          variant={sortBy === 'date' ? 'primary' : 'outline'}
-          onPress={() => setSortBy('date')}
-          style={{ marginRight: 8 }}
-        >
-          Date
-        </Button>
-        <Button
-          variant={sortBy === 'amount' ? 'primary' : 'outline'}
-          onPress={() => setSortBy('amount')}
-        >
-          Amount
-        </Button>
-      </View>
     </View>
   );
 
   const OrderItem = ({ item }: { item: Order }) => (
-    <View style={styles.orderCard}>
-      <View style={{ flex: 1 }}>
-        <Text style={styles.orderId}>{item.id}</Text>
-        <Text style={styles.orderRoute}>{item.route}</Text>
+    <TouchableOpacity
+      style={styles.orderRow}
+      activeOpacity={0.7}
+      onPress={() => router.push(`/(tabs)/tracking?id=${item.id}` as any)}
+    >
+      <View style={{ flex: 1, minWidth: 0 }}>
+        <Text style={styles.orderId} numberOfLines={1}>
+          {item.id}
+        </Text>
+        <Text style={styles.orderRoute} numberOfLines={1}>
+          {item.route}
+        </Text>
         <Text style={styles.orderDate}>{new Date(item.updatedAt).toLocaleString()}</Text>
       </View>
-      <View style={{ alignItems: 'flex-end' }}>
+      <View style={{ alignItems: 'flex-end', marginLeft: 8 }}>
         <Text style={styles.amount}>{formatINR(item.price)}</Text>
-        <View style={{ flexDirection: 'row', marginTop: 8 }}>
-          <Button
-            variant='outline'
-            onPress={() => router.push(`/(tabs)/tracking?id=${item.id}` as any)}
-            style={{ marginRight: 8 }}
-          >
-            Track
-          </Button>
-          <Button
-            variant='ghost'
-            onPress={() =>
-              router.push(`/(modals)/receipt?id=${item.id}&amount=${item.price}` as any)
-            }
-          >
-            Receipt
-          </Button>
-        </View>
+        <Text style={styles.viewText}>View →</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <View style={styles.header}>
-        <Text style={styles.title}>Order Management</Text>
-        <Text style={styles.subtitle}>Imphal ⟷ New Delhi Express Operations</Text>
+        <Text style={styles.title}>Orders</Text>
+        <Text style={styles.subtitle}>All shipments between Imphal and New Delhi</Text>
       </View>
       <Segment />
       <Filters />
@@ -176,36 +153,38 @@ function makeStyles(colors: any) {
     segBtnActive: { backgroundColor: colors.primary + '22' },
     segLabel: { color: colors.textSecondary, fontWeight: '600' },
     segLabelActive: { color: colors.primary, fontWeight: '800' },
-    card: {
+    searchCard: {
       backgroundColor: colors.surface,
       marginHorizontal: 16,
-      marginBottom: 12,
-      borderRadius: 12,
-      padding: 12,
+      marginBottom: 8,
+      borderRadius: 10,
+      padding: 8,
       borderWidth: 1,
       borderColor: colors.border,
     },
-    cardTitle: { fontSize: 16, fontWeight: '700', color: colors.text, marginBottom: 8 },
     input: {
       borderWidth: 1,
       borderColor: colors.border,
       borderRadius: 8,
-      padding: 10,
+      padding: 8,
       color: colors.text,
+      fontSize: 14,
     },
-    row: { flexDirection: 'row', marginTop: 8 },
-    orderCard: {
+    orderRow: {
       flexDirection: 'row',
       backgroundColor: colors.surface,
       marginHorizontal: 16,
-      padding: 12,
-      borderRadius: 12,
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+      borderRadius: 10,
       borderWidth: 1,
       borderColor: colors.border,
+      alignItems: 'center',
     },
-    orderId: { fontSize: 16, fontWeight: '800', color: colors.text },
-    orderRoute: { color: colors.textSecondary, marginTop: 4 },
-    orderDate: { color: colors.textSecondary, marginTop: 2, fontSize: 12 },
-    amount: { color: colors.primary, fontWeight: '800' },
+    orderId: { fontSize: 14, fontWeight: '800', color: colors.text },
+    orderRoute: { color: colors.textSecondary, marginTop: 2, fontSize: 13 },
+    orderDate: { color: colors.textSecondary, marginTop: 2, fontSize: 11 },
+    amount: { color: colors.primary, fontWeight: '800', fontSize: 14 },
+    viewText: { color: colors.textSecondary, fontSize: 11, marginTop: 4 },
   });
 }

@@ -150,6 +150,16 @@ export default function EditProfileModal() {
         // Continue with success since basic profile was updated
       }
 
+      // Sync to Supabase profile by email (best-effort; ignore failure)
+      try {
+        const email = form.email || user?.emailAddresses?.[0]?.emailAddress;
+        const fullName = `${form.firstName} ${form.lastName}`.trim();
+        if (email && fullName) {
+          const { upsertProfileNameByEmail } = await import('../../src/services/profile');
+          await upsertProfileNameByEmail(email, fullName);
+        }
+      } catch {}
+
       // Success feedback
       await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 

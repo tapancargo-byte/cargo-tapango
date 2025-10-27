@@ -88,7 +88,8 @@ export default {
           backgroundColor: '#FAFBFF', // Match design system
           image: './assets/splash-icon.png',
           dark: {
-            image: './assets/splash-icon-dark.png',
+            // Use the same image until a dedicated dark asset is added
+            image: './assets/splash-icon.png',
             backgroundColor: '#0A0E1A', // Match dark theme background
           },
           imageWidth: 150,
@@ -126,6 +127,11 @@ export default {
           String(
             process.env.EXPO_PUBLIC_ENABLE_BOOKING_SMS || ''
           ).toLowerCase() === 'true',
+        // Rollout switch for the minimal home
+        homeMinimalV2:
+          String(
+            process.env.EXPO_PUBLIC_HOME_MINIMAL_V2 || 'true'
+          ).toLowerCase() !== 'false',
       },
       // Read at runtime via Constants.expoConfig.extra.oneSignalAppId
       oneSignalAppId: process.env.EXPO_PUBLIC_ONESIGNAL_APP_ID || null,

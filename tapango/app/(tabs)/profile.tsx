@@ -269,27 +269,53 @@ export default function ProfileScreen() {
                       {isLoading ? (
                         <LoadingSpinner size='sm' />
                       ) : (
-                        <Switch
-                          size='$5'
-                          backgroundColor={colorScheme === 'dark' ? colors.primary : colors.border}
-                          checked={colorScheme === 'dark'}
-                          onCheckedChange={handleThemeToggle}
+                        <XStack
+                          alignItems='center'
+                          borderWidth={1}
+                          borderColor={colors.border}
+                          borderRadius={9999}
+                          padding='$1'
+                          backgroundColor={colors.surface}
                         >
-                          <Switch.Thumb
-                            backgroundColor={colors.surface}
-                            style={
-                              Platform.OS === 'web'
-                                ? { boxShadow: '0px 3px 6px rgba(0,0,0,0.15)' }
-                                : ({
-                                    shadowColor: colors.shadow,
-                                    shadowOffset: { width: 0, height: 3 },
-                                    shadowOpacity: 0.15,
-                                    shadowRadius: 6,
-                                    elevation: 4,
-                                  } as any)
-                            }
-                          />
-                        </Switch>
+                          {(['light', 'system', 'dark'] as const).map((mode) => {
+                            const selected = colorScheme === mode;
+                            return (
+                              <Stack key={mode}>
+                                <Button
+                                  variant='ghost'
+                                  size='sm'
+                                  onPress={() => toggleColorScheme(mode)}
+                                  backgroundColor={selected ? colors.primary + '15' : 'transparent'}
+                                  borderRadius={9999}
+                                  padding='$2'
+                                  style={{ minWidth: 76 }}
+                                >
+                                  <XStack alignItems='center' space='$1'>
+                                    <Feather
+                                      name={
+                                        mode === 'dark'
+                                          ? 'moon'
+                                          : mode === 'light'
+                                          ? 'sun'
+                                          : 'smartphone'
+                                      }
+                                      size={14}
+                                      color={selected ? colors.primary : colors.textSecondary}
+                                    />
+                                    <Text
+                                      fontSize={12}
+                                      fontWeight={selected ? '800' : '600'}
+                                      color={selected ? colors.primary : colors.textSecondary}
+                                      textTransform='capitalize'
+                                    >
+                                      {mode}
+                                    </Text>
+                                  </XStack>
+                                </Button>
+                              </Stack>
+                            );
+                          })}
+                        </XStack>
                       )}
                     </XStack>
                   </ElevatedCard>

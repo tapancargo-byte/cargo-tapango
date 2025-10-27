@@ -5,11 +5,14 @@
   "build": {
     "development": {
       "channel": "development",
+      "developmentClient": true,
+      "distribution": "internal",
       "android": { "buildType": "apk" },
       "ios": { "simulator": true }
     },
     "preview": {
       "channel": "preview",
+      "distribution": "internal",
       "android": { "buildType": "apk" }
     },
     "production": {

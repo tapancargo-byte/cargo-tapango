@@ -61,8 +61,8 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const systemColorScheme = useColorScheme();
-  // Default to light theme for premium feel
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
+  // Default to system to respect OS; persisted preference overrides
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('system');
 
   // Load saved color scheme on mount
   useEffect(() => {

@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { RefreshControl, Dimensions, Platform } from 'react-native';
+import { RefreshControl, Dimensions, Platform, Pressable } from 'react-native';
 import { ScrollView as RNScrollView } from 'react-native';
 import { router } from 'expo-router';
+import { track } from '../../src/utils/analytics';
 import { YStack, XStack, Text, Stack } from 'tamagui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
@@ -22,6 +23,7 @@ import {
   Circle,
   AnimatedBadge,
   AppIcon,
+  StatChip,
 } from '../../src/ui';
 import { formatDate } from '../../src/utils/format';
 import { loadBookingDraft } from '../../src/utils/drafts';
@@ -35,9 +37,10 @@ import { getTokens } from '../../src/design-system/tokens';
 import { useUser } from '@clerk/clerk-expo';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCounts } from '../../src/contexts/CountsContext';
-import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import LottieView from 'lottie-react-native';
+import Constants from 'expo-constants';
+import { TopActionsCarousel } from '../../src/components/home/TopActionsCarousel';
 
 // Platform-specific map imports - temporarily disabled for web compatibility
 let MapView: any = null;
@@ -165,7 +168,15 @@ function buildStatsData(counts: ReturnType<typeof useCounts> | null) {
   return tiles;
 }
 
-const ModernHeroSection = ({ user, tokens, colors, onNewOrder, onTrackShipment }: any) => {
+const ModernHeroSection = ({
+  user,
+  tokens,
+  colors,
+  onNewOrder,
+  onTrackShipment,
+  onViewOrders,
+  firstNameOverride,
+}: any) => {
   return (
     <YStack space='$6'>
       {/* Welcome Header - Clean and Minimal */}
@@ -180,188 +191,66 @@ const ModernHeroSection = ({ user, tokens, colors, onNewOrder, onTrackShipment }
         </Caption>
         <YStack space='$2'>
           <Title fontSize={32} fontWeight='800' color={colors.text} lineHeight={38}>
-            {user?.firstName ? `Hello, ${user.firstName}` : 'Your Logistics Hub'}
+            {firstNameOverride && firstNameOverride.trim().length > 0
+              ? `Hello, ${firstNameOverride}`
+              : user?.firstName?.trim()
+              ? `Hello, ${user.firstName}`
+              : 'Hello'}
           </Title>
           <Subtitle fontSize={16} color={colors.textSecondary} fontWeight='400' lineHeight={24}>
-            Seamless cargo delivery between Imphal and New Delhi
+            Connecting Imphal and New Delhi Through Efficient Cargo Solutions
           </Subtitle>
         </YStack>
-      </YStack>
-
-      {/* Primary Actions - Modern Button Design */}
-      <YStack space='$4'>
-        <Button
-          size='lg'
-          variant='primary'
-          onPress={onNewOrder}
-          borderRadius={16}
-          padding='$4'
-          backgroundColor={colors.primary}
-          pressStyle={{ backgroundColor: colors.primaryPress, transform: [{ scale: 0.98 }] }}
-        >
-          <XStack alignItems='center' space='$3' flex={1} justifyContent='center'>
-            <Circle size={32} backgroundColor='rgba(255,255,255,0.2)'>
-              <AppIcon name='add' size={16} color='white' />
-            </Circle>
-            <YStack alignItems='flex-start'>
-              <Text fontSize={16} fontWeight='600' color='white'>
-                Create New Shipment
-              </Text>
-              <Text fontSize={12} color='rgba(255,255,255,0.8)'>
-                Book and track your cargo
-              </Text>
-            </YStack>
-          </XStack>
-        </Button>
-
-        <XStack space='$3'>
-          <Button
-            flex={1}
-            variant='outline'
-            onPress={onTrackShipment}
-            borderRadius={12}
-            borderColor={colors.border}
-            backgroundColor={colors.surface}
-            pressStyle={{ backgroundColor: colors.surfaceVariant }}
-          >
-            <XStack alignItems='center' space='$2'>
-              <AppIcon name='search' size={16} color={colors.primary} />
-              <Text fontSize={14} fontWeight='500' color={colors.text}>
-                Track Package
-              </Text>
-            </XStack>
-          </Button>
-
-          <Button
-            flex={1}
-            variant='outline'
-            onPress={() => router.push('/(tabs)/orders')}
-            borderRadius={12}
-            borderColor={colors.border}
-            backgroundColor={colors.surface}
-            pressStyle={{ backgroundColor: colors.surfaceVariant }}
-          >
-            <XStack alignItems='center' space='$2'>
-              <AppIcon name='list' size={16} color={colors.primary} />
-              <Text fontSize={14} fontWeight='500' color={colors.text}>
-                View Orders
-              </Text>
-            </XStack>
-          </Button>
-        </XStack>
       </YStack>
     </YStack>
   );
 };
 
-const ModernStatsOverview = ({ shipments, colors, tokens }: any) => {
-  const stats = [
-    {
-      label: 'In Transit',
-      value: shipments.filter((s: Shipment) => s.status === 'in-transit').length,
-      icon: 'car',
-      color: colors.primary,
-      bgColor: colors.primary + '12',
-    },
+const StatsChips = ({ shipments, colors }: any) => {
+  const inTransit = shipments.filter((s: Shipment) => s.status === 'in-transit').length;
+  const delivered = shipments.filter((s: Shipment) => s.status === 'delivered').length;
+  const pending = shipments.filter((s: Shipment) => s.status === 'pending').length;
+  const urgent = shipments.filter((s: Shipment) => s.priority === 'urgent').length;
+
+  const chips = [
+    { label: 'In Transit', value: String(inTransit), icon: 'car', tint: colors.primary },
     {
       label: 'Delivered',
-      value: shipments.filter((s: Shipment) => s.status === 'delivered').length,
+      value: String(delivered),
       icon: 'checkmark-circle',
-      color: colors.success,
-      bgColor: colors.success + '12',
+      tint: colors.success,
     },
-    {
-      label: 'Pending',
-      value: shipments.filter((s: Shipment) => s.status === 'pending').length,
-      icon: 'time',
-      color: colors.warning,
-      bgColor: colors.warning + '12',
-    },
-    {
-      label: 'Urgent',
-      value: shipments.filter((s: Shipment) => s.priority === 'urgent').length,
-      icon: 'alert-circle',
-      color: colors.danger,
-      bgColor: colors.danger + '12',
-    },
+    { label: 'Pending', value: String(pending), icon: 'time', tint: colors.warning },
+    { label: 'Urgent', value: String(urgent), icon: 'alert-circle', tint: colors.danger },
   ];
 
   return (
-    <YStack space='$4'>
-      {/* Section Header */}
+    <YStack space='$3'>
       <YStack space='$1'>
         <SectionTitle fontSize={20} fontWeight='700' color={colors.text}>
-          Overview
+          Status at a Glance
         </SectionTitle>
         <Caption color={colors.textSecondary}>Real-time shipment status across the network</Caption>
       </YStack>
 
-      {/* Stats Grid - 2x2 layout */}
-      <YStack space='$3'>
-        <XStack space='$3'>
-          {stats.slice(0, 2).map((stat, index) => (
-            <Animated.View
-              key={stat.label}
-              entering={FadeInDown.delay(index * 100)}
-              style={{ flex: 1 }}
-            >
-              <ElevatedCard hover padding='$4' borderRadius={16} backgroundColor={colors.surface}>
-                <YStack space='$3' alignItems='flex-start'>
-                  <XStack alignItems='center' justifyContent='space-between' width='100%'>
-                    <Circle size={40} backgroundColor={stat.bgColor}>
-                      <AppIcon name={stat.icon as any} size={18} color={stat.color} />
-                    </Circle>
-                    <Text fontSize={28} fontWeight='800' color={stat.color} lineHeight={32}>
-                      {stat.value}
-                    </Text>
-                  </XStack>
-                  <Text
-                    fontSize={13}
-                    fontWeight='500'
-                    color={colors.textSecondary}
-                    textTransform='uppercase'
-                    letterSpacing={0.5}
-                  >
-                    {stat.label}
-                  </Text>
-                </YStack>
-              </ElevatedCard>
-            </Animated.View>
+      <RNScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <XStack space='$2' paddingRight='$4'>
+          {chips.map((c) => (
+            <StatChip
+              key={c.label}
+              icon={c.icon}
+              label={c.label}
+              value={c.value}
+              tint={c.tint}
+              onPress={() => {
+                const segment = c.label === 'Delivered' ? 'Past' : 'Active';
+                track('status_chip_clicked', { label: c.label, segment });
+                router.push(`/(tabs)/orders?segment=${segment}` as any);
+              }}
+            />
           ))}
         </XStack>
-
-        <XStack space='$3'>
-          {stats.slice(2, 4).map((stat, index) => (
-            <Animated.View
-              key={stat.label}
-              entering={FadeInDown.delay((index + 2) * 100)}
-              style={{ flex: 1 }}
-            >
-              <ElevatedCard hover padding='$4' borderRadius={16} backgroundColor={colors.surface}>
-                <YStack space='$3' alignItems='flex-start'>
-                  <XStack alignItems='center' justifyContent='space-between' width='100%'>
-                    <Circle size={40} backgroundColor={stat.bgColor}>
-                      <AppIcon name={stat.icon as any} size={18} color={stat.color} />
-                    </Circle>
-                    <Text fontSize={28} fontWeight='800' color={stat.color} lineHeight={32}>
-                      {stat.value}
-                    </Text>
-                  </XStack>
-                  <Text
-                    fontSize={13}
-                    fontWeight='500'
-                    color={colors.textSecondary}
-                    textTransform='uppercase'
-                    letterSpacing={0.5}
-                  >
-                    {stat.label}
-                  </Text>
-                </YStack>
-              </ElevatedCard>
-            </Animated.View>
-          ))}
-        </XStack>
-      </YStack>
+      </RNScrollView>
     </YStack>
   );
 };
@@ -401,12 +290,38 @@ const RouteMapCard = ({ colors }: any) => {
 export default function DashboardScreen() {
   const palette = useAppColors();
   const { user } = useUser();
+  const [supaFirstName, setSupaFirstName] = React.useState<string | null>(null);
+
+  const deriveFirstNameFromUser = (u: any): string | null => {
+    const clerkFirst = u?.firstName?.trim();
+    if (clerkFirst) return clerkFirst;
+    const email: string | undefined = u?.emailAddresses?.[0]?.emailAddress;
+    if (!email) return null;
+    const local = email.split('@')[0] || '';
+    const token =
+      local
+        .replace(/[^a-zA-Z]+/g, ' ')
+        .trim()
+        .split(/\s+/)[0] || '';
+    if (!token) return null;
+    return token.charAt(0).toUpperCase() + token.slice(1).toLowerCase();
+  };
   const [refreshing, setRefreshing] = useState(false);
 
   // Actions
-  const handleNewOrder = () => router.push('/(tabs)/booking');
-  const handleViewOrders = () => router.push('/(tabs)/orders');
-  const handleTrackShipment = () => router.push('/(tabs)/tracking');
+  const handleNewOrder = () => {
+    track('top_action_clicked', { action: 'create_shipment' });
+    router.push('/(tabs)/booking');
+  };
+  const safeName = (supaFirstName || user?.firstName || '').trim();
+  const handleViewOrders = () => {
+    track('top_action_clicked', { action: 'view_orders' });
+    router.push('/(tabs)/orders');
+  };
+  const handleTrackShipment = () => {
+    track('top_action_clicked', { action: 'track_package' });
+    router.push('/(tabs)/tracking');
+  };
 
   // Drafts + recent addresses
   const [hasDraft, setHasDraft] = React.useState(false);
@@ -416,6 +331,7 @@ export default function DashboardScreen() {
   // Shipments (mocked for now) with skeleton during initial load
   const [shipments, setShipments] = React.useState<Shipment[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const [shipmentsSegment, setShipmentsSegment] = React.useState<'Active' | 'Past'>('Active');
 
   React.useEffect(() => {
     (async () => {
@@ -436,6 +352,27 @@ export default function DashboardScreen() {
     }, 600);
     return () => clearTimeout(t);
   }, []);
+
+  // Fetch profile name from Supabase by email (via anon key + RLS)
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const email = user?.emailAddresses?.[0]?.emailAddress;
+        if (!email) {
+          setSupaFirstName(null);
+          return;
+        }
+        const { getOrCreateFirstName } = await import('../../src/services/profile');
+        const first = await getOrCreateFirstName(
+          email,
+          [user?.firstName, user?.lastName].filter(Boolean).join(' ').trim() || undefined
+        );
+        setSupaFirstName(first || null);
+      } catch {
+        setSupaFirstName(null);
+      }
+    })();
+  }, [user?.emailAddresses?.[0]?.emailAddress]);
 
   // Refresh counts when this screen gets focus
   const counts = useCounts();
@@ -462,18 +399,7 @@ export default function DashboardScreen() {
     longitudeDelta: 20.0, // Cover the operational corridor
   };
 
-  const PremiumShipmentCard = ({ shipment, colors }: { shipment: Shipment; colors: any }) => {
-    const getPriorityColor = (priority?: string) => {
-      switch (priority) {
-        case 'urgent':
-          return colors.error;
-        case 'express':
-          return colors.warning;
-        default:
-          return colors.textSecondary;
-      }
-    };
-
+  const MinimalShipmentCard = ({ shipment, colors }: { shipment: Shipment; colors: any }) => {
     const getStatusColor = (status: string) => {
       switch (status) {
         case 'in-transit':
@@ -490,116 +416,82 @@ export default function DashboardScreen() {
     };
 
     return (
-      <ElevatedCard variant='elevated' animation='slide' hover>
-        <YStack space='$3'>
-          <XStack alignItems='center' justifyContent='space-between'>
-            <YStack flex={1}>
-              <XStack alignItems='center' space='$2'>
-                <Text fontSize={16} fontWeight='700' color={colors.text}>
-                  {shipment.id}
-                </Text>
-                {shipment.priority === 'urgent' && (
-                  <Circle size={6} backgroundColor={colors.error} />
-                )}
-              </XStack>
-              <Text fontSize={14} color={colors.textSecondary}>
-                {shipment.origin} → {shipment.destination}
-              </Text>
-            </YStack>
-
-            <YStack alignItems='flex-end'>
-              <Circle size={32} backgroundColor={getStatusColor(shipment.status) + '20'}>
-                <AppIcon
-                  name={
-                    shipment.status === 'delivered'
-                      ? 'checkmark'
-                      : shipment.status === 'in-transit'
-                      ? 'car'
-                      : 'time'
-                  }
-                  size={14}
-                  color={getStatusColor(shipment.status)}
-                />
-              </Circle>
-            </YStack>
-          </XStack>
-
+      <OutlinedCard variant='outlined' animation='fade' padding='$3'>
+        <Pressable
+          onPress={() => router.push(`/(tabs)/tracking?id=${shipment.id}` as any)}
+          accessibilityRole='button'
+          accessibilityLabel={`Track ${shipment.id}`}
+        >
           <YStack space='$2'>
             <XStack alignItems='center' justifyContent='space-between'>
-              <Text fontSize={12} color={colors.textSecondary}>
-                Progress: {shipment.progress}%
-              </Text>
-              <Text
-                fontSize={12}
-                color={getPriorityColor(shipment.priority)}
-                textTransform='uppercase'
-                fontWeight='600'
-              >
-                {shipment.priority || 'Standard'}
-              </Text>
-            </XStack>
-
-            <ProgressBar
-              value={shipment.progress}
-              height={6}
-              backgroundColor={colors.surfaceVariant}
-            />
-
-            <XStack alignItems='center' justifyContent='space-between'>
-              <XStack alignItems='center' space='$2'>
-                <AppIcon name='cube' size={12} color={colors.textSecondary} />
-                <Text fontSize={12} color={colors.textSecondary}>
-                  {shipment.cargoType} • {shipment.weight}
-                </Text>
+              <XStack alignItems='center' space='$2' flex={1} minWidth={0}>
+                <Circle size={8} backgroundColor={getStatusColor(shipment.status)} />
+                <YStack flex={1} minWidth={0}>
+                  <Text fontSize={14} fontWeight='800' color={colors.text} numberOfLines={1}>
+                    {shipment.id}
+                  </Text>
+                  <Text fontSize={12} color={colors.textSecondary} numberOfLines={1}>
+                    {shipment.origin} → {shipment.destination}
+                  </Text>
+                </YStack>
               </XStack>
-              <Text fontSize={12} color={colors.textSecondary}>
-                ETA: {formatDate(shipment.estimatedDelivery)}
-              </Text>
-            </XStack>
-          </YStack>
 
-          <XStack space='$2'>
-            <Button
-              flex={1}
-              variant='ghost'
-              size='sm'
-              onPress={() => router.push(`/(tabs)/tracking?id=${shipment.id}` as any)}
-              leftIcon={<AppIcon name='location' size={14} />}
-            >
-              Track
-            </Button>
-            <Button
-              flex={1}
-              variant='outline'
-              size='sm'
-              onPress={() => router.push(`/(modals)/receipt?id=${shipment.id}` as any)}
-              leftIcon={<AppIcon name='document' size={14} />}
-            >
-              Receipt
-            </Button>
-          </XStack>
-        </YStack>
-      </ElevatedCard>
+              <XStack alignItems='center' space='$1'>
+                <AppIcon name='time' size={11} color={colors.textSecondary} />
+                <Text fontSize={11} color={colors.textSecondary}>
+                  {formatDate(shipment.estimatedDelivery)}
+                </Text>
+                <AppIcon name='chevron-forward' size={12} color={colors.textTertiary} />
+              </XStack>
+            </XStack>
+
+            {shipment.status !== 'delivered' && (
+              <ProgressBar
+                value={shipment.progress}
+                height={3}
+                backgroundColor={colors.surfaceVariant}
+              />
+            )}
+          </YStack>
+        </Pressable>
+      </OutlinedCard>
     );
   };
 
   const screenCounts = counts;
+
+  const filteredRecent = React.useMemo(
+    () =>
+      shipments
+        .filter((s) =>
+          shipmentsSegment === 'Active' ? s.status !== 'delivered' : s.status === 'delivered'
+        )
+        .slice(0, 3),
+    [shipments, shipmentsSegment]
+  );
+
+  const segmentCount = React.useMemo(
+    () =>
+      shipments.filter((s) =>
+        shipmentsSegment === 'Active' ? s.status !== 'delivered' : s.status === 'delivered'
+      ).length,
+    [shipments, shipmentsSegment]
+  );
+
+  const segmentCounts = React.useMemo(() => {
+    const active = shipments.filter((s) => s.status !== 'delivered').length;
+    const past = shipments.filter((s) => s.status === 'delivered').length;
+    return { active, past };
+  }, [shipments]);
+
   return (
     <Screen scroll={false} padding='$0' safeTop={true} safeBottom={true}>
-      {/* Non-scrollable header */}
-      <FadeIn>
-        <YStack space='$4' paddingHorizontal='$4' paddingTop='$4' paddingBottom={12}>
-          <ModernHeroSection
-            user={user}
-            colors={palette}
-            tokens={getTokens('light')}
-            onNewOrder={handleNewOrder}
-            onTrackShipment={handleTrackShipment}
-          />
-        </YStack>
-      </FadeIn>
-
-      {/* Scrollable body */}
+      {/* analytics: home_opened */}
+      {React.useMemo(() => {
+        track('home_opened');
+        return null;
+      }, [])}
+      {/* Scrollable body (including hero/actions) */}
       <RNScrollView
         style={{ backgroundColor: 'transparent' }}
         refreshControl={
@@ -611,16 +503,41 @@ export default function DashboardScreen() {
         }
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior='automatic'
+        stickyHeaderIndices={[1]}
         contentContainerStyle={{ paddingBottom: 24 }}
       >
+        {/* 0: Hero section */}
         <FadeIn>
-          <YStack space='$4' paddingHorizontal='$4' paddingTop='$2' paddingBottom={24}>
-            {/* Modern Stats Overview */}
-            <ModernStatsOverview
-              shipments={shipments}
+          <YStack space='$4' paddingHorizontal='$4' paddingTop='$4' paddingBottom={12}>
+            <ModernHeroSection
+              user={user}
               colors={palette}
               tokens={getTokens('light')}
+              onNewOrder={handleNewOrder}
+              onTrackShipment={handleTrackShipment}
+              onViewOrders={handleViewOrders}
+              firstNameOverride={supaFirstName ?? deriveFirstNameFromUser(user)}
             />
+          </YStack>
+        </FadeIn>
+
+        {/* 1: Sticky top actions carousel (gated by feature flag) */}
+        {(Constants as any)?.expoConfig?.extra?.features?.homeMinimalV2 ?? true ? (
+          <YStack backgroundColor='$background'>
+            <TopActionsCarousel
+              colors={palette}
+              onNewOrder={handleNewOrder}
+              onTrack={handleTrackShipment}
+              onViewOrders={handleViewOrders}
+            />
+          </YStack>
+        ) : null}
+
+        {/* 2: Rest of content */}
+        <FadeIn>
+          <YStack space='$4' paddingHorizontal='$4' paddingTop='$4' paddingBottom={24}>
+            {/* Status chips */}
+            <StatsChips shipments={shipments} colors={palette} />
 
             {/* Network Overview Animation */}
             <RouteMapCard colors={palette} />
@@ -629,36 +546,83 @@ export default function DashboardScreen() {
             <YStack space='$3'>
               <XStack alignItems='center' justifyContent='space-between'>
                 <SectionTitle color={palette.text}>Recent Shipments</SectionTitle>
-                <XStack alignItems='center' space='$2'>
-                  <AnimatedBadge text={`${shipments.length}`} tone='info' />
-                  <Button variant='ghost' size='sm' onPress={handleViewOrders}>
-                    <XStack alignItems='center' space='$1'>
-                      <Text color={palette.primary} fontSize={14}>
-                        View All
-                      </Text>
-                      <AppIcon name='chevron-forward' size={14} color={palette.primary} />
-                    </XStack>
-                  </Button>
+                {/* Minimal segmented toggle */}
+                <XStack
+                  alignItems='center'
+                  borderWidth={1}
+                  borderColor={palette.border}
+                  borderRadius={9999}
+                  paddingHorizontal='$1'
+                  paddingVertical='$1'
+                  backgroundColor={palette.surface}
+                >
+                  {(['Active', 'Past'] as const).map((label) => {
+                    const selected = shipmentsSegment === label;
+                    const count = label === 'Active' ? segmentCounts.active : segmentCounts.past;
+                    return (
+                      <Pressable key={label} onPress={() => setShipmentsSegment(label)}>
+                        <XStack
+                          paddingHorizontal='$2'
+                          paddingVertical={6}
+                          borderRadius={9999}
+                          backgroundColor={selected ? palette.primary + '15' : 'transparent'}
+                        >
+                          <Text
+                            fontSize={12}
+                            fontWeight={selected ? '800' : '600'}
+                            color={selected ? palette.primary : palette.textSecondary}
+                          >
+                            {`${label} (${count})`}
+                          </Text>
+                        </XStack>
+                      </Pressable>
+                    );
+                  })}
                 </XStack>
               </XStack>
 
               {loading ? (
                 <YStack space='$3'>
                   {Array.from({ length: 3 }).map((_, i) => (
-                    <ElevatedCard key={i} variant='elevated'>
+                    <OutlinedCard key={i} variant='outlined'>
                       <YStack space='$2'>
                         <Skeleton height={16} width={'60%' as any} />
                         <SkeletonText lines={2} />
                         <Skeleton height={6} radius={3} />
                       </YStack>
-                    </ElevatedCard>
+                    </OutlinedCard>
                   ))}
                 </YStack>
               ) : (
-                <YStack space='$3'>
-                  {shipments.slice(0, 4).map((shipment) => (
-                    <PremiumShipmentCard key={shipment.id} shipment={shipment} colors={palette} />
-                  ))}
+                <YStack space='$2'>
+                  {filteredRecent.length === 0 ? (
+                    <Text color={palette.textSecondary} fontSize={13}>
+                      No shipments in this segment
+                    </Text>
+                  ) : (
+                    <>
+                      {filteredRecent.map((shipment) => (
+                        <MinimalShipmentCard
+                          key={shipment.id}
+                          shipment={shipment}
+                          colors={palette}
+                        />
+                      ))}
+                      <Button
+                        variant='ghost'
+                        size='sm'
+                        onPress={handleViewOrders}
+                        style={{ alignSelf: 'flex-end' }}
+                      >
+                        <XStack alignItems='center' space='$1'>
+                          <Text color={palette.primary} fontSize={13}>
+                            See all ({segmentCount})
+                          </Text>
+                          <AppIcon name='chevron-forward' size={13} color={palette.primary} />
+                        </XStack>
+                      </Button>
+                    </>
+                  )}
                 </YStack>
               )}
             </YStack>

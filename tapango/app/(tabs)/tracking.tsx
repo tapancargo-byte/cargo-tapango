@@ -1,67 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { RefreshControl, Share, Platform, KeyboardAvoidingView } from 'react-native';
+import { RefreshControl, Platform, KeyboardAvoidingView, Pressable } from 'react-native';
 import { formatDateTime } from '../../src/utils/format';
-// AppIcon is already imported from '../../src/ui' in the grouped import below.
 import * as Haptics from 'expo-haptics';
-
-// Platform-specific map imports - temporarily disabled for web compatibility
-let MapView: any = null;
-let Marker: any = null;
-let PROVIDER_GOOGLE: string | null = null;
-let Polyline: any = null;
-
-// TODO: Re-enable maps with proper web bundling exclusion
-// Maps functionality temporarily disabled to fix web build
-// if (Platform.OS !== 'web') {
-//   try {
-//     const maps = require('react-native-maps');
-//     MapView = maps.default;
-//     Marker = maps.Marker;
-//     PROVIDER_GOOGLE = maps.PROVIDER_GOOGLE;
-//     Polyline = maps.Polyline;
-//   } catch (error) {
-//     console.warn('Failed to load react-native-maps:', error);
-//   }
-// }
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, router } from 'expo-router';
 import { Input } from '../../src/ui';
 import { StatusVariant } from '../../src/ui/StatusBadge';
-import { YStack, XStack, Text, ScrollView, Stack, Separator } from 'tamagui';
-import { Circle } from '../../src/ui';
+import { YStack, XStack, Text, ScrollView } from 'tamagui';
 import {
   Button,
-  Card,
-  Skeleton,
-  SkeletonText,
-  StatChip,
-  SectionHeader,
-  ProgressBar,
   StatusPill,
   AppIcon,
-  AppHeader,
   Screen,
-  AnimatedBadge,
   FadeIn,
-  GlassCard,
-  ElevatedCard,
+  OutlinedCard,
   LoadingSpinner,
-  Title,
-  SectionTitle,
-  Subtitle,
-  Overline,
 } from '../../src/ui';
 import { font } from '../../src/ui/tokens';
 import { useColors } from '../../src/styles/ThemeProvider';
 import { t } from '../../src/i18n';
-import Animated, {
-  FadeInDown,
-  FadeInUp,
-  useSharedValue,
-  useAnimatedStyle,
-  withRepeat,
-  withTiming,
-  interpolate,
-} from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 
 interface TrackingEvent {
   id: string;
@@ -158,31 +115,6 @@ export default function TrackingScreen() {
         status: 'in-transit',
       },
     ],
-  };
-
-  // Premium animated pulse component for live tracking
-  const LiveTrackingPulse = () => {
-    const pulseAnimation = useSharedValue(0);
-
-    useEffect(() => {
-      pulseAnimation.value = withRepeat(withTiming(1, { duration: 2000 }), -1, false);
-    }, []);
-
-    const animatedStyle = useAnimatedStyle(() => {
-      const scale = interpolate(pulseAnimation.value, [0, 1], [1, 1.5]);
-      const opacity = interpolate(pulseAnimation.value, [0, 1], [0.8, 0.1]);
-
-      return {
-        transform: [{ scale }],
-        opacity,
-      };
-    });
-
-    return (
-      <Animated.View style={[{ position: 'absolute' }, animatedStyle]}>
-        <Circle size={60} backgroundColor='rgba(79, 195, 247, 0.3)' />
-      </Animated.View>
-    );
   };
 
   useEffect(() => {
@@ -314,25 +246,6 @@ export default function TrackingScreen() {
     return formatDateTime(timestamp);
   };
 
-  const getProgressPercentage = (status: StatusVariant): number => {
-    switch (status) {
-      case 'pending':
-        return 10;
-      case 'confirmed':
-        return 25;
-      case 'in-transit':
-        return 60;
-      case 'delivered':
-        return 100;
-      case 'cancelled':
-        return 0;
-      case 'delayed':
-        return 40;
-      default:
-        return 0;
-    }
-  };
-
   return (
     <Screen scroll={false} padding='$0' safeTop={true} safeBottom={true}>
       <KeyboardAvoidingView
@@ -357,59 +270,44 @@ export default function TrackingScreen() {
               {/* Modern Header */}
               <YStack space='$3'>
                 <YStack space='$2'>
-                  <Text fontSize={28} fontWeight='800' color={palette.text} lineHeight={34}>
-                    Live Tracking
+                  <Text fontSize={24} fontWeight='800' color={palette.text} lineHeight={30}>
+                    Track Shipment
                   </Text>
-                  <XStack alignItems='center' justifyContent='space-between'>
-                    <Text fontSize={15} color={palette.textSecondary} fontWeight='400'>
-                      Imphal ⟷ New Delhi Express Route
-                    </Text>
-                    <XStack alignItems='center' space='$2'>
-                      <Circle size={8} backgroundColor={palette.success} />
-                      <Text
-                        fontSize={13}
-                        color={palette.success}
-                        fontWeight='600'
-                        textTransform='uppercase'
-                      >
-                        LIVE
-                      </Text>
-                      <Circle size={40} backgroundColor={palette.primary + '12'}>
-                        <AppIcon name='location' size={20} color={palette.primary} />
-                      </Circle>
-                    </XStack>
-                  </XStack>
+                  <Text fontSize={15} color={palette.textSecondary} fontWeight='400'>
+                    Enter a tracking number to see latest updates
+                  </Text>
                 </YStack>
               </YStack>
 
-              {/* Modern Search Card */}
-              <ElevatedCard padding='$5' borderRadius={20} backgroundColor={palette.surface}>
+              {/* Minimal Search Card */}
+              <OutlinedCard padding='$3' borderRadius={14} backgroundColor={palette.surface}>
                 <YStack space='$4'>
                   <YStack space='$3'>
-                    <XStack alignItems='center' space='$4'>
-                      <Circle size={48} backgroundColor={palette.info + '15'}>
-                        <AppIcon name='search' size={22} color={palette.info} />
-                      </Circle>
-                      <YStack flex={1}>
-                        <Text fontSize={20} fontWeight='800' color={palette.text} lineHeight={24}>
-                          Track Your Shipment
-                        </Text>
-                        <Text fontSize={14} color={palette.textSecondary} fontWeight='400'>
-                          Enter tracking number or scan QR code
-                        </Text>
-                      </YStack>
-                    </XStack>
+                    <Text fontSize={16} fontWeight='800' color={palette.text}>
+                      Track your shipment
+                    </Text>
+                    <Text fontSize={12} color={palette.textSecondary}>
+                      Enter tracking number or scan QR code
+                    </Text>
                   </YStack>
 
                   <Input
-                    label='Tracking Number'
+                    label='Tracking number'
                     value={trackingNumber}
                     onChangeText={onChangeTracking}
                     placeholder='TPG123456789'
                     error={error ?? undefined}
                     variant='outlined'
                     borderRadius={12}
-                    rightIcon={<AppIcon name='qr-code' size={18} color={palette.textSecondary} />}
+                    rightIcon={
+                      <Pressable
+                        accessibilityLabel='Scan QR'
+                        onPress={() => router.push('/(modals)/scan')}
+                        hitSlop={10}
+                      >
+                        <AppIcon name='qr-code' size={18} color={palette.textSecondary} />
+                      </Pressable>
+                    }
                   />
 
                   {isLoading ? (
@@ -426,10 +324,10 @@ export default function TrackingScreen() {
                     </Button>
                   ) : (
                     <Button
-                      size='lg'
+                      size='md'
                       onPress={handleTrack}
                       variant='primary'
-                      borderRadius={16}
+                      borderRadius={12}
                       backgroundColor={palette.primary}
                       pressStyle={{
                         backgroundColor: palette.primaryPress,
@@ -439,32 +337,31 @@ export default function TrackingScreen() {
                       <XStack alignItems='center' space='$3'>
                         <AppIcon name='search' size={18} color='white' />
                         <Text color='white' fontWeight='700' fontSize={16}>
-                          Track Package
+                          View Status
                         </Text>
                       </XStack>
                     </Button>
                   )}
                 </YStack>
-              </ElevatedCard>
+              </OutlinedCard>
 
               {/* Premium Shipment Results */}
               {shipment && (
                 <Animated.View entering={FadeInDown.duration(600)}>
                   <YStack space='$4'>
-                    {/* Shipment Header */}
-                    <ElevatedCard variant='elevated' animation='slide'>
+                    {/* Shipment Header (minimal) */}
+                    <OutlinedCard variant='outlined'>
                       <XStack alignItems='center' justifyContent='space-between'>
                         <YStack flex={1}>
                           <XStack alignItems='center' space='$2'>
-                            <Text fontSize={font.section} fontWeight='700' color={palette.text}>
+                            <Text fontSize={14} fontWeight='800' color={palette.text}>
                               {shipment.trackingNumber}
                             </Text>
-                            <Circle size={8} backgroundColor={palette.success} />
                           </XStack>
                           <XStack alignItems='center' space='$2' marginTop='$1'>
                             <StatusPill status={shipment.status as any} />
-                            <Text fontSize={font.caption} color={palette.textSecondary}>
-                              Last updated:{' '}
+                            <Text fontSize={11} color={palette.textSecondary}>
+                              Updated{' '}
                               {formatDateTimeLocal(
                                 shipment.events[shipment.events.length - 1]?.timestamp || ''
                               )}
@@ -472,421 +369,83 @@ export default function TrackingScreen() {
                           </XStack>
                         </YStack>
 
-                        <XStack space='$2'>
-                          <Button size='sm' variant='outline' onPress={handleRefresh}>
-                            <AppIcon name='refresh' size={16} />
-                          </Button>
-                          <Button
-                            size='sm'
-                            variant='ghost'
-                            onPress={async () => {
-                              const message = `Track TAPANGO shipment: ${shipment.trackingNumber} - ${shipment.origin} to ${shipment.destination}`;
-                              await Share.share({ message });
-                            }}
-                          >
-                            <AppIcon name='share' size={16} />
-                          </Button>
-                        </XStack>
-                      </XStack>
-                    </ElevatedCard>
-
-                    {/* Live Route Map */}
-                    <ElevatedCard variant='elevated'>
-                      <YStack space='$3'>
-                        <XStack alignItems='center' justifyContent='space-between'>
-                          <XStack alignItems='center' space='$3'>
-                            <Stack position='relative'>
-                              <LiveTrackingPulse />
-                              <Circle
-                                size={40}
-                                backgroundColor={palette.primary}
-                                borderWidth={2}
-                                borderColor='white'
-                              >
-                                <AppIcon name='location' size={20} color='white' />
-                              </Circle>
-                            </Stack>
-                            <YStack>
-                              <Text fontSize={font.section} fontWeight='700' color={palette.text}>
-                                Live Route Map
-                              </Text>
-                              <Text fontSize={font.caption} color={palette.textSecondary}>
-                                Real-time location tracking
-                              </Text>
-                            </YStack>
-                          </XStack>
-
-                          <Overline color={palette.success}>LIVE</Overline>
-                        </XStack>
-
-                        <Stack
-                          height={250}
-                          borderRadius='$3'
-                          overflow='hidden'
-                          backgroundColor={palette.surfaceVariant}
+                        <Button
+                          size='sm'
+                          variant='outline'
+                          onPress={handleRefresh}
+                          borderRadius={10}
                         >
-                          {MapView ? (
-                            <MapView
-                              style={{ flex: 1 }}
-                              provider={PROVIDER_GOOGLE}
-                              initialRegion={{
-                                latitude: 26.0, // Midpoint between Imphal and Delhi
-                                longitude: 85.0,
-                                latitudeDelta: 10.0,
-                                longitudeDelta: 20.0,
-                              }}
-                            >
-                              {/* Route polyline */}
-                              <Polyline
-                                coordinates={[
-                                  { latitude: 24.817, longitude: 93.9368 }, // Imphal
-                                  { latitude: 26.1445, longitude: 91.7362 }, // Guwahati
-                                  { latitude: 26.8467, longitude: 80.9462 }, // Lucknow
-                                  { latitude: 28.7041, longitude: 77.1025 }, // Delhi
-                                ]}
-                                strokeColor={palette.primary}
-                                strokeWidth={3}
-                              />
+                          <AppIcon name='refresh' size={16} />
+                        </Button>
+                      </XStack>
+                    </OutlinedCard>
 
-                              {/* Origin Marker */}
-                              <Marker
-                                coordinate={{ latitude: 24.817, longitude: 93.9368 }}
-                                title='Origin'
-                                description={shipment.origin}
-                              >
-                                <Circle
-                                  size={20}
-                                  backgroundColor={palette.success}
-                                  borderWidth={2}
-                                  borderColor='white'
-                                >
-                                  <AppIcon name='business' size={10} color='white' />
-                                </Circle>
-                              </Marker>
-
-                              {/* Current Location (animated) */}
-                              <Marker
-                                coordinate={{ latitude: 26.1445, longitude: 91.7362 }} // Guwahati
-                                title='Current Location'
-                                description={shipment.currentLocation}
-                              >
-                                <Stack position='relative'>
-                                  <LiveTrackingPulse />
-                                  <Circle
-                                    size={16}
-                                    backgroundColor={palette.primary}
-                                    borderWidth={2}
-                                    borderColor='white'
-                                  >
-                                    <AppIcon name='car' size={8} color='white' />
-                                  </Circle>
-                                </Stack>
-                              </Marker>
-
-                              {/* Destination Marker */}
-                              <Marker
-                                coordinate={{ latitude: 28.7041, longitude: 77.1025 }}
-                                title='Destination'
-                                description={shipment.destination}
-                              >
-                                <Circle
-                                  size={20}
-                                  backgroundColor={palette.warning}
-                                  borderWidth={2}
-                                  borderColor='white'
-                                >
-                                  <AppIcon name='flag' size={10} color='white' />
-                                </Circle>
-                              </Marker>
-                            </MapView>
-                          ) : (
-                            // Fallback for web - show route info
-                            <YStack flex={1} alignItems='center' justifyContent='center' space='$3'>
-                              <Circle size={80} backgroundColor={palette.primary + '20'}>
-                                <AppIcon name='navigate' size={40} color={palette.primary} />
-                              </Circle>
-                              <SectionTitle color={palette.text}>Live Route Tracking</SectionTitle>
-                              <Subtitle color={palette.textSecondary}>
-                                Interactive map available on mobile app
-                              </Subtitle>
-
-                              {/* Route Progress Visualization */}
-                              <YStack width='100%' maxWidth={280} space='$3'>
-                                <XStack alignItems='center' justifyContent='space-between'>
-                                  <Circle size={32} backgroundColor={palette.success}>
-                                    <AppIcon name='business' size={16} color='white' />
-                                  </Circle>
-                                  <Stack
-                                    flex={1}
-                                    marginHorizontal='$3'
-                                    height={4}
-                                    backgroundColor={palette.primary}
-                                    borderRadius={2}
-                                  />
-                                  <Stack position='relative'>
-                                    <LiveTrackingPulse />
-                                    <Circle size={24} backgroundColor={palette.primary}>
-                                      <AppIcon name='car' size={12} color='white' />
-                                    </Circle>
-                                  </Stack>
-                                  <Stack
-                                    flex={1}
-                                    marginHorizontal='$3'
-                                    height={4}
-                                    backgroundColor={palette.surfaceVariant}
-                                    borderRadius={2}
-                                  />
-                                  <Circle size={32} backgroundColor={palette.warning}>
-                                    <AppIcon name='flag' size={16} color='white' />
-                                  </Circle>
-                                </XStack>
-
-                                <XStack alignItems='center' justifyContent='space-between'>
-                                  <Text fontSize={10} color={palette.textSecondary}>
-                                    Origin
-                                  </Text>
-                                  <Text fontSize={10} color={palette.primary} fontWeight='600'>
-                                    Current
-                                  </Text>
-                                  <Text fontSize={10} color={palette.textSecondary}>
-                                    Destination
-                                  </Text>
-                                </XStack>
-                              </YStack>
-                            </YStack>
-                          )}
-                        </Stack>
+                    {/* Shipment Summary (minimal) */}
+                    <OutlinedCard>
+                      <YStack space='$2'>
+                        <XStack alignItems='center' justifyContent='space-between'>
+                          <Text fontSize={12} color={palette.textSecondary}>
+                            From
+                          </Text>
+                          <Text fontSize={14} color={palette.text} fontWeight='600'>
+                            {shipment.origin}
+                          </Text>
+                        </XStack>
+                        <XStack alignItems='center' justifyContent='space-between'>
+                          <Text fontSize={12} color={palette.textSecondary}>
+                            To
+                          </Text>
+                          <Text fontSize={14} color={palette.text} fontWeight='600'>
+                            {shipment.destination}
+                          </Text>
+                        </XStack>
+                        <XStack alignItems='center' justifyContent='space-between'>
+                          <Text fontSize={12} color={palette.textSecondary}>
+                            Estimated delivery
+                          </Text>
+                          <Text fontSize={14} color={palette.text} fontWeight='600'>
+                            {formatDateTimeLocal(shipment.estimatedDelivery)}
+                          </Text>
+                        </XStack>
                       </YStack>
-                    </ElevatedCard>
+                    </OutlinedCard>
 
-                    {/* Shipment Details */}
-                    <ElevatedCard variant='elevated'>
-                      <YStack space='$3'>
-                        <SectionTitle color={palette.text}>Shipment Details</SectionTitle>
+                    {/* Updates List (minimal) */}
+                    <OutlinedCard>
+                      <YStack space='$2'>
+                        <XStack alignItems='center' justifyContent='space-between'>
+                          <Text fontSize={14} fontWeight='800' color={palette.text}>
+                            Updates
+                          </Text>
+                          <Text fontSize={11} color={palette.textSecondary}>
+                            {shipment.events.length} events
+                          </Text>
+                        </XStack>
 
-                        <YStack space='$3'>
-                          <XStack alignItems='center' justifyContent='space-between'>
-                            <XStack alignItems='center' space='$2'>
-                              <AppIcon name='location' size={16} color={palette.primary} />
-                              <Text fontSize={font.subtitle} color={palette.textSecondary}>
-                                From:
-                              </Text>
-                            </XStack>
-                            <Text
-                              fontSize={font.subtitle}
-                              color={palette.text}
-                              fontWeight='600'
-                              flex={1}
-                              textAlign='right'
-                            >
-                              {shipment.origin}
-                            </Text>
-                          </XStack>
-
-                          <ProgressBar
-                            value={getProgressPercentage(shipment.status)}
-                            height={8}
-                            backgroundColor={palette.surfaceVariant}
-                          />
-
-                          <XStack alignItems='center' justifyContent='space-between'>
-                            <XStack alignItems='center' space='$2'>
-                              <AppIcon name='flag' size={16} color={palette.success} />
-                              <Text fontSize={font.subtitle} color={palette.textSecondary}>
-                                To:
-                              </Text>
-                            </XStack>
-                            <Text
-                              fontSize={font.subtitle}
-                              color={palette.text}
-                              fontWeight='600'
-                              flex={1}
-                              textAlign='right'
-                            >
-                              {shipment.destination}
-                            </Text>
-                          </XStack>
-
-                          <Separator />
-
-                          <XStack space='$4'>
-                            <YStack flex={1} space='$2'>
-                              <Text
-                                fontSize={font.caption}
-                                color={palette.textSecondary}
-                                textTransform='uppercase'
-                              >
-                                Current Location
-                              </Text>
-                              <Text fontSize={font.subtitle} color={palette.text} fontWeight='600'>
-                                {shipment.currentLocation}
-                              </Text>
-                            </YStack>
-
-                            <YStack flex={1} space='$2'>
-                              <Text
-                                fontSize={font.caption}
-                                color={palette.textSecondary}
-                                textTransform='uppercase'
-                              >
-                                Est. Delivery
-                              </Text>
-                              <Text fontSize={font.subtitle} color={palette.text} fontWeight='600'>
-                                {formatDateTimeLocal(shipment.estimatedDelivery)}
-                              </Text>
-                            </YStack>
-                          </XStack>
-
-                          <XStack space='$4'>
-                            <YStack flex={1} space='$2'>
-                              <Text
-                                fontSize={font.caption}
-                                color={palette.textSecondary}
-                                textTransform='uppercase'
-                              >
-                                Cargo Type
-                              </Text>
-                              <Text fontSize={font.subtitle} color={palette.text} fontWeight='600'>
-                                {shipment.cargoType}
-                              </Text>
-                            </YStack>
-
-                            <YStack flex={1} space='$2'>
-                              <Text
-                                fontSize={font.caption}
-                                color={palette.textSecondary}
-                                textTransform='uppercase'
-                              >
-                                Weight
-                              </Text>
-                              <Text fontSize={font.subtitle} color={palette.text} fontWeight='600'>
-                                {shipment.weight}
-                              </Text>
-                            </YStack>
-                          </XStack>
-                        </YStack>
-                      </YStack>
-                    </ElevatedCard>
-
-                    {/* Enhanced Timeline */}
-                    <ElevatedCard padding='$5' borderRadius={20} backgroundColor={palette.surface}>
-                      <YStack space='$4'>
-                        <YStack space='$3'>
-                          <XStack alignItems='center' space='$4'>
-                            <Circle size={48} backgroundColor={palette.secondary + '15'}>
-                              <AppIcon name='time' size={22} color={palette.secondary} />
-                            </Circle>
-                            <YStack flex={1}>
-                              <Text
-                                fontSize={20}
-                                fontWeight='800'
-                                color={palette.text}
-                                lineHeight={24}
-                              >
-                                Tracking Timeline
-                              </Text>
-                              <Text fontSize={14} color={palette.textSecondary} fontWeight='400'>
-                                {shipment.events.length} tracking events • Real-time updates
-                              </Text>
-                            </YStack>
-                          </XStack>
-                        </YStack>
-
-                        <YStack space='$4'>
+                        <YStack space='$2'>
                           {shipment.events.map((event, index) => (
-                            <Animated.View
-                              key={event.id}
-                              entering={FadeInUp.delay(index * 100).duration(400)}
-                            >
-                              <XStack space='$4'>
-                                <YStack alignItems='center'>
-                                  <Circle
-                                    size={32}
-                                    backgroundColor={
-                                      index === 0
-                                        ? palette.success
-                                        : index === shipment.events.length - 1
-                                          ? palette.primary
-                                          : palette.warning
-                                    }
-                                    borderWidth={3}
-                                    borderColor={palette.surface}
-                                    style={{
-                                      shadowColor: palette.shadow,
-                                      shadowOffset: { width: 0, height: 2 },
-                                      shadowOpacity: 0.1,
-                                      shadowRadius: 4,
-                                      elevation: 2,
-                                    }}
-                                  >
-                                    <AppIcon
-                                      name={
-                                        index === 0
-                                          ? 'checkmark'
-                                          : index === shipment.events.length - 1
-                                            ? 'car'
-                                            : 'location'
-                                      }
-                                      size={14}
-                                      color='white'
-                                    />
-                                  </Circle>
-                                  {index < shipment.events.length - 1 && (
-                                    <Stack
-                                      width={3}
-                                      height={48}
-                                      backgroundColor={palette.border}
-                                      borderRadius={2}
-                                      marginVertical='$2'
-                                    />
-                                  )}
-                                </YStack>
-
-                                <YStack
-                                  flex={1}
-                                  paddingBottom={index < shipment.events.length - 1 ? '$4' : 0}
-                                >
-                                  <XStack alignItems='flex-start' justifyContent='space-between'>
-                                    <YStack flex={1} space='$2'>
-                                      <Text fontSize={16} fontWeight='700' color={palette.text}>
-                                        {event.location}
-                                      </Text>
-                                      <Text
-                                        fontSize={14}
-                                        color={palette.textSecondary}
-                                        lineHeight={20}
-                                      >
-                                        {event.description}
-                                      </Text>
-                                    </YStack>
-                                    <YStack alignItems='flex-end' space='$1'>
-                                      <Text
-                                        fontSize={12}
-                                        color={palette.textSecondary}
-                                        fontWeight='500'
-                                      >
-                                        {formatDateTimeLocal(event.timestamp)}
-                                      </Text>
-                                      <Text
-                                        fontSize={10}
-                                        color={
-                                          index === 0
-                                            ? palette.success
-                                            : index === shipment.events.length - 1
-                                              ? palette.primary
-                                              : palette.warning
-                                        }
-                                        textTransform='uppercase'
-                                        fontWeight='600'
-                                      >
-                                        {event.status.replace('-', ' ')}
-                                      </Text>
-                                    </YStack>
-                                  </XStack>
+                            <Animated.View key={event.id} entering={FadeInUp.delay(index * 60)}>
+                              <XStack
+                                alignItems='flex-start'
+                                justifyContent='space-between'
+                                space='$2'
+                              >
+                                <Text fontSize={11} color={palette.textSecondary}>
+                                  {formatDateTimeLocal(event.timestamp)}
+                                </Text>
+                                <YStack flex={1} minWidth={0}>
                                   <Text
-                                    fontSize={font.caption}
+                                    fontSize={13}
+                                    fontWeight='600'
+                                    color={palette.text}
+                                    numberOfLines={1}
+                                  >
+                                    {event.location}
+                                  </Text>
+                                  <Text
+                                    fontSize={12}
                                     color={palette.textSecondary}
-                                    marginTop='$1'
+                                    numberOfLines={2}
                                   >
                                     {event.description}
                                   </Text>
@@ -896,7 +455,7 @@ export default function TrackingScreen() {
                           ))}
                         </YStack>
                       </YStack>
-                    </ElevatedCard>
+                    </OutlinedCard>
                   </YStack>
                 </Animated.View>
               )}
