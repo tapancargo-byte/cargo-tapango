@@ -1,24 +1,29 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createClient } from '@supabase/supabase-js';
 
-const url = process.env.EXPO_PUBLIC_SUPABASE_URL;
-const anon = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+export type GetAccessTokenFunction = () => Promise<string | null>;
 
-let supabase: SupabaseClient | null = null;
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL as string;
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY as string;
 
-if (url && anon) {
-  supabase = createClient(url, anon, {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: false,
-      storage: {
-        getItem: (key: string) => AsyncStorage.getItem(key),
-        setItem: (key: string, value: string) => AsyncStorage.setItem(key, value),
-        removeItem: (key: string) => AsyncStorage.removeItem(key),
-      },
-    },
-  });
+export const supabase =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey, {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+          detectSessionInUrl: false,
+        },
+      })
+    : null;
+
+export function createAuthenticatedSupabaseClient(_accessToken: string) {
+  // For now, we rely on anon-key access with permissive RLS for public/mobile flows.
+  // If we later bridge Clerk -> Supabase JWT, we can attach Authorization headers here.
+  return supabase;
 }
 
-export { supabase };
+export function createAutoAuthenticatedSupabaseClient(
+  _getAccessToken: GetAccessTokenFunction
+) {
+  return supabase;
+}

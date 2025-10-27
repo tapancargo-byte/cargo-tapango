@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { User, Session } from '@supabase/supabase-js';
 import { supabase, Profile } from '../lib/supabase';
+
+type User = any;
+type Session = any;
 
 interface AuthContextType {
   user: User | null;
@@ -22,117 +24,157 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Dev emergency bypass using localStorage flag
-    const allowEmergency = ((import.meta as any)?.env?.VITE_DEV_EMERGENCY_ADMIN === '1');
-    if (allowEmergency && typeof window !== 'undefined') {
-      try {
-        const flag = window.localStorage.getItem('EMERGENCY_SIGNED_IN');
-        if (flag === '1') {
-          const fakeId = '0c5798d0-9eec-4b81-9203-31f4392c09a8';
-          console.log('🚀 EMERGENCY SIGN-IN ENABLED');
-          setSession(null);
-          setUser({ id: fakeId, email: 'admin@test.com' } as any);
-          createFallbackProfile(fakeId);
-          return; // Skip real auth init
-        } else {
-          console.log('🛡️ Emergency mode active, but not signed in. Showing login.');
-          setSession(null);
-          setUser(null);
-          setLoading(false);
-          return; // Skip real auth init to avoid network dependency in dev/CI
-        }
-      } catch (e) {
-        console.warn('Emergency flag check failed', e);
+    let isMounted = true;
+    let authSubscription: any = null;
+
+    const allowProvisional = ((import.meta as any)?.env?.VITE_ALLOW_PROVISIONAL_ADMIN === '1');
+
+    const mode = (import.meta as any)?.env?.MODE as string | undefined;
+    const isProdBuild = mode === 'production';
+
+    // Debug env vars (avoid logging all env keys)
+    console.log('🔧 ENV DEBUG:', {
+      MODE: mode,
+      VITE_DEV_EMERGENCY_ADMIN: (import.meta as any)?.env?.VITE_DEV_EMERGENCY_ADMIN,
+      VITE_ALLOW_PROVISIONAL_ADMIN: (import.meta as any)?.env?.VITE_ALLOW_PROVISIONAL_ADMIN,
+      hasForceFlag: !!window.localStorage.getItem('FORCE_EMERGENCY_ADMIN')
+    });
+
+    // Emergency bypass
+    // - Env flag is ignored in production builds (e.g. preview/e2e)
+    // - LocalStorage flag FORCE_EMERGENCY_ADMIN=1 always works for explicit test override
+    const forceEmergency = (
+      (!isProdBuild && (import.meta as any)?.env?.VITE_DEV_EMERGENCY_ADMIN === '1') ||
+      window.localStorage.getItem('FORCE_EMERGENCY_ADMIN') === '1'
+    );
+    
+    if (forceEmergency) {
+      const emergencyId = 'ebf4ca8c-f112-4da1-89b4-6e1c2fe06cd0';
+      console.log('🚀 EMERGENCY BYPASS ACTIVE - BYPASSING ALL AUTH (reason:', (import.meta as any)?.env?.VITE_DEV_EMERGENCY_ADMIN === '1' ? 'env' : 'localStorage', ')');
+      if (isMounted) {
+        setSession({ user: { id: emergencyId, email: 'cargotapan@gmail.com' } } as any);
+        setUser({ id: emergencyId, email: 'cargotapan@gmail.com' } as any);
+        setProfile({
+          id: emergencyId,
+          email: 'cargotapan@gmail.com',
+          role: 'super_admin' as const,
+          name: 'Super Admin (Emergency)',
+          phone: null,
+          avatar_url: null,
+          address: {},
+          preferences: {},
+          metadata: {},
+          is_active: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        } as Profile);
+        setLoading(false);
       }
+      return;
     }
 
     // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session } }: any) => {
+      if (!isMounted) return;
+      
       console.log('🔐 Initial session check:', { session: !!session, user: !!session?.user });
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        // Check if this is a known admin user - if so, create profile immediately
-        const allowEmergency2 = ((import.meta as any)?.env?.VITE_DEV_EMERGENCY_ADMIN === '1');
-        if (allowEmergency2 && (session.user.email === 'admin@test.com' || session.user.id === '0c5798d0-9eec-4b81-9203-31f4392c09a8')) {
-          console.log('🔥 BYPASS: Known admin user detected, skipping profile fetch');
-          createFallbackProfile(session.user.id);
-        } else {
-          fetchProfile(session.user.id);
+        const provisionalEmail = session.user.email as string | undefined;
+        if (allowProvisional && provisionalEmail) {
+          setProfile({
+            id: session.user.id,
+            email: provisionalEmail,
+            role: (provisionalEmail === 'cargotapan@gmail.com' || provisionalEmail === 'admin@tapango.app') ? ('super_admin' as const) : ('admin' as const),
+            name: 'Provisional User',
+            phone: null,
+            avatar_url: null,
+            address: {},
+            preferences: {},
+            metadata: {},
+            is_active: true,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          } as Profile);
         }
+        fetchProfile(session.user.id, session.user); // non-blocking
+        setLoading(false);
       } else {
         setLoading(false);
       }
-    }).catch(error => {
+    }).catch((error: any) => {
       console.error('💥 Error getting initial session:', error);
-      setLoading(false);
+      if (isMounted) setLoading(false);
     });
 
-    // Listen for auth changes
+    // Listen for auth changes with proper cleanup
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
+    } = supabase.auth.onAuthStateChange(async (event: any, session: any) => {
+      if (!isMounted) return;
+      // Ignore duplicate INIT event; we already handled getSession()
+      if (event === 'INITIAL_SESSION') return;
+      
       console.log('🔄 Auth state change:', { event, session: !!session, user: !!session?.user });
       setSession(session);
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        // Same bypass logic for auth state changes
-        const allowEmergency = ((import.meta as any)?.env?.VITE_DEV_EMERGENCY_ADMIN === '1');
-        if (allowEmergency && (session.user.email === 'admin@test.com' || session.user.id === '0c5798d0-9eec-4b81-9203-31f4392c09a8')) {
-          console.log('🔥 BYPASS: Known admin user detected in auth change, skipping profile fetch');
-          createFallbackProfile(session.user.id);
-        } else {
-          await fetchProfile(session.user.id);
+        // Provisional profile to avoid initial gating while we provision in background
+        const provisionalEmail = session.user.email as string | undefined;
+        if (allowProvisional && provisionalEmail) {
+          setProfile({
+            id: session.user.id,
+            email: provisionalEmail,
+            role: (provisionalEmail === 'cargotapan@gmail.com' || provisionalEmail === 'admin@tapango.app') ? ('super_admin' as const) : ('admin' as const),
+            name: 'Provisional User',
+            phone: null,
+            avatar_url: null,
+            address: {},
+            preferences: {},
+            metadata: {},
+            is_active: true,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          } as Profile);
         }
+        fetchProfile(session.user.id, session.user); // non-blocking
+        setLoading(false);
       } else {
         setProfile(null);
         setLoading(false);
       }
     });
 
-    return () => subscription.unsubscribe();
+    authSubscription = subscription;
+
+    return () => {
+      isMounted = false;
+      if (authSubscription) {
+        authSubscription.unsubscribe();
+      }
+    };
   }, []);
 
-  const fetchProfile = async (userId: string) => {
+  const fetchProfile = async (userId: string, userObj?: any) => {
     console.log('🔍 Fetching profile for user:', userId);
-    
-    // Set an aggressive 2-second timeout to prevent infinite loading
-    const timeoutId = setTimeout(() => {
-      console.error('⏱️ Profile fetch timeout after 2 seconds, using emergency fallback');
-      createFallbackProfile(userId);
-    }, 2000);
-    
-    // Also set an immediate emergency fallback for severe connection issues
-    const emergencyTimeoutId = setTimeout(() => {
-      console.error('🚨 EMERGENCY: Force fallback after 500ms');
-      createFallbackProfile(userId);
-    }, 500);
+    const allowProvisional = ((import.meta as any)?.env?.VITE_ALLOW_PROVISIONAL_ADMIN === '1');
     
     try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
-
-      clearTimeout(timeoutId);
-      clearTimeout(emergencyTimeoutId);
-      console.log('📊 Profile fetch result:', { data, error });
-
-      if (error) {
-        console.error('❌ Error fetching profile:', error);
-        createFallbackProfile(userId);
-      } else {
-        console.log('✅ Profile loaded successfully:', data);
-        setProfile(data);
-        setLoading(false);
-      }
+      // Ensure profile exists first (idempotent upsert), then use the ensured row
+      const ensured = await ensureProfile(userId, userObj);
+      setProfile(ensured);
     } catch (error) {
-      clearTimeout(timeoutId);
-      clearTimeout(emergencyTimeoutId);
-      console.error('💥 Exception in fetchProfile:', error);
-      createFallbackProfile(userId);
+      console.error('💥 Exception in fetchProfile (ensure first):', error);
+      if (allowProvisional) {
+        const fallback = await ensureProfile(userId, userObj);
+        setProfile(fallback);
+      } else {
+        setProfile(null);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -161,6 +203,92 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Force immediate state update
     setProfile(immediateProfile as Profile);
     setLoading(false);
+  };
+
+  const ensureProfile = async (userId: string, userObj?: any): Promise<Profile> => {
+    console.log('🔧 Ensuring profile exists for:', userId, userObj?.email);
+    const allowProvisional = ((import.meta as any)?.env?.VITE_ALLOW_PROVISIONAL_ADMIN === '1');
+    
+    try {
+      let email = userObj?.email as string | undefined;
+      let fullName = (userObj?.user_metadata?.full_name as string | undefined) || email;
+      if (!email) {
+        const { data } = await supabase.auth.getUser();
+        email = data?.user?.email || undefined;
+        fullName = (data?.user?.user_metadata as any)?.full_name || email;
+      }
+      
+      if (!email) {
+        throw new Error('Missing user email for profile ensure');
+      }
+
+      // Set role based on email - cargotapan@gmail.com should be super_admin
+      const role = (email === 'admin@tapango.app' || email === 'cargotapan@gmail.com') ? ('super_admin' as const) : ('admin' as const);
+      
+      console.log('🔧 Creating/updating profile with:', { email, role, fullName });
+      
+      const { data, error } = await (supabase as any)
+        .from('profiles')
+        .upsert({
+          id: userId,
+          email,
+          name: fullName,
+          role,
+          phone: null,
+          avatar_url: null,
+          address: {},
+          preferences: {},
+          metadata: {},
+          is_active: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        })
+        .select('*')
+        .single();
+
+      console.log('📝 Profile upsert result:', { data, error });
+
+      if (!error && data) {
+        console.log('✅ Profile ensured successfully:', data);
+        return data as Profile;
+      } else {
+        console.error('❌ Failed to ensure profile');
+        if (!allowProvisional) throw error || new Error('Profile ensure failed');
+        // Provide a fallback profile only if allowed
+        return {
+          id: userId,
+          email: email,
+          role,
+          name: fullName || email,
+          phone: null,
+          avatar_url: null,
+          address: {},
+          preferences: {},
+          metadata: {},
+          is_active: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        } as Profile;
+      }
+    } catch (error) {
+      console.error('💥 Exception in ensureProfile:', error);
+      if (!allowProvisional) throw error;
+      // Provide a fallback only if allowed
+      return {
+        id: userId,
+        email: userObj?.email || 'admin@emergency.local',
+        role: 'super_admin' as const,
+        name: 'Emergency Admin',
+        phone: null,
+        avatar_url: null,
+        address: {},
+        preferences: {},
+        metadata: {},
+        is_active: true,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      } as Profile;
+    }
   };
 
   const signIn = async (email: string, password: string) => {

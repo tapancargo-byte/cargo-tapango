@@ -28,8 +28,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="/dashboard">
-                    TapanGo Admin
+<BreadcrumbLink href="/dashboard">
+                    Tapan Associate Cargo Admin
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />

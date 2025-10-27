@@ -1,12 +1,12 @@
 // @ts-nocheck
-import React from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
-import Splash from '../../src/screens/SplashScreen'
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import Splash from '../../src/screens/SplashScreen';
 
 const meta: Meta = {
   title: 'App/Splash',
-}
-export default meta
+};
+export default meta;
 
 export const Preview: StoryObj = {
   render: () => (
@@ -14,4 +14,4 @@ export const Preview: StoryObj = {
       <Splash onAnimationComplete={() => {}} minimumDisplayTime={300} />
     </div>
   ),
-}
+};

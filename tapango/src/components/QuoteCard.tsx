@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
 import * as Haptics from 'expo-haptics';
 import { fetchQuote, QuotePayload, QuoteResponse } from '../services/quote';
@@ -23,20 +23,20 @@ export const QuoteCard: React.FC<Props> = ({ payload, onSuccess }) => {
     <View style={styles.card}>
       <Text style={styles.title}>Instant Quote</Text>
       {!data && (
-        <TouchableOpacity
-          accessibilityRole="button"
-          onPress={() => mutate()}
-          style={styles.cta}
-        >
+        <TouchableOpacity accessibilityRole='button' onPress={() => mutate()} style={styles.cta}>
           {isPending ? (
-            <ActivityIndicator color="#fff" />
+            <ActivityIndicator color='#fff' />
           ) : (
             <Text style={styles.ctaText}>Get Quote</Text>
           )}
         </TouchableOpacity>
       )}
 
-      {isError && <Text style={styles.error}>Error: {(error as any)?.message ?? 'Failed to fetch quote'}</Text>}
+      {isError && (
+        <Text style={styles.error}>
+          Error: {(error as any)?.message ?? 'Failed to fetch quote'}
+        </Text>
+      )}
 
       {data && (
         <View style={styles.result}>
@@ -55,9 +55,22 @@ export const QuoteCard: React.FC<Props> = ({ payload, onSuccess }) => {
 };
 
 const styles = StyleSheet.create({
-  card: { marginTop: 12, padding: 16, borderRadius: 12, backgroundColor: '#ffffff', borderWidth: 1, borderColor: '#E5E7EB' },
+  card: {
+    marginTop: 12,
+    padding: 16,
+    borderRadius: 12,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
   title: { fontSize: 16, fontWeight: '700', marginBottom: 8, color: '#111827' },
-  cta: { marginTop: 8, backgroundColor: '#007AFF', paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
+  cta: {
+    marginTop: 8,
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
   ctaText: { color: '#fff', fontWeight: '700' },
   error: { color: '#B91C1C', marginTop: 8 },
   result: { marginTop: 8 },

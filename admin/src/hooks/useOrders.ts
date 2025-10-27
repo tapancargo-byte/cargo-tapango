@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase, Order, OrderWithRelations, OrderInsert, OrderUpdate } from '../lib/supabase';
+import { supabase, Order, OrderWithRelations, OrderInsert, OrderUpdate, logSupabaseError } from '../lib/supabase';
 
 // Query keys
 export const orderKeys = {
@@ -68,6 +68,7 @@ export function useOrders(filters: OrderFilters = {}) {
       const { data, error } = await query;
 
       if (error) {
+        logSupabaseError('orders', 'select', error, { filters });
         throw new Error(`Failed to fetch orders: ${error.message}`);
       }
 
@@ -108,6 +109,7 @@ export function useOrder(id: string) {
         if (error.code === 'PGRST116') {
           return null; // Not found
         }
+        logSupabaseError('orders', 'selectOne', error, { id });
         throw new Error(`Failed to fetch order: ${error.message}`);
       }
 

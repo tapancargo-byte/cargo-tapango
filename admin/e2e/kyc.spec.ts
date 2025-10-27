@@ -22,7 +22,7 @@ test.afterEach(async ({ page }, testInfo) => {
 // This relies on VITE_DEV_EMERGENCY_ADMIN=1 and localStorage flag.
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
-    localStorage.setItem('EMERGENCY_SIGNED_IN', '1');
+    localStorage.setItem('FORCE_EMERGENCY_ADMIN', '1');
   });
 });
 

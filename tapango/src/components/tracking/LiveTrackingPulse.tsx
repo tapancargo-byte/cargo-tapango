@@ -30,13 +30,13 @@ interface LiveTrackingPulseProps {
   style?: ViewStyle;
 }
 
-export function LiveTrackingPulse({ 
+export function LiveTrackingPulse({
   size = 60,
   color = 'rgba(79, 195, 247, 0.3)',
-  style
+  style,
 }: LiveTrackingPulseProps) {
   const pulseAnimation = useSharedValue(0);
-  
+
   useEffect(() => {
     let isSubscribed = true;
 
@@ -64,7 +64,7 @@ export function LiveTrackingPulse({
       cancelAnimation(pulseAnimation);
     };
   }, [pulseAnimation]); // pulseAnimation is stable and needed for cleanup
-  
+
   const animatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(
       pulseAnimation.value,
@@ -79,24 +79,20 @@ export function LiveTrackingPulse({
       [MAX_OPACITY, MIN_OPACITY],
       Extrapolate.CLAMP
     );
-    
+
     return {
       transform: [{ scale }],
       opacity,
     };
   });
-  
+
   return (
-    <Animated.View 
+    <Animated.View
       style={[styles.container, style, animatedStyle]}
-      accessibilityRole="none"
-      testID="live-tracking-pulse"
+      accessibilityRole='none'
+      testID='live-tracking-pulse'
     >
-      <Circle 
-        size={size} 
-        backgroundColor={color}
-        accessibilityElementsHidden={true}
-      />
+      <Circle size={size} backgroundColor={color} accessibilityElementsHidden={true} />
     </Animated.View>
   );
 }

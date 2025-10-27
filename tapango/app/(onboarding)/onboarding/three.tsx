@@ -2,12 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import AnimatedSquareCard from '../../../components/AnimatedSquareCard';
-import Pagination from '../../../components/Pagination';
 import * as Haptics from 'expo-haptics';
 import { StorageService } from '../../../src/utils/storage';
 import LottieView from 'lottie-react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { AppIcon } from '../../../src/ui';
 
 const TrackingAnimation = require('../../../assets/lottie/real_time_tracking.json');
 
@@ -23,31 +21,42 @@ export default function OnboardingStep3() {
   const finish = async () => {
     await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     await StorageService.setOnboardingCompleted(true);
-    router.replace('/(auth)/sign-in');
+    router.replace('/(auth)/role');
   };
 
   return (
     <View style={styles.container}>
       <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
-        <TouchableOpacity onPress={back} style={styles.backBtn} accessibilityRole="button">
-          <Ionicons name="chevron-back" size={24} color="#fff" />
+        <TouchableOpacity onPress={back} style={styles.backBtn} accessibilityRole='button'>
+          <AppIcon name='chevron-back' size={24} color='#fff' />
         </TouchableOpacity>
         <View style={{ width: 44 }} />
       </View>
 
       <View style={styles.body}>
-        <AnimatedSquareCard>
-          <LottieView source={TrackingAnimation} autoPlay loop style={{ width: 180, height: 180 }} />
-        </AnimatedSquareCard>
+        <View style={styles.card}>
+          <LottieView
+            source={TrackingAnimation}
+            autoPlay
+            loop
+            style={{ width: 180, height: 180 }}
+          />
+        </View>
 
         <Text style={styles.overline}>Real-Time Monitoring</Text>
         <Text style={styles.title}>Live tracking, 99% on-time</Text>
-        <Text style={styles.sub}>GPS updates, push alerts, direct driver chat – all in one place.</Text>
+        <Text style={styles.sub}>
+          GPS updates, push alerts, direct driver chat – all in one place.
+        </Text>
       </View>
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + 24 }]}>
-        <Pagination total={3} index={2} />
-        <TouchableOpacity style={styles.cta} onPress={finish} accessibilityRole="button">
+        <View style={styles.pagination}>
+          <View style={styles.dot} />
+          <View style={styles.dot} />
+          <View style={[styles.dot, styles.dotActive]} />
+        </View>
+        <TouchableOpacity style={styles.cta} onPress={finish} accessibilityRole='button'>
           <Text style={styles.ctaText}>Get started</Text>
         </TouchableOpacity>
       </View>
@@ -69,6 +78,33 @@ const styles = StyleSheet.create({
   title: { color: '#fff', fontSize: 28, fontWeight: '800', marginTop: 8 },
   sub: { color: 'rgba(255,255,255,0.9)', fontSize: 16, lineHeight: 24, marginTop: 12 },
   footer: { paddingHorizontal: 24 },
+  card: {
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+    alignSelf: 'center',
+  },
+  pagination: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    marginBottom: 16,
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255,255,255,0.4)',
+  },
+  dotActive: {
+    backgroundColor: '#ffffff',
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+  },
   cta: {
     backgroundColor: '#ffffff',
     borderRadius: 28,
@@ -77,4 +113,3 @@ const styles = StyleSheet.create({
   },
   ctaText: { color: '#001A36', fontSize: 17, fontWeight: '700' },
 });
-

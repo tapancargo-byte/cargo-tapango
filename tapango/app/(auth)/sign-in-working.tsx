@@ -1,73 +1,86 @@
-import { useSignIn } from '@clerk/clerk-expo'
-import { Link, useRouter } from 'expo-router'
-import { Text, TextInput, TouchableOpacity, View, StyleSheet, StatusBar, SafeAreaView, Dimensions, Alert, KeyboardAvoidingView, Platform } from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient'
-import { Ionicons } from '@expo/vector-icons'
-import React, { useState } from 'react'
-import { colors } from '../../src/styles/colors'
+import { useSignIn } from '@clerk/clerk-expo';
+import { Link, useRouter } from 'expo-router';
+import {
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  StatusBar,
+  SafeAreaView,
+  Dimensions,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { AppIcon } from '../../src/ui';
+import React, { useState } from 'react';
+import { colors } from '../../src/styles/colors';
 
-const { width, height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window');
 
 export default function SignInScreen() {
-  const { signIn, setActive, isLoaded } = useSignIn()
-  const router = useRouter()
+  const { signIn, setActive, isLoaded } = useSignIn();
+  const router = useRouter();
 
-  const [emailAddress, setEmailAddress] = useState('')
-  const [password, setPassword] = useState('')
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [emailAddress, setEmailAddress] = useState('');
+  const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Handle the submission of the sign-in form
   const onSignInPress = async () => {
-    if (!isLoaded || isLoading) return
+    if (!isLoaded || isLoading) return;
 
     // Basic validation
     if (!emailAddress.trim()) {
-      Alert.alert('Validation Error', 'Please enter your email address')
-      return
+      Alert.alert('Validation Error', 'Please enter your email address');
+      return;
     }
     if (!password.trim()) {
-      Alert.alert('Validation Error', 'Please enter your password')
-      return
+      Alert.alert('Validation Error', 'Please enter your password');
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       const signInAttempt = await signIn.create({
         identifier: emailAddress,
         password,
-      })
+      });
 
       // If sign-in process is complete, set the created session as active
       if (signInAttempt.status === 'complete') {
-        await setActive({ session: signInAttempt.createdSessionId })
-        console.log('✅ Sign-in successful, redirecting to main app')
-        router.replace('/(tabs)')
+        await setActive({ session: signInAttempt.createdSessionId });
+        console.log('✅ Sign-in successful, redirecting to main app');
+        router.replace('/(tabs)');
       } else {
-        console.error('Sign-in incomplete:', JSON.stringify(signInAttempt, null, 2))
-        Alert.alert('Sign-in Error', 'Sign-in process incomplete. Please try again.')
+        console.error('Sign-in incomplete:', JSON.stringify(signInAttempt, null, 2));
+        Alert.alert('Sign-in Error', 'Sign-in process incomplete. Please try again.');
       }
     } catch (err: any) {
-      console.error('Sign-in error:', JSON.stringify(err, null, 2))
-      const errorMessage = err?.errors?.[0]?.longMessage || err?.message || 'An error occurred during sign-in'
-      Alert.alert('Sign-in Failed', errorMessage)
+      console.error('Sign-in error:', JSON.stringify(err, null, 2));
+      const errorMessage =
+        err?.errors?.[0]?.longMessage || err?.message || 'An error occurred during sign-in';
+      Alert.alert('Sign-in Failed', errorMessage);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.primary.blue} />
-      
+      <StatusBar barStyle='light-content' backgroundColor={colors.primary.blue} />
+
       <LinearGradient
         colors={colors.gradients.primary}
         style={styles.gradientContainer}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <KeyboardAvoidingView 
+        <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.keyboardAvoid}
         >
@@ -75,7 +88,7 @@ export default function SignInScreen() {
             {/* Header Section */}
             <View style={styles.headerSection}>
               <View style={styles.logoContainer}>
-                <Ionicons name="car-outline" size={48} color={colors.neutral.white} />
+                <AppIcon name='car-outline' size={48} color={colors.neutral.white} />
               </View>
               <Text style={styles.title}>Welcome back</Text>
               <Text style={styles.subtitle}>Sign in to your TAPANGO account</Text>
@@ -84,44 +97,49 @@ export default function SignInScreen() {
             {/* Form Section */}
             <View style={styles.formSection}>
               <View style={styles.inputContainer}>
-                <Ionicons name="mail-outline" size={20} color="#9CA3AF" style={styles.inputIcon} />
+                <AppIcon name='mail-outline' size={20} color='#9CA3AF' style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
-                  autoCapitalize="none"
-                  keyboardType="email-address"
+                  autoCapitalize='none'
+                  keyboardType='email-address'
                   value={emailAddress}
-                  placeholder="Email address"
-                  placeholderTextColor="#9CA3AF"
+                  placeholder='Email address'
+                  placeholderTextColor='#9CA3AF'
                   onChangeText={setEmailAddress}
                   editable={!isLoading}
                 />
               </View>
 
               <View style={styles.inputContainer}>
-                <Ionicons name="lock-closed-outline" size={20} color="#9CA3AF" style={styles.inputIcon} />
+                <AppIcon
+                  name='lock-closed-outline'
+                  size={20}
+                  color='#9CA3AF'
+                  style={styles.inputIcon}
+                />
                 <TextInput
                   style={[styles.input, styles.passwordInput]}
                   value={password}
-                  placeholder="Password"
-                  placeholderTextColor="#9CA3AF"
+                  placeholder='Password'
+                  placeholderTextColor='#9CA3AF'
                   secureTextEntry={!isPasswordVisible}
                   onChangeText={setPassword}
                   editable={!isLoading}
                 />
-                <TouchableOpacity 
-                  style={styles.eyeIcon} 
+                <TouchableOpacity
+                  style={styles.eyeIcon}
                   onPress={() => setIsPasswordVisible(!isPasswordVisible)}
                 >
-                  <Ionicons 
-                    name={isPasswordVisible ? "eye-off-outline" : "eye-outline"} 
-                    size={20} 
-                    color="#9CA3AF" 
+                  <AppIcon
+                    name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+                    size={20}
+                    color='#9CA3AF'
                   />
                 </TouchableOpacity>
               </View>
 
-              <TouchableOpacity 
-                style={[styles.signInButton, isLoading && styles.signInButtonDisabled]} 
+              <TouchableOpacity
+                style={[styles.signInButton, isLoading && styles.signInButtonDisabled]}
                 onPress={onSignInPress}
                 disabled={isLoading}
               >
@@ -137,7 +155,7 @@ export default function SignInScreen() {
             <View style={styles.footerSection}>
               <Text style={styles.footerText}>
                 Don't have an account?{' '}
-                <Link href="/(auth)/sign-up">
+                <Link href='/(auth)/sign-up'>
                   <Text style={styles.footerLink}>Sign up</Text>
                 </Link>
               </Text>
@@ -146,7 +164,7 @@ export default function SignInScreen() {
         </KeyboardAvoidingView>
       </LinearGradient>
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -165,7 +183,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 32,
   },
-  
+
   // Header Section
   headerSection: {
     flex: 2,
@@ -292,4 +310,4 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textDecorationLine: 'underline',
   },
-})
+});

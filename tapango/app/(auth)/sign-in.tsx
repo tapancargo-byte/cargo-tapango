@@ -1,56 +1,62 @@
-import React from 'react'
-import { useSignIn } from '@clerk/clerk-expo'
-import { Link, useRouter } from 'expo-router'
-import { 
-  Text, 
-  TouchableOpacity, 
-  View, 
-  StyleSheet, 
-  KeyboardAvoidingView, 
-  Platform, 
-  ScrollView, 
+import React from 'react';
+import { useSignIn } from '@clerk/clerk-expo';
+import { Link, useRouter } from 'expo-router';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
   Dimensions,
-  Animated 
-} from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import { StatusBar } from 'expo-status-bar'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { AuthInput, AuthButton } from '../../src/ui/auth'
-import { colors } from '../../src/styles/colors'
-import { spacing, borderRadius, shadows } from '../../src/styles/spacing'
-import { textStyles, typography } from '../../src/styles/typography'
+  Animated,
+} from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AuthInput, AuthButton } from '../../src/ui/auth';
+import { notifyLoginSuccess } from '../../src/utils/notifications';
+import { initOneSignal, loginOneSignal } from '../../src/integrations/onesignal';
+import { colors } from '../../src/styles/colors';
+import { spacing, borderRadius, shadows } from '../../src/styles/spacing';
+import { textStyles, typography } from '../../src/styles/typography';
 
 const { width, height } = Dimensions.get('window');
 
 export default function SignInScreen() {
-  const { signIn, setActive, isLoaded } = useSignIn()
-  const router = useRouter()
-  const insets = useSafeAreaInsets()
+  const { signIn, setActive, isLoaded } = useSignIn();
+  const router = useRouter();
+  const insets = useSafeAreaInsets();
 
-  const [emailAddress, setEmailAddress] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [showPassword, setShowPassword] = React.useState(false)
-  const [errors, setErrors] = React.useState<{email?: string; password?: string; general?: string}>({})
+  const [emailAddress, setEmailAddress] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [errors, setErrors] = React.useState<{
+    email?: string;
+    password?: string;
+    general?: string;
+  }>({});
   // Use stable Animated.Value instance so re-renders (e.g. toggling password visibility) don't reset opacity
-  const fadeAnim = React.useRef(new Animated.Value(0)).current
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
 
   // Handle the submission of the sign-in form
   // Add a loading check
   if (!isLoaded) {
     return (
       <View style={styles.container}>
-        <StatusBar style="light" />
+        <StatusBar style='light' />
         <View style={styles.backgroundContainer}>
           <View style={[styles.loadingContainer, { paddingTop: insets.top }]}>
             <Animated.View style={[styles.loadingLogo, { transform: [{ scale: fadeAnim }] }]}>
-              <Ionicons name="car" size={40} color="white" />
+              <Feather name='truck' size={40} color='white' />
             </Animated.View>
             <Text style={styles.loadingText}>Loading...</Text>
           </View>
         </View>
       </View>
-    )
+    );
   }
 
   React.useEffect(() => {
@@ -58,55 +64,67 @@ export default function SignInScreen() {
       toValue: 1,
       duration: 600,
       useNativeDriver: true,
-    }).start()
-  }, [fadeAnim])
+    }).start();
+    // Initialize OneSignal if configured
+    try {
+      initOneSignal();
+    } catch {}
+  }, [fadeAnim]);
 
   const onSignInPress = async () => {
-    if (!isLoaded || isLoading) return
-    setErrors({})
+    if (!isLoaded || isLoading) return;
+    setErrors({});
 
     if (!emailAddress) {
-      setErrors((e) => ({ ...e, email: 'Email is required' }))
-      return
+      setErrors((e) => ({ ...e, email: 'Email is required' }));
+      return;
     }
     if (!password) {
-      setErrors((e) => ({ ...e, password: 'Password is required' }))
-      return
+      setErrors((e) => ({ ...e, password: 'Password is required' }));
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       const signInAttempt = await signIn.create({
         identifier: emailAddress.trim(),
         password,
-      })
+      });
 
       if (signInAttempt.status === 'complete') {
-        await setActive({ session: signInAttempt.createdSessionId })
-        router.replace('/(tabs)')
+        await setActive({ session: signInAttempt.createdSessionId });
+        try {
+          await notifyLoginSuccess(emailAddress.trim());
+        } catch {}
+        try {
+          loginOneSignal((signInAttempt as any)?.user?.id || emailAddress.trim());
+        } catch {}
+        router.replace('/(tabs)');
       } else {
-        console.error(JSON.stringify(signInAttempt, null, 2))
-        setErrors((e) => ({ ...e, general: 'Additional steps required to complete sign-in.' }))
+        console.error(JSON.stringify(signInAttempt, null, 2));
+        setErrors((e) => ({ ...e, general: 'Additional steps required to complete sign-in.' }));
       }
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2))
-      setErrors((e) => ({ ...e, general: err?.errors?.[0]?.message || 'Sign-in failed. Please try again.' }))
+      console.error(JSON.stringify(err, null, 2));
+      setErrors((e) => ({
+        ...e,
+        general: err?.errors?.[0]?.message || 'Sign-in failed. Please try again.',
+      }));
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <KeyboardAvoidingView 
-      style={styles.container} 
+    <KeyboardAvoidingView
+      style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <StatusBar style="light" />
-      
+      <StatusBar style='light' />
+
       <View style={styles.backgroundContainer}>
-        <View style={[styles.content, { paddingTop: insets.top }]}>
-          
+        <View style={[styles.content, { paddingTop: Math.max(insets.top, 12) }]}>
           {/* Header */}
           <View style={styles.header}>
             <View style={styles.placeholder} />
@@ -118,7 +136,7 @@ export default function SignInScreen() {
           <Animated.View style={[styles.formContainer, { opacity: fadeAnim }]}>
             <View style={styles.iconContainer}>
               <View style={styles.iconCircle}>
-                <Ionicons name="log-in" size={32} color="white" />
+                <Feather name='log-in' size={32} color='white' />
               </View>
             </View>
 
@@ -128,45 +146,50 @@ export default function SignInScreen() {
             </Text>
 
             <AuthInput
-              label="Email Address"
-              icon="mail"
+              label='Email Address'
+              icon='mail'
               value={emailAddress}
               onChangeText={(text) => {
-                setEmailAddress(text)
+                setEmailAddress(text);
                 if (errors.email) {
-                  const newErrors = { ...errors }
-                  delete newErrors.email
-                  setErrors(newErrors)
+                  const newErrors = { ...errors };
+                  delete newErrors.email;
+                  setErrors(newErrors);
                 }
               }}
               error={errors.email}
-              autoCapitalize="none"
-              keyboardType="email-address"
+              autoCapitalize='none'
+              keyboardType='email-address'
+              textContentType='emailAddress'
+              autoComplete='email'
               autoCorrect={false}
-              returnKeyType="next"
+              returnKeyType='next'
             />
 
             <AuthInput
-              label="Password"
-              icon="lock-closed"
+              label='Password'
+              icon='lock-closed'
               value={password}
               onChangeText={(text) => {
-                setPassword(text)
+                setPassword(text);
                 if (errors.password) {
-                  const newErrors = { ...errors }
-                  delete newErrors.password
-                  setErrors(newErrors)
+                  const newErrors = { ...errors };
+                  delete newErrors.password;
+                  setErrors(newErrors);
                 }
               }}
               error={errors.password}
               isPassword
               autoCorrect={false}
-              returnKeyType="go"
+              textContentType='password'
+              autoComplete='password'
+              returnKeyType='go'
+              onSubmitEditing={onSignInPress}
             />
 
             {errors.general && (
               <View style={styles.generalErrorContainer}>
-                <Ionicons name="warning" size={20} color={colors.status.error} />
+                <Feather name='alert-circle' size={20} color={colors.status.error} />
                 <Text style={styles.errorText}>{errors.general}</Text>
               </View>
             )}
@@ -176,17 +199,15 @@ export default function SignInScreen() {
               onPress={onSignInPress}
               loading={isLoading}
               disabled={isLoading}
-              icon="log-in"
+              icon='log-in'
             />
 
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.forgotPasswordContainer}
               onPress={() => router.push('/(auth)/forgot-password')}
               activeOpacity={0.7}
             >
-              <Text style={styles.forgotPasswordText}>
-                Forgot your password?
-              </Text>
+              <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
             </TouchableOpacity>
           </Animated.View>
 
@@ -196,15 +217,13 @@ export default function SignInScreen() {
               onPress={() => router.push('/(auth)/sign-up')}
               activeOpacity={0.7}
             >
-              <Text style={styles.signUpText}>
-                Don't have an account? Sign up
-              </Text>
+              <Text style={styles.signUpText}>Don't have an account? Sign up</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
     </KeyboardAvoidingView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -274,7 +293,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     ...(Platform.OS === 'web'
       ? { boxShadow: '0px 8px 16px rgba(30, 64, 175, 0.30)' }
-      : { ...shadows.lg, shadowColor: 'rgba(30, 64, 175, 0.3)' } as any),
+      : ({ ...shadows.lg, shadowColor: 'rgba(30, 64, 175, 0.3)' } as any)),
   },
   title: {
     ...textStyles.title,
@@ -302,7 +321,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.status.error,
-    ...(Platform.OS === 'web' ? { boxShadow: '0px 1px 4px rgba(0,0,0,0.18)' } : { ...shadows.sm } as any),
+    ...(Platform.OS === 'web'
+      ? { boxShadow: '0px 1px 4px rgba(0,0,0,0.18)' }
+      : ({ ...shadows.sm } as any)),
   },
   errorText: {
     ...textStyles.body,

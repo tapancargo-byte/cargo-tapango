@@ -1,6 +1,6 @@
 import { colors } from './colors';
-import { typography, textStyles } from './typography';
-import { spacing, borderRadius, shadows, layout } from './spacing';
+import { textStyles, typography } from './typography';
+import { borderRadius, layout, shadows, spacing } from './spacing';
 
 export { colors } from './colors';
 export { typography, textStyles } from './typography';

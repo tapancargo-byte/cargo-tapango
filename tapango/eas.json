@@ -5,11 +5,14 @@
   "build": {
     "development": {
       "channel": "development",
+      "developmentClient": true,
+      "distribution": "internal",
       "android": { "buildType": "apk" },
       "ios": { "simulator": true }
     },
     "preview": {
       "channel": "preview",
+      "distribution": "internal",
       "android": { "buildType": "apk" }
     },
     "production": {
@@ -38,8 +41,7 @@
       "ios": {
         "appleId": "${process.env.APPLE_ID}",
         "ascAppId": "${process.env.ASC_APP_ID}",
-        "appleTeamId": "${process.env.APPLE_TEAM_ID}",
-        "betaGroups": ["Beta Testers"]
+        "appleTeamId": "${process.env.APPLE_TEAM_ID}"
       }
     }
   }

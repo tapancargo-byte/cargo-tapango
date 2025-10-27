@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase, Profile, ProfileUpdate } from '../lib/supabase';
+import { supabase, Profile, ProfileUpdate, logSupabaseError } from '../lib/supabase';
 
 // Query keys
 export const customerKeys = {
@@ -40,6 +40,7 @@ export function useCustomers(filters: CustomerFilters = {}) {
       const { data, error } = await query;
 
       if (error) {
+        logSupabaseError('profiles', 'select', error, { role: 'customer', filters });
         throw new Error(`Failed to fetch customers: ${error.message}`);
       }
 
@@ -65,6 +66,7 @@ export function useCustomer(id: string) {
         if (error.code === 'PGRST116') {
           return null; // Not found
         }
+        logSupabaseError('profiles', 'selectOne', error, { id });
         throw new Error(`Failed to fetch customer: ${error.message}`);
       }
 

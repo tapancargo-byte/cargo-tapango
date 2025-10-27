@@ -1,7 +1,7 @@
 // @ts-nocheck
-import React from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
-import { ProgressBar } from '../../src/ui'
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { ProgressBar } from '../../src/ui';
 
 const meta: Meta<typeof ProgressBar> = {
   title: 'Design System/ProgressBar',
@@ -14,8 +14,8 @@ const meta: Meta<typeof ProgressBar> = {
     value: 60,
     height: 8,
   },
-}
-export default meta
+};
+export default meta;
 
 export const Playground: StoryObj<typeof ProgressBar> = {
   render: (args) => (
@@ -23,14 +23,14 @@ export const Playground: StoryObj<typeof ProgressBar> = {
       <ProgressBar {...args} />
     </div>
   ),
-}
+};
 
 export const Values: StoryObj<typeof ProgressBar> = {
   render: () => (
     <div style={{ display: 'grid', gap: 8, width: 320 }}>
-      {[0, 10, 25, 50, 75, 100].map(v => (
+      {[0, 10, 25, 50, 75, 100].map((v) => (
         <ProgressBar key={v} value={v} height={8} />
       ))}
     </div>
   ),
-}
+};

@@ -18,8 +18,8 @@ const Settings: React.FC = () => {
     companyName: 'TapanGo Logistics',
     supportEmail: 'support@tapango.com',
     supportPhone: '+1-800-TAPANGO',
-    timezone: 'America/New_York',
-    currency: 'USD',
+timezone: 'Asia/Kolkata',
+    currency: 'INR',
     
     // Pricing Settings
     baseFare: 5.00,
@@ -169,7 +169,8 @@ const Settings: React.FC = () => {
                       <SelectTrigger>
                         <SelectValue placeholder="Select currency" />
                       </SelectTrigger>
-                      <SelectContent>
+<SelectContent>
+                        <SelectItem value="INR">INR (₹)</SelectItem>
                         <SelectItem value="USD">USD ($)</SelectItem>
                         <SelectItem value="EUR">EUR (€)</SelectItem>
                         <SelectItem value="GBP">GBP (£)</SelectItem>
@@ -196,7 +197,7 @@ const Settings: React.FC = () => {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="baseFare">Base Fare ($)</Label>
+<Label htmlFor="baseFare">Base Fare (₹)</Label>
                     <Input
                       id="baseFare"
                       type="number"
@@ -208,7 +209,7 @@ const Settings: React.FC = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="perKmRate">Per KM Rate ($)</Label>
+<Label htmlFor="perKmRate">Per KM Rate (₹)</Label>
                     <Input
                       id="perKmRate"
                       type="number"
@@ -222,7 +223,7 @@ const Settings: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="perMinuteRate">Per Minute Rate ($)</Label>
+<Label htmlFor="perMinuteRate">Per Minute Rate (₹)</Label>
                     <Input
                       id="perMinuteRate"
                       type="number"

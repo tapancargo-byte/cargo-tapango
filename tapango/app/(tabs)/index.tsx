@@ -1,35 +1,64 @@
 import React, { useState, useCallback } from 'react';
-import { Alert, Dimensions, RefreshControl } from 'react-native';
+import { RefreshControl, Dimensions, Platform, Pressable } from 'react-native';
 import { ScrollView as RNScrollView } from 'react-native';
-// Conditional import for react-native-maps (not available on web)
-let MapView: any = null
-let Marker: any = null
-let PROVIDER_GOOGLE: any = null
-try {
-  const maps = require('react-native-maps')
-  MapView = maps.default
-  Marker = maps.Marker
-  PROVIDER_GOOGLE = maps.PROVIDER_GOOGLE
-} catch {
-  // Maps not available on web
-}
 import { router } from 'expo-router';
-import { YStack, XStack, Text, ScrollView, Stack } from 'tamagui';
-import { Circle } from '../../src/ui';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Button, Card, Skeleton, SkeletonText, StatChip, SectionHeader, ProgressBar, StatusPill, AppIcon, AppHeader, Screen, AnimatedBadge, FadeIn, GlassCard, ElevatedCard, LoadingSpinner, Title, SectionTitle, Subtitle, Overline } from '../../src/ui';
+import { track } from '../../src/utils/analytics';
+import { YStack, XStack, Text, Stack } from 'tamagui';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+  Button,
+  Card,
+  Skeleton,
+  SkeletonText,
+  ProgressBar,
+  Screen,
+  FadeIn,
+  ElevatedCard,
+  OutlinedCard,
+  GlassCard,
+  Title,
+  SectionTitle,
+  Subtitle,
+  Caption,
+  Circle,
+  AnimatedBadge,
+  AppIcon,
+  StatChip,
+} from '../../src/ui';
 import { formatDate } from '../../src/utils/format';
-import { loadBookingDraft, clearBookingDraft } from '../../src/utils/drafts';
+import { loadBookingDraft } from '../../src/utils/drafts';
 import { getRecentAddresses } from '../../src/utils/addressHistory';
 import { StorageService } from '../../src/utils/storage';
-import { Ionicons } from '@expo/vector-icons';
+import { MCPTestComponent } from '../../src/components/MCPTestComponent';
+// Use AppIcon for consistent cross-family icon mapping
 import { useColors as useAppColors } from '../../src/styles/ThemeProvider';
+import { useIsDark } from '../../src/styles/ThemeProvider';
+import { getTokens } from '../../src/design-system/tokens';
 import { useUser } from '@clerk/clerk-expo';
-import { t } from '../../src/i18n';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCounts } from '../../src/contexts/CountsContext';
-import Animated, { FadeInDown, FadeInUp, SlideInRight } from 'react-native-reanimated';
-import { BlurView } from 'expo-blur';
+import Animated, { FadeInDown } from 'react-native-reanimated';
+import LottieView from 'lottie-react-native';
+import Constants from 'expo-constants';
+import { TopActionsCarousel } from '../../src/components/home/TopActionsCarousel';
+
+// Platform-specific map imports - temporarily disabled for web compatibility
+let MapView: any = null;
+let Marker: any = null;
+let PROVIDER_GOOGLE: any = null;
+
+// TODO: Re-enable maps with proper web bundling exclusion
+// Maps functionality temporarily disabled to fix web build
+// if (Platform.OS !== 'web') {
+//   try {
+//     const maps = require('react-native-maps');
+//     MapView = maps.default || maps;
+//     Marker = maps.Marker;
+//     PROVIDER_GOOGLE = maps.PROVIDER_GOOGLE;
+//   } catch (e) {
+//     console.warn('Failed to load react-native-maps:', e);
+//   }
+// }
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -55,328 +84,244 @@ type Shipment = {
 
 // TAPANGO operates between Imphal and New Delhi
 const mockRecentShipments: Shipment[] = [
-  { 
-    id: 'TPG-2024-001', 
-    status: 'in-transit', 
-    origin: 'Imphal', 
-    destination: 'New Delhi', 
-    estimatedDelivery: '2024-01-20', 
+  {
+    id: 'TPG-2024-001',
+    status: 'in-transit',
+    origin: 'Imphal',
+    destination: 'New Delhi',
+    estimatedDelivery: '2024-01-20',
     progress: 75,
     priority: 'express',
     cargoType: 'Electronics',
-    weight: '25 kg'
+    weight: '25 kg',
   },
-  { 
-    id: 'TPG-2024-002', 
-    status: 'delivered', 
-    origin: 'New Delhi', 
-    destination: 'Imphal', 
-    estimatedDelivery: '2024-01-18', 
+  {
+    id: 'TPG-2024-002',
+    status: 'delivered',
+    origin: 'New Delhi',
+    destination: 'Imphal',
+    estimatedDelivery: '2024-01-18',
     progress: 100,
     priority: 'standard',
     cargoType: 'Documents',
-    weight: '2 kg'
+    weight: '2 kg',
   },
-  { 
-    id: 'TPG-2024-003', 
-    status: 'pending', 
-    origin: 'Imphal', 
-    destination: 'New Delhi', 
-    estimatedDelivery: '2024-01-22', 
+  {
+    id: 'TPG-2024-003',
+    status: 'pending',
+    origin: 'Imphal',
+    destination: 'New Delhi',
+    estimatedDelivery: '2024-01-22',
     progress: 5,
     priority: 'urgent',
     cargoType: 'Medical Supplies',
-    weight: '18 kg'
+    weight: '18 kg',
   },
-  { 
-    id: 'TPG-2024-004', 
-    status: 'in-transit', 
-    origin: 'New Delhi', 
-    destination: 'Imphal', 
-    estimatedDelivery: '2024-01-21', 
+  {
+    id: 'TPG-2024-004',
+    status: 'in-transit',
+    origin: 'New Delhi',
+    destination: 'Imphal',
+    estimatedDelivery: '2024-01-21',
     progress: 40,
     priority: 'standard',
     cargoType: 'General Cargo',
-    weight: '45 kg'
+    weight: '45 kg',
   },
 ];
 
 // Build stats chip data from counts and local fallbacks
 function buildStatsData(counts: ReturnType<typeof useCounts> | null) {
   const { formatINR } = require('../../src/utils/currency');
-  const shipmentsActive = counts?.shipmentsActive ?? mockRecentShipments.filter((s) => s.status === 'in-transit').length;
-  const ordersPast = counts?.ordersPast ?? mockRecentShipments.filter((s) => s.status === 'delivered').length;
+  const shipmentsActive =
+    counts?.shipmentsActive ?? mockRecentShipments.filter((s) => s.status === 'in-transit').length;
+  const ordersPast =
+    counts?.ordersPast ?? mockRecentShipments.filter((s) => s.status === 'delivered').length;
   const tiles: any[] = [
-    { label: require('../../src/i18n').t('statActive'), value: String(shipmentsActive), iconName: 'car-outline' as const, tint: '#3B82F6' },
-    { label: require('../../src/i18n').t('statDelivered'), value: String(ordersPast), iconName: 'cube-outline' as const, tint: '#10B981' },
+    {
+      label: require('../../src/i18n').t('statActive'),
+      value: String(shipmentsActive),
+      iconName: 'car-outline' as const,
+      tint: '#3B82F6',
+    },
+    {
+      label: require('../../src/i18n').t('statDelivered'),
+      value: String(ordersPast),
+      iconName: 'cube-outline' as const,
+      tint: '#10B981',
+    },
   ];
-  if (counts?.savedAmountInr != null) tiles.push({ label: require('../../src/i18n').t('statSaved'), value: formatINR(counts.savedAmountInr), iconName: 'cash-outline' as const, tint: '#8B5CF6' });
-  if (counts?.onTimePercent != null) tiles.push({ label: require('../../src/i18n').t('statOnTime'), value: `${counts.onTimePercent}%`, iconName: 'stats-chart-outline' as const, tint: '#F59E0B' });
+  if (counts?.savedAmountInr != null)
+    tiles.push({
+      label: require('../../src/i18n').t('statSaved'),
+      value: formatINR(counts.savedAmountInr),
+      iconName: 'cash-outline' as const,
+      tint: '#8B5CF6',
+    });
+  if (counts?.onTimePercent != null)
+    tiles.push({
+      label: require('../../src/i18n').t('statOnTime'),
+      value: `${counts.onTimePercent}%`,
+      iconName: 'stats-chart-outline' as const,
+      tint: '#F59E0B',
+    });
   return tiles;
 }
 
-const PremiumHeroCard = ({ user, colors, onNewOrder, onTrackShipment }: any) => {
+const ModernHeroSection = ({
+  user,
+  tokens,
+  colors,
+  onNewOrder,
+  onTrackShipment,
+  onViewOrders,
+  firstNameOverride,
+}: any) => {
   return (
-    <GlassCard variant="glass" blur animation="fade">
-      <Stack position="relative" overflow="hidden">
-        {/* Background Gradient Overlay */}
-        <LinearGradient
-          colors={[colors.primary + '20', colors.secondary + '10']}
-          start={[0, 0]}
-          end={[1, 1]}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: -1,
-          }}
-        />
-        
-        <YStack space="$4" padding="$1">
-          {/* Welcome Section */}
-          <XStack alignItems="center" justifyContent="space-between">
-            <YStack flex={1}>
-              <Overline color={colors.textSecondary}>
-                Welcome to TAPANGO
-              </Overline>
-              <Title color={colors.text} weight="bold">
-                {user?.firstName ? `Hello, ${user.firstName}!` : 'Your Logistics Hub'}
-              </Title>
-              <Subtitle color={colors.textSecondary}>
-                Imphal ⟷ New Delhi Express Corridor
-              </Subtitle>
-            </YStack>
-            
-            <Circle size={60} backgroundColor={colors.primary + '20'} borderWidth={2} borderColor={colors.primary}>
-              <Ionicons name="business" size={24} color={colors.primary} />
-            </Circle>
-          </XStack>
-          
-          {/* Quick Action Buttons */}
-          <XStack space="$3">
-            <Button 
-              flex={1} 
-              variant="primary" 
-              size="lg" 
-              onPress={onNewOrder}
-              leftIcon={<Ionicons name="add-circle" size={20} color="white" />}
-            >
-              New Shipment
-            </Button>
-            <Button 
-              flex={1} 
-              variant="secondary" 
-              size="lg" 
-              onPress={onTrackShipment}
-              leftIcon={<Ionicons name="location" size={20} />}
-            >
-              Track
-            </Button>
-          </XStack>
+    <YStack space='$6'>
+      {/* Welcome Header - Clean and Minimal */}
+      <YStack space='$3'>
+        <Caption
+          color={colors.textSecondary}
+          fontSize={14}
+          textTransform='uppercase'
+          letterSpacing={1}
+        >
+          Welcome to TAPANGO
+        </Caption>
+        <YStack space='$2'>
+          <Title fontSize={32} fontWeight='800' color={colors.text} lineHeight={38}>
+            {firstNameOverride && firstNameOverride.trim().length > 0
+              ? `Hello, ${firstNameOverride}`
+              : user?.firstName?.trim()
+              ? `Hello, ${user.firstName}`
+              : 'Hello'}
+          </Title>
+          <Subtitle fontSize={16} color={colors.textSecondary} fontWeight='400' lineHeight={24}>
+            Connecting Imphal and New Delhi Through Efficient Cargo Solutions
+          </Subtitle>
         </YStack>
-      </Stack>
-    </GlassCard>
-  )
-}
-
-const OperationalStatsGrid = ({ shipments, colors }: any) => {
-  const activeShipments = shipments.filter((s: Shipment) => s.status === 'in-transit').length
-  const deliveredToday = shipments.filter((s: Shipment) => s.status === 'delivered').length
-  const pendingPickup = shipments.filter((s: Shipment) => s.status === 'pending').length
-  const urgentShipments = shipments.filter((s: Shipment) => s.priority === 'urgent').length
-  
-  return (
-    <YStack space="$3">
-      <XStack alignItems="center" justifyContent="space-between">
-        <SectionTitle color={colors.text}>
-          Operational Overview
-        </SectionTitle>
-        <Circle size={32} backgroundColor={colors.info + '20'}>
-          <Ionicons name="analytics" size={16} color={colors.info} />
-        </Circle>
-      </XStack>
-      
-      <XStack space="$3">
-        <ElevatedCard flex={1} variant="elevated" animation="slide">
-          <YStack alignItems="center" space="$2">
-            <Circle size={48} backgroundColor={colors.primary + '20'}>
-              <Ionicons name="car" size={20} color={colors.primary} />
-            </Circle>
-            <Text fontSize={24} fontWeight="800" color={colors.primary}>
-              {activeShipments}
-            </Text>
-            <Text fontSize={12} color={colors.textSecondary} textAlign="center">
-              In Transit
-            </Text>
-          </YStack>
-        </ElevatedCard>
-        
-        <ElevatedCard flex={1} variant="elevated" animation="slide">
-          <YStack alignItems="center" space="$2">
-            <Circle size={48} backgroundColor={colors.success + '20'}>
-              <Ionicons name="checkmark-circle" size={20} color={colors.success} />
-            </Circle>
-            <Text fontSize={24} fontWeight="800" color={colors.success}>
-              {deliveredToday}
-            </Text>
-            <Text fontSize={12} color={colors.textSecondary} textAlign="center">
-              Delivered
-            </Text>
-          </YStack>
-        </ElevatedCard>
-      </XStack>
-      
-      <XStack space="$3">
-        <ElevatedCard flex={1} variant="elevated" animation="slide">
-          <YStack alignItems="center" space="$2">
-            <Circle size={48} backgroundColor={colors.warning + '20'}>
-              <Ionicons name="time" size={20} color={colors.warning} />
-            </Circle>
-            <Text fontSize={24} fontWeight="800" color={colors.warning}>
-              {pendingPickup}
-            </Text>
-            <Text fontSize={12} color={colors.textSecondary} textAlign="center">
-              Pending
-            </Text>
-          </YStack>
-        </ElevatedCard>
-        
-        <ElevatedCard flex={1} variant="elevated" animation="slide">
-          <YStack alignItems="center" space="$2">
-            <Circle size={48} backgroundColor={colors.error + '20'}>
-              <Ionicons name="alert-circle" size={20} color={colors.error} />
-            </Circle>
-            <Text fontSize={24} fontWeight="800" color={colors.error}>
-              {urgentShipments}
-            </Text>
-            <Text fontSize={12} color={colors.textSecondary} textAlign="center">
-              Urgent
-            </Text>
-          </YStack>
-        </ElevatedCard>
-      </XStack>
+      </YStack>
     </YStack>
-  )
-}
+  );
+};
 
-const RouteMapCard = ({ mapRegion, shipments, colors }: any) => {
+const StatsChips = ({ shipments, colors }: any) => {
+  const inTransit = shipments.filter((s: Shipment) => s.status === 'in-transit').length;
+  const delivered = shipments.filter((s: Shipment) => s.status === 'delivered').length;
+  const pending = shipments.filter((s: Shipment) => s.status === 'pending').length;
+  const urgent = shipments.filter((s: Shipment) => s.priority === 'urgent').length;
+
+  const chips = [
+    { label: 'In Transit', value: String(inTransit), icon: 'car', tint: colors.primary },
+    {
+      label: 'Delivered',
+      value: String(delivered),
+      icon: 'checkmark-circle',
+      tint: colors.success,
+    },
+    { label: 'Pending', value: String(pending), icon: 'time', tint: colors.warning },
+    { label: 'Urgent', value: String(urgent), icon: 'alert-circle', tint: colors.danger },
+  ];
+
   return (
-    <ElevatedCard variant="elevated">
-      <YStack space="$3">
-        <XStack alignItems="center" justifyContent="space-between">
+    <YStack space='$3'>
+      <YStack space='$1'>
+        <SectionTitle fontSize={20} fontWeight='700' color={colors.text}>
+          Status at a Glance
+        </SectionTitle>
+        <Caption color={colors.textSecondary}>Real-time shipment status across the network</Caption>
+      </YStack>
+
+      <RNScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <XStack space='$2' paddingRight='$4'>
+          {chips.map((c) => (
+            <StatChip
+              key={c.label}
+              icon={c.icon}
+              label={c.label}
+              value={c.value}
+              tint={c.tint}
+              onPress={() => {
+                const segment = c.label === 'Delivered' ? 'Past' : 'Active';
+                track('status_chip_clicked', { label: c.label, segment });
+                router.push(`/(tabs)/orders?segment=${segment}` as any);
+              }}
+            />
+          ))}
+        </XStack>
+      </RNScrollView>
+    </YStack>
+  );
+};
+
+const RouteMapCard = ({ colors }: any) => {
+  return (
+    <ElevatedCard variant='elevated'>
+      <YStack space='$3'>
+        <XStack alignItems='center' justifyContent='space-between'>
           <YStack>
-            <SectionTitle color={colors.text}>
-              Live Route Map
-            </SectionTitle>
+            <SectionTitle color={colors.text}>Network Overview</SectionTitle>
             <Text fontSize={12} color={colors.textSecondary}>
-              Imphal ⟷ New Delhi Corridor
+              Seamless cargo movement across corridors
             </Text>
           </YStack>
-          <Circle size={32} backgroundColor={colors.secondary + '20'}>
-            <Ionicons name="map" size={16} color={colors.secondary} />
-          </Circle>
         </XStack>
-        
-        <Stack height={200} borderRadius="$3" overflow="hidden" backgroundColor={colors.surfaceVariant}>
-          {MapView ? (
-            <MapView 
-              style={{ flex: 1 }}
-              provider={PROVIDER_GOOGLE}
-              initialRegion={mapRegion}
-            >
-              {/* Imphal Marker */}
-              <Marker
-                coordinate={{ latitude: 24.8170, longitude: 93.9368 }}
-                title="Imphal Hub"
-                description="TAPANGO Northeast Operations"
-              >
-                <Circle size={20} backgroundColor={colors.primary} borderWidth={2} borderColor="white">
-                  <Ionicons name="business" size={10} color="white" />
-                </Circle>
-              </Marker>
-              
-              {/* New Delhi Marker */}
-              <Marker
-                coordinate={{ latitude: 28.7041, longitude: 77.1025 }}
-                title="New Delhi Hub"
-                description="TAPANGO Central Operations"
-              >
-                <Circle size={20} backgroundColor={colors.secondary} borderWidth={2} borderColor="white">
-                  <Ionicons name="business" size={10} color="white" />
-                </Circle>
-              </Marker>
-              
-              {/* Active Shipment Markers */}
-              {shipments.filter((s: Shipment) => s.status === 'in-transit').map((shipment: Shipment, index: number) => {
-                // Simulate positions along the route
-                const progress = shipment.progress / 100
-                const lat = 24.8170 + (28.7041 - 24.8170) * progress
-                const lng = 93.9368 + (77.1025 - 93.9368) * progress
-                
-                return (
-                  <Marker
-                    key={shipment.id}
-                    coordinate={{ latitude: lat, longitude: lng }}
-                    title={shipment.id}
-                    description={`${shipment.origin} → ${shipment.destination}`}
-                  >
-                    <Circle size={16} backgroundColor={colors.warning} borderWidth={1} borderColor="white">
-                      <Ionicons name="car" size={8} color="white" />
-                    </Circle>
-                  </Marker>
-                )
-              })}
-            </MapView>
-          ) : (
-            // Fallback for web - show a placeholder with route info
-            <YStack flex={1} alignItems="center" justifyContent="center" space="$2">
-              <Circle size={80} backgroundColor={colors.primary + '20'}>
-                <Ionicons name="map" size={40} color={colors.primary} />
-              </Circle>
-              <Text fontSize={16} fontWeight="600" color={colors.text}>
-                Live Route Tracking
-              </Text>
-              <Text fontSize={12} color={colors.textSecondary} textAlign="center">
-                Interactive map available on mobile app
-              </Text>
-              <XStack space="$3" marginTop="$2">
-                <XStack alignItems="center" space="$1">
-                  <Circle size={12} backgroundColor={colors.primary} />
-                  <Text fontSize={12} color={colors.textSecondary}>Imphal</Text>
-                </XStack>
-                <XStack alignItems="center" space="$1">
-                  <Circle size={12} backgroundColor={colors.secondary} />
-                  <Text fontSize={12} color={colors.textSecondary}>New Delhi</Text>
-                </XStack>
-              </XStack>
-            </YStack>
-          )}
+
+        <Stack
+          height={200}
+          borderRadius='$3'
+          overflow='hidden'
+          backgroundColor={colors.surfaceVariant}
+        >
+          <LottieView
+            source={require('../../assets/lottie/home-section.json')}
+            autoPlay
+            loop
+            style={{ width: '100%', height: '100%' }}
+            resizeMode='cover'
+          />
         </Stack>
-        
-        <XStack alignItems="center" justifyContent="space-between" paddingTop="$2">
-          <Text fontSize={12} color={colors.textSecondary}>
-            {shipments.filter((s: Shipment) => s.status === 'in-transit').length} active shipments
-          </Text>
-          <Button variant="ghost" size="sm" onPress={() => router.push('/(tabs)/tracking')}>
-            View All
-          </Button>
-        </XStack>
       </YStack>
     </ElevatedCard>
-  )
-}
+  );
+};
 
 export default function DashboardScreen() {
   const palette = useAppColors();
   const { user } = useUser();
-  const [refreshing, setRefreshing] = useState(false)
-  
+  const [supaFirstName, setSupaFirstName] = React.useState<string | null>(null);
+
+  const deriveFirstNameFromUser = (u: any): string | null => {
+    const clerkFirst = u?.firstName?.trim();
+    if (clerkFirst) return clerkFirst;
+    const email: string | undefined = u?.emailAddresses?.[0]?.emailAddress;
+    if (!email) return null;
+    const local = email.split('@')[0] || '';
+    const token =
+      local
+        .replace(/[^a-zA-Z]+/g, ' ')
+        .trim()
+        .split(/\s+/)[0] || '';
+    if (!token) return null;
+    return token.charAt(0).toUpperCase() + token.slice(1).toLowerCase();
+  };
+  const [refreshing, setRefreshing] = useState(false);
+
   // Actions
-  const handleNewOrder = () => router.push('/(tabs)/booking');
-  const handleViewOrders = () => router.push('/(tabs)/orders');
-  const handleTrackShipment = () => router.push('/(tabs)/tracking');
+  const handleNewOrder = () => {
+    track('top_action_clicked', { action: 'create_shipment' });
+    router.push('/(tabs)/booking');
+  };
+  const safeName = (supaFirstName || user?.firstName || '').trim();
+  const handleViewOrders = () => {
+    track('top_action_clicked', { action: 'view_orders' });
+    router.push('/(tabs)/orders');
+  };
+  const handleTrackShipment = () => {
+    track('top_action_clicked', { action: 'track_package' });
+    router.push('/(tabs)/tracking');
+  };
 
   // Drafts + recent addresses
   const [hasDraft, setHasDraft] = React.useState(false);
@@ -386,6 +331,7 @@ export default function DashboardScreen() {
   // Shipments (mocked for now) with skeleton during initial load
   const [shipments, setShipments] = React.useState<Shipment[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const [shipmentsSegment, setShipmentsSegment] = React.useState<'Active' | 'Past'>('Active');
 
   React.useEffect(() => {
     (async () => {
@@ -407,6 +353,27 @@ export default function DashboardScreen() {
     return () => clearTimeout(t);
   }, []);
 
+  // Fetch profile name from Supabase by email (via anon key + RLS)
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const email = user?.emailAddresses?.[0]?.emailAddress;
+        if (!email) {
+          setSupaFirstName(null);
+          return;
+        }
+        const { getOrCreateFirstName } = await import('../../src/services/profile');
+        const first = await getOrCreateFirstName(
+          email,
+          [user?.firstName, user?.lastName].filter(Boolean).join(' ').trim() || undefined
+        );
+        setSupaFirstName(first || null);
+      } catch {
+        setSupaFirstName(null);
+      }
+    })();
+  }, [user?.emailAddresses?.[0]?.emailAddress]);
+
   // Refresh counts when this screen gets focus
   const counts = useCounts();
   useFocusEffect(
@@ -414,265 +381,325 @@ export default function DashboardScreen() {
       counts?.refresh?.();
     }, [counts?.refresh])
   );
-  
+
   const handleRefresh = useCallback(async () => {
-    setRefreshing(true)
+    setRefreshing(true);
     // Simulate refresh delay
     setTimeout(() => {
-      setRefreshing(false)
-      counts?.refresh?.()
-    }, 1000)
+      setRefreshing(false);
+      counts?.refresh?.();
+    }, 1000);
   }, [counts]);
 
   // Map focused on TAPANGO operational corridor: Imphal to New Delhi
   const mapRegion = {
     latitude: 26.8467, // Midpoint between Imphal (24.8170°N) and New Delhi (28.7041°N)
     longitude: 79.4589, // Midpoint between Imphal (93.9368°E) and New Delhi (77.1025°E)
-    latitudeDelta: 8.0,   // Show both cities in view
+    latitudeDelta: 8.0, // Show both cities in view
     longitudeDelta: 20.0, // Cover the operational corridor
   };
 
-  const PremiumShipmentCard = ({ shipment, colors }: { shipment: Shipment; colors: any }) => {
-    const getPriorityColor = (priority?: string) => {
-      switch (priority) {
-        case 'urgent': return colors.error
-        case 'express': return colors.warning
-        default: return colors.textSecondary
-      }
-    }
-    
+  const MinimalShipmentCard = ({ shipment, colors }: { shipment: Shipment; colors: any }) => {
     const getStatusColor = (status: string) => {
       switch (status) {
-        case 'in-transit': return colors.primary
-        case 'delivered': return colors.success
-        case 'pending': return colors.warning
-        case 'delayed': return colors.error
-        default: return colors.textSecondary
+        case 'in-transit':
+          return colors.primary;
+        case 'delivered':
+          return colors.success;
+        case 'pending':
+          return colors.warning;
+        case 'delayed':
+          return colors.error;
+        default:
+          return colors.textSecondary;
       }
-    }
-    
+    };
+
     return (
-      <ElevatedCard variant="elevated" animation="slide" hover>
-        <YStack space="$3">
-          <XStack alignItems="center" justifyContent="space-between">
-            <YStack flex={1}>
-              <XStack alignItems="center" space="$2">
-                <Text fontSize={16} fontWeight="700" color={colors.text}>
-                  {shipment.id}
-                </Text>
-                {shipment.priority === 'urgent' && (
-                  <Circle size={6} backgroundColor={colors.error} />
-                )}
+      <OutlinedCard variant='outlined' animation='fade' padding='$3'>
+        <Pressable
+          onPress={() => router.push(`/(tabs)/tracking?id=${shipment.id}` as any)}
+          accessibilityRole='button'
+          accessibilityLabel={`Track ${shipment.id}`}
+        >
+          <YStack space='$2'>
+            <XStack alignItems='center' justifyContent='space-between'>
+              <XStack alignItems='center' space='$2' flex={1} minWidth={0}>
+                <Circle size={8} backgroundColor={getStatusColor(shipment.status)} />
+                <YStack flex={1} minWidth={0}>
+                  <Text fontSize={14} fontWeight='800' color={colors.text} numberOfLines={1}>
+                    {shipment.id}
+                  </Text>
+                  <Text fontSize={12} color={colors.textSecondary} numberOfLines={1}>
+                    {shipment.origin} → {shipment.destination}
+                  </Text>
+                </YStack>
               </XStack>
-              <Text fontSize={14} color={colors.textSecondary}>
-                {shipment.origin} → {shipment.destination}
-              </Text>
-            </YStack>
-            
-            <YStack alignItems="flex-end">
-              <Circle size={32} backgroundColor={getStatusColor(shipment.status) + '20'}>
-                <Ionicons 
-                  name={shipment.status === 'delivered' ? 'checkmark' : shipment.status === 'in-transit' ? 'car' : 'time'} 
-                  size={14} 
-                  color={getStatusColor(shipment.status)} 
-                />
-              </Circle>
-            </YStack>
-          </XStack>
-          
-          <YStack space="$2">
-            <XStack alignItems="center" justifyContent="space-between">
-              <Text fontSize={12} color={colors.textSecondary}>
-                Progress: {shipment.progress}%
-              </Text>
-              <Text fontSize={12} color={getPriorityColor(shipment.priority)} textTransform="uppercase" fontWeight="600">
-                {shipment.priority || 'Standard'}
-              </Text>
-            </XStack>
-            
-            <ProgressBar value={shipment.progress} height={6} backgroundColor={colors.surfaceVariant} />
-            
-            <XStack alignItems="center" justifyContent="space-between">
-              <XStack alignItems="center" space="$2">
-                <Ionicons name="cube" size={12} color={colors.textSecondary} />
-                <Text fontSize={12} color={colors.textSecondary}>
-                  {shipment.cargoType} • {shipment.weight}
+
+              <XStack alignItems='center' space='$1'>
+                <AppIcon name='time' size={11} color={colors.textSecondary} />
+                <Text fontSize={11} color={colors.textSecondary}>
+                  {formatDate(shipment.estimatedDelivery)}
                 </Text>
+                <AppIcon name='chevron-forward' size={12} color={colors.textTertiary} />
               </XStack>
-              <Text fontSize={12} color={colors.textSecondary}>
-                ETA: {formatDate(shipment.estimatedDelivery)}
-              </Text>
             </XStack>
+
+            {shipment.status !== 'delivered' && (
+              <ProgressBar
+                value={shipment.progress}
+                height={3}
+                backgroundColor={colors.surfaceVariant}
+              />
+            )}
           </YStack>
-          
-          <XStack space="$2">
-            <Button 
-              flex={1} 
-              variant="ghost" 
-              size="sm" 
-              onPress={() => router.push(`/(tabs)/tracking?id=${shipment.id}` as any)}
-              leftIcon={<Ionicons name="location" size={14} />}
-            >
-              Track
-            </Button>
-            <Button 
-              flex={1} 
-              variant="outline" 
-              size="sm" 
-              onPress={() => router.push(`/(modals)/receipt?id=${shipment.id}` as any)}
-              leftIcon={<Ionicons name="document" size={14} />}
-            >
-              Receipt
-            </Button>
-          </XStack>
-        </YStack>
-      </ElevatedCard>
-    )
-  }
+        </Pressable>
+      </OutlinedCard>
+    );
+  };
 
   const screenCounts = counts;
+
+  const filteredRecent = React.useMemo(
+    () =>
+      shipments
+        .filter((s) =>
+          shipmentsSegment === 'Active' ? s.status !== 'delivered' : s.status === 'delivered'
+        )
+        .slice(0, 3),
+    [shipments, shipmentsSegment]
+  );
+
+  const segmentCount = React.useMemo(
+    () =>
+      shipments.filter((s) =>
+        shipmentsSegment === 'Active' ? s.status !== 'delivered' : s.status === 'delivered'
+      ).length,
+    [shipments, shipmentsSegment]
+  );
+
+  const segmentCounts = React.useMemo(() => {
+    const active = shipments.filter((s) => s.status !== 'delivered').length;
+    const past = shipments.filter((s) => s.status === 'delivered').length;
+    return { active, past };
+  }, [shipments]);
+
   return (
-<Screen scroll padding="$0">
-      <RNScrollView 
+    <Screen scroll={false} padding='$0' safeTop={true} safeBottom={true}>
+      {/* analytics: home_opened */}
+      {React.useMemo(() => {
+        track('home_opened');
+        return null;
+      }, [])}
+      {/* Scrollable body (including hero/actions) */}
+      <RNScrollView
+        style={{ backgroundColor: 'transparent' }}
         refreshControl={
-          <RefreshControl 
-            refreshing={refreshing} 
+          <RefreshControl
+            refreshing={refreshing}
             onRefresh={handleRefresh}
             tintColor={palette.primary}
           />
         }
         showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior='automatic'
+        stickyHeaderIndices={[1]}
+        contentContainerStyle={{ paddingBottom: 24 }}
       >
+        {/* 0: Hero section */}
         <FadeIn>
-        <YStack space="$4" paddingHorizontal="$4" paddingBottom={120}>
-          {/* Premium Hero Card */}
-          <PremiumHeroCard 
-            user={user}
-            colors={palette}
-            onNewOrder={handleNewOrder}
-            onTrackShipment={handleTrackShipment}
-          />
-
-          {/* Operational Stats Grid */}
-          <OperationalStatsGrid shipments={shipments} colors={palette} />
-          
-          {/* Route Map Card */}
-          <RouteMapCard mapRegion={mapRegion} shipments={shipments} colors={palette} />
-          
-          {/* Recent Shipments Section */}
-          <YStack space="$3">
-            <XStack alignItems="center" justifyContent="space-between">
-              <SectionTitle color={palette.text}>
-                Recent Shipments
-              </SectionTitle>
-              <XStack alignItems="center" space="$2">
-                <AnimatedBadge text={`${shipments.length}`} tone="info" />
-                <Button variant="ghost" size="sm" onPress={handleViewOrders}>
-                  <XStack alignItems="center" space="$1">
-                    <Text color={palette.primary} fontSize={14}>View All</Text>
-                    <Ionicons name="chevron-forward" size={14} color={palette.primary} />
-                  </XStack>
-                </Button>
-              </XStack>
-            </XStack>
-            
-            {loading ? (
-              <YStack space="$3">
-                {Array.from({ length: 3 }).map((_, i) => (
-                  <ElevatedCard key={i} variant="elevated">
-                    <YStack space="$2">
-                      <Skeleton height={16} width={'60%' as any} />
-                      <SkeletonText lines={2} />
-                      <Skeleton height={6} radius={3} />
-                    </YStack>
-                  </ElevatedCard>
-                ))}
-              </YStack>
-            ) : (
-              <YStack space="$3">
-                {shipments.slice(0, 4).map((shipment) => (
-                  <PremiumShipmentCard 
-                    key={shipment.id} 
-                    shipment={shipment} 
-                    colors={palette} 
-                  />
-                ))}
-              </YStack>
-            )}
+          <YStack space='$4' paddingHorizontal='$4' paddingTop='$4' paddingBottom={12}>
+            <ModernHeroSection
+              user={user}
+              colors={palette}
+              tokens={getTokens('light')}
+              onNewOrder={handleNewOrder}
+              onTrackShipment={handleTrackShipment}
+              onViewOrders={handleViewOrders}
+              firstNameOverride={supaFirstName ?? deriveFirstNameFromUser(user)}
+            />
           </YStack>
+        </FadeIn>
 
-          {/* Quick Actions Section */}
-          {(hasDraft || recentPickups.length > 0 || recentDeliveries.length > 0) && (
-            <ElevatedCard variant="elevated">
-              <YStack space="$3">
-                <XStack alignItems="center" space="$3">
-                  <Circle size={40} backgroundColor={palette.secondary + '20'}>
-                    <Ionicons name="flash" size={20} color={palette.secondary} />
-                  </Circle>
-                  <YStack>
-                    <SectionTitle color={palette.text}>
-                      Quick Actions
-                    </SectionTitle>
-                    <Text fontSize={12} color={palette.textSecondary}>
-                      Resume drafts and recent locations
-                    </Text>
-                  </YStack>
+        {/* 1: Sticky top actions carousel (gated by feature flag) */}
+        {(Constants as any)?.expoConfig?.extra?.features?.homeMinimalV2 ?? true ? (
+          <YStack backgroundColor='$background'>
+            <TopActionsCarousel
+              colors={palette}
+              onNewOrder={handleNewOrder}
+              onTrack={handleTrackShipment}
+              onViewOrders={handleViewOrders}
+            />
+          </YStack>
+        ) : null}
+
+        {/* 2: Rest of content */}
+        <FadeIn>
+          <YStack space='$4' paddingHorizontal='$4' paddingTop='$4' paddingBottom={24}>
+            {/* Status chips */}
+            <StatsChips shipments={shipments} colors={palette} />
+
+            {/* Network Overview Animation */}
+            <RouteMapCard colors={palette} />
+
+            {/* Recent Shipments Section */}
+            <YStack space='$3'>
+              <XStack alignItems='center' justifyContent='space-between'>
+                <SectionTitle color={palette.text}>Recent Shipments</SectionTitle>
+                {/* Minimal segmented toggle */}
+                <XStack
+                  alignItems='center'
+                  borderWidth={1}
+                  borderColor={palette.border}
+                  borderRadius={9999}
+                  paddingHorizontal='$1'
+                  paddingVertical='$1'
+                  backgroundColor={palette.surface}
+                >
+                  {(['Active', 'Past'] as const).map((label) => {
+                    const selected = shipmentsSegment === label;
+                    const count = label === 'Active' ? segmentCounts.active : segmentCounts.past;
+                    return (
+                      <Pressable key={label} onPress={() => setShipmentsSegment(label)}>
+                        <XStack
+                          paddingHorizontal='$2'
+                          paddingVertical={6}
+                          borderRadius={9999}
+                          backgroundColor={selected ? palette.primary + '15' : 'transparent'}
+                        >
+                          <Text
+                            fontSize={12}
+                            fontWeight={selected ? '800' : '600'}
+                            color={selected ? palette.primary : palette.textSecondary}
+                          >
+                            {`${label} (${count})`}
+                          </Text>
+                        </XStack>
+                      </Pressable>
+                    );
+                  })}
                 </XStack>
-                
-                {hasDraft && (
-                  <Button 
-                    variant="outline" 
-                    onPress={() => router.push('/(tabs)/booking?resumeDraft=1' as any)}
-                    leftIcon={<Ionicons name="document-text" size={16} />}
-                  >
-                    Resume Last Draft
-                  </Button>
-                )}
-                
-                {(recentPickups.length > 0 || recentDeliveries.length > 0) && (
-                  <YStack space="$2">
-                    <SectionTitle color={palette.text}>
-                      Recent Addresses
-                    </SectionTitle>
-                    <RNScrollView horizontal showsHorizontalScrollIndicator={false}>
-                      <XStack space="$2">
-                        {[...recentPickups, ...recentDeliveries].slice(0, 5).map((address, index) => (
-                          <Card key={index} variant="flat">
-                            <Text fontSize={12} numberOfLines={1} maxWidth={120}>
-                              {address}
-                            </Text>
-                          </Card>
-                        ))}
-                      </XStack>
-                    </RNScrollView>
-                  </YStack>
-                )}
-              </YStack>
-            </ElevatedCard>
-          )}
-          
-          {/* Active Shipments Alert */}
-          {shipments.some(s => s.status === 'in-transit') && (
-            <GlassCard variant="glass" animation="slide">
-              <XStack alignItems="center" space="$3">
-                <Circle size={40} backgroundColor={palette.primary + '20'}>
-                  <Ionicons name="car" size={20} color={palette.primary} />
-                </Circle>
-                <YStack flex={1}>
-                  <Text fontSize={16} fontWeight="700" color={palette.text}>
-                    {shipments.filter(s => s.status === 'in-transit').length} Active Shipments
-                  </Text>
-                  <Subtitle color={palette.textSecondary}>
-                    Tap to view live tracking updates
-                  </Subtitle>
-                </YStack>
-                <Button variant="primary" size="sm" onPress={handleTrackShipment}>
-                  Track Live
-                </Button>
               </XStack>
-            </GlassCard>
-          )}
-        </YStack>
+
+              {loading ? (
+                <YStack space='$3'>
+                  {Array.from({ length: 3 }).map((_, i) => (
+                    <OutlinedCard key={i} variant='outlined'>
+                      <YStack space='$2'>
+                        <Skeleton height={16} width={'60%' as any} />
+                        <SkeletonText lines={2} />
+                        <Skeleton height={6} radius={3} />
+                      </YStack>
+                    </OutlinedCard>
+                  ))}
+                </YStack>
+              ) : (
+                <YStack space='$2'>
+                  {filteredRecent.length === 0 ? (
+                    <Text color={palette.textSecondary} fontSize={13}>
+                      No shipments in this segment
+                    </Text>
+                  ) : (
+                    <>
+                      {filteredRecent.map((shipment) => (
+                        <MinimalShipmentCard
+                          key={shipment.id}
+                          shipment={shipment}
+                          colors={palette}
+                        />
+                      ))}
+                      <Button
+                        variant='ghost'
+                        size='sm'
+                        onPress={handleViewOrders}
+                        style={{ alignSelf: 'flex-end' }}
+                      >
+                        <XStack alignItems='center' space='$1'>
+                          <Text color={palette.primary} fontSize={13}>
+                            See all ({segmentCount})
+                          </Text>
+                          <AppIcon name='chevron-forward' size={13} color={palette.primary} />
+                        </XStack>
+                      </Button>
+                    </>
+                  )}
+                </YStack>
+              )}
+            </YStack>
+
+            {/* Quick Actions Section */}
+            {(hasDraft || recentPickups.length > 0 || recentDeliveries.length > 0) && (
+              <ElevatedCard variant='elevated'>
+                <YStack space='$3'>
+                  <XStack alignItems='center' space='$3'>
+                    <Circle size={40} backgroundColor={palette.secondary + '20'}>
+                      <AppIcon name='flash' size={20} color={palette.secondary} />
+                    </Circle>
+                    <YStack>
+                      <SectionTitle color={palette.text}>Quick Actions</SectionTitle>
+                      <Text fontSize={12} color={palette.textSecondary}>
+                        Resume drafts and recent locations
+                      </Text>
+                    </YStack>
+                  </XStack>
+
+                  {hasDraft && (
+                    <Button
+                      variant='outline'
+                      onPress={() => router.push('/(tabs)/booking?resumeDraft=1' as any)}
+                      leftIcon={<AppIcon name='document-text' size={16} />}
+                    >
+                      Resume Last Draft
+                    </Button>
+                  )}
+
+                  {(recentPickups.length > 0 || recentDeliveries.length > 0) && (
+                    <YStack space='$2'>
+                      <SectionTitle color={palette.text}>Recent Addresses</SectionTitle>
+                      <RNScrollView horizontal showsHorizontalScrollIndicator={false}>
+                        <XStack space='$2'>
+                          {[...recentPickups, ...recentDeliveries]
+                            .slice(0, 5)
+                            .map((address, index) => (
+                              <Card key={index} variant='flat'>
+                                <Text fontSize={12} numberOfLines={1} maxWidth={120}>
+                                  {address}
+                                </Text>
+                              </Card>
+                            ))}
+                        </XStack>
+                      </RNScrollView>
+                    </YStack>
+                  )}
+                </YStack>
+              </ElevatedCard>
+            )}
+
+            {/* Active Shipments Alert */}
+            {shipments.some((s) => s.status === 'in-transit') && (
+              <GlassCard variant='glass' animation='slide'>
+                <XStack alignItems='center' space='$3'>
+                  <Circle size={40} backgroundColor={palette.primary + '20'}>
+                    <AppIcon name='car' size={20} color={palette.primary} />
+                  </Circle>
+                  <YStack flex={1}>
+                    <Text fontSize={16} fontWeight='700' color={palette.text}>
+                      {shipments.filter((s) => s.status === 'in-transit').length} Active Shipments
+                    </Text>
+                    <Subtitle color={palette.textSecondary}>
+                      Tap to view live tracking updates
+                    </Subtitle>
+                  </YStack>
+                  <Button variant='primary' size='sm' onPress={handleTrackShipment}>
+                    Track Live
+                  </Button>
+                </XStack>
+              </GlassCard>
+            )}
+
+            {/* MCP Integration Test Component - Development Only */}
+            {process.env.NODE_ENV === 'development' && <MCPTestComponent />}
+          </YStack>
         </FadeIn>
       </RNScrollView>
     </Screen>

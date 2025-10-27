@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "noResolve": false,
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
@@ -23,50 +23,43 @@
     "jsx": "react-native",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/components/*": [
-        "./src/components/*"
-      ],
-      "@/hooks/*": [
-        "./src/hooks/*"
-      ],
-      "@/services/*": [
-        "./src/services/*"
-      ],
-      "@/stores/*": [
-        "./src/stores/*"
-      ],
-      "@/types/*": [
-        "./src/types/*"
-      ],
-      "@/utils/*": [
-        "./src/utils/*"
-      ],
-      "@/theme/*": [
-        "./src/theme/*"
-      ]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/services/*": ["./src/services/*"],
+      "@/stores/*": ["./src/stores/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/theme/*": ["./src/theme/*"]
     },
     "types": ["tamagui"]
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "app/**/*.ts",
+    "app/**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "src/types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",
+    "node_modules/**/*",
     "babel.config.js",
     "metro.config.js",
     "storybook",
     "storybook/**/*",
     "tests",
     "tests/**/*",
+    "__tests__",
+    "__tests__/**/*",
+    "src/__tests__",
+    "src/__tests__/**/*",
     "test-results",
-    "test-results/**/*"
+    "test-results/**/*",
+    "supabase/functions",
+    "supabase/functions/**/*"
   ],
   "extends": "expo/tsconfig.base"
 }

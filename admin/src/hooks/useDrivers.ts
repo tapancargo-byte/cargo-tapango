@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase, Driver, DriverWithProfile, DriverInsert, DriverUpdate } from '../lib/supabase';
+import { supabase, Driver, DriverWithProfile, DriverInsert, DriverUpdate, logSupabaseError } from '../lib/supabase';
 
 // Query keys
 export const driverKeys = {
@@ -60,6 +60,7 @@ export function useDrivers(filters: DriverFilters = {}) {
       const { data, error } = await query;
 
       if (error) {
+        logSupabaseError('drivers', 'select', error, { filters });
         throw new Error(`Failed to fetch drivers: ${error.message}`);
       }
 
@@ -90,6 +91,7 @@ export function useDriver(id: string) {
         if (error.code === 'PGRST116') {
           return null; // Not found
         }
+        logSupabaseError('drivers', 'selectOne', error, { id });
         throw new Error(`Failed to fetch driver: ${error.message}`);
       }
 

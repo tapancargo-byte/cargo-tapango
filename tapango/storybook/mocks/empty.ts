@@ -1,2 +1,2 @@
 // @ts-nocheck
-export default {}
+export default {};

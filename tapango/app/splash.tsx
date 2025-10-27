@@ -3,6 +3,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useAuth } from '@clerk/clerk-expo';
+// @ts-ignore - Module is properly installed, IDE cache issue
 import LottieView from 'lottie-react-native';
 
 // Lottie animation for splash
@@ -27,23 +28,39 @@ export default function SplashRoute() {
     let t = setTimeout(() => {
       if (!navigated.current && isLoaded) {
         navigated.current = true;
-        if (!isSignedIn) router.replace('/onboarding');
-        else router.replace('/(tabs)');
+        if (!isSignedIn) {
+          router.replace('/(onboarding)/onboarding' as any);
+        } else {
+          router.replace('/(tabs)');
+        }
       }
     }, DURATION_MS);
 
     return () => clearTimeout(t);
   }, [isLoaded, isSignedIn, router]);
 
+  // If Clerk is not loaded after a reasonable time, show error or fallback
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      if (!isLoaded && !navigated.current) {
+        console.warn('Clerk taking too long to load, navigating to onboarding...');
+        navigated.current = true;
+        router.replace('/(onboarding)/onboarding' as any);
+      }
+    }, 10000); // 10 second fallback
+
+    return () => clearTimeout(fallbackTimer);
+  }, [isLoaded, router]);
+
   return (
     <View style={styles.container}>
-      <View style={styles.content} accessibilityLabel="TAPANGO is loading">
+      <View style={styles.content} accessibilityLabel='TAPANGO is loading'>
         <LottieView
           source={SplashAnimation}
           autoPlay
           loop
           style={styles.lottie}
-          resizeMode="contain"
+          resizeMode='contain'
           speed={0.9}
         />
         <View style={styles.brandWrap}>
@@ -86,4 +103,3 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-

@@ -1,8 +1,8 @@
-import React from 'react'
-import { Stack } from 'tamagui'
+import React from 'react';
+import { Stack } from 'tamagui';
 
 export interface CircleProps extends React.ComponentProps<typeof Stack> {
-  size: number
+  size: number;
 }
 
 export const Circle: React.FC<CircleProps> = ({ size, children, ...props }) => {
@@ -11,11 +11,11 @@ export const Circle: React.FC<CircleProps> = ({ size, children, ...props }) => {
       width={size}
       height={size}
       borderRadius={size / 2}
-      alignItems="center"
-      justifyContent="center"
+      alignItems='center'
+      justifyContent='center'
       {...props}
     >
       {children}
     </Stack>
-  )
-}
+  );
+};

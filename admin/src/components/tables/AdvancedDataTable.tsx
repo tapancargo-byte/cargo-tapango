@@ -44,6 +44,7 @@ import {
   Trash2,
 } from 'lucide-react'
 import { useTheme } from '../../providers/ThemeProvider'
+import { formatINR } from '../../lib/currency'
 
 // Sample data structure - replace with actual data type
 export interface TableData {
@@ -213,10 +214,7 @@ export function AdvancedDataTable({
         ),
         cell: ({ row }) => {
           const amount = parseFloat(row.getValue('revenue'))
-          const formatted = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          }).format(amount)
+const formatted = formatINR(amount)
           return <div className="font-medium">{formatted}</div>
         },
       },

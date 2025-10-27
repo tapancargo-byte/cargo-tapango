@@ -11,7 +11,9 @@ console.log('To reset the onboarding state and see the complete flow:');
 console.log('');
 console.log('Option 1: Use the Development Helper (Easiest)');
 console.log('1. Start the app');
-console.log('2. When you see the TAPANGO screen with buttons, tap "Reset Onboarding (Dev Only)"');
+console.log(
+  '2. When you see the TAPANGO screen with buttons, tap "Reset Onboarding (Dev Only)"'
+);
 console.log('3. Confirm the reset in the alert dialog');
 console.log('4. Restart the app to see the full flow');
 console.log('');

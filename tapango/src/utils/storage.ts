@@ -7,6 +7,9 @@ export const STORAGE_KEYS = {
   THEME_PREFERENCE: 'theme_preference',
   LANGUAGE_PREFERENCE: 'language_preference',
   LAST_APP_VERSION: 'last_app_version',
+  SMS_PHONE_E164: 'sms_phone_e164',
+  SMS_CONSENT_AT: 'sms_consent_at',
+  SELECTED_ROLE: 'selected_role',
 } as const;
 
 export interface UserPreferences {
@@ -15,6 +18,8 @@ export interface UserPreferences {
   theme: 'light' | 'dark' | 'system';
   language: string;
 }
+
+export type SelectedRole = 'customer' | 'driver';
 
 export const StorageService = {
   // Generic methods
@@ -66,14 +71,16 @@ export const StorageService = {
 
   async getOnboardingCompleted(): Promise<boolean> {
     try {
-      const result = await AsyncStorage.getItem(STORAGE_KEYS.ONBOARDING_COMPLETED);
+      const result = await AsyncStorage.getItem(
+        STORAGE_KEYS.ONBOARDING_COMPLETED
+      );
       console.log('Onboarding completed raw value:', result);
-      
+
       if (result === null) {
         console.log('No onboarding data found - onboarding not completed');
         return false;
       }
-      
+
       const parsed = JSON.parse(result) as boolean;
       console.log('Onboarding completed parsed value:', parsed);
       return parsed;
@@ -91,13 +98,13 @@ export const StorageService = {
     try {
       const result = await AsyncStorage.getItem(STORAGE_KEYS.FIRST_LAUNCH);
       console.log('First launch raw value:', result);
-      
+
       if (result === null) {
         // First time opening the app
         console.log('No first launch data found - this is first launch');
         return true;
       }
-      
+
       const parsed = JSON.parse(result) as boolean;
       console.log('First launch parsed value:', parsed);
       return parsed;
@@ -108,7 +115,9 @@ export const StorageService = {
   },
 
   // User preferences
-  async setUserPreferences(preferences: Partial<UserPreferences>): Promise<void> {
+  async setUserPreferences(
+    preferences: Partial<UserPreferences>
+  ): Promise<void> {
     const currentPreferences = await this.getUserPreferences();
     const updatedPreferences = { ...currentPreferences, ...preferences };
     await this.setItem(STORAGE_KEYS.USER_PREFERENCES, updatedPreferences);
@@ -172,14 +181,51 @@ export const StorageService = {
     await this.setLastAppVersion(toVersion);
   },
 
+  // SMS helpers
+  async setSmsPhoneE164(phone: string) {
+    await this.setItem(STORAGE_KEYS.SMS_PHONE_E164, phone);
+  },
+  async getSmsPhoneE164(): Promise<string | null> {
+    return await this.getItem<string>(STORAGE_KEYS.SMS_PHONE_E164, null as any);
+  },
+  async setSmsConsentAt(timestampIso: string) {
+    await this.setItem(STORAGE_KEYS.SMS_CONSENT_AT, timestampIso);
+  },
+  async getSmsConsentAt(): Promise<string | null> {
+    return await this.getItem<string>(STORAGE_KEYS.SMS_CONSENT_AT, null as any);
+  },
+
+  // Role selection helpers
+  async setSelectedRole(role: SelectedRole): Promise<void> {
+    try {
+      await this.setItem(STORAGE_KEYS.SELECTED_ROLE, role);
+    } catch (e) {
+      console.warn('Failed to persist selected role (non-blocking):', e);
+    }
+  },
+  async getSelectedRole(): Promise<SelectedRole | null> {
+    try {
+      const role = await this.getItem<SelectedRole>(
+        STORAGE_KEYS.SELECTED_ROLE,
+        null as any
+      );
+      return (role as SelectedRole | null) ?? null;
+    } catch (e) {
+      console.warn('Failed to read selected role (non-blocking):', e);
+      return null;
+    }
+  },
+
   // Development helpers
   async clearOnboardingState(): Promise<void> {
     try {
       await AsyncStorage.multiRemove([
         STORAGE_KEYS.ONBOARDING_COMPLETED,
-        STORAGE_KEYS.FIRST_LAUNCH
+        STORAGE_KEYS.FIRST_LAUNCH,
       ]);
-      console.log('Onboarding state cleared - app will show onboarding on next launch');
+      console.log(
+        'Onboarding state cleared - app will show onboarding on next launch'
+      );
     } catch (error) {
       console.error('Error clearing onboarding state:', error);
     }
@@ -200,7 +246,7 @@ export const StorageService = {
       const keys = await AsyncStorage.getAllKeys();
       const stores = await AsyncStorage.multiGet(keys);
       const data: Record<string, any> = {};
-      
+
       stores.forEach(([key, value]) => {
         try {
           data[key] = value ? JSON.parse(value) : null;
@@ -208,14 +254,14 @@ export const StorageService = {
           data[key] = value;
         }
       });
-      
+
       return data;
     } catch (error) {
       console.error('Error getting all data:', error);
       return {};
     }
   },
-  
+
   // Development helper to reset onboarding for testing
   async resetOnboardingForTesting(): Promise<void> {
     try {

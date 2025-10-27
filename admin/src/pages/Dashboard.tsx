@@ -19,6 +19,7 @@ import { useDashboardStats, useOrders } from '../hooks/useSupabaseData';
 import { useTheme } from '../providers/ThemeProvider';
 import { InteractiveChart } from '../components/charts/InteractiveChart';
 import { ResponsiveContainer, ResponsiveGrid } from '../components/layout/ResponsiveContainer';
+import { formatINR } from '../lib/currency';
 
 const Dashboard: React.FC = () => {
   const { data: metrics, isLoading: metricsLoading } = useDashboardStats();
@@ -213,14 +214,14 @@ const Dashboard: React.FC = () => {
               {/* Content */}
               <div className="relative">
                 <div className={`text-2xl @lg:text-3xl font-bold mb-1 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
-                  {metrics ? `$${metrics.totalRevenue.toLocaleString()}` : '$0'}
+{metrics ? formatINR(metrics.totalRevenue) : formatINR(0)}
                 </div>
                 <div className={`text-sm font-medium mb-2 ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>
                   Revenue
                 </div>
                 <div className={`text-xs ${theme === 'dark' ? 'text-slate-400' : 'text-slate-500'} flex items-center space-x-1`}>
                   <DollarSign className="h-3 w-3" />
-                  <span>{metrics ? `$${metrics.avgOrderValue.toFixed(2)} avg order` : '$0.00 avg order'}</span>
+<span>{metrics ? `${formatINR(metrics.avgOrderValue)} avg order` : `${formatINR(0)} avg order`}</span>
                 </div>
               </div>
             </div>
@@ -367,7 +368,7 @@ const Dashboard: React.FC = () => {
                       {(order.status || 'pending').replace('_', ' ')}
                     </div>
                     <p className={`text-sm ${theme === 'dark' ? 'text-slate-300' : 'text-gray-700'} font-medium mt-1`}>
-                      ${(order as any).total_price || (order as any).price || 0}
+{formatINR((order as any).total_price || (order as any).price || 0)}
                     </p>
                   </div>
                   

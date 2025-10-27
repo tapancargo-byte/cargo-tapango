@@ -1,14 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 type Props = {
   current: number; // 1..3
   labels?: string[];
 };
 
-export const StepIndicator: React.FC<Props> = ({ current, labels = ['Addresses', 'Cargo', 'Review'] }) => {
+export const StepIndicator: React.FC<Props> = ({
+  current,
+  labels = ['Addresses', 'Cargo', 'Review'],
+}) => {
   return (
-    <View style={styles.container} accessibilityRole="adjustable" accessibilityLabel={`Step ${current} of 3`}>
+    <View
+      style={styles.container}
+      accessibilityRole='adjustable'
+      accessibilityLabel={`Step ${current} of 3`}
+    >
       {labels.map((label, idx) => {
         const step = idx + 1;
         const active = step <= current;
@@ -27,9 +34,21 @@ export const StepIndicator: React.FC<Props> = ({ current, labels = ['Addresses',
 };
 
 const styles = StyleSheet.create({
-  container: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12 },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
   step: { flexDirection: 'row', alignItems: 'center' },
-  circle: { width: 28, height: 28, borderRadius: 14, justifyContent: 'center', alignItems: 'center', borderWidth: 2 },
+  circle: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+  },
   circleInactive: { borderColor: '#D1D5DB' },
   circleActive: { borderColor: '#007AFF', backgroundColor: '#E0F2FE' },
   circleText: { fontWeight: '700', color: '#6B7280' },
